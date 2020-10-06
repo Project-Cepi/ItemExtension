@@ -1,5 +1,5 @@
 {
-  "entrypoint": "example.plugin.ExamplePlugin",
-  "name": "Example extension",
-  "version": "1.0.0-EXAMPLE"
+  "entrypoint": "world.cepi.itemextension.ItemPlugin",
+  "name": "ItemExtension",
+  "version": "1.0.0"
 }
