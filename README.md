@@ -1,2 +1,2 @@
-# ExampleExtension
- An example extension for Minestom
+# ItemExtension
+ This minestom extension handles the items for Cepi.
