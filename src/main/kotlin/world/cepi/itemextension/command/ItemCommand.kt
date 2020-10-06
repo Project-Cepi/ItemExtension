@@ -4,5 +4,4 @@ import net.minestom.server.command.builder.Command
 
 class ItemCommand : Command("item") {
 
-    setCo
 }
