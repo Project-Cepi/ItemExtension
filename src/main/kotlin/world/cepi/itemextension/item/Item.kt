@@ -1,7 +1,9 @@
 package world.cepi.itemextension.item
 
+import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.traits.Trait
+import world.cepi.itemextension.item.traits.TraitContainer
 import kotlin.reflect.KClass
 
 /**
@@ -22,25 +24,17 @@ class Item(
      * The rarity of the Item.
      */
     var rarity: Rarity
-) {
+): TraitContainer<Trait> {
+
+    override val traits: MutableList<Trait> = mutableListOf()
 
     /**
-     * List of traits that can be added or removed from. Its modifier is private to prevent any accidental hacky situations
+     * Renders an item to an ItemStack.
+     *
+     * @param amount The amount of the item to return
      */
-    private val traits: MutableList<Trait> = mutableListOf()
-
-    /**
-     * Encapsulation function to add a trait to the [traits] property
-     */
-    fun addTrait(trait: Trait) {
-        traits.add(trait)
-    }
-
-    /**
-     * Safely removes a trait based on its class refrence.
-     */
-    fun removeTrait(traitClass: KClass<Trait>) {
-        traits.filter { it::class == traitClass }.forEach { traits.remove(it) }
+    fun renderItem(amount: Byte): ItemStack {
+        return ItemStack(material, amount, 0)
     }
 
 
