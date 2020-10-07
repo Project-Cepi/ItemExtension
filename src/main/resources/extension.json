@@ -1,5 +1,5 @@
 {
-  "entrypoint": "world.cepi.itemextension.ItemPlugin",
+  "entrypoint": "world.cepi.itemextension.ItemExtension",
   "name": "ItemExtension",
   "version": "1.0.0"
 }

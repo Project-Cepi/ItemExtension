@@ -4,27 +4,14 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitContainer
-import kotlin.reflect.KClass
+import world.cepi.itemextension.item.traits.getTrait
+import world.cepi.itemextension.item.traits.list.MaterialTrait
+import world.cepi.itemextension.item.traits.list.RarityTrait
 
 /**
  * Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits.
  */
-class Item(
-    /**
-     * The name of the item. Color is defiend by rarity, not the name
-     */
-    var name: String,
-
-    /**
-     * The material of the item. For display reasons. customModelData can be defined as a trait.
-     */
-    var material: Material,
-
-    /**
-     * The rarity of the Item.
-     */
-    var rarity: Rarity
-): TraitContainer<Trait> {
+class Item: TraitContainer<Trait> {
 
     override val traits: MutableList<Trait> = mutableListOf()
 
@@ -34,7 +21,19 @@ class Item(
      * @param amount The amount of the item to return
      */
     fun renderItem(amount: Byte): ItemStack {
-        return ItemStack(material, amount, 0)
+
+        assert(hasTrait(MaterialTrait::class))
+
+        val item = ItemStack(getTrait<Trait, MaterialTrait>().material, amount, 0)
+
+        val lore: MutableList<String> = mutableListOf()
+
+        traits.sortedByDescending { it.loreIndex }.forEach {
+            it.task(item)
+            lore.addAll(it.renderLore())
+        }
+
+        return item
     }
 
 
