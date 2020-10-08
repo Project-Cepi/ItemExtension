@@ -6,7 +6,7 @@ import net.minestom.server.item.ItemStack
 /**
  * Trait objects that get appended to [Item]s. Inspired by the decorator pattern
  */
-interface Trait {
+interface Trait : Cloneable {
 
     /**
      * The position where this trait is rendered in the item lore (for item rendering).
@@ -27,6 +27,10 @@ interface Trait {
      */
     fun renderLore(): List<String> {
         return arrayListOf()
+    }
+
+    public override fun clone(): Any {
+        return super.clone()
     }
 
 }

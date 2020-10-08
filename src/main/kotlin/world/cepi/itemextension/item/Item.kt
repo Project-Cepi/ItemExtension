@@ -1,12 +1,10 @@
 package world.cepi.itemextension.item
 
 import net.minestom.server.item.ItemStack
-import net.minestom.server.item.Material
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitContainer
 import world.cepi.itemextension.item.traits.getTrait
 import world.cepi.itemextension.item.traits.list.MaterialTrait
-import world.cepi.itemextension.item.traits.list.RarityTrait
 
 /**
  * Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits.
@@ -20,11 +18,13 @@ class Item: TraitContainer<Trait> {
      *
      * @param amount The amount of the item to return
      */
-    fun renderItem(amount: Byte): ItemStack {
+    fun renderItem(amount: Byte = 1): ItemStack {
 
         assert(hasTrait(MaterialTrait::class))
 
         val item = ItemStack(getTrait<Trait, MaterialTrait>().material, amount, 0)
+
+        item.data.set(key, this, Item::class.java)
 
         val lore: MutableList<String> = mutableListOf()
 
@@ -34,6 +34,13 @@ class Item: TraitContainer<Trait> {
         }
 
         return item
+    }
+
+    companion object {
+        /**
+         * Key for klaxon JSON storage.
+         */
+        val key = "cepi"
     }
 
 
