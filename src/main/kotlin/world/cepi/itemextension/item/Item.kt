@@ -1,5 +1,6 @@
 package world.cepi.itemextension.item
 
+import net.minestom.server.chat.ColoredText
 import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitContainer
@@ -26,12 +27,15 @@ class Item: TraitContainer<Trait> {
 
         item.data.set(key, this, Item::class.java)
 
-        val lore: MutableList<String> = mutableListOf()
+        val lore: MutableList<ColoredText> = mutableListOf()
 
         traits.sortedByDescending { it.loreIndex }.forEach {
             it.task(item)
             lore.addAll(it.renderLore())
         }
+
+        item.lore.removeAll { true }
+        item.lore.addAll(lore)
 
         return item
     }
