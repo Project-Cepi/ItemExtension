@@ -52,13 +52,26 @@ class ItemCommand : Command("item") {
             }
         }, resetAction);
 
+        addSyntax({ commandSender, _ ->
+            val player = commandSender as Player
+            val itemStack = player.itemInMainHand
+            if (itemStack.data.hasKey(Item.key)) {
+                val item = itemStack.data.get<Item>(Item.key)
+                item.traits.removeIf { it !is MaterialTrait }
+                player.itemInMainHand = item.renderItem()
+                player.sendMessage("Trait Removed!")
+            } else {
+                player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
+            }
+        }, removeAction);
+
         addSyntax({ commandSender, arguments ->
             commandSender.sendMessage("\"${arguments.getWord("action")}\" requires paramaters!")
         }, actionType);
 
         addSyntax({ commandSender, arguments ->
             commandSender.sendMessage("\"remove\" requires a trait to remove!")
-        }, resetAction);
+        }, removeAction);
     }
 
 }

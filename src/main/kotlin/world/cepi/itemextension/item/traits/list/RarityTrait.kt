@@ -8,10 +8,14 @@ class RarityTrait(
     /**
      * The rarity that the [RarityTrait] encapsulates.
      */
-    rarity: Rarity
+    val rarity: Rarity
 ) : Trait {
 
     override val loreIndex = 1
+
+    override fun renderLore(): List<ColoredText> {
+        return listOf(rarity.asString())
+    }
 
     /**
      * Rarity enum for handling item rarities.
@@ -35,8 +39,8 @@ class RarityTrait(
         LEGENDARY(5, ChatColor.RED),
         MYTHICAL(6, ChatColor.CYAN);
 
-        fun asString(rarity: Rarity): ColoredText {
-            return ColoredText.of(rarity.color, rarity.name)
+        fun asString(): ColoredText {
+            return ColoredText.of(this.color, this.name)
         }
 
     }

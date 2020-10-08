@@ -1,6 +1,7 @@
 package world.cepi.itemextension.item.traits
 
 import com.beust.klaxon.Json
+import net.minestom.server.chat.ColoredText
 import net.minestom.server.item.ItemStack
 
 /**
@@ -25,7 +26,7 @@ interface Trait : Cloneable {
     /**
      * This function is called based on the [loreIndex] of the [Trait]
      */
-    fun renderLore(): List<String> {
+    fun renderLore(): List<ColoredText> {
         return arrayListOf()
     }
 
