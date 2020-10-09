@@ -7,7 +7,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.list.MaterialTrait
 
 
-class ItemCommand : Command("item") {
+object ItemCommand : Command("item") {
 
     init {
         val actionType = ArgumentType.Word("action").from("create", "set")
