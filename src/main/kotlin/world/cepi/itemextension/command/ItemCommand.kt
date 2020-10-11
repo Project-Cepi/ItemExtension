@@ -10,6 +10,9 @@ import world.cepi.itemextension.item.traits.list.MaterialTrait
 class ItemCommand : Command("item") {
 
     init {
+
+        val actions = ArgumentType.Word("action").from("create", "set", "remove", "reset")
+
         val actionType = ArgumentType.Word("action").from("create", "set")
 
         val removeAction = ArgumentType.Word("action").from("remove")
@@ -22,15 +25,7 @@ class ItemCommand : Command("item") {
 
         addCallback({ commandSender, string, _ ->
             commandSender.sendMessage("\"$string\" is an invalid action! Valid actions include create, reset, set, and remove.")
-        }, resetAction)
-
-        addCallback({ commandSender, string, _ ->
-            commandSender.sendMessage("\"$string\" is an invalid action! Valid actions include create, reset, set, and remove.")
-        }, removeAction)
-
-        addCallback({ commandSender, string, _ ->
-            commandSender.sendMessage("\"$string\" is an invalid action! Valid actions include create, reset, set, and remove.")
-        }, actionType)
+        }, actions)
 
         setCondition { sender ->
             if (!sender.isPlayer) {
@@ -69,7 +64,7 @@ class ItemCommand : Command("item") {
             commandSender.sendMessage("\"${arguments.getWord("action")}\" requires paramaters!")
         }, actionType);
 
-        addSyntax({ commandSender, arguments ->
+        addSyntax({ commandSender, _ ->
             commandSender.sendMessage("\"remove\" requires a trait to remove!")
         }, removeAction);
     }
