@@ -54,6 +54,8 @@ class ItemCommand : Command("item") {
                             item.addTrait(MaterialTrait(itemStack.material, itemStack.customModelData))
                             player.itemInMainHand = item.renderItem(itemStack.amount)
                             player.sendMessage("Item created!")
+                        } else {
+                            player.sendMessage("This item is already a Cepi item! Try /item reset to get a blank slate.")
                         }
                     }
                     "reset" -> {
@@ -70,6 +72,15 @@ class ItemCommand : Command("item") {
                         if (isCepiItem) {
                             val item = itemStack.data.get<Item>(Item.key)
                             item.traits.removeIf { it !is MaterialTrait }
+                            player.itemInMainHand = item.renderItem()
+                            player.sendMessage("Trait Removed!")
+                        } else {
+                            player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
+                        }
+                    }
+                    "set" -> {
+                        if (isCepiItem) {
+                            val item = itemStack.data.get<Item>(Item.key)
                             player.itemInMainHand = item.renderItem()
                             player.sendMessage("Trait Removed!")
                         } else {
