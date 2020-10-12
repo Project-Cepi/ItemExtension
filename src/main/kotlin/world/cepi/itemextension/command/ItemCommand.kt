@@ -6,7 +6,10 @@ import net.minestom.server.data.DataImpl
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.traits.Traits
 import world.cepi.itemextension.item.traits.list.MaterialTrait
+import kotlin.reflect.full.primaryConstructor
+import kotlin.reflect.full.valueParameters
 
 
 class ItemCommand : Command("item") {
@@ -18,6 +21,8 @@ class ItemCommand : Command("item") {
         setDefaultExecutor { commandSender, _ ->
             commandSender.sendMessage("Usage: /item (create, reset, set, remove) <params>")
         }
+
+        val traits = ArgumentType.Word("traits").from(*Traits.values().map { it.name.toLowerCase() }.toTypedArray())
 
 
         setCondition { sender ->
@@ -68,30 +73,66 @@ class ItemCommand : Command("item") {
                             player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
                         }
                     }
-                    "remove" -> {
-                        if (isCepiItem) {
-                            val item = itemStack.data.get<Item>(Item.key)
-                            item.traits.removeIf { it !is MaterialTrait }
-                            player.itemInMainHand = item.renderItem()
-                            player.sendMessage("Trait Removed!")
-                        } else {
-                            player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
-                        }
-                    }
-                    "set" -> {
-                        if (isCepiItem) {
-                            val item = itemStack.data.get<Item>(Item.key)
-                            player.itemInMainHand = item.renderItem()
-                            player.sendMessage("Trait Removed!")
-                        } else {
-                            player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
-                        }
-                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }, actions)
+
+        addSyntax({ commandSender, args ->
+
+            val player = commandSender as Player
+            val itemStack = player.itemInMainHand
+
+            if (itemStack.material == Material.AIR) {
+                player.sendMessage("You don't have an item in your hand! Please get one first!")
+                return@addSyntax
+            }
+
+            // data must be initialized for an itemStack
+            if (itemStack.data == null) {
+                itemStack.data = DataImpl()
+            }
+
+            val isCepiItem = itemStack.data.get<Item>(Item.key) != null
+
+            when (args.getWord("action")) {
+                "remove" -> {
+                    if (isCepiItem) {
+                        val trait = Traits.values().first { it.name.toLowerCase() == args.getWord("traits") }
+
+                        val item = itemStack.data.get<Item>(Item.key)
+
+                        if (item.hasTrait(trait.clazz)) {
+                            item.removeTrait(trait.clazz)
+                            player.sendMessage("Trait removed!")
+                        } else {
+                            player.sendMessage("This trait isn't in this item!")
+                        }
+                    } else {
+                        player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
+                    }
+                }
+                "create" -> {
+                    if (isCepiItem) {
+                        val trait = Traits.values().first { it.name.toLowerCase() == args.getWord("traits") }
+
+                        if (trait.clazz.primaryConstructor?.valueParameters!!.isEmpty()) {
+
+                            val item = itemStack.data.get<Item>(Item.key)
+
+                            if (item.hasTrait(trait.clazz)) {
+                                item.removeTrait(trait.clazz)
+                            }
+                        } else {
+                            player.sendMessage("This trait requires more than one argument!")
+                        }
+
+                    }
+                }
+            }
+        }, actions, traits)
+
     }
 
 }
