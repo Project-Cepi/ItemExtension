@@ -7,7 +7,6 @@ import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.list.MaterialTrait
-import java.lang.NullPointerException
 
 
 class ItemCommand : Command("item") {
@@ -28,7 +27,7 @@ class ItemCommand : Command("item") {
             } else true
         }
 
-        addCallback({ commandSender, _, _ ->
+        setArgumentCallback({ commandSender, _, _ ->
             commandSender.sendMessage("Invalid action! Actions include <reset, create, set, and remove>.")
         }, actions)
 
@@ -41,6 +40,7 @@ class ItemCommand : Command("item") {
                     player.sendMessage("You don't have an item in your hand! Please get one first!")
                     return@addSyntax
                 }
+                
                 // data must be initialized for an itemStack
                 if (itemStack.data == null) {
                     itemStack.data = DataImpl()
