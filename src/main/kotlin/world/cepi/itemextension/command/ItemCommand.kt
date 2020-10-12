@@ -41,10 +41,10 @@ class ItemCommand : Command("item") {
                     player.sendMessage("You don't have an item in your hand! Please get one first!")
                     return@addSyntax
                 }
-
-               if (itemStack.data == null) {
-                   itemStack.data = DataImpl()
-               }
+                // data must be initialized for an itemStack
+                if (itemStack.data == null) {
+                    itemStack.data = DataImpl()
+                }
 
                 val isCepiItem = itemStack.data.get<Item>(Item.key) != null
                 when (args.getWord("action")) {
