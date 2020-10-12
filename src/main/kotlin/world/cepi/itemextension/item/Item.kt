@@ -1,6 +1,7 @@
 package world.cepi.itemextension.item
 
 import net.minestom.server.chat.ColoredText
+import net.minestom.server.data.DataImpl
 import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitContainer
@@ -25,6 +26,10 @@ class Item: TraitContainer<Trait> {
 
         val item = ItemStack(getTrait<Trait, MaterialTrait>().material, amount, 0)
 
+        if (item.data == null) {
+            item.data = DataImpl()
+        }
+
         item.data.set(key, this, Item::class.java)
 
         val lore: MutableList<ColoredText> = mutableListOf()
@@ -44,7 +49,7 @@ class Item: TraitContainer<Trait> {
         /**
          * Key for klaxon JSON storage.
          */
-        val key = "cepi"
+        val key = "cepi-item"
     }
 
 
