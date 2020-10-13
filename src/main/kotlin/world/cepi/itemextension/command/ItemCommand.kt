@@ -9,6 +9,7 @@ import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.Traits
 import world.cepi.itemextension.item.traits.list.MaterialTrait
+import kotlin.reflect.KClassifier
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.valueParameters
 
@@ -134,18 +135,19 @@ class ItemCommand : Command("item") {
             }
         }, actions, traits)
 
-        Traits.values().forEach {trait ->
+        Traits.values().forEach { trait ->
             val constructor = trait.clazz.primaryConstructor!!
 
-            val args = mutableListOf<Argument<*>>()
+            val map = hashMapOf<KClassifier, Argument<*>>()
 
             var validArguments = true
 
-            constructor.valueParameters.forEachIndexed { index, kParam ->
+            constructor.valueParameters.forEach { kParam ->
+                println(kParam.type.classifier)
                 when (kParam.type.classifier) {
 
                     String::class -> {
-                        args.add(ArgumentType.String(kParam.name))
+                        map[kParam.type.classifier!!] = ArgumentType.String(kParam.name)
                     }
 
                     else -> {
@@ -157,9 +159,39 @@ class ItemCommand : Command("item") {
 
             if (validArguments) {
 
-                addSyntax({ commandSender, args ->
+                addSyntax({ commandSender, arguments ->
+                    val values = map.map { arguments.getObject(it.value.id) }
 
-                }, actions, traits, *args.toTypedArray())
+                    val player = commandSender as Player
+                    val itemStack = player.itemInMainHand
+
+                    if (itemStack.material == Material.AIR) {
+                        player.sendMessage("You don't have an item in your hand! Please get one first!")
+                        return@addSyntax
+                    }
+
+                    // data must be initialized for an itemStack
+                    if (itemStack.data == null) {
+                        itemStack.data = DataImpl()
+                    }
+
+                    val isCepiItem = itemStack.data.get<Item>(Item.key) != null
+
+                    if (isCepiItem) {
+                        val item = itemStack.data.get<Item>(Item.key)
+
+                        if (item.hasTrait(trait.clazz)) {
+                            item.removeTrait(trait.clazz)
+                        }
+
+                        item.addTrait(trait.clazz.primaryConstructor!!.call(*values.toTypedArray()))
+
+                        player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
+                    } else {
+                        player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
+                    }
+
+                }, actions, traits, *map.values.toTypedArray())
 
             }
         }

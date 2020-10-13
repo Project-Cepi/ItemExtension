@@ -13,5 +13,4 @@ class MaterialTrait(
      * CustomModelData for the item (resource pack)
      */
     val customModelData: Int = 0
-) : Trait {
-}
+) : Trait

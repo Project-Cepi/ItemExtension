@@ -39,8 +39,6 @@ interface TraitContainer<T : Trait> {
 /**
  * Get a trait from the list from the class value
  *
- * @param traitClass The class to check by for the array.
- *
  * @return The trait
  */
 inline fun <T : Trait, reified A : T> TraitContainer<T>.getTrait(): A = traits.first { it is A } as A

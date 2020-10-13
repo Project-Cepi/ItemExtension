@@ -49,7 +49,7 @@ class Item: TraitContainer<Trait> {
         /**
          * Key for klaxon JSON storage.
          */
-        val key = "cepi-item"
+        const val key = "cepi-item"
     }
 
 

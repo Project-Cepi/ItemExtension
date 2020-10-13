@@ -5,7 +5,7 @@ import net.minestom.server.chat.ColoredText
 import net.minestom.server.item.ItemStack
 
 /**
- * Trait objects that get appended to [Item]s. Inspired by the decorator pattern
+ * Trait objects that get appended to Items. Inspired by the decorator pattern
  */
 interface Trait {
 

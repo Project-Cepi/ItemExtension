@@ -1,7 +1,7 @@
 package world.cepi.itemextension
 
 import net.minestom.server.MinecraftServer
-import net.minestom.server.extensions.Extension;
+import net.minestom.server.extensions.Extension
 import world.cepi.itemextension.command.ItemCommand
 
 class ItemExtension : Extension() {
