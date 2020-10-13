@@ -1,6 +1,7 @@
 package world.cepi.itemextension.command
 
 import net.minestom.server.command.builder.Command
+import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.data.DataImpl
 import net.minestom.server.entity.Player
@@ -117,7 +118,7 @@ class ItemCommand : Command("item") {
                     if (isCepiItem) {
                         val trait = Traits.values().first { it.name.toLowerCase() == args.getWord("traits") }
 
-                        if (trait.clazz.primaryConstructor?.valueParameters!!.isEmpty()) {
+                        if (trait.clazz.primaryConstructor?.valueParameters == null) {
 
                             val item = itemStack.data.get<Item>(Item.key)
 
@@ -132,6 +133,36 @@ class ItemCommand : Command("item") {
                 }
             }
         }, actions, traits)
+
+        Traits.values().forEach {trait ->
+            val constructor = trait.clazz.primaryConstructor!!
+
+            val args = mutableListOf<Argument<*>>()
+
+            var validArguments = true
+
+            constructor.valueParameters.forEachIndexed { index, kParam ->
+                when (kParam.type.classifier) {
+
+                    String::class -> {
+                        args.add(ArgumentType.String(kParam.name))
+                    }
+
+                    else -> {
+                        validArguments = false
+                    }
+
+                }
+            }
+
+            if (validArguments) {
+
+                addSyntax({ commandSender, args ->
+
+                }, actions, traits, *args.toTypedArray())
+
+            }
+        }
 
     }
 
