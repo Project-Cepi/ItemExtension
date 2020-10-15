@@ -53,7 +53,12 @@ class ItemCommand : Command("item") {
         addSyntax({ commandSender, args -> singleAction(commandSender, args) }, reset)
 
         addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, remove, traitList)
-        addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, set, traitList)
+
+        traits.forEach { (trait, traitArg) ->
+            if (trait.clazz.primaryConstructor == null || trait.clazz.primaryConstructor!!.valueParameters.isEmpty()) {
+                addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, set, traitArg)
+            }
+        }
 
         traits.forEach { (trait, traitArgument) ->
             try {
