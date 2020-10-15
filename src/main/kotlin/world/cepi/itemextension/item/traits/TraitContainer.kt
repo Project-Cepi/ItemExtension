@@ -4,9 +4,7 @@ import kotlin.reflect.KClass
 
 interface TraitContainer<T : Trait> {
 
-    /**
-     * List of traits that can be added or removed from.
-     */
+    /** List of traits that can be added or removed from. */
     val traits: MutableList<T>
 
     /**

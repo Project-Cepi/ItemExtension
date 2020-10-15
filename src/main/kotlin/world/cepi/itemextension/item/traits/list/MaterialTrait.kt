@@ -1,5 +1,6 @@
 package world.cepi.itemextension.item.traits.list
 
+import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.traits.Trait
 
@@ -13,4 +14,10 @@ class MaterialTrait(
      * CustomModelData for the item (resource pack)
      */
     val customModelData: Int = 0
-) : Trait
+) : Trait {
+
+    override fun task(item: ItemStack) {
+        item.customModelData = customModelData
+    }
+
+}

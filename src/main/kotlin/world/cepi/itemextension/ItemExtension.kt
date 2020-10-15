@@ -7,9 +7,9 @@ import world.cepi.itemextension.command.ItemCommand
 class ItemExtension : Extension() {
 
     override fun initialize() {
-        logger.info("[ItemExtension] has been enabled!")
-
         MinecraftServer.getCommandManager().register(ItemCommand())
+
+        logger.info("[ItemExtension] has been enabled!")
     }
 
     override fun terminate() {

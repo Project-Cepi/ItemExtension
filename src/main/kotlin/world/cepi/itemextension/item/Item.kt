@@ -3,10 +3,9 @@ package world.cepi.itemextension.item
 import net.minestom.server.chat.ColoredText
 import net.minestom.server.data.DataImpl
 import net.minestom.server.item.ItemStack
+import net.minestom.server.item.Material
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitContainer
-import world.cepi.itemextension.item.traits.getTrait
-import world.cepi.itemextension.item.traits.list.MaterialTrait
 
 /**
  * Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits.
@@ -22,9 +21,7 @@ class Item: TraitContainer<Trait> {
      */
     fun renderItem(amount: Byte = 1): ItemStack {
 
-        assert(hasTrait(MaterialTrait::class))
-
-        val item = ItemStack(getTrait<Trait, MaterialTrait>().material, amount, 0)
+        val item = ItemStack(Material.PAPER, amount, 0)
 
         if (item.data == null) {
             item.data = DataImpl()
