@@ -20,6 +20,10 @@ class ItemCommand : Command("item") {
 
     private val requireFormattedItem = "You are not holding a formatted Item in your hand! Use /item create first."
     private val itemIsAir = "You don't have an item in your hand! Please get one first!"
+    private val requireNonFormattedItem = "This item is already a Cepi item!"
+    private val usage = "Usage"
+    private val onlyPlayers = "This command is only available for players!"
+    private val invalidActions = "Invalid action! Actions include"
 
     init {
 
@@ -30,24 +34,24 @@ class ItemCommand : Command("item") {
         val remove = ArgumentType.Word("action").from("remove")
 
         setDefaultExecutor { commandSender, _ ->
-            commandSender.sendMessage("Usage: /item (create, reset, set, remove) <params>")
+            commandSender.sendMessage("$usage: /item (create, reset, set, remove) <params>")
         }
 
         val traitList = ArgumentType.Word("trait").from(*Traits.values().map { it.name.toLowerCase() }.toTypedArray())
 
         val traits = mapOf(*Traits.values()
-            .map { it to ArgumentType.Word("trait").from(it.name.toLowerCase()) }
+            .map { it.clazz to ArgumentType.Word("trait").from(it.name.toLowerCase()) }
             .toTypedArray())
 
         setCondition { sender ->
             if (!sender.isPlayer) {
-                sender.sendMessage("The command is only available for players!")
+                sender.sendMessage(onlyPlayers)
                 false
             } else true
         }
 
         setArgumentCallback({ commandSender, _, _ ->
-            commandSender.sendMessage("Invalid action! Actions include <reset, create, set, and remove>.")
+            commandSender.sendMessage("$invalidActions <reset, create, set, and remove>.")
         }, actions)
 
         setArgumentCallback({ commandSender, _, _ -> commandSender.sendMessage("Invalid trait!") }, traitList)
@@ -57,9 +61,9 @@ class ItemCommand : Command("item") {
 
         addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, remove, traitList)
 
-        traits.forEach traitLoop@{ (trait, traitArg) ->
+        traits.forEach traitLoop@ { (trait, traitArg) ->
             // We will be using this constructor later to get its arguments
-            val constructor = trait.clazz.primaryConstructor
+            val constructor = trait.primaryConstructor
 
             // Defined for the constructor parameter scanner
             val map = hashMapOf<KClassifier, Argument<*>>()
@@ -79,31 +83,27 @@ class ItemCommand : Command("item") {
             }
 
             addSyntax({ commandSender, arguments ->
-                try {
-                    val values = map.map { entry -> arguments.getObject(entry.value.id) }
+                val values = map.map { entry -> arguments.getObject(entry.value.id) }
 
-                    val player = commandSender as Player
-                    val itemStack = player.itemInMainHand
+                val player = commandSender as Player
+                val itemStack = player.itemInMainHand
 
-                    if (itemStack.material == Material.AIR) {
-                        player.sendMessage(itemIsAir)
-                        return@addSyntax
-                    }
-
-                    if (checkIsCepiItem(itemStack)) {
-                        val item = itemStack.data.get<Item>(Item.key)
-
-                        if (item.hasTrait(trait.clazz))
-                            item.removeTrait(trait.clazz)
-
-                        item.addTrait(trait.clazz.primaryConstructor!!.call(*values.toTypedArray()))
-
-                        player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
-                    } else
-                        player.sendMessage(requireFormattedItem)
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                if (itemStack.material == Material.AIR) {
+                    player.sendMessage(itemIsAir)
+                    return@addSyntax
                 }
+
+                if (checkIsCepiItem(itemStack)) {
+                    val item = itemStack.data.get<Item>(Item.key)
+
+                    if (item.hasTrait(trait))
+                        item.removeTrait(trait)
+
+                    item.addTrait(trait.primaryConstructor!!.call(*values.toTypedArray()))
+
+                    player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
+                } else
+                    player.sendMessage(requireFormattedItem)
             }, set, traitArg, *map.values.toTypedArray())
 
         }
@@ -127,7 +127,7 @@ class ItemCommand : Command("item") {
                     player.itemInMainHand = item.renderItem(itemStack.amount)
                     player.sendMessage("Item Created!")
                 } else
-                    player.sendMessage("This item is already a Cepi item!")
+                    player.sendMessage(requireNonFormattedItem)
             }
             "reset" -> {
                 if (isCepiItem) {
