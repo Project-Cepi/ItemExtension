@@ -18,6 +18,7 @@ class MaterialTrait(
 
     override fun task(item: ItemStack) {
         item.customModelData = customModelData
+        item.material = material
     }
 
 }

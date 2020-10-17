@@ -23,12 +23,6 @@ class Item: TraitContainer<Trait> {
 
         val item = ItemStack(Material.PAPER, amount, 0)
 
-        if (item.data == null) {
-            item.data = DataImpl()
-        }
-
-        item.data.set(key, this, Item::class.java)
-
         val lore: MutableList<ColoredText> = mutableListOf()
 
         traits.sortedByDescending { it.loreIndex }.forEach {
@@ -38,6 +32,12 @@ class Item: TraitContainer<Trait> {
 
         item.lore.removeAll { true }
         item.lore.addAll(lore)
+
+        if (item.data == null) {
+            item.data = DataImpl()
+        }
+
+        item.data.set(key, this, Item::class.java)
 
         return item
     }

@@ -77,7 +77,20 @@ class ItemCommand : Command("item") {
                             map[kParam.type.classifier!!] = ArgumentType.String(kParam.name)
                         }
 
-                        else -> validArguments = false
+                        Int::class -> {
+                            map[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name)
+                        }
+
+                        // special types or just not a recognized one
+                        else -> {
+
+//                            if (isEnum(kParam.type.classifier!! as KClass<out Any>)) {
+//
+//                                map[kParam.type.classifier!!] = ArgumentType.String(kParam.name)
+//                            }
+
+                            validArguments = false
+                        }
 
                     }
                 }
@@ -91,7 +104,9 @@ class ItemCommand : Command("item") {
                     }
 
                     addSyntax({ commandSender, arguments ->
-                        val values = map.map { arguments.getObject(it.value.id) }
+                        val values = map.map { entry ->
+                            arguments.getObject(entry.value.id)
+                        }
 
                         val player = commandSender as Player
                         val itemStack = player.itemInMainHand
@@ -131,7 +146,7 @@ class ItemCommand : Command("item") {
         }
     }
 
-    fun singleAction(commandSender: CommandSender, args: Arguments) {
+    private fun singleAction(commandSender: CommandSender, args: Arguments) {
         val player = commandSender as Player
         val itemStack = player.itemInMainHand
 
@@ -152,16 +167,16 @@ class ItemCommand : Command("item") {
                     val item = Item()
                     item.addTrait(MaterialTrait(itemStack.material, itemStack.customModelData))
                     player.itemInMainHand = item.renderItem(itemStack.amount)
-                    player.sendMessage("Item created!")
+                    player.sendMessage("Item Created!")
                 } else {
-                    player.sendMessage("This item is already a Cepi item! Try /item reset to get a blank slate.")
+                    player.sendMessage("This item is already a Cepi item!")
                 }
             }
             "reset" -> {
                 if (isCepiItem) {
                     val item = itemStack.data.get<Item>(Item.key)
-                    item.traits.removeIf { it !is MaterialTrait }
-                    player.itemInMainHand = item.renderItem()
+                    item.traits.removeAll { true }
+                    player.itemInMainHand = item.renderItem(itemStack.amount)
                     player.sendMessage("Item Reset!")
                 } else {
                     player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
@@ -170,7 +185,7 @@ class ItemCommand : Command("item") {
         }
     }
 
-    fun actionWithTrait(commandSender: CommandSender, args: Arguments) {
+    private fun actionWithTrait(commandSender: CommandSender, args: Arguments) {
         val player = commandSender as Player
         val itemStack = player.itemInMainHand
 
@@ -189,7 +204,7 @@ class ItemCommand : Command("item") {
         when (args.getWord("action")) {
             "remove" -> {
                 if (isCepiItem) {
-                    val trait = Traits.values().first { it.name.toLowerCase() == args.getWord("traits") }
+                    val trait = Traits.values().first { it.name.equals(args.getWord("traits"), ignoreCase = true) }
 
                     val item = itemStack.data.get<Item>(Item.key)
 
@@ -214,6 +229,8 @@ class ItemCommand : Command("item") {
                         if (item.hasTrait(trait.clazz)) {
                             item.removeTrait(trait.clazz)
                         }
+
+                        item.addTrait(trait.clazz.primaryConstructor!!.call())
                     } else {
                         player.sendMessage("This trait requires more than one argument!")
                     }

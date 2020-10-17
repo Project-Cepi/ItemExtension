@@ -11,10 +11,10 @@ class RarityTrait(
     val rarity: Rarity
 ) : Trait {
 
-    override val loreIndex = 1
+    override val loreIndex = 3
 
     override fun renderLore(): List<ColoredText> {
-        return listOf(rarity.asString())
+        return listOf(ColoredText.of(""), rarity.asString())
     }
 
     /**
@@ -40,7 +40,7 @@ class RarityTrait(
         MYTHICAL(6, ChatColor.CYAN);
 
         fun asString(): ColoredText {
-            return ColoredText.of(this.color, this.name)
+            return ColoredText.of(ChatColor.BOLD, "").append(this.color, this.name)
         }
 
     }
