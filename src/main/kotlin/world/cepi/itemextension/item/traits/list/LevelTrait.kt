@@ -4,8 +4,9 @@ import net.minestom.server.chat.ChatColor
 import net.minestom.server.chat.ColoredText
 import world.cepi.itemextension.item.traits.Trait
 
+/** The level amount required to even use the item, usually to define its overall quality. */
 class LevelTrait(
-        val level: Int
+    private val level: Int
 ) : Trait {
 
     override val loreIndex = 0

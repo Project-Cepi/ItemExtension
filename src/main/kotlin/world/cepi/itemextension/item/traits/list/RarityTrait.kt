@@ -4,11 +4,10 @@ import net.minestom.server.chat.ChatColor
 import net.minestom.server.chat.ColoredText
 import world.cepi.itemextension.item.traits.Trait
 
+/** Defines the overall chance that this item would even exist */
 class RarityTrait(
-    /**
-     * The rarity that the [RarityTrait] encapsulates.
-     */
-    val rarity: Rarity
+    /** The rarity that the [RarityTrait] encapsulates. */
+    private val rarity: Rarity
 ) : Trait {
 
     override val loreIndex = 3
@@ -17,19 +16,13 @@ class RarityTrait(
         return listOf(ColoredText.of(""), rarity.asString())
     }
 
-    /**
-     * Rarity enum for handling item rarities.
-     */
+    /** Rarity enum for handling item rarities. */
     enum class Rarity(
-        /**
-         * Number that identifies the Rarity for future-proofing items. 1 is the lowest, goes up to highest
-         */
+        /** Number that identifies the Rarity for future-proofing items. 1 is the lowest, goes up to highest */
         val number: Int,
 
-        /**
-         * The color of the rarity
-         */
-        val color: ChatColor
+        /** The color of the rarity */
+        private val color: ChatColor
     ) {
 
         COMMON(1, ChatColor.GRAY),

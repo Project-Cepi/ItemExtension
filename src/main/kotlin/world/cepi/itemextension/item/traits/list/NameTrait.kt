@@ -5,10 +5,8 @@ import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.traits.Trait
 
 class NameTrait(
-    /**
-     * The name to be rendered on the item
-     */
-    val name: String
+    /** The name to be rendered on the item */
+    private val name: String
 ) : Trait {
 
     override fun task(item: ItemStack) {

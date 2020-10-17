@@ -7,6 +7,7 @@ import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.data.DataImpl
 import net.minestom.server.entity.Player
+import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.Traits
@@ -15,8 +16,10 @@ import kotlin.reflect.KClassifier
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.valueParameters
 
-
 class ItemCommand : Command("item") {
+
+    private val requireFormattedItem = "You are not holding a formatted Item in your hand! Use /item create first."
+    private val itemIsAir = "You don't have an item in your hand! Please get one first!"
 
     init {
 
@@ -32,7 +35,9 @@ class ItemCommand : Command("item") {
 
         val traitList = ArgumentType.Word("trait").from(*Traits.values().map { it.name.toLowerCase() }.toTypedArray())
 
-        val traits = mapOf(*Traits.values().map { it to ArgumentType.Word("trait").from(it.name.toLowerCase()) }.toTypedArray())
+        val traits = mapOf(*Traits.values()
+            .map { it to ArgumentType.Word("trait").from(it.name.toLowerCase()) }
+            .toTypedArray())
 
         setCondition { sender ->
             if (!sender.isPlayer) {
@@ -45,104 +50,62 @@ class ItemCommand : Command("item") {
             commandSender.sendMessage("Invalid action! Actions include <reset, create, set, and remove>.")
         }, actions)
 
-        setArgumentCallback({ commandSender, _, _ ->
-            commandSender.sendMessage("Invalid trait!")
-        }, traitList)
+        setArgumentCallback({ commandSender, _, _ -> commandSender.sendMessage("Invalid trait!") }, traitList)
 
         addSyntax({ commandSender, args -> singleAction(commandSender, args) }, create)
         addSyntax({ commandSender, args -> singleAction(commandSender, args) }, reset)
 
         addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, remove, traitList)
 
-        traits.forEach { (trait, traitArg) ->
-            if (trait.clazz.primaryConstructor == null || trait.clazz.primaryConstructor!!.valueParameters.isEmpty()) {
-                addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, set, traitArg)
-            }
-        }
+        traits.forEach traitLoop@{ (trait, traitArg) ->
+            // We will be using this constructor later to get its arguments
+            val constructor = trait.clazz.primaryConstructor
 
-        traits.forEach { (trait, traitArgument) ->
-            try {
-                // We will be using this constructor later to get its arguments
-                val constructor = trait.clazz.primaryConstructor ?: return@forEach
+            // Defined for the constructor parameter scanner
+            val map = hashMapOf<KClassifier, Argument<*>>()
 
-                // Defined for the constructor paramater scanner
-                val map = hashMapOf<KClassifier, Argument<*>>()
+            constructor?.valueParameters?.forEach { kParam ->
+                when (kParam.type.classifier) {
 
-                var validArguments = true
-
-                constructor.valueParameters.forEach { kParam ->
-                    when (kParam.type.classifier) {
-
-                        String::class -> {
-                            map[kParam.type.classifier!!] = ArgumentType.String(kParam.name)
-                        }
-
-                        Int::class -> {
-                            map[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name)
-                        }
-
-                        // special types or just not a recognized one
-                        else -> {
-
-//                            if (isEnum(kParam.type.classifier!! as KClass<out Any>)) {
-//
-//                                map[kParam.type.classifier!!] = ArgumentType.String(kParam.name)
-//                            }
-
-                            validArguments = false
-                        }
-
-                    }
-                }
-
-                if (validArguments) {
-
-                    map.values.forEach {
-                        setArgumentCallback({ commandSender, _, _ ->
-                            commandSender.sendMessage("Invalid trait argument!")
-                        }, it)
-                    }
-
-                    addSyntax({ commandSender, arguments ->
-                        val values = map.map { entry ->
-                            arguments.getObject(entry.value.id)
-                        }
-
-                        val player = commandSender as Player
-                        val itemStack = player.itemInMainHand
-
-                        if (itemStack.material == Material.AIR) {
-                            player.sendMessage("You don't have an item in your hand! Please get one first!")
-                            return@addSyntax
-                        }
-
-                        // data must be initialized for an itemStack
-                        if (itemStack.data == null) {
-                            itemStack.data = DataImpl()
-                        }
-
-                        val isCepiItem = itemStack.data.get<Item>(Item.key) != null
-
-                        if (isCepiItem) {
-                            val item = itemStack.data.get<Item>(Item.key)
-
-                            if (item.hasTrait(trait.clazz)) {
-                                item.removeTrait(trait.clazz)
-                            }
-
-                            item.addTrait(trait.clazz.primaryConstructor!!.call(*values.toTypedArray()))
-
-                            player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
-                        } else {
-                            player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
-                        }
-
-                    }, set, traitArgument, *map.values.toTypedArray())
+                    String::class -> map[kParam.type.classifier!!] = ArgumentType.String(kParam.name)
+                    Int::class -> map[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name)
+                    else -> return@traitLoop
 
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
+
+            map.values.forEach {
+                setArgumentCallback({ commandSender, _, _ -> commandSender.sendMessage("Invalid trait argument!") }, it)
+            }
+
+            addSyntax({ commandSender, arguments ->
+                try {
+                    val values = map.map { entry -> arguments.getObject(entry.value.id) }
+
+                    val player = commandSender as Player
+                    val itemStack = player.itemInMainHand
+
+                    if (itemStack.material == Material.AIR) {
+                        player.sendMessage(itemIsAir)
+                        return@addSyntax
+                    }
+
+                    if (checkIsCepiItem(itemStack)) {
+                        val item = itemStack.data.get<Item>(Item.key)
+
+                        if (item.hasTrait(trait.clazz))
+                            item.removeTrait(trait.clazz)
+
+                        item.addTrait(trait.clazz.primaryConstructor!!.call(*values.toTypedArray()))
+
+                        player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
+                    } else
+                        player.sendMessage(requireFormattedItem)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }, set, traitArg, *map.values.toTypedArray())
+
         }
     }
 
@@ -151,16 +114,11 @@ class ItemCommand : Command("item") {
         val itemStack = player.itemInMainHand
 
         if (itemStack.material == Material.AIR) {
-            player.sendMessage("You don't have an item in your hand! Please get one first!")
+            player.sendMessage(itemIsAir)
             return
         }
 
-        // data must be initialized for an itemStack
-        if (itemStack.data == null) {
-            itemStack.data = DataImpl()
-        }
-
-        val isCepiItem = itemStack.data.get<Item>(Item.key) != null
+        val isCepiItem = checkIsCepiItem(itemStack)
         when (args.getWord("action")) {
             "create" -> {
                 if (!isCepiItem) {
@@ -168,9 +126,8 @@ class ItemCommand : Command("item") {
                     item.addTrait(MaterialTrait(itemStack.material, itemStack.customModelData))
                     player.itemInMainHand = item.renderItem(itemStack.amount)
                     player.sendMessage("Item Created!")
-                } else {
+                } else
                     player.sendMessage("This item is already a Cepi item!")
-                }
             }
             "reset" -> {
                 if (isCepiItem) {
@@ -178,9 +135,8 @@ class ItemCommand : Command("item") {
                     item.traits.removeAll { true }
                     player.itemInMainHand = item.renderItem(itemStack.amount)
                     player.sendMessage("Item Reset!")
-                } else {
-                    player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
-                }
+                } else
+                    player.sendMessage(requireFormattedItem)
             }
         }
     }
@@ -190,54 +146,31 @@ class ItemCommand : Command("item") {
         val itemStack = player.itemInMainHand
 
         if (itemStack.material == Material.AIR) {
-            player.sendMessage("You don't have an item in your hand! Please get one first!")
+            player.sendMessage(itemIsAir)
             return
         }
 
+        val isCepiItem = checkIsCepiItem(itemStack)
+
+        if (isCepiItem) {
+            val trait = Traits.values().first { it.name.equals(args.getWord("traits"), ignoreCase = true) }
+
+            val item = itemStack.data.get<Item>(Item.key)
+
+            if (item.hasTrait(trait.clazz)) {
+                item.removeTrait(trait.clazz)
+                player.sendMessage("Trait removed!")
+            } else
+                player.sendMessage("This trait isn't in this item!")
+        } else
+            player.sendMessage(requireFormattedItem)
+    }
+
+    private fun checkIsCepiItem(itemStack: ItemStack): Boolean {
         // data must be initialized for an itemStack
-        if (itemStack.data == null) {
-            itemStack.data = DataImpl()
-        }
+        if (itemStack.data == null) itemStack.data = DataImpl()
 
-        val isCepiItem = itemStack.data.get<Item>(Item.key) != null
-
-        when (args.getWord("action")) {
-            "remove" -> {
-                if (isCepiItem) {
-                    val trait = Traits.values().first { it.name.equals(args.getWord("traits"), ignoreCase = true) }
-
-                    val item = itemStack.data.get<Item>(Item.key)
-
-                    if (item.hasTrait(trait.clazz)) {
-                        item.removeTrait(trait.clazz)
-                        player.sendMessage("Trait removed!")
-                    } else {
-                        player.sendMessage("This trait isn't in this item!")
-                    }
-                } else {
-                    player.sendMessage("You are not holding a formatted Item in your hand! Use /item create first.")
-                }
-            }
-            "set" -> {
-                if (isCepiItem) {
-                    val trait = Traits.values().first { it.name.toLowerCase() == args.getWord("traits") }
-
-                    if (trait.clazz.primaryConstructor?.valueParameters == null) {
-
-                        val item = itemStack.data.get<Item>(Item.key)
-
-                        if (item.hasTrait(trait.clazz)) {
-                            item.removeTrait(trait.clazz)
-                        }
-
-                        item.addTrait(trait.clazz.primaryConstructor!!.call())
-                    } else {
-                        player.sendMessage("This trait requires more than one argument!")
-                    }
-
-                }
-            }
-        }
+        return itemStack.data.hasKey(Item.key)
     }
 
 }
