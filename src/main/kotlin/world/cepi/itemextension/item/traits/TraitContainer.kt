@@ -4,7 +4,7 @@ import kotlin.reflect.KClass
 
 interface TraitContainer<T : Trait> {
 
-    /** List of traits that can be added or removed from. */
+    /** List of traits that can be added or removed from. Please use a wrapper function */
     val traits: MutableList<T>
 
     /**
@@ -31,6 +31,9 @@ interface TraitContainer<T : Trait> {
      * @return Boolean value for if the list contains the following [traitClass]
      */
     fun hasTrait(traitClass: KClass<out T>): Boolean = traits.any { it::class == traitClass }
+
+    /** Removes all traits from the trait container. */
+    fun removeAllTraits() = traits.removeAll { true }
 
 }
 

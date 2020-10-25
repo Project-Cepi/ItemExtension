@@ -66,13 +66,14 @@ class ItemCommand : Command("item") {
             val constructor = trait.primaryConstructor
 
             // Defined for the constructor parameter scanner
-            val map = hashMapOf<KClassifier, Argument<*>>()
+            val map = linkedMapOf<KClassifier, Argument<*>>()
 
             constructor?.valueParameters?.forEach { kParam ->
+
                 when (kParam.type.classifier) {
 
-                    String::class -> map[kParam.type.classifier!!] = ArgumentType.String(kParam.name)
-                    Int::class -> map[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name)
+                    String::class -> map[kParam.type.classifier!!] = ArgumentType.String(kParam.name!!)
+                    Int::class -> map[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name!!)
                     else -> return@traitLoop
 
                 }
@@ -94,9 +95,9 @@ class ItemCommand : Command("item") {
                 }
 
                 if (checkIsCepiItem(itemStack)) {
-                    val item = itemStack.data.get<Item>(Item.key)
+                    val item = itemStack.data!!.get<Item>(Item.key)
 
-                    if (item.hasTrait(trait))
+                    if (item!!.hasTrait(trait))
                         item.removeTrait(trait)
 
                     item.addTrait(trait.primaryConstructor!!.call(*values.toTypedArray()))
@@ -131,8 +132,8 @@ class ItemCommand : Command("item") {
             }
             "reset" -> {
                 if (isCepiItem) {
-                    val item = itemStack.data.get<Item>(Item.key)
-                    item.traits.removeAll { true }
+                    val item = itemStack.data!!.get<Item>(Item.key)!!
+                    item.removeAllTraits()
                     player.itemInMainHand = item.renderItem(itemStack.amount)
                     player.sendMessage("Item Reset!")
                 } else
@@ -155,7 +156,7 @@ class ItemCommand : Command("item") {
         if (isCepiItem) {
             val trait = Traits.values().first { it.name.equals(args.getWord("traits"), ignoreCase = true) }
 
-            val item = itemStack.data.get<Item>(Item.key)
+            val item = itemStack.data!!.get<Item>(Item.key)!!
 
             if (item.hasTrait(trait.clazz)) {
                 item.removeTrait(trait.clazz)
@@ -170,7 +171,7 @@ class ItemCommand : Command("item") {
         // data must be initialized for an itemStack
         if (itemStack.data == null) itemStack.data = DataImpl()
 
-        return itemStack.data.hasKey(Item.key)
+        return itemStack.data!!.hasKey(Item.key)
     }
 
 }

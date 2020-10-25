@@ -30,22 +30,21 @@ class Item: TraitContainer<Trait> {
             lore.addAll(it.renderLore())
         }
 
-        item.lore.removeAll { true }
-        item.lore.addAll(lore)
+        if (item.lore == null) item.lore = arrayListOf<ColoredText>()
+        item.lore!!.removeAll { true }
+        item.lore!!.addAll(lore)
 
-        if (item.data == null) {
-            item.data = DataImpl()
-        }
+        val data = DataImpl()
 
-        item.data.set(key, this, Item::class.java)
+        data.set(key, this, Item::class.java)
+
+        item.data = data
 
         return item
     }
 
     companion object {
-        /**
-         * Key for klaxon JSON storage.
-         */
+        /** Key for klaxon JSON storage. */
         const val key = "cepi-item"
     }
 

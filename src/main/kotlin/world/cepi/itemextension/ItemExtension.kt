@@ -4,7 +4,7 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.extensions.Extension
 import world.cepi.itemextension.command.ItemCommand
 
-class ItemExtension : Extension() {
+object ItemExtension : Extension() {
 
     override fun initialize() {
         MinecraftServer.getCommandManager().register(ItemCommand())

@@ -4,9 +4,7 @@ import com.beust.klaxon.Json
 import net.minestom.server.chat.ColoredText
 import net.minestom.server.item.ItemStack
 
-/**
- * Trait objects that get appended to Items. Inspired by the decorator pattern
- */
+/** Trait objects that get appended to Items. Inspired by the decorator pattern */
 interface Trait {
 
     /** The position where this trait is rendered in the item lore (for item rendering). */
