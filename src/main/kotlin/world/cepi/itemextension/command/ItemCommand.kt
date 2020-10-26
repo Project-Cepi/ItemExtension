@@ -34,14 +34,16 @@ class ItemCommand : Command("item") {
         val remove = ArgumentType.Word("action").from("remove")
 
         setDefaultExecutor { commandSender, _ ->
-            commandSender.sendMessage("$usage: /item (create, reset, set, remove) <params>")
+            commandSender.sendMessage("$usage: /item <create, reset, set, remove> <params>")
         }
 
-        val traitList = ArgumentType.Word("trait").from(*Traits.values().map { it.name.toLowerCase() }.toTypedArray())
+        val traitList = ArgumentType.Word("trait")
+            .from(*Traits.values().map { it.name.toLowerCase() }
+                .toTypedArray())
 
         val traits = mapOf(*Traits.values()
             .map { it.clazz to ArgumentType.Word("trait").from(it.name.toLowerCase()) }
-            .toTypedArray())
+                .toTypedArray())
 
         setCondition { sender ->
             if (!sender.isPlayer) {
@@ -66,25 +68,25 @@ class ItemCommand : Command("item") {
             val constructor = trait.primaryConstructor
 
             // Defined for the constructor parameter scanner
-            val map = linkedMapOf<KClassifier, Argument<*>>()
+            val constructurArguments = linkedMapOf<KClassifier, Argument<*>>()
 
             constructor?.valueParameters?.forEach { kParam ->
 
                 when (kParam.type.classifier) {
 
-                    String::class -> map[kParam.type.classifier!!] = ArgumentType.String(kParam.name!!)
-                    Int::class -> map[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name!!)
+                    String::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.String(kParam.name!!)
+                    Int::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name!!)
                     else -> return@traitLoop
 
                 }
             }
 
-            map.values.forEach {
+            constructurArguments.values.forEach {
                 setArgumentCallback({ commandSender, _, _ -> commandSender.sendMessage("Invalid trait argument!") }, it)
             }
 
             addSyntax({ commandSender, arguments ->
-                val values = map.map { entry -> arguments.getObject(entry.value.id) }
+                val values = constructurArguments.map { entry -> arguments.getObject(entry.value.id) }
 
                 val player = commandSender as Player
                 val itemStack = player.itemInMainHand
@@ -95,17 +97,19 @@ class ItemCommand : Command("item") {
                 }
 
                 if (checkIsCepiItem(itemStack)) {
-                    val item = itemStack.data!!.get<Item>(Item.key)
+                    val item = itemStack.data!!.get<Item>(Item.key)!!
 
-                    if (item!!.hasTrait(trait))
+                    if (item.hasTrait(trait))
                         item.removeTrait(trait)
 
                     item.addTrait(trait.primaryConstructor!!.call(*values.toTypedArray()))
 
                     player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
+
+                    player.sendMessage("Trait added!")
                 } else
                     player.sendMessage(requireFormattedItem)
-            }, set, traitArg, *map.values.toTypedArray())
+            }, set, traitArg, *constructurArguments.values.toTypedArray())
 
         }
     }
@@ -154,13 +158,14 @@ class ItemCommand : Command("item") {
         val isCepiItem = checkIsCepiItem(itemStack)
 
         if (isCepiItem) {
-            val trait = Traits.values().first { it.name.equals(args.getWord("traits"), ignoreCase = true) }
+            val trait = Traits.values().first { it.name.equals(args.getWord("trait"), ignoreCase = true) }
 
             val item = itemStack.data!!.get<Item>(Item.key)!!
 
             if (item.hasTrait(trait.clazz)) {
                 item.removeTrait(trait.clazz)
                 player.sendMessage("Trait removed!")
+                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
             } else
                 player.sendMessage("This trait isn't in this item!")
         } else

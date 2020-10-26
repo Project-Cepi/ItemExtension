@@ -6,9 +6,9 @@ import kotlin.reflect.KClass
 enum class Traits(val clazz: KClass<out Trait>) {
 
     RARITY(RarityTrait::class),
+    LEVEL(LevelTrait::class),
     NAME(NameTrait::class),
     MATERIAL(MaterialTrait::class),
-    LEVEL(LevelTrait::class),
     DAMAGE(DamageTrait::class)
 
 }
