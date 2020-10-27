@@ -27,7 +27,7 @@ class DamageTrait(
     }
 
     private fun applyAttribute(item: ItemStack, slot: AttributeSlot) {
-        item.attributes.add(ItemAttribute(UUID.randomUUID(), item.displayName.toString(), Attribute.ATTACK_DAMAGE, AttributeOperation.ADDITION,
+        item.addAttribute(ItemAttribute(UUID.randomUUID(), item.displayName.toString(), Attribute.ATTACK_DAMAGE, AttributeOperation.ADDITION,
             damage.toDouble(), slot))
     }
 

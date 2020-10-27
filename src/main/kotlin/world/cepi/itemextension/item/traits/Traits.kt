@@ -5,10 +5,10 @@ import kotlin.reflect.KClass
 
 enum class Traits(val clazz: KClass<out Trait>) {
 
-    RARITY(RarityTrait::class),
+    DAMAGE(DamageTrait::class),
     LEVEL(LevelTrait::class),
     NAME(NameTrait::class),
+    RARITY(RarityTrait::class),
     MATERIAL(MaterialTrait::class),
-    DAMAGE(DamageTrait::class)
 
 }
