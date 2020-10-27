@@ -42,7 +42,7 @@ class ItemCommand : Command("item") {
                 .toTypedArray())
 
         val traits = mapOf(*Traits.values()
-            .map { it.clazz to ArgumentType.Word("trait").from(it.name.toLowerCase()) }
+            .map { it.clazz to ArgumentType.Word(it.name.toLowerCase()).from(it.name.toLowerCase()) }
                 .toTypedArray())
 
         setCondition { sender ->
@@ -89,7 +89,7 @@ class ItemCommand : Command("item") {
                 val values = constructurArguments.map { entry -> arguments.getObject(entry.value.id) }
 
                 val player = commandSender as Player
-                val itemStack = player.itemInMainHand
+                val itemStack = player.itemInMainHand.clone()
 
                 if (itemStack.material == Material.AIR) {
                     player.sendMessage(itemIsAir)
@@ -116,7 +116,7 @@ class ItemCommand : Command("item") {
 
     private fun singleAction(commandSender: CommandSender, args: Arguments) {
         val player = commandSender as Player
-        val itemStack = player.itemInMainHand
+        val itemStack = player.itemInMainHand.clone()
 
         if (itemStack.material == Material.AIR) {
             player.sendMessage(itemIsAir)
@@ -148,7 +148,7 @@ class ItemCommand : Command("item") {
 
     private fun actionWithTrait(commandSender: CommandSender, args: Arguments) {
         val player = commandSender as Player
-        val itemStack = player.itemInMainHand
+        val itemStack = player.itemInMainHand.clone()
 
         if (itemStack.material == Material.AIR) {
             player.sendMessage(itemIsAir)
