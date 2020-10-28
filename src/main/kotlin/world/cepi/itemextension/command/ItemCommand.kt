@@ -27,11 +27,10 @@ class ItemCommand : Command("item") {
 
     init {
 
-        val actions = ArgumentType.Word("action").from("create", "reset", "set", "remove")
-        val create = ArgumentType.Word("action").from("create")
-        val reset = ArgumentType.Word("action").from("reset")
-        val set = ArgumentType.Word("action").from("set")
-        val remove = ArgumentType.Word("action").from("remove")
+        val create = ArgumentType.Word("create").from("create")
+        val reset = ArgumentType.Word("reset").from("reset")
+        val set = ArgumentType.Word("set").from("set")
+        val remove = ArgumentType.Word("remove").from("remove")
 
         setDefaultExecutor { commandSender, _ ->
             commandSender.sendMessage("$usage: /item <create, reset, set, remove> <params>")
@@ -43,7 +42,7 @@ class ItemCommand : Command("item") {
 
         val traits = mapOf(*Traits.values()
             .map { it.clazz to ArgumentType.Word(it.name.toLowerCase()).from(it.name.toLowerCase()) }
-                .toTypedArray())
+            .toTypedArray())
 
         setCondition { sender ->
             if (!sender.isPlayer) {
@@ -52,18 +51,14 @@ class ItemCommand : Command("item") {
             } else true
         }
 
-        setArgumentCallback({ commandSender, _, _ ->
-            commandSender.sendMessage("$invalidActions <reset, create, set, and remove>.")
-        }, actions)
-
         setArgumentCallback({ commandSender, _, _ -> commandSender.sendMessage("Invalid trait!") }, traitList)
 
-        addSyntax({ commandSender, args -> singleAction(commandSender, args) }, create)
-        addSyntax({ commandSender, args -> singleAction(commandSender, args) }, reset)
+        addSyntax({ commandSender, _ -> createAction(commandSender) }, create)
+        addSyntax({ commandSender, _ -> resetAction(commandSender) }, reset)
 
         addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, remove, traitList)
 
-        traits.forEach traitLoop@ { (trait, traitArg) ->
+        traits.forEach traitLoop@{ (trait, traitArg) ->
             // We will be using this constructor later to get its arguments
             val constructor = trait.primaryConstructor
 
@@ -76,6 +71,7 @@ class ItemCommand : Command("item") {
 
                     String::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.String(kParam.name!!)
                     Int::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name!!)
+                    Enum::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.Word(kParam.name!!)
                     else -> return@traitLoop
 
                 }
@@ -114,7 +110,7 @@ class ItemCommand : Command("item") {
         }
     }
 
-    private fun singleAction(commandSender: CommandSender, args: Arguments) {
+    private fun createAction(commandSender: CommandSender) {
         val player = commandSender as Player
         val itemStack = player.itemInMainHand.clone()
 
@@ -124,27 +120,36 @@ class ItemCommand : Command("item") {
         }
 
         val isCepiItem = checkIsCepiItem(itemStack)
-        when (args.getWord("action")) {
-            "create" -> {
-                if (!isCepiItem) {
-                    val item = Item()
-                    item.addTrait(MaterialTrait(itemStack.material, itemStack.customModelData))
-                    player.itemInMainHand = item.renderItem(itemStack.amount)
-                    player.sendMessage("Item Created!")
-                } else
-                    player.sendMessage(requireNonFormattedItem)
-            }
-            "reset" -> {
-                if (isCepiItem) {
-                    val item = itemStack.data!!.get<Item>(Item.key)!!
-                    item.removeAllTraits()
-                    player.itemInMainHand = item.renderItem(itemStack.amount)
-                    player.sendMessage("Item Reset!")
-                } else
-                    player.sendMessage(requireFormattedItem)
-            }
-        }
+        if (!isCepiItem) {
+            val item = Item()
+            item.addTrait(MaterialTrait(itemStack.material, itemStack.customModelData))
+            player.itemInMainHand = item.renderItem(itemStack.amount)
+            player.sendMessage("Item Created!")
+        } else
+            player.sendMessage(requireNonFormattedItem)
+
     }
+
+    private fun resetAction(commandSender: CommandSender) {
+        val player = commandSender as Player
+        val itemStack = player.itemInMainHand.clone()
+
+        if (itemStack.material == Material.AIR) {
+            player.sendMessage(itemIsAir)
+            return
+        }
+
+        val isCepiItem = checkIsCepiItem(itemStack)
+
+        if (isCepiItem) {
+            val item = itemStack.data!!.get<Item>(Item.key)!!
+            item.removeAllTraits()
+            player.itemInMainHand = item.renderItem(itemStack.amount)
+            player.sendMessage("Item Reset!")
+        } else
+            player.sendMessage(requireFormattedItem)
+    }
+
 
     private fun actionWithTrait(commandSender: CommandSender, args: Arguments) {
         val player = commandSender as Player
