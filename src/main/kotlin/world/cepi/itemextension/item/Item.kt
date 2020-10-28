@@ -2,6 +2,7 @@ package world.cepi.itemextension.item
 
 import net.minestom.server.chat.ColoredText
 import net.minestom.server.data.DataImpl
+import net.minestom.server.item.ItemFlag
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.traits.Trait
@@ -33,6 +34,9 @@ class Item: TraitContainer<Trait> {
         if (item.lore == null) item.lore = arrayListOf<ColoredText>()
         item.lore!!.removeAll { true }
         item.lore!!.addAll(lore)
+
+        item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ENCHANTS,
+            ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_UNBREAKABLE)
 
         val data = DataImpl()
 
