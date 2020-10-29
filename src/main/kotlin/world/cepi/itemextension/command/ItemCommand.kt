@@ -12,9 +12,11 @@ import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.Traits
 import world.cepi.itemextension.item.traits.list.MaterialTrait
+import kotlin.reflect.KClass
 import kotlin.reflect.KClassifier
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.valueParameters
+import kotlin.reflect.jvm.jvmName
 
 class ItemCommand : Command("item") {
 
@@ -71,8 +73,16 @@ class ItemCommand : Command("item") {
 
                     String::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.String(kParam.name!!)
                     Int::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name!!)
-                    Enum::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.Word(kParam.name!!)
-                    else -> return@traitLoop
+                    else -> {
+                        // special types
+
+                        val enumClz = (Class.forName(((kParam.type.classifier) as KClass<*>).jvmName).enumConstants as Array<Enum<*>>)
+
+                        val argumentEnum = ArgumentEnum(kParam.name!!).from(*enumClz.map { it.name }.toTypedArray())
+                        argumentEnum.enumArray = enumClz
+
+                        constructurArguments[kParam.type.classifier!!] = argumentEnum
+                    }
 
                 }
             }
@@ -82,7 +92,15 @@ class ItemCommand : Command("item") {
             }
 
             addSyntax({ commandSender, arguments ->
-                val values = constructurArguments.map { entry -> arguments.getObject(entry.value.id) }
+                val values = constructurArguments.map { entry ->
+
+                    if (entry.value is ArgumentEnum) {
+                        val argumentEnum = entry.value as ArgumentEnum
+                        return@map argumentEnum.enumArray.first { it.name == arguments.getString(entry.value.id) }
+                    } else {
+                        return@map arguments.getObject(entry.value.id)
+                    }
+                }
 
                 val player = commandSender as Player
                 val itemStack = player.itemInMainHand.clone()

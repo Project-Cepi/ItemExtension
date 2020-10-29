@@ -26,10 +26,8 @@ class Item: TraitContainer<Trait> {
 
         val lore: MutableList<ColoredText> = mutableListOf()
 
-        traits.sortedByDescending { it.loreIndex }.forEach {
-            it.task(item)
-            lore.addAll(it.renderLore())
-        }
+        traits.sortedBy { it.loreIndex }.forEach { lore.addAll(it.renderLore()) }
+        traits.sortedBy { it.taskIndex }.forEach { it.task(item) }
 
         if (item.lore == null) item.lore = arrayListOf<ColoredText>()
         item.lore!!.removeAll { true }
