@@ -33,6 +33,7 @@ class ItemCommand : Command("item") {
         val reset = ArgumentType.Word("reset").from("reset")
         val set = ArgumentType.Word("set").from("set")
         val remove = ArgumentType.Word("remove").from("remove")
+        val update = ArgumentType.Word("update").from("update")
 
         setDefaultExecutor { commandSender, _ ->
             commandSender.sendMessage("$usage: /item <create, reset, set, remove> <params>")
@@ -57,6 +58,7 @@ class ItemCommand : Command("item") {
 
         addSyntax({ commandSender, _ -> createAction(commandSender) }, create)
         addSyntax({ commandSender, _ -> resetAction(commandSender) }, reset)
+        addSyntax({ commandSender, _ -> updateAction(commandSender) }, update)
 
         addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, remove, traitList)
 
@@ -168,6 +170,24 @@ class ItemCommand : Command("item") {
             player.sendMessage(requireFormattedItem)
     }
 
+    fun updateAction(commandSender: CommandSender) {
+        val player = commandSender as Player
+        val itemStack = player.itemInMainHand.clone()
+
+        if (itemStack.material == Material.AIR) {
+            player.sendMessage(itemIsAir)
+            return
+        }
+
+        val isCepiItem = checkIsCepiItem(itemStack)
+
+        if (isCepiItem) {
+            val item = itemStack.data!!.get<Item>(Item.key)!!
+            player.itemInMainHand = item.renderItem(itemStack.amount)
+            player.sendMessage("Item Rendered!!")
+        } else
+            player.sendMessage(requireFormattedItem)
+    }
 
     private fun actionWithTrait(commandSender: CommandSender, args: Arguments) {
         val player = commandSender as Player
