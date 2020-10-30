@@ -4,6 +4,7 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.traits.Trait
 
+/** The material that the item will take on. Default is Paper. */
 class MaterialTrait(
     /** The display material for the item */
     private val material: Material = Material.PAPER,

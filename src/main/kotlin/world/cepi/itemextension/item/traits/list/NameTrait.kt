@@ -4,6 +4,7 @@ import net.minestom.server.chat.ColoredText
 import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.traits.Trait
 
+/** Represents the name that the item contains. */
 class NameTrait(
     /** The name to be rendered on the item */
     private val name: String
