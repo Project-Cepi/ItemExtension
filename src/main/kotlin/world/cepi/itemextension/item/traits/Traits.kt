@@ -10,5 +10,6 @@ enum class Traits(val clazz: KClass<out Trait>) {
     NAME(NameTrait::class),
     RARITY(RarityTrait::class),
     MATERIAL(MaterialTrait::class),
+    ARMOR(ArmorTrait::class)
 
 }
