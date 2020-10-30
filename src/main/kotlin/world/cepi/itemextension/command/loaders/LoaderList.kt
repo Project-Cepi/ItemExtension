@@ -11,5 +11,7 @@ val loaders = listOf(
     UpdateAction,
 
     // regular loaders
-    ConditionLoader
+    ConditionLoader,
+    DefaultExecutorLoader,
+    TraitListLoader
 )
