@@ -4,6 +4,5 @@ import world.cepi.itemextension.item.traits.Trait
 
 // TODO make armor trait
 class ArmorTrait(
-    val armor: Int
-) : Trait {
-}
+    private val armor: Int
+) : Trait
