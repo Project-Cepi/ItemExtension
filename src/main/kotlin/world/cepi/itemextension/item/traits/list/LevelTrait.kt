@@ -12,7 +12,7 @@ class LevelTrait(
     override val loreIndex = 0
 
     override fun renderLore(): List<ColoredText> {
-        return listOf(ColoredText.of(ChatColor.GRAY, "Level Min. ").append(ChatColor.WHITE, level.toString()))
+        return listOf(ColoredText.of(ChatColor.GRAY, "Min. Level ").append(ChatColor.WHITE, level.toString()))
     }
 
 }
