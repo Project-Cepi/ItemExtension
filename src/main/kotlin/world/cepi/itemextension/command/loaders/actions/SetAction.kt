@@ -34,42 +34,50 @@ object SetAction : ItemCommandLoader {
             val constructor = trait.primaryConstructor
 
             // Defined for the constructor parameter scanner
-            val constructurArguments = linkedMapOf<KClassifier, Argument<*>>()
+            val constructorArguments = linkedMapOf<KClassifier, Argument<*>>()
 
             constructor?.valueParameters?.forEach { kParam ->
 
                 when (kParam.type.classifier) {
 
-                    String::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.String(kParam.name!!)
-                    Int::class -> constructurArguments[kParam.type.classifier!!] = ArgumentType.Integer(kParam.name!!)
+                    String::class -> constructorArguments[kParam.type.classifier!!] =
+                        ArgumentType.String(kParam.name!!)
+                    Int::class -> constructorArguments[kParam.type.classifier!!] =
+                        ArgumentType.Integer(kParam.name!!)
                     else -> {
                         // special types
                         // TODO truly check if its an Enum.
+                        try {
+                            val enumClz =
+                                (Class.forName(((kParam.type.classifier) as KClass<*>).jvmName).enumConstants as Array<Enum<*>>)
 
-                        val enumClz = (Class.forName(((kParam.type.classifier) as KClass<*>).jvmName).enumConstants as Array<Enum<*>>)
+                            val argumentEnum = ArgumentEnum(kParam.name!!).from(*enumClz.map { it.name }.toTypedArray())
+                            argumentEnum.enumArray = enumClz
 
-                        val argumentEnum = ArgumentEnum(kParam.name!!).from(*enumClz.map { it.name }.toTypedArray())
-                        argumentEnum.enumArray = enumClz
-
-                        constructurArguments[kParam.type.classifier!!] = argumentEnum
+                            constructorArguments[kParam.type.classifier!!] = argumentEnum
+                        } catch (e: Exception) {
+                            return@traitLoop
+                        }
                     }
 
                 }
             }
 
-            constructurArguments.values.forEach {
-                command.setArgumentCallback({ commandSender, _, _ -> commandSender.sendMessage("Invalid trait argument!") }, it)
+            constructorArguments.values.forEach {
+                command.setArgumentCallback(
+                    { commandSender, _, _ -> commandSender.sendMessage("Invalid trait argument!") },
+                    it
+                )
             }
 
             command.addSyntax({ commandSender, arguments ->
-                val values = constructurArguments.map { entry ->
+                val values = constructorArguments.map { entry ->
 
                     if (entry.value is ArgumentEnum) {
                         val argumentEnum = entry.value as ArgumentEnum
                         return@map argumentEnum.enumArray.first { it.name == arguments.getString(entry.value.id) }
-                    } else {
+                    } else
                         return@map arguments.getObject(entry.value.id)
-                    }
                 }
 
                 val player = commandSender as Player
@@ -93,7 +101,7 @@ object SetAction : ItemCommandLoader {
                     player.sendMessage("Trait added!")
                 } else
                     player.sendMessage(requireFormattedItem)
-            }, set, traitArg, *constructurArguments.values.toTypedArray())
+            }, set, traitArg, *constructorArguments.values.toTypedArray())
 
         }
     }

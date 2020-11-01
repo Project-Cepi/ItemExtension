@@ -11,10 +11,10 @@ import world.cepi.itemextension.command.requireFormattedItem
 import world.cepi.itemextension.item.Item
 
 object ResetAction : ItemCommandLoader {
-    override fun register(command: Command) {
+    override fun register(command: Command) = with(command) {
         val reset = ArgumentType.Word("reset").from("reset")
 
-        command.addSyntax({ commandSender, _ ->
+        addSyntax({ commandSender, _ ->
             val player = commandSender as Player
             val itemStack = player.itemInMainHand.clone()
 

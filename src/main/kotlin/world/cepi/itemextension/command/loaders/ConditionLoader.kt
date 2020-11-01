@@ -9,8 +9,8 @@ object ConditionLoader : ItemCommandLoader {
         command.setCondition { sender ->
             if (!sender.isPlayer) {
                 sender.sendMessage(onlyPlayers)
-                false
-            } else true
+                return@setCondition false
+            } else return@setCondition true
         }
     }
 
