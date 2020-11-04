@@ -18,7 +18,7 @@ object CreateAction : ItemCommandLoader {
 
         command.addSyntax({ commandSender, _ ->
             val player = commandSender as Player
-            val itemStack = player.itemInMainHand.clone()
+            val itemStack = player.itemInMainHand
 
             val isCepiItem = checkIsItem(itemStack)
             if (!isCepiItem) {

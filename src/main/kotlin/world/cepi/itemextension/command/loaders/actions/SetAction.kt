@@ -81,7 +81,7 @@ object SetAction : ItemCommandLoader {
                 }
 
                 val player = commandSender as Player
-                val itemStack = player.itemInMainHand.clone()
+                val itemStack = player.itemInMainHand
 
                 if (itemStack.material == Material.AIR) {
                     player.sendMessage(itemIsAir)

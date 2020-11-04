@@ -11,12 +11,12 @@ import world.cepi.itemextension.command.requireFormattedItem
 import world.cepi.itemextension.item.Item
 
 object UpdateAction : ItemCommandLoader {
-    override fun register(command: Command) = with(command) {
+    override fun register(command: Command) {
         val update = ArgumentType.Word("update").from("update")
 
-        addSyntax({ commandSender, _ ->
+        command.addSyntax({ commandSender, _ ->
             val player = commandSender as Player
-            val itemStack = player.itemInMainHand.clone()
+            val itemStack = player.itemInMainHand
 
             if (itemStack.material == Material.AIR) {
                 player.sendMessage(itemIsAir)
