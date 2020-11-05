@@ -17,7 +17,7 @@ class RarityTrait(
     }
 
     /** Rarity enum for handling item rarities. */
-    enum class Rarity(
+    enum class Rarity (
         /** Number that identifies the Rarity for future-proofing items. 1 is the lowest, goes up to highest */
         val number: Int,
 

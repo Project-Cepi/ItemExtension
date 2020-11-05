@@ -14,6 +14,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.Traits
 import kotlin.reflect.KClass
 import kotlin.reflect.KClassifier
+import kotlin.reflect.KFunction
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.valueParameters
 import kotlin.reflect.jvm.jvmName
@@ -31,37 +32,12 @@ object SetAction : ItemCommandLoader {
 
         traits.forEach traitLoop@{ (trait, traitArg) ->
             // We will be using this constructor later to get its arguments
-            val constructor = trait.primaryConstructor
+            val constructor = trait.primaryConstructor!!
 
             // Defined for the constructor parameter scanner
             val constructorArguments = linkedMapOf<KClassifier, Argument<*>>()
 
-            constructor?.valueParameters?.forEach { kParam ->
-
-                when (kParam.type.classifier) {
-
-                    String::class -> constructorArguments[kParam.type.classifier!!] =
-                        ArgumentType.String(kParam.name!!)
-                    Int::class -> constructorArguments[kParam.type.classifier!!] =
-                        ArgumentType.Integer(kParam.name!!)
-                    else -> {
-                        // special types
-                        // TODO truly check if its an Enum.
-                        try {
-                            val enumClz =
-                                (Class.forName(((kParam.type.classifier) as KClass<*>).jvmName).enumConstants as Array<Enum<*>>)
-
-                            val argumentEnum = ArgumentEnum(kParam.name!!).from(*enumClz.map { it.name }.toTypedArray())
-                            argumentEnum.enumArray = enumClz
-
-                            constructorArguments[kParam.type.classifier!!] = argumentEnum
-                        } catch (e: Exception) {
-                            return@traitLoop
-                        }
-                    }
-
-                }
-            }
+            require(defineArguments(constructorArguments, constructor))
 
             constructorArguments.values.forEach {
                 command.setArgumentCallback(
@@ -101,8 +77,40 @@ object SetAction : ItemCommandLoader {
                     player.sendMessage("Trait added!")
                 } else
                     player.sendMessage(requireFormattedItem)
+
             }, set, traitArg, *constructorArguments.values.toTypedArray())
 
         }
     }
+
+    fun defineArguments(linkedMap: LinkedHashMap<KClassifier, Argument<*>>, constructor: KFunction<*>): Boolean {
+        constructor.valueParameters.forEach { kParam ->
+
+            when (kParam.type.classifier) {
+
+                String::class -> linkedMap[kParam.type.classifier!!] =
+                        ArgumentType.String(kParam.name!!)
+                Int::class -> linkedMap[kParam.type.classifier!!] =
+                        ArgumentType.Integer(kParam.name!!)
+                else -> {
+                    // special types
+                    // TODO truly check if its an Enum.
+                    try {
+                        val enumClz =
+                                (Class.forName(((kParam.type.classifier) as KClass<*>).jvmName).enumConstants as Array<Enum<*>>)
+
+                        val argumentEnum = ArgumentEnum(kParam.name!!).from(*enumClz.map { it.name }.toTypedArray())
+                        argumentEnum.enumArray = enumClz
+
+                        linkedMap[kParam.type.classifier!!] = argumentEnum
+                    } catch (e: Exception) {
+                        return false
+                    }
+                }
+
+            }
+        }
+        return true;
+    }
+
 }
