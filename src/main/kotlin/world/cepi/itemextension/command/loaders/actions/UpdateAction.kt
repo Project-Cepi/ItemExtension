@@ -8,6 +8,7 @@ import world.cepi.itemextension.command.itemIsAir
 import world.cepi.itemextension.command.itemRendered
 import world.cepi.itemextension.command.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.requireFormattedItem
+import world.cepi.itemextension.command.sendFormattedMessage
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 
@@ -20,7 +21,7 @@ object UpdateAction : ItemCommandLoader {
             val itemStack = player.itemInMainHand
 
             if (itemStack.material == Material.AIR) {
-                player.sendMessage(itemIsAir)
+                player.sendFormattedMessage(itemIsAir)
                 return@addSyntax
             }
 
@@ -29,9 +30,9 @@ object UpdateAction : ItemCommandLoader {
             if (isCepiItem) {
                 val item = itemStack.data!!.get<Item>(Item.key)!!
                 player.itemInMainHand = item.renderItem(itemStack.amount)
-                player.sendMessage(itemRendered)
+                player.sendFormattedMessage(itemRendered)
             } else
-                player.sendMessage(requireFormattedItem)
+                player.sendFormattedMessage(requireFormattedItem)
         }, update)
 
     }

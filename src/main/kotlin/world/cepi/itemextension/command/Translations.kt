@@ -1,5 +1,12 @@
 package world.cepi.itemextension.command
 
+import net.minestom.server.chat.ChatColor
+import net.minestom.server.entity.Player
+
+fun Player.sendFormattedMessage(message: String) {
+    this.sendMessage(ChatColor.DARK_GRAY + ChatColor.BOLD + "| " + ChatColor.RESET + ChatColor.GRAY + message)
+}
+
 const val requireFormattedItem = "You are not holding a formatted Item in your hand! Use /item create first."
 const val itemIsAir = "You don't have an item in your hand! Please get one first!"
 const val requireNonFormattedItem = "This item is already a Cepi item!"

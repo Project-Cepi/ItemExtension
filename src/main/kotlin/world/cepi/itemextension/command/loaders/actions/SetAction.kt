@@ -57,7 +57,7 @@ object SetAction : ItemCommandLoader {
                 val itemStack = player.itemInMainHand
 
                 if (itemStack.material == Material.AIR) {
-                    player.sendMessage(itemIsAir)
+                    player.sendFormattedMessage(itemIsAir)
                     return@addSyntax
                 }
 
@@ -71,9 +71,9 @@ object SetAction : ItemCommandLoader {
 
                     player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
 
-                    player.sendMessage(traitAdded)
+                    player.sendFormattedMessage(traitAdded)
                 } else
-                    player.sendMessage(requireFormattedItem)
+                    player.sendFormattedMessage(requireFormattedItem)
 
             }, set, traitArg, *constructorArguments.values.toTypedArray())
 
@@ -93,6 +93,7 @@ object SetAction : ItemCommandLoader {
                 Int::class -> linkedMap[kParam.type.classifier!!] =
                         ArgumentType.Integer(kParam.name!!)
                 else -> {
+                    return null
                     // special types
                     // TODO truly check if its an Enum.
                     try {
