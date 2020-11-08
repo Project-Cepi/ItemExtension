@@ -4,6 +4,7 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.extensions.Extension
 import world.cepi.itemextension.command.ItemCommand
 
+/** Extension wrapper for Minestom. */
 object ItemExtension : Extension() {
 
     override fun initialize() {

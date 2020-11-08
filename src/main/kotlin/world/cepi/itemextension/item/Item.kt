@@ -52,3 +52,18 @@ class Item: TraitContainer<Trait> {
 
 
 }
+
+/**
+ * Check if an [ItemStack] contains [Item] data.
+ * It checks it via the itemstack's [DataImpl]
+ *
+ * @param itemStack The itemStack to check by
+ *
+ * @return If the [ItemStack] "is" an [Item]
+ */
+fun checkIsItem(itemStack: ItemStack): Boolean {
+    // data must be initialized for an itemStack
+    if (itemStack.data == null) itemStack.data = DataImpl()
+
+    return itemStack.data!!.hasKey(Item.key)
+}

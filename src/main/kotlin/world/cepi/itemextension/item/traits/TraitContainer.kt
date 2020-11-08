@@ -2,6 +2,7 @@ package world.cepi.itemextension.item.traits
 
 import kotlin.reflect.KClass
 
+/** Object that can hold Traits */
 interface TraitContainer<T : Trait> {
 
     /** List of traits that can be added or removed from. Please use a wrapper function */
