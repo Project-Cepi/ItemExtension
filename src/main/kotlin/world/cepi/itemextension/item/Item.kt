@@ -33,8 +33,7 @@ class Item: TraitContainer<Trait> {
         item.lore!!.removeAll { true }
         item.lore!!.addAll(lore)
 
-        item.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_DESTROYS, ItemFlag.HIDE_ENCHANTS,
-            ItemFlag.HIDE_PLACED_ON, ItemFlag.HIDE_POTION_EFFECTS, ItemFlag.HIDE_UNBREAKABLE)
+        item.addItemFlags(*ItemFlag.values())
 
         val data = DataImpl()
 
