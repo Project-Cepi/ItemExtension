@@ -15,7 +15,6 @@ import kotlin.reflect.KClassifier
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.valueParameters
-import kotlin.reflect.jvm.jvmName
 
 // TODO break down and organize
 object SetAction : ItemCommandLoader {
@@ -98,7 +97,7 @@ object SetAction : ItemCommandLoader {
                     // TODO truly check if its an Enum.
                     try {
                         val enumClz =
-                                (Class.forName(((kParam.type.classifier) as KClass<*>).jvmName).enumConstants as Array<Enum<*>>)
+                                ((kParam.type.classifier) as KClass<*>).java.enumConstants as Array<Enum<*>>
 
                         val argumentEnum = ArgumentEnum(kParam.name!!).from(*enumClz.map { it.name }.toTypedArray())
                         argumentEnum.enumArray = enumClz
