@@ -38,7 +38,7 @@ object SetAction : ItemCommandLoader {
 
             constructorArguments.values.forEach {
                 command.setArgumentCallback(
-                    { commandSender, _, _ -> commandSender.sendMessage(invalidTraitArgument) },
+                    { commandSender, _, _ -> commandSender.sendFormattedMessage(invalidTraitArgument) },
                     it
                 )
             }
