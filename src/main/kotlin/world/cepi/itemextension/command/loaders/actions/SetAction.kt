@@ -5,11 +5,8 @@ import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.itemextension.command.ArgumentEnum
-import world.cepi.itemextension.command.checkIsItem
-import world.cepi.itemextension.command.itemIsAir
+import world.cepi.itemextension.command.*
 import world.cepi.itemextension.command.loaders.ItemCommandLoader
-import world.cepi.itemextension.command.requireFormattedItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.Traits
 import kotlin.reflect.KClass
@@ -41,7 +38,7 @@ object SetAction : ItemCommandLoader {
 
             constructorArguments.values.forEach {
                 command.setArgumentCallback(
-                    { commandSender, _, _ -> commandSender.sendMessage("Invalid trait argument!") },
+                    { commandSender, _, _ -> commandSender.sendMessage(invalidTraitArgument) },
                     it
                 )
             }
@@ -74,7 +71,7 @@ object SetAction : ItemCommandLoader {
 
                     player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
 
-                    player.sendMessage("Trait added!")
+                    player.sendMessage(traitAdded)
                 } else
                     player.sendMessage(requireFormattedItem)
 
@@ -83,7 +80,7 @@ object SetAction : ItemCommandLoader {
         }
     }
 
-    fun defineArguments(linkedMap: LinkedHashMap<KClassifier, Argument<*>>, constructor: KFunction<*>): Boolean {
+    private fun defineArguments(linkedMap: LinkedHashMap<KClassifier, Argument<*>>, constructor: KFunction<*>): Boolean {
         constructor.valueParameters.forEach { kParam ->
 
             when (kParam.type.classifier) {
@@ -110,7 +107,7 @@ object SetAction : ItemCommandLoader {
 
             }
         }
-        return true;
+        return true
     }
 
 }

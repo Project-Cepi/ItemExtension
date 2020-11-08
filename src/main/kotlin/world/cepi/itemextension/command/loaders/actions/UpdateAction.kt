@@ -6,6 +6,7 @@ import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.checkIsItem
 import world.cepi.itemextension.command.itemIsAir
+import world.cepi.itemextension.command.itemRendered
 import world.cepi.itemextension.command.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.requireFormattedItem
 import world.cepi.itemextension.item.Item
@@ -28,7 +29,7 @@ object UpdateAction : ItemCommandLoader {
             if (isCepiItem) {
                 val item = itemStack.data!!.get<Item>(Item.key)!!
                 player.itemInMainHand = item.renderItem(itemStack.amount)
-                player.sendMessage("Item Rendered!!")
+                player.sendMessage(itemRendered)
             } else
                 player.sendMessage(requireFormattedItem)
         }, update)

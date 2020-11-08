@@ -29,7 +29,7 @@ object ResetAction : ItemCommandLoader {
                 val item = itemStack.data!!.get<Item>(Item.key)!!
                 item.removeAllTraits()
                 player.itemInMainHand = item.renderItem(itemStack.amount)
-                player.sendMessage("Item Reset!")
+                player.sendMessage(itemReset)
             } else
                 player.sendMessage(requireFormattedItem)
         }, reset)

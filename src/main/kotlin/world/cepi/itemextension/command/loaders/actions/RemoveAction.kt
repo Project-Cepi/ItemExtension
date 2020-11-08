@@ -6,10 +6,8 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.itemextension.command.checkIsItem
-import world.cepi.itemextension.command.itemIsAir
+import world.cepi.itemextension.command.*
 import world.cepi.itemextension.command.loaders.ItemCommandLoader
-import world.cepi.itemextension.command.requireFormattedItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.Traits
 
@@ -44,10 +42,10 @@ object RemoveAction : ItemCommandLoader {
 
             if (item.hasTrait(trait.clazz)) {
                 item.removeTrait(trait.clazz)
-                player.sendMessage("Trait removed!")
+                player.sendMessage(traitRemoved)
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
             } else
-                player.sendMessage("This trait isn't in this item!")
+                player.sendMessage(traitNotFound)
         } else
             player.sendMessage(requireFormattedItem)
     }
