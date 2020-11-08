@@ -6,7 +6,7 @@ import world.cepi.itemextension.command.onlyPlayers
 object ConditionLoader : ItemCommandLoader {
 
     override fun register(command: Command) {
-        command.setCondition { sender ->
+        command.setCondition { sender, _ ->
             if (!sender.isPlayer) {
                 sender.sendMessage(onlyPlayers)
                 return@setCondition false
