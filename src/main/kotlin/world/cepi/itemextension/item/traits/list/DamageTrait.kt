@@ -3,10 +3,10 @@ package world.cepi.itemextension.item.traits.list
 import net.minestom.server.attribute.Attribute
 import net.minestom.server.attribute.AttributeOperation
 import net.minestom.server.chat.ChatColor
-import net.minestom.server.chat.ColoredText
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.attribute.AttributeSlot
 import net.minestom.server.item.attribute.ItemAttribute
+import world.cepi.itemextension.command.plus
 import world.cepi.itemextension.item.traits.Trait
 import java.util.*
 
@@ -17,8 +17,8 @@ class DamageTrait(
 
     override val loreIndex = 1
 
-    override fun renderLore(): List<ColoredText> {
-        return listOf(ColoredText.of(ChatColor.YELLOW, "$damage Attack Damage"))
+    override fun renderLore(): List<String> {
+        return listOf(ChatColor.YELLOW + "$damage Attack Damage")
     }
 
     override fun task(item: ItemStack) {

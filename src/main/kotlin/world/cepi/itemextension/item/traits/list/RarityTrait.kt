@@ -1,7 +1,7 @@
 package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
-import net.minestom.server.chat.ColoredText
+import world.cepi.itemextension.command.plus
 import world.cepi.itemextension.item.traits.Trait
 
 /** Defines the overall chance that this item would even exist */
@@ -12,8 +12,8 @@ class RarityTrait(
 
     override val loreIndex = 3
 
-    override fun renderLore(): List<ColoredText> {
-        return listOf(ColoredText.of(""), rarity.asString())
+    override fun renderLore(): List<String> {
+        return listOf(rarity.asString())
     }
 
     /** Rarity enum for handling item rarities. */
@@ -32,8 +32,8 @@ class RarityTrait(
         LEGENDARY(5, ChatColor.RED),
         MYTHICAL(6, ChatColor.CYAN);
 
-        fun asString(): ColoredText {
-            return ColoredText.of(ChatColor.BOLD, "").append(this.color, this.name)
+        fun asString(): String {
+            return ChatColor.BOLD + this.color + this.name
         }
 
     }

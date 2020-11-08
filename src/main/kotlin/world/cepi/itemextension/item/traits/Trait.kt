@@ -1,7 +1,6 @@
 package world.cepi.itemextension.item.traits
 
 import com.beust.klaxon.Json
-import net.minestom.server.chat.ColoredText
 import net.minestom.server.item.ItemStack
 
 /** Trait objects that get appended to Items. Inspired by the decorator pattern */
@@ -29,7 +28,7 @@ interface Trait {
      *
      * @return A list of ColoredText used to display on an array
      */
-    fun renderLore(): List<ColoredText> {
+    fun renderLore(): List<String> {
         return arrayListOf()
     }
 

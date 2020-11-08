@@ -1,7 +1,7 @@
 package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
-import net.minestom.server.chat.ColoredText
+import world.cepi.itemextension.command.plus
 import world.cepi.itemextension.item.traits.Trait
 
 /** The level amount required to even use the item, usually to define its overall quality. */
@@ -12,8 +12,8 @@ class LevelTrait(
 
     override val loreIndex = 0
 
-    override fun renderLore(): List<ColoredText> {
-        return listOf(ColoredText.of(ChatColor.GRAY, "Min. Level ").append(ChatColor.WHITE, level.toString()))
+    override fun renderLore(): List<String> {
+        return listOf(ChatColor.GRAY +  "Min. Level " + ChatColor.WHITE + level)
     }
 
 }
