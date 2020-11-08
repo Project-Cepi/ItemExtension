@@ -8,6 +8,7 @@ import net.minestom.server.item.Material
 import world.cepi.itemextension.command.*
 import world.cepi.itemextension.command.loaders.ItemCommandLoader
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.Traits
 import kotlin.reflect.KClass
 import kotlin.reflect.KClassifier

@@ -4,12 +4,12 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.itemextension.command.checkIsItem
 import world.cepi.itemextension.command.itemIsAir
 import world.cepi.itemextension.command.itemRendered
 import world.cepi.itemextension.command.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.requireFormattedItem
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.checkIsItem
 
 object UpdateAction : ItemCommandLoader {
     override fun register(command: Command) {
