@@ -92,18 +92,18 @@ object SetAction : ItemCommandLoader {
                 Int::class -> linkedMap[kParam.type.classifier!!] =
                         ArgumentType.Integer(kParam.name!!)
                 else -> {
-                    return null
+                    if (((kParam.type.classifier) as KClass<*>).java.enumConstants == null) return null
                     // special types
                     // TODO truly check if its an Enum.
                     try {
                         val enumClz =
                                 ((kParam.type.classifier) as KClass<*>).java.enumConstants as Array<Enum<*>>
 
-                        val argumentEnum = ArgumentEnum(kParam.name!!).from(*enumClz.map { it.name }.toTypedArray())
-                        argumentEnum.enumArray = enumClz
+                        val argumentEnum = ArgumentEnum(kParam.name!!, enumClz).from(*enumClz.map { it.name }.toTypedArray())
 
                         linkedMap[kParam.type.classifier!!] = argumentEnum
                     } catch (e: Exception) {
+                        e.printStackTrace()
                         return null
                     }
                 }
