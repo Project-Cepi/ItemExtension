@@ -32,10 +32,9 @@ object SetAction : ItemCommandLoader {
             // We will be using this constructor later to get its arguments
             val constructor = trait.primaryConstructor!!
 
-            // Defined for the constructor parameter scanner
-            val constructorArguments = linkedMapOf<KClassifier, Argument<*>>()
+            val constructorArguments = defineArguments(constructor) ?: return@traitLoop
 
-            require(defineArguments(constructorArguments, constructor))
+            if (constructorArguments.size == 0) return@traitLoop
 
             constructorArguments.values.forEach {
                 command.setArgumentCallback(
@@ -81,7 +80,10 @@ object SetAction : ItemCommandLoader {
         }
     }
 
-    private fun defineArguments(linkedMap: LinkedHashMap<KClassifier, Argument<*>>, constructor: KFunction<*>): Boolean {
+    private fun defineArguments(constructor: KFunction<*>): LinkedHashMap<KClassifier, Argument<*>>? {
+
+        val linkedMap = linkedMapOf<KClassifier, Argument<*>>()
+
         constructor.valueParameters.forEach { kParam ->
 
             when (kParam.type.classifier) {
@@ -102,13 +104,13 @@ object SetAction : ItemCommandLoader {
 
                         linkedMap[kParam.type.classifier!!] = argumentEnum
                     } catch (e: Exception) {
-                        return false
+                        return null
                     }
                 }
 
             }
         }
-        return true
+        return linkedMap
     }
 
 }
