@@ -4,6 +4,12 @@ import net.minestom.server.chat.ChatColor
 import net.minestom.server.command.CommandSender
 import net.minestom.server.entity.Player
 
+/**
+ * Sends a formatted message to the corresponding sender.
+ *
+ * @param message The origin message, usually grabbed from the list of translations
+ * @param params The replacers, usually used to replace a placeholder in a translation message
+ */
 fun CommandSender.sendFormattedMessage(message: String, vararg params: String = arrayOf("")) {
 
     var parsedMessage = message
