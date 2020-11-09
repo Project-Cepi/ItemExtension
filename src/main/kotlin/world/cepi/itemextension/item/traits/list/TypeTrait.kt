@@ -8,7 +8,7 @@ class TypeTrait(
         private val type: Type
 ) : Trait {
 
-    override val loreIndex = 0
+    override val loreIndex = 1
 
     override fun renderLore(): List<String> {
         return arrayListOf("${ChatColor.BOLD}${ChatColor.GRAY}${type.name}")

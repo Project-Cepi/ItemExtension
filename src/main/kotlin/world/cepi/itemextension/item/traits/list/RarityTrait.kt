@@ -25,12 +25,14 @@ class RarityTrait(
         private val color: ChatColor
     ) {
 
-        COMMON(1, ChatColor.GRAY),
-        UNCOMMON(2, ChatColor.BRIGHT_GREEN),
-        RARE(3, ChatColor.BLUE),
-        EPIC(4, ChatColor.PINK),
-        LEGENDARY(5, ChatColor.RED),
-        MYTHICAL(6, ChatColor.CYAN);
+        /** Nothing special about this item, found in shops or dropped*/
+        BASIC(0, ChatColor.GRAY),
+        /** Item found in hidden places such as loot chests */
+        ARTIFACT(1, ChatColor.PINK),
+        /** Item received as a reward for completing a challenge */
+        TREASURE(2, ChatColor.BRIGHT_GREEN),
+        /** Item that embodies a part of you */
+        VESSEL(3, ChatColor.BLUE);
 
         fun asString(): String {
             return ChatColor.BOLD + this.color + this.name

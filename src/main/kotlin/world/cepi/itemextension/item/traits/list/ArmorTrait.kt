@@ -9,10 +9,10 @@ class ArmorTrait(
     private val armor: Int
 ) : Trait {
 
-    override val loreIndex = 0
+    override val loreIndex = 3
 
     override fun renderLore(): List<String> {
-        return listOf(ChatColor.GRAY + "Armor" + ChatColor.WHITE + armor)
+        return listOf(ChatColor.CYAN + "Armor" + ChatColor.WHITE + armor)
     }
 
 }

@@ -8,10 +8,10 @@ class AttackSpeedTrait(
         val attackSpeed: Int
 ) : Trait {
 
-    override val loreIndex = 0
+    override val loreIndex = 4
 
     override fun renderLore(): List<String> {
-        return listOf(ChatColor.GRAY +  "Attack speed " + ChatColor.WHITE + attackSpeed)
+        return listOf(ChatColor.GRAY + attackSpeed.toString() + "s Attack Speed")
     }
 
 }
