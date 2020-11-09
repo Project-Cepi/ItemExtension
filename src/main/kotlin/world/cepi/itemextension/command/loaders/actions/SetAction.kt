@@ -95,6 +95,8 @@ object SetAction : ItemCommandLoader {
                         ArgumentType.String(kParam.name!!)
                 Int::class -> linkedMap[kParam.type.classifier!!] =
                         ArgumentType.Integer(kParam.name!!)
+                Double::class -> linkedMap[kParam.type.classifier!!] =
+                        ArgumentType.Double(kParam.name!!)
                 Material::class -> linkedMap[kParam.type.classifier!!] =
                         ArgumentType.ItemStack(kParam.name!!)
                 else -> {

@@ -43,4 +43,4 @@ interface TraitContainer<T : Trait> {
  *
  * @return The trait
  */
-inline fun <T : Trait, reified A : T> TraitContainer<T>.getTrait(): A = traits.first { it is A } as A
+inline fun <T : Trait, reified A : T> TraitContainer<T>.getTrait(): A? = traits.firstOrNull { it is A } as? A

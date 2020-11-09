@@ -18,7 +18,7 @@ class DamageTrait(
     override val loreIndex = 1
 
     override fun renderLore(): List<String> {
-        return listOf(ChatColor.GOLD + "$damage Attack Damage")
+        return listOf(ChatColor.GOLD + "+$damage Damage")
     }
 
     override fun task(item: ItemStack) {

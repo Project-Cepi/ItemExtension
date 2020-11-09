@@ -12,7 +12,7 @@ class ArmorTrait(
     override val loreIndex = 3
 
     override fun renderLore(): List<String> {
-        return listOf(ChatColor.CYAN + armor.toString() + " Armor")
+        return listOf(ChatColor.CYAN + "+$armor Armor")
     }
 
 }
