@@ -11,7 +11,7 @@ import world.cepi.itemextension.item.traits.getTrait
 /** Represents the name that the item contains. */
 class NameTrait(
     /** The name to be rendered on the item */
-    private val name: String
+    val name: String
 ) : Trait {
 
     override val taskIndex = 10

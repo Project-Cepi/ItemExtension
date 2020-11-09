@@ -11,6 +11,7 @@ import world.cepi.itemextension.command.loaders.ItemCommandLoader
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.Traits
+import kotlin.reflect.jvm.jvmName
 
 object RemoveAction : ItemCommandLoader {
     override fun register(command: Command) {
@@ -42,7 +43,7 @@ object RemoveAction : ItemCommandLoader {
 
             if (item.hasTrait(trait.clazz)) {
                 item.removeTrait(trait.clazz)
-                player.sendFormattedMessage(traitRemoved)
+                player.sendFormattedMessage(traitRemoved, trait.clazz.jvmName)
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
             } else
                 player.sendFormattedMessage(traitNotFound)

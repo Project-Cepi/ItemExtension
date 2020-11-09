@@ -3,6 +3,7 @@ package world.cepi.itemextension.command.loaders.actions
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
+import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.*
@@ -15,6 +16,7 @@ import kotlin.reflect.KClassifier
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.valueParameters
+import kotlin.reflect.jvm.jvmName
 
 // TODO break down and organize
 object SetAction : ItemCommandLoader {
@@ -24,8 +26,8 @@ object SetAction : ItemCommandLoader {
         val set = ArgumentType.Word("set").from("set")
 
         val traits = mapOf(*Traits.values()
-            .map { it.clazz to ArgumentType.Word(it.name.toLowerCase()).from(it.name.toLowerCase()) }
-            .toTypedArray())
+                .map { it.clazz to ArgumentType.Word(it.name.toLowerCase()).from(it.name.toLowerCase()) }
+                .toTypedArray())
 
         traits.forEach traitLoop@{ (trait, traitArg) ->
             // We will be using this constructor later to get its arguments
@@ -37,8 +39,8 @@ object SetAction : ItemCommandLoader {
 
             constructorArguments.values.forEach {
                 command.setArgumentCallback(
-                    { commandSender, _, _ -> commandSender.sendFormattedMessage(invalidTraitArgument) },
-                    it
+                        { commandSender, _, _ -> commandSender.sendFormattedMessage(invalidTraitArgument) },
+                        it
                 )
             }
 
@@ -48,6 +50,8 @@ object SetAction : ItemCommandLoader {
                     if (entry.value is ArgumentEnum) {
                         val argumentEnum = entry.value as ArgumentEnum
                         return@map argumentEnum.enumArray.first { it.name == arguments.getString(entry.value.id) }
+                    } else if (entry.value is ArgumentItemStack) {
+                        return@map arguments.getItemStack(entry.value.id).material
                     } else
                         return@map arguments.getObject(entry.value.id)
                 }
@@ -70,7 +74,7 @@ object SetAction : ItemCommandLoader {
 
                     player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
 
-                    player.sendFormattedMessage(traitAdded)
+                    player.sendFormattedMessage(traitAdded, trait.jvmName)
                 } else
                     player.sendFormattedMessage(requireFormattedItem)
 
@@ -91,21 +95,18 @@ object SetAction : ItemCommandLoader {
                         ArgumentType.String(kParam.name!!)
                 Int::class -> linkedMap[kParam.type.classifier!!] =
                         ArgumentType.Integer(kParam.name!!)
+                Material::class -> linkedMap[kParam.type.classifier!!] =
+                        ArgumentType.ItemStack(kParam.name!!)
                 else -> {
                     if (((kParam.type.classifier) as KClass<*>).java.enumConstants == null) return null
-                    // special types
-                    // TODO truly check if its an Enum.
-                    try {
-                        val enumClz =
-                                ((kParam.type.classifier) as KClass<*>).java.enumConstants as Array<Enum<*>>
 
-                        val argumentEnum = ArgumentEnum(kParam.name!!, enumClz).from(*enumClz.map { it.name }.toTypedArray())
+                    @Suppress("UNCHECKED_CAST") // We already check if the class is an enum or not.
+                    val enumClz =
+                            ((kParam.type.classifier) as KClass<*>).java.enumConstants as Array<Enum<*>>
 
-                        linkedMap[kParam.type.classifier!!] = argumentEnum
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        return null
-                    }
+                    val argumentEnum = ArgumentEnum(kParam.name!!, enumClz).from(*enumClz.map { it.name }.toTypedArray())
+
+                    linkedMap[kParam.type.classifier!!] = argumentEnum
                 }
 
             }
