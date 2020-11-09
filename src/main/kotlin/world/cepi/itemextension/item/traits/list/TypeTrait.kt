@@ -8,15 +8,16 @@ class TypeTrait(
         private val type: Type
 ) : Trait {
 
-    override val loreIndex = 1
+    override val loreIndex = 0
 
     override fun renderLore(): List<String> {
-        return arrayListOf("${ChatColor.BOLD}${ChatColor.GRAY}${type.name}", "")
+        return arrayListOf("${ChatColor.GRAY}${type.name}", "")
     }
 
     /** Type enum for handling item types */
     enum class Type {
-        TEST
+        WEAPON,
+        ARMOR
     }
 
 }

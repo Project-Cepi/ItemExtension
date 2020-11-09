@@ -7,13 +7,13 @@ import world.cepi.itemextension.item.traits.Trait
 /** Defines the overall chance that this item would even exist */
 class RarityTrait(
     /** The rarity that the [RarityTrait] encapsulates. */
-    private val rarity: Rarity
+    val rarity: Rarity
 ) : Trait {
 
-    override val loreIndex = 3
+    override val loreIndex = 10
 
     override fun renderLore(): List<String> {
-        return listOf(rarity.asString(), "")
+        return listOf("", rarity.asString())
     }
 
     /** Rarity enum for handling item rarities. */
@@ -22,7 +22,7 @@ class RarityTrait(
         val number: Int,
 
         /** The color of the rarity */
-        private val color: ChatColor
+        val color: ChatColor
     ) {
 
         /** Nothing special about this item, found in shops or dropped*/
