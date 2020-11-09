@@ -13,7 +13,7 @@ class RarityTrait(
     override val loreIndex = 3
 
     override fun renderLore(): List<String> {
-        return listOf(rarity.asString())
+        return listOf(rarity.asString(), "")
     }
 
     /** Rarity enum for handling item rarities. */
