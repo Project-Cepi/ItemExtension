@@ -7,7 +7,7 @@ import net.minestom.server.entity.Player
 fun CommandSender.sendFormattedMessage(message: String, vararg params: String = arrayOf("")) {
 
     var parsedMessage = message
-    params.forEachIndexed { item, index -> parsedMessage = parsedMessage.replace("%${index + 1}".toRegex(), item.toString()) }
+    params.forEachIndexed { item, index -> parsedMessage = parsedMessage.replace("%${index + 1}", item.toString()) }
 
     if (this is Player)
         this.sendMessage(ChatColor.DARK_GRAY + ChatColor.BOLD + "| " + ChatColor.RESET + ChatColor.GRAY + parsedMessage)

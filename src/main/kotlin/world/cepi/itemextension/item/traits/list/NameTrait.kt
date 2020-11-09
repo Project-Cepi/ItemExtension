@@ -18,7 +18,7 @@ class NameTrait(
 
     override fun task(item: ItemStack) {
         val color = item.data?.get<Item>(Item.key)?.getTrait<Trait, RarityTrait>()?.rarity?.color ?: ChatColor.WHITE
-        item.displayName = ColoredText.of(color + name)
+        item.displayName = ColoredText.of(color, name)
     }
 
 }
