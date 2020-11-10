@@ -12,7 +12,7 @@ import world.cepi.itemextension.item.traits.getTrait
 class NameTrait(
     /** The name to be rendered on the item */
     val name: String
-) : Trait {
+) : ItemTrait {
 
     override val taskIndex = 10
 

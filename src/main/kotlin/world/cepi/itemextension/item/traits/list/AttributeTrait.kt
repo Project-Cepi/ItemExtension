@@ -2,9 +2,8 @@ package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.plus
-import world.cepi.itemextension.item.traits.Trait
 
-interface AttributeTrait : Trait {
+interface AttributeTrait : ItemTrait {
 
     val name: String
     val value: Int

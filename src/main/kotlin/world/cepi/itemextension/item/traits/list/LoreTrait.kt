@@ -1,13 +1,11 @@
 package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
-import net.minestom.server.item.ItemStack
-import world.cepi.itemextension.item.traits.Trait
 import java.util.regex.Pattern
 
 class LoreTrait(
         val lore: String
-) : Trait {
+) : ItemTrait {
 
     override val loreIndex = 20 // bottom of the barrel
 

@@ -2,7 +2,6 @@ package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
-import world.cepi.itemextension.item.traits.Trait
 
 /** The material that the item will take on. Default is Paper. */
 class MaterialTrait(
@@ -11,7 +10,7 @@ class MaterialTrait(
 
     /** CustomModelData for the item (resource pack) */
     private val customModelData: Int = 0
-) : Trait {
+) : ItemTrait {
 
     override fun task(item: ItemStack) {
         item.customModelData = customModelData

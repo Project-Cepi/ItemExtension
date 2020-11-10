@@ -4,7 +4,7 @@ import world.cepi.itemextension.item.traits.list.*
 import kotlin.reflect.KClass
 
 /** List of traits represented as an enum to contain more data. */
-enum class Traits(val clazz: KClass<out Trait>) {
+enum class Traits(val clazz: KClass<out ItemTrait>) {
 
     ATTACK_SPEED(AttackSpeedTrait::class),
     DAMAGE(DamageTrait::class),

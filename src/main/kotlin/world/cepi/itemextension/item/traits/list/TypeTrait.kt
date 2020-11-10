@@ -1,12 +1,11 @@
 package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
-import world.cepi.itemextension.item.traits.Trait
 
 class TypeTrait(
         /** The type, used to hold the value in TypeTrait. */
         private val type: Type
-) : Trait {
+) : ItemTrait {
 
     override val loreIndex = 0
 

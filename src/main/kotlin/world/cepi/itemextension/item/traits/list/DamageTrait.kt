@@ -7,13 +7,12 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.item.attribute.AttributeSlot
 import net.minestom.server.item.attribute.ItemAttribute
 import world.cepi.itemextension.command.plus
-import world.cepi.itemextension.item.traits.Trait
 import java.util.*
 
 /** The damage this brings upon attackers */
 class DamageTrait(
     private val damage: Int
-) : Trait {
+) : ItemTrait {
 
     override val loreIndex = 1
 
