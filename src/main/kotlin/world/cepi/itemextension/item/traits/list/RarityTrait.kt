@@ -7,7 +7,7 @@ import world.cepi.itemextension.command.plus
 class RarityTrait(
     /** The rarity that the [RarityTrait] encapsulates. */
     val rarity: Rarity
-) : ItemTrait {
+) : ItemTrait() {
 
     override val loreIndex = 10
 

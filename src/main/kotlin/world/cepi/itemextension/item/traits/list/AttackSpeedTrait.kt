@@ -5,7 +5,7 @@ import world.cepi.itemextension.command.plus
 
 class AttackSpeedTrait(
         val attackSpeed: Double
-) : ItemTrait {
+) : ItemTrait() {
 
     override val loreIndex = 4
 

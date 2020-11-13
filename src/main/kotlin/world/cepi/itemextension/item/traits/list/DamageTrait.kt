@@ -12,7 +12,7 @@ import java.util.*
 /** The damage this brings upon attackers */
 class DamageTrait(
     private val damage: Int
-) : ItemTrait {
+) : ItemTrait() {
 
     override val loreIndex = 1
 

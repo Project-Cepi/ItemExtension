@@ -11,6 +11,7 @@ import world.cepi.itemextension.command.loaders.ItemCommandLoader
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.Traits
+import world.cepi.itemextension.item.traits.list.ItemTrait
 import kotlin.reflect.jvm.jvmName
 
 object RemoveAction : ItemCommandLoader {
@@ -19,8 +20,8 @@ object RemoveAction : ItemCommandLoader {
         val remove = ArgumentType.Word("remove").from("remove")
 
         val traitList = ArgumentType.Word("trait")
-            .from(*Traits.values().map { it.name.toLowerCase() }
-                .toTypedArray())
+            .from(*ItemTrait.classList.map { it.jvmName }
+                    .toTypedArray())
 
         command.addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, remove, traitList)
     }

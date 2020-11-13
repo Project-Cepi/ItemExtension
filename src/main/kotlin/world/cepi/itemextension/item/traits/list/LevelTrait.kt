@@ -4,7 +4,7 @@ package world.cepi.itemextension.item.traits.list
 class LevelTrait(
     /** The minimum level required to use the item passed as a parameter. */
     private val level: Int
-) : ItemTrait {
+) : ItemTrait() {
 
     override val loreIndex = 0
 

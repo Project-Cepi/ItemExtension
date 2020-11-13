@@ -5,7 +5,7 @@ import java.util.regex.Pattern
 
 class LoreTrait(
         val lore: String
-) : ItemTrait {
+) : ItemTrait() {
 
     override val loreIndex = 20 // bottom of the barrel
 

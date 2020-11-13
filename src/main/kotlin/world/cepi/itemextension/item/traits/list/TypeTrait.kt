@@ -5,7 +5,7 @@ import net.minestom.server.chat.ChatColor
 class TypeTrait(
         /** The type, used to hold the value in TypeTrait. */
         private val type: Type
-) : ItemTrait {
+) : ItemTrait() {
 
     override val loreIndex = 0
 

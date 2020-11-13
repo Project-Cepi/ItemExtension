@@ -6,7 +6,7 @@ import world.cepi.itemextension.command.plus
 // TODO make armor trait
 class ArmorTrait(
     private val armor: Int
-) : ItemTrait {
+) : ItemTrait() {
 
     override val loreIndex = 3
 

@@ -11,6 +11,7 @@ import world.cepi.itemextension.command.loaders.ItemCommandLoader
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.Traits
+import world.cepi.itemextension.item.traits.list.ItemTrait
 import kotlin.reflect.KClass
 import kotlin.reflect.KClassifier
 import kotlin.reflect.KFunction
@@ -25,8 +26,8 @@ object SetAction : ItemCommandLoader {
 
         val set = ArgumentType.Word("set").from("set")
 
-        val traits = mapOf(*Traits.values()
-                .map { it.clazz to ArgumentType.Word(it.name.toLowerCase()).from(it.name.toLowerCase()) }
+        val traits = mapOf(*ItemTrait.classList
+                .map { it to ArgumentType.Word(it.jvmName.toLowerCase()).from(it.jvmName.toLowerCase()) }
                 .toTypedArray())
 
         traits.forEach traitLoop@{ (trait, traitArg) ->

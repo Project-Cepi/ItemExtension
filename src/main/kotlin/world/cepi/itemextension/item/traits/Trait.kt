@@ -2,6 +2,7 @@ package world.cepi.itemextension.item.traits
 
 import com.beust.klaxon.Json
 import net.minestom.server.item.ItemStack
+import kotlin.reflect.KFunction
 
 /** Trait objects that get appended to Items. Inspired by the decorator pattern */
 interface Trait {

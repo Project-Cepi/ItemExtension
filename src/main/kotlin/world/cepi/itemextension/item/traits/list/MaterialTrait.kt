@@ -10,7 +10,7 @@ class MaterialTrait(
 
     /** CustomModelData for the item (resource pack) */
     private val customModelData: Int = 0
-) : ItemTrait {
+) : ItemTrait() {
 
     override fun task(item: ItemStack) {
         item.customModelData = customModelData
