@@ -8,11 +8,10 @@ import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.*
 import world.cepi.itemextension.command.loaders.ItemCommandLoader
+import world.cepi.itemextension.command.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.traits.Traits
 import world.cepi.itemextension.item.traits.list.ItemTrait
-import kotlin.reflect.jvm.jvmName
 
 object RemoveAction : ItemCommandLoader {
     override fun register(command: Command) {
@@ -20,8 +19,7 @@ object RemoveAction : ItemCommandLoader {
         val remove = ArgumentType.Word("remove").from("remove")
 
         val traitList = ArgumentType.Word("trait")
-            .from(*ItemTrait.classList.map { it.jvmName }
-                    .toTypedArray())
+            .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }.toTypedArray())
 
         command.addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, remove, traitList)
     }
@@ -38,13 +36,13 @@ object RemoveAction : ItemCommandLoader {
         val isCepiItem = checkIsItem(itemStack)
 
         if (isCepiItem) {
-            val trait = Traits.values().first { it.name.equals(args.getWord("trait"), ignoreCase = true) }
+            val trait = ItemTrait.classList.first { processTraitName(it.simpleName!!).equals(args.getWord("trait"), ignoreCase = true) }
 
             val item = itemStack.data!!.get<Item>(Item.key)!!
 
-            if (item.hasTrait(trait.clazz)) {
-                item.removeTrait(trait.clazz)
-                player.sendFormattedMessage(traitRemoved, trait.clazz.jvmName)
+            if (item.hasTrait(trait)) {
+                item.removeTrait(trait)
+                player.sendFormattedMessage(traitRemoved, trait.simpleName!!.substring(0..trait.simpleName!!.length - 5))
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
             } else
                 player.sendFormattedMessage(traitNotFound)

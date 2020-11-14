@@ -8,9 +8,9 @@ import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.*
 import world.cepi.itemextension.command.loaders.ItemCommandLoader
+import world.cepi.itemextension.command.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.traits.Traits
 import world.cepi.itemextension.item.traits.list.ItemTrait
 import kotlin.reflect.KClass
 import kotlin.reflect.KClassifier
@@ -27,7 +27,8 @@ object SetAction : ItemCommandLoader {
         val set = ArgumentType.Word("set").from("set")
 
         val traits = mapOf(*ItemTrait.classList
-                .map { it to ArgumentType.Word(it.jvmName.toLowerCase()).from(it.jvmName.toLowerCase()) }
+                .map { it to ArgumentType.Word(it.simpleName!!)
+                        .from(processTraitName(it.simpleName!!)) }
                 .toTypedArray())
 
         traits.forEach traitLoop@{ (trait, traitArg) ->
