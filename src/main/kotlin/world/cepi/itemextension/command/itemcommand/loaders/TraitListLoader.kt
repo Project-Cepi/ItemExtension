@@ -17,4 +17,12 @@ object TraitListLoader : ItemCommandLoader {
 
 }
 
+/**
+ * Turns a trait name, EX NameTrait, into name.
+ * NOTE: This is an unsafe method.
+ *
+ * @param name String that ends with "Trait"
+ *
+ * @return A substring of that trait, EX NameTrait turns into "name"
+ */
 fun processTraitName(name: String) = name.toLowerCase().substring(0..name.length - 5)
