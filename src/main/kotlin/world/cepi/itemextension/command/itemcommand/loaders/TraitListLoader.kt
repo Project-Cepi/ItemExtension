@@ -1,8 +1,8 @@
-package world.cepi.itemextension.command.loaders
+package world.cepi.itemextension.command.itemcommand.loaders
 
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
-import world.cepi.itemextension.command.sendFormattedMessage
+import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 import world.cepi.itemextension.item.traits.list.ItemTrait
 
 object TraitListLoader : ItemCommandLoader {
@@ -25,4 +25,4 @@ object TraitListLoader : ItemCommandLoader {
  *
  * @return A substring of that trait, EX NameTrait turns into "name"
  */
-fun processTraitName(name: String) = name.toLowerCase().substring(0..name.length - 5)
+fun processTraitName(name: String) = name.toLowerCase().substring(0..name.length - 6)

@@ -1,4 +1,4 @@
-package world.cepi.itemextension.command.loaders.actions
+package world.cepi.itemextension.command.itemcommand.loaders.actions
 
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Arguments
@@ -6,9 +6,9 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.itemextension.command.*
-import world.cepi.itemextension.command.loaders.ItemCommandLoader
-import world.cepi.itemextension.command.loaders.processTraitName
+import world.cepi.itemextension.command.itemcommand.*
+import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
+import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.ItemTrait

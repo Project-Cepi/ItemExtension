@@ -6,7 +6,7 @@ import net.minestom.server.chat.ChatColor
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.attribute.AttributeSlot
 import net.minestom.server.item.attribute.ItemAttribute
-import world.cepi.itemextension.command.plus
+import world.cepi.itemextension.command.itemcommand.plus
 import java.util.*
 
 /** The damage this brings upon attackers */

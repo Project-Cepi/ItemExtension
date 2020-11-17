@@ -1,4 +1,4 @@
-package world.cepi.itemextension.command.loaders
+package world.cepi.itemextension.command.itemcommand.loaders
 
 import net.minestom.server.command.builder.Command
 

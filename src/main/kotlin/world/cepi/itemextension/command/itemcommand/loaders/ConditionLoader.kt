@@ -1,8 +1,8 @@
-package world.cepi.itemextension.command.loaders
+package world.cepi.itemextension.command.itemcommand.loaders
 
 import net.minestom.server.command.builder.Command
-import world.cepi.itemextension.command.onlyPlayers
-import world.cepi.itemextension.command.sendFormattedMessage
+import world.cepi.itemextension.command.itemcommand.onlyPlayers
+import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 
 object ConditionLoader : ItemCommandLoader {
 

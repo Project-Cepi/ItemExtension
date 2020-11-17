@@ -1,7 +1,7 @@
 package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
-import world.cepi.itemextension.command.plus
+import world.cepi.itemextension.command.itemcommand.plus
 
 class AttackSpeedTrait(
         val attackSpeed: Double

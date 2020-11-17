@@ -1,4 +1,4 @@
-package world.cepi.itemextension.command
+package world.cepi.itemextension.command.itemcommand
 
 import net.minestom.server.command.builder.arguments.ArgumentWord
 
