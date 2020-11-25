@@ -1,7 +1,7 @@
 package world.cepi.itemextension.item.traits.list
 
-import net.minestom.server.attribute.Attribute
 import net.minestom.server.attribute.AttributeOperation
+import net.minestom.server.attribute.Attributes
 import net.minestom.server.chat.ChatColor
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.attribute.AttributeSlot
@@ -26,7 +26,7 @@ class DamageTrait(
     }
 
     private fun applyAttribute(item: ItemStack, slot: AttributeSlot) {
-        item.addAttribute(ItemAttribute(UUID.randomUUID(), item.displayName.toString(), Attribute.ATTACK_DAMAGE, AttributeOperation.ADDITION,
+        item.addAttribute(ItemAttribute(UUID.randomUUID(), item.displayName.toString(), Attributes.ATTACK_DAMAGE, AttributeOperation.ADDITION,
             damage.toDouble(), slot))
     }
 
