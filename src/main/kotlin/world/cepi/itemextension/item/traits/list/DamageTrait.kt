@@ -11,7 +11,7 @@ import java.util.*
 
 /** The damage this brings upon attackers */
 class DamageTrait(
-    private val damage: Int
+    private val damage: Double
 ) : ItemTrait() {
 
     override val loreIndex = 1
@@ -27,7 +27,7 @@ class DamageTrait(
 
     private fun applyAttribute(item: ItemStack, slot: AttributeSlot) {
         item.addAttribute(ItemAttribute(UUID.randomUUID(), item.displayName.toString(), Attributes.ATTACK_DAMAGE, AttributeOperation.ADDITION,
-            damage.toDouble(), slot))
+            damage, slot))
     }
 
 
