@@ -33,9 +33,6 @@ dependencies {
 
     // Compile Minestom into project
     implementation("com.github.Minestom:Minestom:a8c1c73")
-
-    // Use the Netty library
-    implementation("io.netty:netty-transport-native-epoll:4.1.52.Final")
 }
 
 tasks.withType<Test> {

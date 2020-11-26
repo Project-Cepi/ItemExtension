@@ -13,7 +13,9 @@ import net.minestom.server.entity.Player
 fun CommandSender.sendFormattedMessage(message: String, vararg params: String = arrayOf("")) {
 
     var parsedMessage = message
-    params.forEachIndexed { item, index -> parsedMessage = parsedMessage.replace("%${index + 1}", item.toString()) }
+    params.forEachIndexed { index, item ->
+        parsedMessage = parsedMessage.replaceFirst("%${index + 1}", item)
+    }
 
     if (this is Player)
         this.sendMessage(ChatColor.DARK_GRAY + ChatColor.BOLD + "| " + ChatColor.RESET + ChatColor.GRAY + parsedMessage)
