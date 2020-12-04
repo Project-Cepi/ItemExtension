@@ -13,7 +13,6 @@ open class ItemTrait : Trait {
             MaterialTrait::class,
             ArmorTrait::class,
             LoreTrait::class,
-            TypeTrait::class,
-            AttributeDisplayTrait::class
+            TypeTrait::class
     )
 }
