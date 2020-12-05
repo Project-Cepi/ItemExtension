@@ -9,10 +9,10 @@ class ClearCommand : Command("clear") {
     init {
         ConditionLoader.register(this)
 
-        addSyntax({ commandSender, _ ->
+        setDefaultExecutor { commandSender, _ ->
             val player = commandSender as Player
             player.inventory.clear()
-        })
+        }
     }
 
 }
