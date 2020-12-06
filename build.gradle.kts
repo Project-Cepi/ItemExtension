@@ -39,6 +39,12 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+configure<SourceSetContainer> {
+    named("main") {
+        java.srcDir("src/main/kotlin")
+    }
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
