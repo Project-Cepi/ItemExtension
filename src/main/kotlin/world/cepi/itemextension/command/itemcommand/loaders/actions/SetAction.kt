@@ -17,7 +17,6 @@ import kotlin.reflect.KClassifier
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.valueParameters
-import kotlin.reflect.jvm.jvmName
 
 // TODO break down and organize
 object SetAction : ItemCommandLoader {
@@ -77,7 +76,7 @@ object SetAction : ItemCommandLoader {
 
                     player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
 
-                    player.sendFormattedMessage(traitAdded, trait.jvmName)
+                    player.sendFormattedMessage(traitAdded, trait.simpleName ?: "unknown")
                 } else
                     player.sendFormattedMessage(requireFormattedItem)
 
