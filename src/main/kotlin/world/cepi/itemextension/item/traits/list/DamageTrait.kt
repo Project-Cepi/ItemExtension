@@ -1,13 +1,8 @@
 package world.cepi.itemextension.item.traits.list
 
-import net.minestom.server.attribute.AttributeOperation
-import net.minestom.server.attribute.Attributes
 import net.minestom.server.chat.ChatColor
 import net.minestom.server.item.ItemStack
-import net.minestom.server.item.attribute.AttributeSlot
-import net.minestom.server.item.attribute.ItemAttribute
 import world.cepi.itemextension.command.itemcommand.plus
-import java.util.*
 
 /** The damage this brings upon attackers */
 class DamageTrait(
@@ -21,14 +16,7 @@ class DamageTrait(
     }
 
     override fun task(item: ItemStack) {
-        applyAttribute(item, AttributeSlot.MAINHAND)
-        applyAttribute(item, AttributeSlot.OFFHAND)
+        item.data!!.set("damage", damage)
     }
-
-    private fun applyAttribute(item: ItemStack, slot: AttributeSlot) {
-        item.addAttribute(ItemAttribute(UUID.randomUUID(), item.displayName.toString(), Attributes.ATTACK_DAMAGE, AttributeOperation.ADDITION,
-            damage, slot))
-    }
-
 
 }
