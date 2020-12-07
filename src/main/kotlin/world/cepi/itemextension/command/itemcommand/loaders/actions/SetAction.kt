@@ -76,7 +76,7 @@ object SetAction : ItemCommandLoader {
 
                     player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
 
-                    player.sendFormattedMessage(traitAdded, trait.simpleName ?: "unknown")
+                    player.sendFormattedMessage(traitAdded, processTraitName(trait.simpleName!!))
                 } else
                     player.sendFormattedMessage(requireFormattedItem)
 

@@ -42,7 +42,7 @@ object RemoveAction : ItemCommandLoader {
 
             if (item.hasTrait(trait)) {
                 item.removeTrait(trait)
-                player.sendFormattedMessage(traitRemoved, (trait.simpleName ?: "unknown").substring(0..trait.simpleName!!.length - 5))
+                player.sendFormattedMessage(traitRemoved, processTraitName(trait.simpleName!!).substring(0..trait.simpleName!!.length - 5))
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
             } else
                 player.sendFormattedMessage(traitNotFound)
