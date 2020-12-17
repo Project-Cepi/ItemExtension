@@ -32,7 +32,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
 
     // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:a8c1c73")
+    implementation("com.github.Minestom:Minestom:ed46bd0dc2")
 }
 
 tasks.withType<Test> {

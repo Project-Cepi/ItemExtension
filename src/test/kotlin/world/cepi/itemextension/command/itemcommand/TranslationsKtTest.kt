@@ -11,8 +11,8 @@ class TranslationsKtTest {
 
         var lastReceivedMessage: String? = null
 
-        override fun getAllPermissions(): MutableCollection<Permission<Any>> {
-            return mutableListOf()
+        override fun getAllPermissions(): MutableSet<Permission> {
+            return mutableSetOf()
         }
 
         override fun sendMessage(message: String) {
