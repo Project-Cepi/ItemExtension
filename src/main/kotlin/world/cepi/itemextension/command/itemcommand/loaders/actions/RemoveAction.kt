@@ -12,16 +12,18 @@ import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.ItemTrait
+import world.cepi.kstom.addSyntax
+import world.cepi.kstom.arguments.asSubcommand
 
 object RemoveAction : ItemCommandLoader {
     override fun register(command: Command) {
 
-        val remove = ArgumentType.Word("remove").from("remove")
+        val remove = "remove".asSubcommand()
 
         val traitList = ArgumentType.Word("trait")
             .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }.toTypedArray())
 
-        command.addSyntax({ commandSender, args -> actionWithTrait(commandSender, args) }, remove, traitList)
+        command.addSyntax(remove, traitList) { commandSender, args -> actionWithTrait(commandSender, args) }
     }
 
     private fun actionWithTrait(commandSender: CommandSender, args: Arguments) {

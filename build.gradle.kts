@@ -33,6 +33,9 @@ dependencies {
 
     // Compile Minestom into project
     implementation("com.github.Minestom:Minestom:ed46bd0dc2")
+
+    // implement KStom
+    implementation("com.github.Project-Cepi:KStom:main-SNAPSHOT")
 }
 
 tasks.withType<Test> {

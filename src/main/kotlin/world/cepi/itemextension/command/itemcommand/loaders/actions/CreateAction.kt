@@ -1,7 +1,6 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
 import net.minestom.server.command.builder.Command
-import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.itemCreated
@@ -11,14 +10,16 @@ import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.MaterialTrait
+import world.cepi.kstom.addSyntax
+import world.cepi.kstom.arguments.asSubcommand
 
 object CreateAction : ItemCommandLoader {
 
     override fun register(command: Command) {
 
-        val create = ArgumentType.Word("create").from("create")
+        val create = "create".asSubcommand()
 
-        command.addSyntax({ commandSender, _ ->
+        command.addSyntax(create) { commandSender ->
             val player = commandSender as Player
             val itemStack = player.itemInMainHand
 
@@ -36,6 +37,6 @@ object CreateAction : ItemCommandLoader {
                 player.sendFormattedMessage(itemCreated)
             } else
                 player.sendFormattedMessage(requireNonFormattedItem)
-        }, create)
+        }
     }
 }

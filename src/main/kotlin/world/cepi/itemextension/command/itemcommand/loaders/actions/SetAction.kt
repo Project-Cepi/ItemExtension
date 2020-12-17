@@ -12,6 +12,8 @@ import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.ItemTrait
+import world.cepi.kstom.addSyntax
+import world.cepi.kstom.arguments.asSubcommand
 import kotlin.reflect.KClass
 import kotlin.reflect.KClassifier
 import kotlin.reflect.KFunction
@@ -23,7 +25,7 @@ object SetAction : ItemCommandLoader {
 
     override fun register(command: Command) {
 
-        val set = ArgumentType.Word("set").from("set")
+        val set = "set".asSubcommand()
 
         val traits = mapOf(*ItemTrait.classList
                 .map { it to ArgumentType.Word(it.simpleName!!)
@@ -46,7 +48,7 @@ object SetAction : ItemCommandLoader {
                 )
             }
 
-            command.addSyntax({ commandSender, arguments ->
+            command.addSyntax(set, traitArg, *constructorArguments.values.toTypedArray()) { commandSender, arguments ->
                 val values = constructorArguments.map { entry ->
 
                     if (entry.value is ArgumentEnum) {
@@ -80,7 +82,7 @@ object SetAction : ItemCommandLoader {
                 } else
                     player.sendFormattedMessage(requireFormattedItem)
 
-            }, set, traitArg, *constructorArguments.values.toTypedArray())
+            }
 
         }
     }

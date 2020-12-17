@@ -1,7 +1,6 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
 import net.minestom.server.command.builder.Command
-import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.itemIsAir
@@ -11,12 +10,14 @@ import world.cepi.itemextension.command.itemcommand.requireFormattedItem
 import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.kstom.addSyntax
+import world.cepi.kstom.arguments.asSubcommand
 
 object UpdateAction : ItemCommandLoader {
     override fun register(command: Command) {
-        val update = ArgumentType.Word("update").from("update")
+        val update = "update".asSubcommand()
 
-        command.addSyntax({ commandSender, _ ->
+        command.addSyntax(update) { commandSender ->
             val player = commandSender as Player
             val itemStack = player.itemInMainHand
 
@@ -33,7 +34,7 @@ object UpdateAction : ItemCommandLoader {
                 player.sendFormattedMessage(itemRendered)
             } else
                 player.sendFormattedMessage(requireFormattedItem)
-        }, update)
+        }
 
     }
 }
