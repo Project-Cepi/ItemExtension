@@ -14,6 +14,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.ItemTrait
 import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
+import world.cepi.kstom.setArgumentCallback
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.primaryConstructor
@@ -41,21 +42,20 @@ object SetAction : ItemCommandLoader {
             if (constructorArguments.isEmpty()) return@traitLoop
 
             constructorArguments.forEach {
-                command.setArgumentCallback(
-                        { commandSender, _, _ -> commandSender.sendFormattedMessage(invalidTraitArgument) },
-                        it
-                )
+                command.setArgumentCallback(it)
+                        { commandSender -> commandSender.sendFormattedMessage(invalidTraitArgument) }
+
             }
 
             command.addSyntax(set, traitArg, *constructorArguments.toTypedArray()) { commandSender, arguments ->
                 val values = constructorArguments.map { entry ->
-
-                    if (entry is ArgumentEnum) {
-                        return@map entry.enumArray.first { it.name.equals(arguments.getString(entry.id), ignoreCase = true) }
-                    } else if (entry is ArgumentItemStack) {
-                        return@map arguments.getItemStack(entry.id).material
-                    } else
-                        return@map arguments.getObject(entry.id)
+                    return@map when(entry) {
+                        is ArgumentEnum ->
+                            entry.enumArray.first { it.name.equals(arguments.getString(entry.id), ignoreCase = true) }
+                        is ArgumentItemStack ->
+                            arguments.getItemStack(entry.id).material
+                        else -> arguments.getObject(entry.id)
+                    }
                 }
 
                 val player = commandSender as Player
