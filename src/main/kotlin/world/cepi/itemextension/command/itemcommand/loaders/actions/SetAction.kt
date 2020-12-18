@@ -15,7 +15,6 @@ import world.cepi.itemextension.item.traits.list.ItemTrait
 import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
 import kotlin.reflect.KClass
-import kotlin.reflect.KClassifier
 import kotlin.reflect.KFunction
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.full.valueParameters
@@ -39,25 +38,24 @@ object SetAction : ItemCommandLoader {
 
             val constructorArguments = defineArguments(constructor) ?: return@traitLoop
 
-            if (constructorArguments.size == 0) return@traitLoop
+            if (constructorArguments.isEmpty()) return@traitLoop
 
-            constructorArguments.values.forEach {
+            constructorArguments.forEach {
                 command.setArgumentCallback(
                         { commandSender, _, _ -> commandSender.sendFormattedMessage(invalidTraitArgument) },
                         it
                 )
             }
 
-            command.addSyntax(set, traitArg, *constructorArguments.values.toTypedArray()) { commandSender, arguments ->
+            command.addSyntax(set, traitArg, *constructorArguments.toTypedArray()) { commandSender, arguments ->
                 val values = constructorArguments.map { entry ->
 
-                    if (entry.value is ArgumentEnum) {
-                        val argumentEnum = entry.value as ArgumentEnum
-                        return@map argumentEnum.enumArray.first { it.name.equals(arguments.getString(entry.value.id), ignoreCase = true) }
-                    } else if (entry.value is ArgumentItemStack) {
-                        return@map arguments.getItemStack(entry.value.id).material
+                    if (entry is ArgumentEnum) {
+                        return@map entry.enumArray.first { it.name.equals(arguments.getString(entry.id), ignoreCase = true) }
+                    } else if (entry is ArgumentItemStack) {
+                        return@map arguments.getItemStack(entry.id).material
                     } else
-                        return@map arguments.getObject(entry.value.id)
+                        return@map arguments.getObject(entry.id)
                 }
 
                 val player = commandSender as Player
@@ -87,22 +85,23 @@ object SetAction : ItemCommandLoader {
         }
     }
 
-    private fun defineArguments(constructor: KFunction<*>): LinkedHashMap<KClassifier, Argument<*>>? {
+    /**
+     * Takes a trait that isn't a TraitContainer, and generates primitive arguments for it based on its constructor
+     *
+     * @param constructor The constructor to use to generate args from.
+     *
+     * @return A organized hashmap of arguments and its classifier
+     */
+    private fun defineArguments(constructor: KFunction<*>): List<Argument<*>>? {
 
-        val linkedMap = linkedMapOf<KClassifier, Argument<*>>()
-
-        constructor.valueParameters.forEach { kParam ->
+        return constructor.valueParameters.map { kParam ->
 
             when (kParam.type.classifier) {
 
-                String::class -> linkedMap[kParam.type.classifier!!] =
-                        ArgumentType.String(kParam.name!!)
-                Int::class -> linkedMap[kParam.type.classifier!!] =
-                        ArgumentType.Integer(kParam.name!!)
-                Double::class -> linkedMap[kParam.type.classifier!!] =
-                        ArgumentType.Double(kParam.name!!)
-                Material::class -> linkedMap[kParam.type.classifier!!] =
-                        ArgumentType.ItemStack(kParam.name!!)
+                String::class -> return@map ArgumentType.String(kParam.name!!)
+                Int::class -> return@map ArgumentType.Integer(kParam.name!!)
+                Double::class -> return@map ArgumentType.Double(kParam.name!!)
+                Material::class -> return@map ArgumentType.ItemStack(kParam.name!!)
                 else -> {
                     if (((kParam.type.classifier) as KClass<*>).java.enumConstants == null) return null
 
@@ -112,12 +111,11 @@ object SetAction : ItemCommandLoader {
 
                     val argumentEnum = ArgumentEnum(kParam.name!!, enumClz).from(*enumClz.map { it.name.toLowerCase() }.toTypedArray())
 
-                    linkedMap[kParam.type.classifier!!] = argumentEnum
+                    argumentEnum
                 }
 
             }
         }
-        return linkedMap
     }
 
 }
