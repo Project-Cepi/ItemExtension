@@ -11,6 +11,7 @@ import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.itemextension.item.traits.TraitContainer
 import world.cepi.itemextension.item.traits.list.ItemTrait
 import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
@@ -86,6 +87,13 @@ object SetAction : ItemCommandLoader {
     }
 
     /**
+     * Gets the subtrait arguments from a trait container. Must be a container that contains subtypes of ItemTraits
+     */
+    private fun defineSubTraits(traitContainer: KClass<TraitContainer<out ItemTrait>>) {
+
+    }
+
+    /**
      * Takes a trait that isn't a TraitContainer, and generates primitive arguments for it based on its constructor
      *
      * @param constructor The constructor to use to generate args from.
@@ -101,6 +109,7 @@ object SetAction : ItemCommandLoader {
                 String::class -> return@map ArgumentType.String(kParam.name!!)
                 Int::class -> return@map ArgumentType.Integer(kParam.name!!)
                 Double::class -> return@map ArgumentType.Double(kParam.name!!)
+                Long::class -> return@map ArgumentType.Long(kParam.name!!)
                 Material::class -> return@map ArgumentType.ItemStack(kParam.name!!)
                 else -> {
                     if (((kParam.type.classifier) as KClass<*>).java.enumConstants == null) return null
@@ -109,7 +118,8 @@ object SetAction : ItemCommandLoader {
                     val enumClz =
                             ((kParam.type.classifier) as KClass<*>).java.enumConstants as Array<Enum<*>>
 
-                    val argumentEnum = ArgumentEnum(kParam.name!!, enumClz).from(*enumClz.map { it.name.toLowerCase() }.toTypedArray())
+                    val argumentEnum = ArgumentEnum(kParam.name!!, enumClz)
+                            .from(*enumClz.map { it.name.toLowerCase() }.toTypedArray())
 
                     argumentEnum
                 }

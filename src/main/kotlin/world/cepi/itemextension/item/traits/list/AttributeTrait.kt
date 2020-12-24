@@ -2,12 +2,11 @@ package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
-import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.itemextension.item.traits.list.attributes.HealthAttributeTrait
 import world.cepi.itemextension.item.traits.list.attributes.SpeedAttributeTrait
 
-open class AttributeTrait : Trait {
+open class AttributeTrait : ItemTrait() {
 
     companion object: TraitRefrenceList(
             HealthAttributeTrait::class,
