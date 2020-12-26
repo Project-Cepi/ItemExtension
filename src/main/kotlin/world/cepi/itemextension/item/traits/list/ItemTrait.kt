@@ -14,6 +14,6 @@ open class ItemTrait : Trait {
             ArmorTrait::class,
             LoreTrait::class,
             TypeTrait::class,
-            AttributeDisplayTrait::class
+            AttributeTrait::class
     )
 }
