@@ -1,9 +1,11 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
+import net.minestom.server.chat.ChatColor
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
+import net.minestom.server.entity.EntityType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.*
@@ -100,30 +102,27 @@ object SetAction : ItemCommandLoader {
      *
      * @return A organized hashmap of arguments and its classifier
      */
-    private fun defineArguments(constructor: KFunction<*>): List<Argument<*>>? {
+    private fun defineArguments(constructor: KFunction<*>): List<Argument<*>> =
+        constructor.valueParameters.map { argumentFromClass(it.type.classifier!! as KClass<*>)!! }
 
-        return constructor.valueParameters.map { kParam ->
+    private fun argumentFromClass(clazz: KClass<*>): Argument<*>? {
+        when (clazz) {
+            String::class -> return ArgumentType.String(clazz.simpleName!!)
+            Int::class -> return ArgumentType.Integer(clazz.simpleName!!)
+            Double::class -> return ArgumentType.Double(clazz.simpleName!!)
+            Long::class -> return ArgumentType.Long(clazz.simpleName!!)
+            ChatColor::class -> return ArgumentType.Color(clazz.simpleName!!)
+            EntityType::class -> return ArgumentType.EntityType(clazz.simpleName!!)
+            Material::class -> return ArgumentType.ItemStack(clazz.simpleName!!)
+            else -> {
+                if (clazz.java.enumConstants == null) return null
 
-            when (kParam.type.classifier) {
+                @Suppress("UNCHECKED_CAST") // We already check if the class is an enum or not.
+                val enumClz =
+                        clazz.java.enumConstants as Array<Enum<*>>
 
-                String::class -> return@map ArgumentType.String(kParam.name!!)
-                Int::class -> return@map ArgumentType.Integer(kParam.name!!)
-                Double::class -> return@map ArgumentType.Double(kParam.name!!)
-                Long::class -> return@map ArgumentType.Long(kParam.name!!)
-                Material::class -> return@map ArgumentType.ItemStack(kParam.name!!)
-                else -> {
-                    if (((kParam.type.classifier) as KClass<*>).java.enumConstants == null) return null
-
-                    @Suppress("UNCHECKED_CAST") // We already check if the class is an enum or not.
-                    val enumClz =
-                            ((kParam.type.classifier) as KClass<*>).java.enumConstants as Array<Enum<*>>
-
-                    val argumentEnum = ArgumentEnum(kParam.name!!, enumClz)
-                            .from(*enumClz.map { it.name.toLowerCase() }.toTypedArray())
-
-                    argumentEnum
-                }
-
+                return ArgumentEnum(clazz.simpleName!!, enumClz)
+                        .from(*enumClz.map { it.name.toLowerCase() }.toTypedArray())
             }
         }
     }
