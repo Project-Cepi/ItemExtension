@@ -20,6 +20,4 @@ open class AttributeTrait : ItemTrait() {
         return listOf(ChatColor.DARK_GRAY + "▸" + "${ChatColor.BRIGHT_GREEN}$value ${ChatColor.GRAY}$name")
     }
 
-
-
 }
