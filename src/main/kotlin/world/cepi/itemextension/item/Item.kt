@@ -1,6 +1,7 @@
 package world.cepi.itemextension.item
 
 import net.minestom.server.chat.ColoredText
+import net.minestom.server.chat.JsonMessage
 import net.minestom.server.data.DataImpl
 import net.minestom.server.item.ItemFlag
 import net.minestom.server.item.ItemStack
@@ -35,7 +36,7 @@ class Item: TraitContainer<Trait> {
         traits.sortedBy { it.loreIndex }.forEach { trait -> lore.addAll(trait.renderLore().map { ColoredText.of(it)}) }
         traits.sortedBy { it.taskIndex }.forEach { it.task(item) }
 
-        if (item.lore == null) item.lore = arrayListOf<ColoredText>()
+        if (item.lore == null) item.lore = arrayListOf<JsonMessage>()
         item.lore!!.removeAll { true }
         item.lore!!.addAll(lore)
 
