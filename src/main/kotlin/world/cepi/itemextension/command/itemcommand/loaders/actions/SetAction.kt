@@ -42,7 +42,7 @@ object SetAction : ItemCommandLoader {
             // We will be using this constructor later to get its arguments
             val constructor = trait.primaryConstructor ?: return@traitLoop
 
-            val constructorArguments = defineArguments(constructor) ?: return@traitLoop
+            val constructorArguments = defineArguments(constructor)
 
             if (constructorArguments.isEmpty()) return@traitLoop
 
