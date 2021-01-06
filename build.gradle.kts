@@ -39,6 +39,9 @@ dependencies {
 
     // implement KStom
     implementation("com.github.Project-Cepi:KStom:main-SNAPSHOT")
+
+    // import kotlinx serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
 }
 
 tasks.withType<Test> {

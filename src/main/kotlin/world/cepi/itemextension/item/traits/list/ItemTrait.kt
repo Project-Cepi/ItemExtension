@@ -3,7 +3,8 @@ package world.cepi.itemextension.item.traits.list
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 
-open class ItemTrait : Trait {
+@Serializable
+abstract class ItemTrait : Trait {
     companion object: TraitRefrenceList(
             DamageTrait::class,
             LevelTrait::class,

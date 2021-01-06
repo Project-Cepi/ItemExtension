@@ -6,7 +6,7 @@ import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.itemextension.item.traits.list.attributes.HealthAttributeTrait
 import world.cepi.itemextension.item.traits.list.attributes.SpeedAttributeTrait
 
-open class AttributeTrait : ItemTrait() {
+abstract class AttributeTrait : ItemTrait() {
 
     companion object: TraitRefrenceList(
             HealthAttributeTrait::class,
