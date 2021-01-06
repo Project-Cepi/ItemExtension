@@ -1,13 +1,12 @@
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.4.20"
+    id("org.jetbrains.kotlin.jvm") version "1.4.21"
+    kotlin("plugin.serialization") version "1.4.20"
+    `maven-publish`
+    maven
 
     // Apply the application plugin to add support for building a jar
     java
-
-    maven
-
-    `maven-publish`
 }
 
 repositories {
