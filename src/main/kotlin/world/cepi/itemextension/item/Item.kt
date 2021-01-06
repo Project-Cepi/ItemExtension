@@ -1,5 +1,6 @@
 package world.cepi.itemextension.item
 
+import kotlinx.serialization.Serializable
 import net.minestom.server.chat.ColoredText
 import net.minestom.server.chat.JsonMessage
 import net.minestom.server.data.DataImpl
@@ -10,6 +11,7 @@ import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitContainer
 
 /** Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits. */
+@Serializable
 class Item: TraitContainer<Trait> {
 
     override val traits: MutableList<Trait> = mutableListOf()

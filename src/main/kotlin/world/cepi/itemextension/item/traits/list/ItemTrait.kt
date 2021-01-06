@@ -1,5 +1,6 @@
 package world.cepi.itemextension.item.traits.list
 
+import kotlinx.serialization.Serializable
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 
