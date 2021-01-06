@@ -4,6 +4,10 @@ plugins {
 
     // Apply the application plugin to add support for building a jar
     java
+
+    maven
+
+    `maven-publish`
 }
 
 repositories {
