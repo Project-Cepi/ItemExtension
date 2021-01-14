@@ -9,6 +9,7 @@ class ArmorTrait(
 ) : ItemTrait() {
 
     override val loreIndex = 3
+    override val taskIndex = 1
 
     override fun renderLore(): List<String> {
         return listOf(ChatColor.CYAN + "+$armor Armor")

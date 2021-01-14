@@ -7,5 +7,6 @@ class LevelTrait(
 ) : ItemTrait() {
 
     override val loreIndex = 0
+    override val taskIndex = 1
 
 }

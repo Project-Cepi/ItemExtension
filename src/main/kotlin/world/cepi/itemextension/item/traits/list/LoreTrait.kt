@@ -8,6 +8,7 @@ class LoreTrait(
 ) : ItemTrait() {
 
     override val loreIndex = 20 // bottom of the barrel
+    override val taskIndex = 1
 
     override fun renderLore(): List<String> {
         return listOf("", *splitString(lore, 30).toTypedArray())

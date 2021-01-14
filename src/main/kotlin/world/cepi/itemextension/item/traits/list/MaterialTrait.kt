@@ -12,6 +12,9 @@ class MaterialTrait(
     private val customModelData: Int = 0
 ) : ItemTrait() {
 
+    override val taskIndex = 1
+    override val loreIndex = 1
+
     override fun task(item: ItemStack) {
         item.customModelData = customModelData
         item.material = material

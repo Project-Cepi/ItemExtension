@@ -10,6 +10,7 @@ class RarityTrait(
 ) : ItemTrait() {
 
     override val loreIndex = 10
+    override val taskIndex = 1
 
     override fun renderLore(): List<String> {
         return listOf("", rarity.asString())
