@@ -8,7 +8,7 @@ object DisableDropping {
 
     fun load(player: Player) {
         player.addEventCallback(ItemDropEvent::class) {
-            it.isCancelled = true
+            isCancelled = true
         }
     }
 }
