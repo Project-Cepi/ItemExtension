@@ -13,11 +13,16 @@ abstract class AttributeTrait : ItemTrait() {
             SpeedAttributeTrait::class
     )
 
+    override val loreIndex = 4
+
     open val name: String = "Example"
     open val value: Int = 0
 
     override fun renderLore(): List<String> {
-        return listOf(ChatColor.DARK_GRAY + "▸" + "${ChatColor.BRIGHT_GREEN}$value ${ChatColor.GRAY}$name")
+        return if (value >= 0)
+            listOf(ChatColor.DARK_GRAY + "► " + "${ChatColor.BRIGHT_GREEN}+$value ${ChatColor.GRAY}$name")
+        else
+            listOf(ChatColor.DARK_GRAY + "► " + "${ChatColor.RED}-$value ${ChatColor.GRAY}$name")
     }
 
 }

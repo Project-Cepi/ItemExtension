@@ -8,7 +8,7 @@ class ArmorTrait(
     val armor: Int
 ) : ItemTrait() {
 
-    override val loreIndex = 3
+    override val loreIndex = 2
     override val taskIndex = 1
 
     override fun renderLore(): List<String> {

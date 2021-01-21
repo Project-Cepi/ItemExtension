@@ -35,8 +35,8 @@ class Item: TraitContainer<Trait> {
 
         val lore: MutableList<ColoredText> = mutableListOf()
 
-        traits.sortedBy { it.loreIndex }.forEach { trait -> lore.addAll(trait.renderLore().map { ColoredText.of(it)}) }
-        traits.sortedBy { it.taskIndex }.forEach { it.task(item) }
+        traits.sortedBy(::sortLore).forEach { trait -> lore.addAll(trait.renderLore().map { ColoredText.of(it)}) }
+        traits.sortedBy(::sortTask).forEach { it.task(item) }
 
         if (item.lore == null) item.lore = arrayListOf<JsonMessage>()
         item.lore!!.removeAll { true }
@@ -50,6 +50,14 @@ class Item: TraitContainer<Trait> {
     companion object {
         /** Key for klaxon JSON storage. */
         const val key = "cepi-item"
+
+        fun sortLore(trait: Trait): Int {
+            return trait.loreIndex
+        }
+
+        fun sortTask(trait: Trait): Int {
+            return trait.loreIndex
+        }
     }
 
 
