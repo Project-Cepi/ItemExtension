@@ -4,6 +4,7 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 import world.cepi.itemextension.item.traits.list.ItemTrait
+import world.cepi.kstom.setArgumentCallback
 
 object TraitListLoader : ItemCommandLoader {
 
@@ -12,7 +13,7 @@ object TraitListLoader : ItemCommandLoader {
             .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }
                 .toTypedArray())
 
-        command.setArgumentCallback({ commandSender, _, _ -> commandSender.sendFormattedMessage("Invalid trait!") }, traitList)
+        command.setArgumentCallback(traitList) { commandSender -> commandSender.sendFormattedMessage("Invalid trait!") }
     }
 
 }
