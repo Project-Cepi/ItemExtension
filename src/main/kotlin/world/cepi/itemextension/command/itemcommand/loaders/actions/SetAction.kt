@@ -39,11 +39,11 @@ object SetAction : ItemCommandLoader {
             if (defineSubTraits(trait).isNotEmpty()) {
 
                 defineSubTraits(trait).forEach {
-                    generateCommand(it, command)
+                    generateCommand(command, trait, it)
                 }
 
             } else
-                generateCommand(trait, command)
+                generateCommand(command, trait)
 
         }
     }
@@ -108,7 +108,10 @@ object SetAction : ItemCommandLoader {
         }
     }
 
-    private fun generateCommand(trait: KClass<out Trait>, command: Command) {
+    private fun generateCommand(command: Command, vararg traits: KClass<out Trait>) {
+
+        val trait = traits.last()
+
         // We will be using this constructor later to get its arguments
         val constructor = trait.primaryConstructor ?: return
 
@@ -122,11 +125,11 @@ object SetAction : ItemCommandLoader {
 
         }
 
-        val traitArg = ArgumentType.Word(trait.simpleName!!)
-                .from(processTraitName(trait.simpleName!!))
+        val traitArgs = traits.map { ArgumentType.Word(it.simpleName!!)
+            .from(processTraitName(it.simpleName!!)) }
 
         // TODO subtrait functionality
-        command.addSyntax(set, traitArg, *constructorArguments.toTypedArray()) { commandSender, arguments ->
+        command.addSyntax(set, *traitArgs.toTypedArray(), *constructorArguments.toTypedArray()) { commandSender, arguments ->
             val values = constructorArguments.map { entry ->
                 return@map when(entry) {
                     is ArgumentEnum ->

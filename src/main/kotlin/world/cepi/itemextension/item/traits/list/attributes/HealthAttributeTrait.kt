@@ -6,8 +6,5 @@ class HealthAttributeTrait(override val value: Int): AttributeTrait() {
 
     override val name = "Health"
 
-    override val taskIndex = 1
-    override val loreIndex = 1
-
 
 }

@@ -14,6 +14,7 @@ abstract class AttributeTrait : ItemTrait() {
     )
 
     override val loreIndex = 4
+    override val taskIndex = 1
 
     open val name: String = "Example"
     open val value: Int = 0
