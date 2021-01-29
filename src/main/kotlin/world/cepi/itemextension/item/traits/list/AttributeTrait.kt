@@ -17,7 +17,7 @@ abstract class AttributeTrait : ItemTrait() {
     override val taskIndex = 1
 
     open val name: String = "Example"
-    open val value: Int = 0
+    open val value: Double = 0.0
 
     override fun renderLore(): List<String> {
         return if (value >= 0)
