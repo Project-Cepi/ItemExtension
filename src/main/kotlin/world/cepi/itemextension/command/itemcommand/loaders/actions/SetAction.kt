@@ -65,14 +65,13 @@ object SetAction : ItemCommandLoader {
     }
 
     /**
-     * Takes a trait that isn't a TraitContainer,
-     * and generates primitive arguments for it based on its constructor
+     * Can generate a list of Arguments from a class constructor.
      *
      * @param constructor The constructor to use to generate args from.
      *
      * @return A organized hashmap of arguments and its classifier
      */
-    private fun defineArguments(constructor: KFunction<*>): List<Argument<*>> =
+    private fun argumentsFromConstructor(constructor: KFunction<*>): List<Argument<*>> =
         constructor.valueParameters.map { argumentFromClass(it.type.classifier!! as KClass<*>)!! }
 
     /**
@@ -115,7 +114,7 @@ object SetAction : ItemCommandLoader {
         // We will be using this constructor later to get its arguments
         val constructor = trait.primaryConstructor ?: return
 
-        val constructorArguments = defineArguments(constructor)
+        val constructorArguments = argumentsFromConstructor(constructor)
 
         if (constructorArguments.isEmpty()) return
 

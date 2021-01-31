@@ -8,7 +8,7 @@ class AttackSpeedTrait(
         val attackSpeed: Double
 ) : ItemTrait() {
 
-    override val loreIndex = 3
+    override val loreIndex = 4
     override val taskIndex = 1
 
     override fun renderLore(): List<String> {

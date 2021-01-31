@@ -3,6 +3,8 @@ package world.cepi.itemextension.item.traits.list
 import kotlinx.serialization.Serializable
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
+import world.cepi.itemextension.item.traits.list.attacks.AttackTrait
+import world.cepi.itemextension.item.traits.list.attributes.AttributeTrait
 
 @Serializable
 abstract class ItemTrait : Trait {
@@ -16,6 +18,7 @@ abstract class ItemTrait : Trait {
             ArmorTrait::class,
             LoreTrait::class,
             TypeTrait::class,
-            AttributeTrait::class
+            AttributeTrait::class,
+            AttackTrait::class
     )
 }

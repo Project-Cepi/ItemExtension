@@ -7,7 +7,7 @@ class TypeTrait(
         val type: Type
 ) : ItemTrait() {
 
-    override val loreIndex = 0
+    override val loreIndex = 1
     override val taskIndex = 1
 
     override fun renderLore(): List<String> {

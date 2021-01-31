@@ -1,10 +1,9 @@
-package world.cepi.itemextension.item.traits.list
+package world.cepi.itemextension.item.traits.list.attributes
 
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
 import world.cepi.itemextension.item.traits.TraitRefrenceList
-import world.cepi.itemextension.item.traits.list.attributes.HealthAttributeTrait
-import world.cepi.itemextension.item.traits.list.attributes.SpeedAttributeTrait
+import world.cepi.itemextension.item.traits.list.ItemTrait
 
 abstract class AttributeTrait : ItemTrait() {
 
@@ -13,7 +12,7 @@ abstract class AttributeTrait : ItemTrait() {
             SpeedAttributeTrait::class
     )
 
-    override val loreIndex = 4
+    override val loreIndex = 5
     override val taskIndex = 1
 
     open val name: String = "Example"
