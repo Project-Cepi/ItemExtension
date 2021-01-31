@@ -15,7 +15,7 @@ repositories {
 
     // Use mavenCentral
     maven(url = "https://repo1.maven.org/maven2/")
-    maven(url = "http://repo.spongepowered.org/maven")
+    maven(url = "https://repo.spongepowered.org/maven")
     maven(url = "https://libraries.minecraft.net")
     maven(url = "https://jitpack.io")
     maven(url = "https://jcenter.bintray.com/")
@@ -38,7 +38,7 @@ dependencies {
     implementation("com.github.Minestom:Minestom:5f75ea7d3a")
 
     // implement KStom
-    implementation("com.github.Project-Cepi:KStom:4fc7563d18")
+    implementation("com.github.Project-Cepi:KStom:6c445a01fc")
 
     // import kotlinx serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")

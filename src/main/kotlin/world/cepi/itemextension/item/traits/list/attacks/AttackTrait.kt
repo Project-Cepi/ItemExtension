@@ -7,7 +7,6 @@ import world.cepi.itemextension.item.traits.list.ItemTrait
 
 abstract class AttackTrait: ItemTrait() {
 
-
     companion object: TraitRefrenceList(
             PrimaryAttackTrait::class,
             SecondaryAttackTrait::class,

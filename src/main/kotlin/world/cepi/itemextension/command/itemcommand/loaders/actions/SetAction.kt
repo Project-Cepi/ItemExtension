@@ -1,11 +1,8 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
-import net.minestom.server.chat.ChatColor
 import net.minestom.server.command.builder.Command
-import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
-import net.minestom.server.entity.EntityType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.*
@@ -17,10 +14,10 @@ import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.itemextension.item.traits.list.ItemTrait
 import world.cepi.kstom.addSyntax
+import world.cepi.kstom.arguments.argumentsFromConstructor
 import world.cepi.kstom.arguments.asSubcommand
 import world.cepi.kstom.setArgumentCallback
 import kotlin.reflect.KClass
-import kotlin.reflect.KFunction
 import kotlin.reflect.full.*
 
 // TODO break down and organize
@@ -34,7 +31,7 @@ object SetAction : ItemCommandLoader {
 
     override fun register(command: Command) {
 
-        traits.forEach traitLoop@{ trait ->
+        traits.forEach { trait ->
 
             if (defineSubTraits(trait).isNotEmpty()) {
 
@@ -62,49 +59,6 @@ object SetAction : ItemCommandLoader {
 
         return (traitContainer.companionObjectInstance as TraitRefrenceList).classList.toList()
 
-    }
-
-    /**
-     * Can generate a list of Arguments from a class constructor.
-     *
-     * @param constructor The constructor to use to generate args from.
-     *
-     * @return A organized hashmap of arguments and its classifier
-     */
-    private fun argumentsFromConstructor(constructor: KFunction<*>): List<Argument<*>> =
-        constructor.valueParameters.map { argumentFromClass(it.type.classifier!! as KClass<*>)!! }
-
-    /**
-     * Generates a Minestom argument based on the class
-     *
-     * @param clazz The class to base the argument off of
-     *
-     * @return An argument that matches with the class.
-     *
-     */
-    private fun argumentFromClass(clazz: KClass<*>): Argument<*>? {
-
-        if (clazz.simpleName == null) return null
-
-        when (clazz) {
-            String::class -> return ArgumentType.String(clazz.simpleName!!)
-            Int::class -> return ArgumentType.Integer(clazz.simpleName!!)
-            Double::class -> return ArgumentType.Double(clazz.simpleName!!)
-            Long::class -> return ArgumentType.Long(clazz.simpleName!!)
-            ChatColor::class -> return ArgumentType.Color(clazz.simpleName!!)
-            EntityType::class -> return ArgumentType.EntityType(clazz.simpleName!!)
-            Material::class -> return ArgumentType.ItemStack(clazz.simpleName!!)
-            else -> {
-                if (clazz.java.enumConstants == null) return null
-
-                @Suppress("UNCHECKED_CAST") // We already check if the class is an enum or not.
-                val enumClz =
-                        clazz.java.enumConstants as Array<Enum<*>>
-
-                return ArgumentEnum(clazz.simpleName!!, enumClz)
-                        .from(*enumClz.map { it.name.toLowerCase() }.toTypedArray())
-            }
-        }
     }
 
     private fun generateCommand(command: Command, vararg traits: KClass<out Trait>) {
