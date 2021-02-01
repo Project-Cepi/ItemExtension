@@ -20,7 +20,7 @@ abstract class AttackTrait: ItemTrait() {
     override val taskIndex = 0
 
     override fun renderLore(): List<String> {
-        return listOf(ChatColor.RED + attack.name + ChatColor.GRAY + "[${clickType}]")
+        return listOf(ChatColor.RED + attack.displayName + ChatColor.GRAY + " [${clickType}]")
     }
 
 }

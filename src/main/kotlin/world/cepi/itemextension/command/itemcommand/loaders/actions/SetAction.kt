@@ -14,6 +14,7 @@ import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.itemextension.item.traits.list.ItemTrait
 import world.cepi.kstom.addSyntax
+import world.cepi.kstom.arguments.ArgumentEnum
 import world.cepi.kstom.arguments.argumentsFromConstructor
 import world.cepi.kstom.arguments.asSubcommand
 import world.cepi.kstom.setArgumentCallback

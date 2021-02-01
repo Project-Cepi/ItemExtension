@@ -1,7 +1,12 @@
 package world.cepi.itemextension.item.traits.list.attacks
 
-enum class Attack {
+import net.minestom.server.entity.Player
 
-    NONE
+enum class Attack(val displayName: String, val action: (Player) -> Unit = { }) {
+
+    NONE("None"),
+    COMPLIMENT("Compliment", {
+        it.sendMessage("You're doing great!")
+    })
 
 }
