@@ -17,7 +17,6 @@ class KItem(material: Material, amount: Byte = 1, damage: Int = 0): ItemStack(ma
         rightCallbacks.forEach { it(player, hand) }
     }
 
-
 }
 
 fun item(material: Material = Material.PAPER, amount: Byte = 1, init: KItem.() -> Unit): KItem {

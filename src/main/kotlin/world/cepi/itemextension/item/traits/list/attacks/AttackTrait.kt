@@ -13,7 +13,7 @@ abstract class AttackTrait: ItemTrait() {
             TertiaryAttackTrait::class
     )
 
-    open val attack: Attack = Attack.NONE
+    open val attack: Attack = Attack.STRIKE
     open val clickType: String = "None"
 
     override val loreIndex = 1
