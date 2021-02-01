@@ -22,9 +22,9 @@ class Item: TraitContainer<Trait> {
      *
      * @return The ItemStack after applying traits to the Item
      */
-    fun renderItem(amount: Byte = 1): ItemStack {
+    fun renderItem(amount: Byte = 1): KItem {
 
-        val item = ItemStack(Material.PAPER, amount, 0)
+        val item = KItem(Material.PAPER, amount)
 
         val data = DataImpl()
 

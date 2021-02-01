@@ -1,6 +1,6 @@
 package world.cepi.itemextension.item.traits
 
-import net.minestom.server.item.ItemStack
+import world.cepi.itemextension.item.KItem
 
 /** Trait objects that get appended to Items. Inspired by the decorator pattern */
 interface Trait {
@@ -16,7 +16,7 @@ interface Trait {
      *
      * @param item The item that is being rendered.
      */
-    fun task(item: ItemStack) { }
+    fun task(item: KItem) { }
 
     /**
      * This function is called based on the [loreIndex] of the [Trait]

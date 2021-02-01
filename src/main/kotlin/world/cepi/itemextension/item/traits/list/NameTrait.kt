@@ -2,8 +2,8 @@ package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
 import net.minestom.server.chat.ColoredText
-import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.KItem
 import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.getTrait
 
@@ -16,7 +16,7 @@ class NameTrait(
     override val taskIndex = 10
     override val loreIndex = 1
 
-    override fun task(item: ItemStack) {
+    override fun task(item: KItem) {
         val color = item.data?.get<Item>(Item.key)?.getTrait<Trait, RarityTrait>()?.rarity?.color ?: ChatColor.WHITE
         item.displayName = ColoredText.of(color, name)
     }

@@ -1,8 +1,8 @@
 package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
-import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.command.itemcommand.plus
+import world.cepi.itemextension.item.KItem
 
 /** The damage this brings upon attackers */
 class DamageTrait(
@@ -16,7 +16,7 @@ class DamageTrait(
         return listOf(ChatColor.GOLD + "+$damage Damage")
     }
 
-    override fun task(item: ItemStack) {
+    override fun task(item: KItem) {
         item.data!!.set("damage", damage)
     }
 
