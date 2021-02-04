@@ -6,15 +6,19 @@ import net.minestom.server.item.Material
 
 class KItem(material: Material, amount: Byte = 1, damage: Int = 0): ItemStack(material, amount, damage) {
 
-    val leftCallbacks: MutableList<(Player, Player.Hand) -> Unit> = mutableListOf()
-    val rightCallbacks: MutableList<(Player, Player.Hand) -> Unit> = mutableListOf()
+    val leftCallbacks: MutableList<(Player, Player.Hand) -> Boolean> = mutableListOf()
+    val rightCallbacks: MutableList<(Player, Player.Hand) -> Boolean> = mutableListOf()
 
     override fun onLeftClick(player: Player, hand: Player.Hand) {
-        leftCallbacks.forEach { it(player, hand) }
+        leftCallbacks.forEach {
+            it(player, hand)
+        }
     }
 
     override fun onRightClick(player: Player, hand: Player.Hand) {
-        rightCallbacks.forEach { it(player, hand) }
+        rightCallbacks.forEach {
+            it(player, hand)
+        }
     }
 
 }

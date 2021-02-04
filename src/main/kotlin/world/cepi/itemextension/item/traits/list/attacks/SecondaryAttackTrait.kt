@@ -7,7 +7,12 @@ class SecondaryAttackTrait(override val attack: Attack): AttackTrait() {
 
     override fun task(item: KItem) {
         item.leftCallbacks.add { player, hand ->
-            if (player.isSneaking) attack.action(player, hand)
+
+            if (player.isSneaking)
+                return@add attack.action(player, hand)
+
+            return@add true
+
         }
     }
 
