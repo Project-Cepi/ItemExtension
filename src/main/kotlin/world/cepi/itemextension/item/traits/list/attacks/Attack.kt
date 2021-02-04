@@ -11,7 +11,6 @@ enum class Attack(val displayName: String, val action: (Player, Player.Hand) -> 
         val direction = player.position.direction.normalize() // Get the general direction the player is looking at
         direction.multiply(6) // Boosts the direction
         player.velocity.add(direction)
-//        player.playSound(Sound.ENTITY_ENDER_DRAGON_FLAP, SoundCategory.MASTER, 1f, 1f)
         player.playSound(Sound.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.MASTER, 1f, 1f)
     })
 
