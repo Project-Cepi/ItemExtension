@@ -10,8 +10,8 @@ import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.MaterialTrait
-import world.cepi.kstom.addSyntax
-import world.cepi.kstom.arguments.asSubcommand
+import world.cepi.kstom.command.addSyntax
+import world.cepi.kstom.command.arguments.asSubcommand
 
 object CreateAction : ItemCommandLoader {
 
