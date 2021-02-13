@@ -79,8 +79,16 @@ object SetAction : ItemCommandLoader {
 
         }
 
-        val traitArgs = traits.map { ArgumentType.Word(it.simpleName!!)
-            .from(processTraitName(it.simpleName!!)) }
+        val traitArgs = traits.mapIndexed { index, loopTrait ->
+            if (index != 0) {
+                // Drop the suffix, EX PrimaryAttackTrait becomes Primary
+                ArgumentType.Word(loopTrait.simpleName!!)
+                    .from(loopTrait.simpleName!!.dropLast(traits[index - 1].simpleName!!.length).toLowerCase())
+            } else {
+                ArgumentType.Word(loopTrait.simpleName!!)
+                    .from(processTraitName(loopTrait.simpleName!!))
+            }
+        }
 
         // TODO subtrait functionality
         command.addSyntax(set, *traitArgs.toTypedArray(), *constructorArguments.toTypedArray()) { commandSender, arguments ->
@@ -90,7 +98,7 @@ object SetAction : ItemCommandLoader {
                         arguments.get(entry).name.toLowerCase()
                     is ArgumentItemStack ->
                         arguments.get(entry).material
-                    else -> arguments.getObject(entry.id)
+                    else -> arguments.get(entry)
                 }
             }
 
