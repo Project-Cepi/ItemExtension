@@ -27,7 +27,7 @@ object CreateAction : ItemCommandLoader {
             if (!isCepiItem) {
                 val item = Item()
 
-                if (itemStack.material != Material.AIR) {
+                if (!itemStack.isAir) {
                     item.addTrait(MaterialTrait(itemStack.material, itemStack.customModelData))
                 } else {
                     item.addTrait(MaterialTrait(Material.PAPER, itemStack.customModelData))

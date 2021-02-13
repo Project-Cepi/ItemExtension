@@ -10,7 +10,7 @@ class GiveCommand : Command("give") {
     init {
 
         val itemArg = ArgumentType.ItemStack("item")
-        val amountArg = ArgumentType.Integer("amount")
+        val amountArg = ArgumentType.Integer("amount").min(1).max(127)
         val selector = ArgumentType.Entities("players").onlyPlayers(true)
 
         ConditionLoader.register(this)
@@ -29,8 +29,8 @@ class GiveCommand : Command("give") {
 
             val player = commandSender as Player
 
-            val item = args.getItemStack("item")
-            item.amount = args.getInteger("amount").toByte()
+            val item = args.get(itemArg)
+            item.amount = args.get(amountArg).toByte()
 
             args.get(selector).find(player.instance!!, null).forEach {
                 (it as? Player)?.inventory?.addItemStack(args.get(itemArg))

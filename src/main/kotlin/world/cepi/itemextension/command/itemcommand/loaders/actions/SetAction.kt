@@ -87,9 +87,9 @@ object SetAction : ItemCommandLoader {
             val values = constructorArguments.map { entry ->
                 return@map when(entry) {
                     is ArgumentEnum<*> ->
-                        entry.enumArray.first { it.name.equals(arguments.getString(entry.id), ignoreCase = true) }
+                        arguments.get(entry).name.toLowerCase()
                     is ArgumentItemStack ->
-                        arguments.getItemStack(entry.id).material
+                        arguments.get(entry).material
                     else -> arguments.getObject(entry.id)
                 }
             }

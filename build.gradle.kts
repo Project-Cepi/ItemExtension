@@ -35,10 +35,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 
     // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:5f75ea7d3a")
+    implementation("com.github.Minestom:Minestom:df2ee23a7c")
 
     // implement KStom
-    implementation("com.github.Project-Cepi:KStom:6e996d24c4")
+    implementation("com.github.Project-Cepi:KStom:3b80924771")
 
     // import kotlinx serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
