@@ -14,7 +14,6 @@ import world.cepi.itemextension.item.traits.Trait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.itemextension.item.traits.list.ItemTrait
 import world.cepi.kstom.command.addSyntax
-import world.cepi.kstom.command.arguments.ArgumentEnum
 import world.cepi.kstom.command.arguments.argumentsFromConstructor
 import world.cepi.kstom.command.arguments.asSubcommand
 import world.cepi.kstom.command.setArgumentCallback
@@ -94,8 +93,6 @@ object SetAction : ItemCommandLoader {
         command.addSyntax(set, *traitArgs.toTypedArray(), *constructorArguments.toTypedArray()) { commandSender, arguments ->
             val values = constructorArguments.map { entry ->
                 return@map when(entry) {
-                    is ArgumentEnum<*> ->
-                        arguments.get(entry).name.toLowerCase()
                     is ArgumentItemStack ->
                         arguments.get(entry).material
                     else -> arguments.get(entry)
