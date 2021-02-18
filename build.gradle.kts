@@ -2,6 +2,7 @@ plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.30"
     kotlin("plugin.serialization") version "1.4.20"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
     `maven-publish`
     maven
 
@@ -23,25 +24,25 @@ repositories {
 
 dependencies {
     // Align versions of all Kotlin components
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+    compileOnly(platform("org.jetbrains.kotlin:kotlin-bom"))
 
     // Use the Kotlin JDK 8 standard library.
-    implementation(kotlin("stdlib"))
+    compileOnly(kotlin("stdlib"))
 
     // Use the Kotlin reflect library.
-    implementation(kotlin("reflect"))
+    compileOnly(kotlin("reflect"))
 
     // Use the JUpiter test library.
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 
     // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:df2ee23a7c")
+    compileOnly("com.github.Minestom:Minestom:df2ee23a7c")
 
     // implement KStom
-    implementation("com.github.Project-Cepi:KStom:3b80924771")
+    compileOnly("com.github.Project-Cepi:KStom:3b80924771")
 
     // import kotlinx serialization
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
 }
 
 tasks.withType<Test> {
@@ -52,3 +53,20 @@ java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
+
+tasks {
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        archiveBaseName.set("mob")
+        mergeServiceFiles()
+        minimize()
+
+    }
+
+    test { useJUnitPlatform() }
+
+    build { dependsOn(shadowJar) }
+
+}
+
+val compileKotlin: org.jetbrains.kotlin.gradle.tasks.KotlinCompile by tasks
+compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
