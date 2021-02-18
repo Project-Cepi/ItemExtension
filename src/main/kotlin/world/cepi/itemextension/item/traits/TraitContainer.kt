@@ -36,11 +36,11 @@ interface TraitContainer<T : Trait> {
     /** Removes all traits from the trait container. */
     fun removeAllTraits() = traits.removeAll { true }
 
-}
+    /**
+     * Get a trait from the list from the class value
+     *
+     * @return The trait
+     */
+    fun <B : T> getTrait(): B? = traits.firstOrNull { (it as? B) != null } as B?
 
-/**
- * Get a trait from the list from the class value
- *
- * @return The trait
- */
-inline fun <T : Trait, reified A : T> TraitContainer<T>.getTrait(): A? = traits.firstOrNull { it is A } as? A
+}

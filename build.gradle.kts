@@ -51,11 +51,6 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
 configurations {
     testImplementation {
         extendsFrom(configurations.compileOnly.get())
@@ -76,5 +71,10 @@ tasks {
 
 }
 
-val compileKotlin: org.jetbrains.kotlin.gradle.tasks.KotlinCompile by tasks
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()

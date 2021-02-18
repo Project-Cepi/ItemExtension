@@ -17,6 +17,6 @@ class TraitContainerTest {
 
         assert(traitContainerImpl.hasTrait(NameTrait::class))
 
-        assertEquals(traitContainerImpl.getTrait<Trait, NameTrait>()?.name, "Hello World!")
+        assertEquals(traitContainerImpl.getTrait<NameTrait>()?.name, "Hello World!")
     }
 }
