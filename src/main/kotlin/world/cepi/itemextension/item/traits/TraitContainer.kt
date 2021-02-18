@@ -41,6 +41,6 @@ interface TraitContainer<T : Trait> {
      *
      * @return The trait
      */
-    fun <B : T> getTrait(): B? = traits.firstOrNull { (it as? B) != null } as B?
+    fun <B : T> getTrait(): B? = traits.firstOrNull { (it as? B) != null } as? B
 
 }
