@@ -12,6 +12,9 @@ import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.item.Material
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.combat.util.applyKnockback
+import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.checkIsItem
+import world.cepi.itemextension.item.traits.list.DamageTrait
 import java.text.NumberFormat
 
 
@@ -32,11 +35,16 @@ object CombatHandler : Handler {
 
                 val item = livingEntitySource.itemInMainHand
                 if (target is LivingEntity) {
+
+                    val cepiItem = if (checkIsItem(item)) {
+                        item.data!!.get<Item>(Item.key)!!
+                    } else null
+
                     val entity = target as LivingEntity
                     val damage: Double = if (item.material == Material.AIR)
                         1.0
                     else
-                        item.data?.get<Double>("damage") ?: 1.0
+                        cepiItem?.getTrait<DamageTrait>()?.damage ?: 1.0
 
                     entity.damage(DamageType.fromEntity(livingEntitySource), damage.toFloat())
                     applyKnockback(entity, livingEntitySource)
