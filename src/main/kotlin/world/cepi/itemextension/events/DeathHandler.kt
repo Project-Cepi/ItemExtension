@@ -1,4 +1,4 @@
-package world.cepi.combat.events
+package world.cepi.itemextension.events
 
 import net.minestom.server.MinecraftServer
 import net.minestom.server.chat.ChatColor

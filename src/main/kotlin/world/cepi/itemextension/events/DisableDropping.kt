@@ -4,10 +4,10 @@ import net.minestom.server.entity.Player
 import net.minestom.server.event.item.ItemDropEvent
 import world.cepi.kstom.addEventCallback
 
-object DisableDropping {
+object DisableDropping : Handler {
 
-    fun load(player: Player) {
-        player.addEventCallback(ItemDropEvent::class) {
+    override fun register(playerInit: Player) {
+        playerInit.addEventCallback(ItemDropEvent::class) {
             isCancelled = true
         }
     }

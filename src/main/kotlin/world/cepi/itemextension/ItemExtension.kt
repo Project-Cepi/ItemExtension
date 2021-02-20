@@ -2,10 +2,10 @@ package world.cepi.itemextension
 
 import net.minestom.server.MinecraftServer
 import net.minestom.server.extensions.Extension
-import world.cepi.combat.events.CombatHandler
-import world.cepi.combat.events.DeathHandler
-import world.cepi.combat.events.HealthHandler
-import world.cepi.combat.events.NoVoidHandler
+import world.cepi.itemextension.events.CombatHandler
+import world.cepi.itemextension.events.DeathHandler
+import world.cepi.itemextension.events.HealthHandler
+import world.cepi.itemextension.events.NoVoidHandler
 import world.cepi.itemextension.command.ClearCommand
 import world.cepi.itemextension.command.GiveCommand
 import world.cepi.itemextension.command.itemcommand.ItemCommand
