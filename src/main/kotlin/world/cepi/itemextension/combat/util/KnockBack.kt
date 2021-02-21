@@ -1,4 +1,4 @@
-package world.cepi.combat.util
+package world.cepi.itemextension.combat.util
 
 import net.minestom.server.entity.Entity
 import net.minestom.server.entity.LivingEntity

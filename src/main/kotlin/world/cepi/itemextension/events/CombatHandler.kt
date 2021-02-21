@@ -9,12 +9,14 @@ import net.minestom.server.entity.Player
 import net.minestom.server.entity.damage.DamageType
 import net.minestom.server.entity.hologram.Hologram
 import net.minestom.server.event.entity.EntityAttackEvent
+import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.item.Material
 import net.minestom.server.utils.time.TimeUnit
-import world.cepi.combat.util.applyKnockback
+import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.DamageTrait
+import world.cepi.itemextension.item.traits.list.LevelTrait
 import java.text.NumberFormat
 
 
@@ -34,11 +36,18 @@ object CombatHandler : Handler {
                     return@addEventCallback
 
                 val item = livingEntitySource.itemInMainHand
-                if (target is LivingEntity) {
 
-                    val cepiItem = if (checkIsItem(item)) {
-                        item.data!!.get<Item>(Item.key)!!
-                    } else null
+                val cepiItem = if (checkIsItem(item)) {
+                    item.data!!.get<Item>(Item.key)!!
+                } else null
+
+                if (entity is Player) {
+                    cepiItem?.getTrait<LevelTrait>()?.let {
+                        if ((entity as Player).level < it.level) return@addEventCallback
+                    }
+                }
+
+                if (target is LivingEntity) {
 
                     val entity = target as LivingEntity
                     val damage: Double = if (item.material == Material.AIR)
@@ -63,6 +72,9 @@ object CombatHandler : Handler {
                     }.delay(1, TimeUnit.SECOND).schedule()
 
                 }
+
+                val deathEvent = EntityDeathEvent(target)
+                target.callEvent(EntityDeathEvent::class.java, deathEvent)
             }
         }
 
