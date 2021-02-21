@@ -11,7 +11,7 @@ import world.cepi.itemextension.item.traits.TraitContainer
 
 /** Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits. */
 @Serializable
-class Item: TraitContainer<Trait> {
+class Item: TraitContainer<Trait>() {
 
     override val traits: MutableList<Trait> = mutableListOf()
 
@@ -32,13 +32,11 @@ class Item: TraitContainer<Trait> {
 
         item.data = data
 
-        val lore: MutableList<ColoredText> = mutableListOf()
+        item.lore = traits.sortedBy(::sortLore)
+            .map { trait -> trait.renderLore(this).map { ColoredText.of(it) } }
+            .flatten()
 
-        traits.sortedBy(::sortLore).forEach { trait -> lore.addAll(trait.renderLore().map { ColoredText.of(it)}) }
         traits.sortedBy(::sortTask).forEach { it.task(item) }
-
-        item.lore.removeAll { true }
-        item.lore.addAll(lore)
 
         item.addItemFlags(*ItemFlag.values())
 
@@ -49,11 +47,11 @@ class Item: TraitContainer<Trait> {
         /** Key for klaxon JSON storage. */
         const val key = "cepi-item"
 
-        fun sortLore(trait: Trait): Int {
+        fun sortLore(trait: Trait): Float {
             return trait.loreIndex
         }
 
-        fun sortTask(trait: Trait): Int {
+        fun sortTask(trait: Trait): Float {
             return trait.loreIndex
         }
     }

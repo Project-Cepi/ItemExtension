@@ -1,16 +1,17 @@
 package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
+import world.cepi.itemextension.item.Item
 import java.util.regex.Pattern
 
 class LoreTrait(
         val lore: String
 ) : ItemTrait() {
 
-    override val loreIndex = 20 // bottom of the barrel
-    override val taskIndex = 1
+    override val loreIndex = 20f // bottom of the barrel
+    override val taskIndex = 1f
 
-    override fun renderLore(): List<String> {
+    override fun renderLore(item: Item): List<String> {
         return listOf("", *splitString(lore, 30).toTypedArray())
     }
 

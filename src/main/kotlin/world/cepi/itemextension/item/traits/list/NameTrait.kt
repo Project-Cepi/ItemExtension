@@ -11,8 +11,8 @@ class NameTrait(
     val name: String
 ) : ItemTrait() {
 
-    override val taskIndex = 10
-    override val loreIndex = 1
+    override val taskIndex = 10f
+    override val loreIndex = 1f
 
     override fun task(item: KItem) {
         val color = item.data?.get<Item>(Item.key)?.getTrait<RarityTrait>()?.rarity?.color ?: ChatColor.WHITE

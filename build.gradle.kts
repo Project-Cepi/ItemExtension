@@ -62,7 +62,7 @@ configurations {
 
 tasks {
     named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
-        archiveBaseName.set("mob")
+        archiveBaseName.set("item")
         mergeServiceFiles()
         minimize()
 
@@ -79,5 +79,4 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }

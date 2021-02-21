@@ -1,15 +1,16 @@
 package world.cepi.itemextension.item.traits
 
+import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.KItem
 
 /** Trait objects that get appended to Items. Inspired by the decorator pattern */
 interface Trait {
 
     /** The position where this trait is rendered in the item lore (for item rendering). */
-    val loreIndex: Int
+    val loreIndex: Float
 
     /** The position where this task is run in the item (for item rendering). */
-    val taskIndex: Int
+    val taskIndex: Float
 
     /**
      * This function runs at item render time.
@@ -23,7 +24,7 @@ interface Trait {
      *
      * @return A list of ColoredText used to display on an array
      */
-    fun renderLore(): List<String> {
+    fun renderLore(item: Item): List<String> {
         return arrayListOf()
     }
 

@@ -2,6 +2,7 @@ package world.cepi.itemextension.item.traits.list.attacks
 
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
+import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.itemextension.item.traits.list.ItemTrait
 
@@ -16,10 +17,10 @@ abstract class AttackTrait: ItemTrait() {
     open val attack: Attack = Attack.STRIKE
     open val clickType: String = "None"
 
-    override val loreIndex = 1
-    override val taskIndex = 0
+    override val loreIndex = 2f
+    override val taskIndex = 0f
 
-    override fun renderLore(): List<String> {
+    override fun renderLore(item: Item): List<String> {
         return listOf(ChatColor.RED + attack.displayName + ChatColor.GRAY + " [${clickType}]")
     }
 

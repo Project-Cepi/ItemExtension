@@ -3,10 +3,10 @@ package world.cepi.itemextension.item.traits
 import kotlin.reflect.KClass
 
 /** Object that can hold Traits */
-interface TraitContainer<T : Trait> {
+abstract class TraitContainer<T : Trait> {
 
     /** List of traits that can be added or removed from. Please use a wrapper function */
-    val traits: MutableList<T>
+    open val traits: MutableList<T> = mutableListOf()
 
     /**
      * Encapsulation function to add a trait to the [traits] property
@@ -33,6 +33,13 @@ interface TraitContainer<T : Trait> {
      */
     fun hasTrait(traitClass: KClass<out T>): Boolean = traits.any { it::class == traitClass }
 
+    /**
+     * Checks if the trait container contains any trait that is a subtype/is this class.
+     *
+     * @return Boolean value for if any traits are a subtype of this generic
+     */
+    inline fun <reified B : T> softHasTrait(): Boolean = traits.any { it is B }
+
     /** Removes all traits from the trait container. */
     fun removeAllTraits() = traits.removeAll { true }
 
@@ -41,6 +48,6 @@ interface TraitContainer<T : Trait> {
      *
      * @return The trait
      */
-    fun <B : T> getTrait(): B? = traits.firstOrNull { (it as? B) != null } as? B
+    inline fun <reified B : T> getTrait(): B? = traits.firstOrNull { (it as? B) != null } as? B
 
 }

@@ -2,6 +2,7 @@ package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
+import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.KItem
 
 /** The damage this brings upon attackers */
@@ -9,11 +10,11 @@ class DamageTrait(
     val damage: Double
 ) : ItemTrait() {
 
-    override val loreIndex = 2
-    override val taskIndex = 1
+    override val loreIndex = 3f
+    override val taskIndex = 1f
 
-    override fun renderLore(): List<String> {
-        return listOf(ChatColor.GOLD + "+$damage Damage")
+    override fun renderLore(item: Item): List<String> {
+        return listOf("", ChatColor.GOLD + "+$damage Damage")
     }
 
     override fun task(item: KItem) {

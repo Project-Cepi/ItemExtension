@@ -12,8 +12,8 @@ class MaterialTrait(
     private val customModelData: Int = 0
 ) : ItemTrait() {
 
-    override val taskIndex = 1
-    override val loreIndex = 1
+    override val taskIndex = 1f
+    override val loreIndex = 1f
 
     override fun task(item: KItem) {
         item.customModelData = customModelData

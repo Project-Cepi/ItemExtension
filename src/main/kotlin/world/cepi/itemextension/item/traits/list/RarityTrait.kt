@@ -2,6 +2,7 @@ package world.cepi.itemextension.item.traits.list
 
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
+import world.cepi.itemextension.item.Item
 
 /** Defines the overall chance that this item would even exist */
 class RarityTrait(
@@ -9,10 +10,10 @@ class RarityTrait(
     val rarity: Rarity
 ) : ItemTrait() {
 
-    override val loreIndex = 10
-    override val taskIndex = 1
+    override val loreIndex = 10f
+    override val taskIndex = 1f
 
-    override fun renderLore(): List<String> {
+    override fun renderLore(item: Item): List<String> {
         return listOf("", rarity.asString())
     }
 

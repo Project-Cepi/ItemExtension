@@ -4,7 +4,6 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
 import net.minestom.server.entity.Player
-import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.*
 import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
@@ -102,7 +101,7 @@ object SetAction : ItemCommandLoader {
             val player = commandSender as Player
             val itemStack = player.itemInMainHand
 
-            if (itemStack.material == Material.AIR) {
+            if (itemStack.isAir) {
                 player.sendFormattedMessage(itemIsAir)
                 return@addSyntax
             }
@@ -115,7 +114,7 @@ object SetAction : ItemCommandLoader {
 
                 item.addTrait(trait.primaryConstructor!!.call(*values.toTypedArray()))
 
-                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
+                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Byte.MAX_VALUE))
 
                 player.sendFormattedMessage(traitAdded, processTraitName(trait.simpleName!!))
             } else

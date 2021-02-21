@@ -5,6 +5,8 @@ import world.cepi.itemextension.item.KItem
 class PrimaryAttackTrait(override val attack: Attack): AttackTrait() {
     override val clickType = "Left"
 
+    override val loreIndex = 2.1f
+
     override fun task(item: KItem) {
         item.leftCallbacks.add(attack.action)
     }
