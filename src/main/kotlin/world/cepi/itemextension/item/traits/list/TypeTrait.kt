@@ -12,7 +12,11 @@ class TypeTrait(
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<String> {
-        return arrayListOf("${ChatColor.GRAY}${type.name.toLowerCase().capitalize()}", "")
+        return if (item.softHasTrait<LevelTrait>()) {
+            arrayListOf("${ChatColor.GRAY}${type.name.toLowerCase().capitalize()}")
+        } else {
+            arrayListOf("${ChatColor.GRAY}${type.name.toLowerCase().capitalize()}", "")
+        }
     }
 
     /** Type enum for handling item types */

@@ -14,6 +14,6 @@ class LevelTrait(
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<String> {
-        return listOf(ChatColor.GRAY + "Level Min. " + ChatColor.WHITE + level)
+        return listOf(ChatColor.GRAY + "Level Min. " + ChatColor.WHITE + level, "")
     }
 }
