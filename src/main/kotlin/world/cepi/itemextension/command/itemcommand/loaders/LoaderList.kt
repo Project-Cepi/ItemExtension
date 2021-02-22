@@ -9,6 +9,7 @@ val loaders = listOf(
     ResetAction,
     SetAction,
     UpdateAction,
+    DataAction,
 
     // regular loaders
     ConditionLoader,

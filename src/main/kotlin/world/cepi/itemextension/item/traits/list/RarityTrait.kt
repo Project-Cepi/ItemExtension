@@ -1,10 +1,15 @@
 package world.cepi.itemextension.item.traits.list
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.traits.ItemTrait
 
 /** Defines the overall chance that this item would even exist */
+@Serializable
+@SerialName("rarity")
 class RarityTrait(
     /** The rarity that the [RarityTrait] encapsulates. */
     val rarity: Rarity

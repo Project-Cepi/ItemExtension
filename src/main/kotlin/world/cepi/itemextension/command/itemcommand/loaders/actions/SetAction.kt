@@ -1,7 +1,6 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
 import net.minestom.server.command.builder.Command
-import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.*
@@ -9,9 +8,8 @@ import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.traits.Trait
+import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
-import world.cepi.itemextension.item.traits.list.ItemTrait
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.argumentsFromConstructor
 import world.cepi.kstom.command.arguments.asSubcommand
@@ -24,9 +22,7 @@ object SetAction : ItemCommandLoader {
 
     val set = "set".asSubcommand()
 
-    val traits = listOf(*ItemTrait.classList
-            .map { it }
-            .toTypedArray())
+    val traits = ItemTrait.classList
 
     override fun register(command: Command) {
 
@@ -52,7 +48,7 @@ object SetAction : ItemCommandLoader {
      *
      * @return A list of klasses of subtraits from the trait container.
      */
-    private fun defineSubTraits(traitContainer: KClass<out Trait>): List<KClass<out Trait>> {
+    private fun defineSubTraits(traitContainer: KClass<out ItemTrait>): List<KClass<out ItemTrait>> {
         val companionClass = traitContainer.companionObjectInstance ?: return emptyList()
         if (companionClass !is TraitRefrenceList) return emptyList()
 
@@ -60,37 +56,34 @@ object SetAction : ItemCommandLoader {
 
     }
 
-    private fun generateCommand(command: Command, vararg traits: KClass<out Trait>) {
+    private fun generateCommand(command: Command, vararg traits: KClass<out ItemTrait>) {
 
-        val trait = traits.last()
+        val lastTrait = traits.last()
 
         // We will be using this constructor later to get its arguments
-        val constructor = trait.primaryConstructor ?: return
+        val traitConstructor = lastTrait.primaryConstructor ?: return
 
-        val constructorArguments = argumentsFromConstructor(constructor)
+        val traitConstructorArguments = argumentsFromConstructor(traitConstructor)
 
-        if (constructorArguments.isEmpty()) return
+        if (traitConstructorArguments.isEmpty()) return
 
-        constructorArguments.forEach {
+        traitConstructorArguments.forEach {
             command.setArgumentCallback(it)
             { commandSender -> commandSender.sendFormattedMessage(invalidTraitArgument) }
 
         }
 
         val traitArgs = traits.mapIndexed { index, loopTrait ->
-            if (index != 0) {
+            if (index != 0) { // If this trait isnt the first trait (root trait)
                 // Drop the suffix, EX PrimaryAttackTrait becomes Primary
-                ArgumentType.Word(loopTrait.simpleName!!)
-                    .from(loopTrait.simpleName!!.dropLast(traits[index - 1].simpleName!!.length).toLowerCase())
+                loopTrait.simpleName!!.dropLast(traits[index - 1].simpleName!!.length).toLowerCase().asSubcommand()
             } else {
-                ArgumentType.Word(loopTrait.simpleName!!)
-                    .from(processTraitName(loopTrait.simpleName!!))
+                processTraitName(loopTrait.simpleName!!).asSubcommand()
             }
         }
 
-        // TODO subtrait functionality
-        command.addSyntax(set, *traitArgs.toTypedArray(), *constructorArguments.toTypedArray()) { commandSender, arguments ->
-            val values = constructorArguments.map { entry ->
+        command.addSyntax(set, *traitArgs.toTypedArray(), *traitConstructorArguments.toTypedArray()) { commandSender, arguments ->
+            val values: List<Any> = traitConstructorArguments.map { entry ->
                 return@map when(entry) {
                     is ArgumentItemStack ->
                         arguments.get(entry).material
@@ -109,14 +102,14 @@ object SetAction : ItemCommandLoader {
             if (checkIsItem(itemStack)) {
                 val item = itemStack.data!!.get<Item>(Item.key)!!
 
-                if (item.hasTrait(trait))
-                    item.removeTrait(trait)
+                if (item.hasTrait(lastTrait))
+                    item.removeTrait(lastTrait)
 
-                item.addTrait(trait.primaryConstructor!!.call(*values.toTypedArray()))
+                item.addTrait(lastTrait.primaryConstructor!!.call(*values.toTypedArray()))
 
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Byte.MAX_VALUE))
 
-                player.sendFormattedMessage(traitAdded, processTraitName(trait.simpleName!!))
+                player.sendFormattedMessage(traitAdded, processTraitName(lastTrait.simpleName!!))
             } else
                 player.sendFormattedMessage(requireFormattedItem)
 

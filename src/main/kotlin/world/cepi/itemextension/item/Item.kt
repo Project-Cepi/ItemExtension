@@ -6,14 +6,14 @@ import net.minestom.server.data.DataImpl
 import net.minestom.server.item.ItemFlag
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
-import world.cepi.itemextension.item.traits.Trait
+import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitContainer
 
 /** Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits. */
 @Serializable
-class Item: TraitContainer<Trait>() {
+class Item: TraitContainer<ItemTrait>() {
 
-    override val traits: MutableList<Trait> = mutableListOf()
+    override val traits: MutableList<ItemTrait> = mutableListOf()
 
     /**
      * Renders an item to an ItemStack.
@@ -47,11 +47,11 @@ class Item: TraitContainer<Trait>() {
         /** Key for klaxon JSON storage. */
         const val key = "cepi-item"
 
-        fun sortLore(trait: Trait): Float {
+        fun sortLore(trait: ItemTrait): Float {
             return trait.loreIndex
         }
 
-        fun sortTask(trait: Trait): Float {
+        fun sortTask(trait: ItemTrait): Float {
             return trait.loreIndex
         }
     }

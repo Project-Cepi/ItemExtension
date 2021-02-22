@@ -3,7 +3,7 @@ package world.cepi.itemextension.item.traits
 import kotlin.reflect.KClass
 
 /** Object that can hold Traits */
-abstract class TraitContainer<T : Trait> {
+abstract class TraitContainer<T : ItemTrait> {
 
     /** List of traits that can be added or removed from. Please use a wrapper function */
     open val traits: MutableList<T> = mutableListOf()

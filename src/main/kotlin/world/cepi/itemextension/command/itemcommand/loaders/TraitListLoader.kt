@@ -3,7 +3,7 @@ package world.cepi.itemextension.command.itemcommand.loaders
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
-import world.cepi.itemextension.item.traits.list.ItemTrait
+import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kstom.command.setArgumentCallback
 
 object TraitListLoader : ItemCommandLoader {

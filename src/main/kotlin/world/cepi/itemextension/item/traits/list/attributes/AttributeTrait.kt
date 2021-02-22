@@ -3,8 +3,8 @@ package world.cepi.itemextension.item.traits.list.attributes
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
-import world.cepi.itemextension.item.traits.list.ItemTrait
 
 abstract class AttributeTrait : ItemTrait() {
 

@@ -1,9 +1,14 @@
 package world.cepi.itemextension.item.traits.list
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.traits.ItemTrait
 import java.util.regex.Pattern
 
+@Serializable
+@SerialName("lore")
 class LoreTrait(
         val lore: String
 ) : ItemTrait() {

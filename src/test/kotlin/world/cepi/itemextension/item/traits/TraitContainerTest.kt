@@ -6,8 +6,8 @@ import world.cepi.itemextension.item.traits.list.NameTrait
 
 class TraitContainerTest {
 
-    class TraitContainerImpl: TraitContainer<Trait>() {
-        override val traits: MutableList<Trait> = mutableListOf()
+    class TraitContainerImpl: TraitContainer<ItemTrait>() {
+        override val traits: MutableList<ItemTrait> = mutableListOf()
     }
 
     @Test

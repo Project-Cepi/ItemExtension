@@ -1,10 +1,15 @@
 package world.cepi.itemextension.item.traits.list
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.list.attributes.AttributeTrait
 
+@Serializable
+@SerialName("attack_speed")
 class AttackSpeedTrait(
         /** The attack speed of the trait. */
         val attackSpeed: Double
