@@ -55,15 +55,19 @@ object CombatHandler : Handler {
                 if (target is LivingEntity) {
 
                     val entity = target as LivingEntity
+
+                    // Get the damage of the item, 1 if the user isn't holding an item.
                     val damage: Double = if (item.material == Material.AIR)
                         1.0
                     else
                         cepiItem?.getTrait<DamageTrait>()?.damage ?: 1.0
 
                     // Appends armor to the damage. Collects all armor from all armor slots and applies it as so.
-                    val finalDamage = ArmorTrait.applyToDamage(listOf(entity.boots, entity.leggings, entity.chestplate, entity.helmet).map {
-                        cepiItem?.getTrait<ArmorTrait>()?.armor ?: 0.0
-                    }.sum(), damage)
+                    val armor = listOf(entity.boots, entity.leggings, entity.chestplate, entity.helmet).map {
+                        it.data?.get<Item>(Item.key)?.getTrait<ArmorTrait>()?.armor ?: 0.0
+                    }.sum()
+
+                    val finalDamage = ArmorTrait.applyToDamage(armor, damage)
 
                     // TODO attack speed?
 
