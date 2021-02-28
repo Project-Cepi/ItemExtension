@@ -1,4 +1,4 @@
-package world.cepi.itemextension.item.traits.list.attributes
+package world.cepi.itemextension.item.traits.list.stats
 
 import net.minestom.server.chat.ChatColor
 import world.cepi.itemextension.command.itemcommand.plus
@@ -6,11 +6,11 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 
-abstract class AttributeTrait : ItemTrait() {
+abstract class StatTrait : ItemTrait() {
 
     companion object: TraitRefrenceList(
-            HealthAttributeTrait::class,
-            SpeedAttributeTrait::class
+            HealthStatTrait::class,
+            SpeedStatTrait::class
     )
 
     override val loreIndex = 6f

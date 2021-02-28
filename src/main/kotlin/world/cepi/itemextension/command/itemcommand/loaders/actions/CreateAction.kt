@@ -33,7 +33,7 @@ object CreateAction : ItemCommandLoader {
                     item.addTrait(MaterialTrait(Material.PAPER, itemStack.customModelData))
                 }
 
-                player.itemInMainHand = item.renderItem(itemStack.amount)
+                player.itemInMainHand = item.renderItem(if (itemStack.amount == 0.toByte()) 1 else itemStack.amount)
                 player.sendFormattedMessage(itemCreated)
             } else
                 player.sendFormattedMessage(requireNonFormattedItem)

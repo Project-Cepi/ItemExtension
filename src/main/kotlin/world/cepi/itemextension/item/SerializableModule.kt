@@ -8,8 +8,8 @@ import world.cepi.itemextension.item.traits.list.*
 import world.cepi.itemextension.item.traits.list.attacks.PrimaryAttackTrait
 import world.cepi.itemextension.item.traits.list.attacks.SecondaryAttackTrait
 import world.cepi.itemextension.item.traits.list.attacks.TertiaryAttackTrait
-import world.cepi.itemextension.item.traits.list.attributes.HealthAttributeTrait
-import world.cepi.itemextension.item.traits.list.attributes.SpeedAttributeTrait
+import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
+import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 
 val module = SerializersModule {
 
@@ -28,7 +28,7 @@ val module = SerializersModule {
         subclass(SecondaryAttackTrait::class)
         subclass(TertiaryAttackTrait::class)
 
-        subclass(HealthAttributeTrait::class)
-        subclass(SpeedAttributeTrait::class)
+        subclass(HealthStatTrait::class)
+        subclass(SpeedStatTrait::class)
     }
 }

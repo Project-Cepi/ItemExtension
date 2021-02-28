@@ -5,7 +5,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.KItem
 import world.cepi.itemextension.item.traits.list.*
 import world.cepi.itemextension.item.traits.list.attacks.AttackTrait
-import world.cepi.itemextension.item.traits.list.attributes.AttributeTrait
+import world.cepi.itemextension.item.traits.list.stats.StatTrait
 
 /** Trait objects that get appended to Items. Inspired by the decorator pattern */
 @Serializable
@@ -43,7 +43,7 @@ abstract class ItemTrait {
         ArmorTrait::class,
         LoreTrait::class,
         TypeTrait::class,
-        AttributeTrait::class,
+        StatTrait::class,
         AttackTrait::class
     )
 
