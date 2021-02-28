@@ -31,7 +31,7 @@ object DataAction : ItemCommandLoader {
         val get = "get".asSubcommand()
 
         val from = "from".asSubcommand()
-        val json = ArgumentType.NBT("json")
+        val json = ArgumentType.NbtCompound("json")
 
         command.addSyntax(data, get) { sender ->
             val player = sender as Player
@@ -44,14 +44,13 @@ object DataAction : ItemCommandLoader {
 
             if (checkIsItem(itemStack)) {
                 println(format.encodeToString(itemStack.data!!.get<Item>(Item.key)))
-                sender.sendMessage(format.encodeToString(itemStack.data!!.get<Item>(Item.key)))
             }
         }
 
-        command.addSyntax(data, from, json) { sender ->
+        command.addSyntax(data, from, json) { sender, args ->
             val player = sender as Player
 
-            // TODO make item usable
+            val nbtData = args.get(json) // TODO process to json and convert
         }
     }
 }

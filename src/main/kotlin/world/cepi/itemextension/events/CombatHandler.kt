@@ -15,6 +15,7 @@ import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.itemextension.item.traits.list.ArmorTrait
 import world.cepi.itemextension.item.traits.list.DamageTrait
 import world.cepi.itemextension.item.traits.list.LevelTrait
 import java.text.NumberFormat
@@ -26,6 +27,7 @@ object CombatHandler : Handler {
         MinecraftServer.getGlobalEventHandler().addEventCallback(EntityAttackEvent::class.java) { entityAttackEvent ->
             with(entityAttackEvent) {
 
+                // Don't attack players in creative!
                 if (target is Player && (target as Player).gameMode == GameMode.CREATIVE) {
                     return@addEventCallback
                 }
@@ -42,6 +44,9 @@ object CombatHandler : Handler {
                 } else null
 
                 if (entity is Player) {
+
+                    // Don't attack if the player doesn't have the correct levels
+
                     cepiItem?.getTrait<LevelTrait>()?.let {
                         if ((entity as Player).level < it.level) return@addEventCallback
                     }
@@ -55,14 +60,21 @@ object CombatHandler : Handler {
                     else
                         cepiItem?.getTrait<DamageTrait>()?.damage ?: 1.0
 
-                    entity.damage(DamageType.fromEntity(livingEntitySource), damage.toFloat())
+                    // Appends armor to the damage. Collects all armor from all armor slots and applies it as so.
+                    val finalDamage = ArmorTrait.applyToDamage(listOf(entity.boots, entity.leggings, entity.chestplate, entity.helmet).map {
+                        cepiItem?.getTrait<ArmorTrait>()?.armor ?: 0.0
+                    }.sum(), damage)
+
+                    // TODO attack speed?
+
+                    entity.damage(DamageType.fromEntity(livingEntitySource), finalDamage.toFloat())
                     applyKnockback(entity, livingEntitySource)
 
-                    val format = NumberFormat.getInstance().format(-damage)
+                    val format = NumberFormat.getInstance().format(-finalDamage)
 
                     val hologram = Hologram(
-                            target.instance,
-                            target.position.clone().add(0.0, 1.0, 0.0),
+                            entity.instance,
+                            entity.position.clone().add(0.0, 1.0, 0.0),
                             ColoredText.of("${ChatColor.RED}$format"),
                             true
                     )
@@ -73,6 +85,7 @@ object CombatHandler : Handler {
 
                 }
 
+                // Calls the event for other handlers to listen to.
                 val deathEvent = EntityDeathEvent(target)
                 target.callEvent(EntityDeathEvent::class.java, deathEvent)
             }

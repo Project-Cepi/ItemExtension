@@ -11,7 +11,7 @@ import world.cepi.itemextension.item.traits.ItemTrait
 @SerialName("armor")
 @Serializable
 class ArmorTrait(
-    val armor: Int
+    val armor: Double
 ) : ItemTrait() {
 
     override val loreIndex = 4f
@@ -20,5 +20,11 @@ class ArmorTrait(
     override fun renderLore(item: Item): List<String> {
         return listOf(ChatColor.CYAN + "+$armor Armor")
     }
+
+    companion object {
+        fun applyToDamage(armor: Double, damage: Double): Double =
+            (damage - armor).coerceIn(0.0, Double.MAX_VALUE)
+    }
+
 
 }

@@ -7,7 +7,7 @@ import world.cepi.itemextension.item.KItem
 @Serializable
 @SerialName("secondary_attack")
 class SecondaryAttackTrait(override val attack: Attack): AttackTrait() {
-    override val clickType = "Shift + Left"
+    override val clickType = "Sneak + Left"
 
     override val loreIndex = 2.2f
 
