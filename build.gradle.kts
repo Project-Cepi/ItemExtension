@@ -1,15 +1,22 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.4.31"
-    kotlin("plugin.serialization") version "1.4.20"
+    // Kotlinx serialization for any data format
+    kotlin("plugin.serialization") version "1.4.21"
+    // Shade the plugin
     id("com.github.johnrengelman.shadow") version "6.1.0"
-    `maven-publish`
+    // Add maven support
     maven
+    // Allow publishing
+    `maven-publish`
 
     // Apply the application plugin to add support for building a jar
     java
+    // Dokka documentation w/ kotlin
+    id("org.jetbrains.dokka") version "1.4.20"
 }
 
 repositories {
@@ -61,7 +68,7 @@ configurations {
 }
 
 tasks {
-    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+    named<ShadowJar>("shadowJar") {
         archiveBaseName.set("item")
         mergeServiceFiles()
         minimize()
@@ -81,28 +88,72 @@ java {
 
 tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
 
-configure<PublishingExtension> {
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}") // Github Package
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.getByName("main").allSource)
+    from("LICENCE.md") {
+        into("META-INF")
+    }
+}
+
+val dokkaJavadocJar by tasks.creating(Jar::class) {
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.get().outputDirectory.get())
+    archiveClassifier.set("javadoc")
+}
+
+
+
+publishing {
     publications {
-        create<MavenPublication>(project.name) {
+        register("gprRelease", MavenPublication::class) {
+            groupId = project.group.toString()
+            artifactId = rootProject.name
+            version = project.version.toString()
+
             from(components["java"])
 
-            // If you configured them before
-            // val sourcesJar by tasks.getting(Jar::class)
-            // val javadocJar by tasks.getting(Jar::class)
-
-            val sourcesJar by tasks.creating(Jar::class) {
-                val sourceSets: SourceSetContainer by project
-
-                from(sourceSets["main"].allJava)
-                classifier = "sources"
-            }
-            val javadocJar by tasks.creating(Jar::class) {
-                from(tasks.get("javadoc"))
-                classifier = "javadoc"
-            }
-
             artifact(sourcesJar)
-            artifact(javadocJar)
+            artifact(dokkaJavadocJar)
+
+            pom {
+                packaging = "jar"
+                name.set(rootProject.name)
+                description.set("An Example extension for Minestom")
+                url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}")
+                scm {
+                    url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}")
+                }
+                issueManagement {
+                    url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}/issues")
+                }
+                licenses {
+                    license {
+                        name.set("MIT License") // Change when needed
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set(System.getenv("GITHUB_OWNER"))
+                        name.set(System.getenv("GITHUB_OWNER"))
+                    }
+                }
+            }
+
         }
     }
 }
