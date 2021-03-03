@@ -32,14 +32,12 @@ object CombatHandler : Handler {
                     return@addEventCallback
                 }
 
-                val livingEntitySource = entity as LivingEntity
-
-                if (DeathHandler.isDead.contains(livingEntitySource) || DeathHandler.isDead.contains(target))
+                if (DeathHandler.isDead.contains(entity) || DeathHandler.isDead.contains(target))
                     return@addEventCallback
 
-                val item = livingEntitySource.itemInMainHand
+                val item = (entity as? LivingEntity)?.itemInMainHand
 
-                val cepiItem = if (checkIsItem(item)) {
+                val cepiItem = if (item != null && checkIsItem(item)) {
                     item.data!!.get<Item>(Item.key)!!
                 } else null
 
@@ -57,7 +55,7 @@ object CombatHandler : Handler {
                     val entity = target as LivingEntity
 
                     // Get the damage of the item, 1 if the user isn't holding an item.
-                    val damage: Double = if (item.material == Material.AIR)
+                    val damage: Double = if (item?.material == Material.AIR)
                         1.0
                     else
                         cepiItem?.getTrait<DamageTrait>()?.damage ?: 1.0
@@ -71,8 +69,8 @@ object CombatHandler : Handler {
 
                     // TODO attack speed?
 
-                    entity.damage(DamageType.fromEntity(livingEntitySource), finalDamage.toFloat())
-                    applyKnockback(entity, livingEntitySource)
+                    entity.damage(DamageType.fromEntity(entity), finalDamage.toFloat())
+                    applyKnockback(entity, entity)
 
                     val format = NumberFormat.getInstance().format(-finalDamage)
 
