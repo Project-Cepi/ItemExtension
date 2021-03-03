@@ -1,7 +1,7 @@
 {
-  "entrypoint": "world.cepi.itemextension.ItemExtension",
-  "name": "ItemExtension",
-  "version": "1.0.0",
+  "entrypoint": "${project.group}.${project.mainClass}",
+  "name": "${project.name}",
+  "version": "${project.version}",
   "dependencies": [
     "LevelExtension"
   ]

@@ -67,16 +67,25 @@ configurations {
     }
 }
 
+// Take gradle.properties and apply it to resources.
 tasks {
+    processResources {
+        // Apply properties to extension.json
+        filesMatching("extension.json") {
+            expand(project.properties)
+        }
+    }
+
+    // Set name, minimize, and merge service files
     named<ShadowJar>("shadowJar") {
-        archiveBaseName.set("item")
+        archiveBaseName.set(project.name)
         mergeServiceFiles()
         minimize()
-
     }
 
     test { useJUnitPlatform() }
 
+    // Make build depend on shadowJar as shading dependencies will most likely be required.
     build { dependsOn(shadowJar) }
 
 }
