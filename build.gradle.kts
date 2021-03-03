@@ -5,6 +5,8 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.4.30"
     kotlin("plugin.serialization") version "1.4.20"
     id("com.github.johnrengelman.shadow") version "6.1.0"
+    `maven-publish`
+    maven
 
     // Apply the application plugin to add support for building a jar
     java
@@ -78,3 +80,29 @@ java {
 }
 
 tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
+
+configure<PublishingExtension> {
+    publications {
+        create<MavenPublication>(project.name) {
+            from(components["java"])
+
+            // If you configured them before
+            // val sourcesJar by tasks.getting(Jar::class)
+            // val javadocJar by tasks.getting(Jar::class)
+
+            val sourcesJar by tasks.creating(Jar::class) {
+                val sourceSets: SourceSetContainer by project
+
+                from(sourceSets["main"].allJava)
+                classifier = "sources"
+            }
+            val javadocJar by tasks.creating(Jar::class) {
+                from(tasks.get("javadoc"))
+                classifier = "javadoc"
+            }
+
+            artifact(sourcesJar)
+            artifact(javadocJar)
+        }
+    }
+}
