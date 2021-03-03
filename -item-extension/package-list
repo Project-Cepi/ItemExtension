@@ -1,0 +1,16 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+world.cepi.itemextension
+world.cepi.itemextension.combat.util
+world.cepi.itemextension.command
+world.cepi.itemextension.command.itemcommand
+world.cepi.itemextension.command.itemcommand.loaders
+world.cepi.itemextension.command.itemcommand.loaders.actions
+world.cepi.itemextension.events
+world.cepi.itemextension.item
+world.cepi.itemextension.item.traits
+world.cepi.itemextension.item.traits.list
+world.cepi.itemextension.item.traits.list.attacks
+world.cepi.itemextension.item.traits.list.stats
+
