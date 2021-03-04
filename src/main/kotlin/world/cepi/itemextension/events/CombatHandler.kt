@@ -70,7 +70,7 @@ object CombatHandler : Handler {
                     // TODO attack speed?
 
                     entity.damage(DamageType.fromEntity(entity), finalDamage.toFloat())
-                    applyKnockback(entity, entity)
+                    applyKnockback(target, entity)
 
                     val format = NumberFormat.getInstance().format(-finalDamage)
 
