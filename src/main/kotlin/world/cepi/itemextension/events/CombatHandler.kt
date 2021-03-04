@@ -52,7 +52,7 @@ object CombatHandler : Handler {
 
                 if (target is LivingEntity) {
 
-                    val entity = target as LivingEntity
+                    val livingTarget = target as LivingEntity
 
                     // Get the damage of the item, 1 if the user isn't holding an item.
                     val damage: Double = if (item?.material == Material.AIR)
@@ -61,7 +61,7 @@ object CombatHandler : Handler {
                         cepiItem?.getTrait<DamageTrait>()?.damage ?: 1.0
 
                     // Appends armor to the damage. Collects all armor from all armor slots and applies it as so.
-                    val armor = listOf(entity.boots, entity.leggings, entity.chestplate, entity.helmet).map {
+                    val armor = listOf(livingTarget.boots, livingTarget.leggings, livingTarget.chestplate, livingTarget.helmet).map {
                         it.data?.get<Item>(Item.key)?.getTrait<ArmorTrait>()?.armor ?: 0.0
                     }.sum()
 
@@ -69,14 +69,14 @@ object CombatHandler : Handler {
 
                     // TODO attack speed?
 
-                    entity.damage(DamageType.fromEntity(entity), finalDamage.toFloat())
+                    livingTarget.damage(DamageType.fromEntity(livingTarget), finalDamage.toFloat())
                     applyKnockback(target, entity)
 
                     val format = NumberFormat.getInstance().format(-finalDamage)
 
                     val hologram = Hologram(
-                            entity.instance,
-                            entity.position.clone().add(0.0, 1.0, 0.0),
+                            livingTarget.instance,
+                            livingTarget.position.clone().add(0.0, 1.0, 0.0),
                             ColoredText.of("${ChatColor.RED}$format"),
                             true
                     )
