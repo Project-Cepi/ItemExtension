@@ -1,4 +1,4 @@
-package world.cepi.itemextension.events
+package world.cepi.itemextension.combat.events
 
 import net.minestom.server.MinecraftServer
 import net.minestom.server.chat.ChatColor
@@ -12,6 +12,7 @@ import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.item.Material
 import net.minestom.server.utils.time.TimeUnit
+import world.cepi.itemextension.Handler
 import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem

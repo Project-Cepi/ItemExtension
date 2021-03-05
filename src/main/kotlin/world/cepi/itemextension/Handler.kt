@@ -1,8 +1,8 @@
-package world.cepi.itemextension.events
+package world.cepi.itemextension
 
 import net.minestom.server.entity.Player
 
-interface Handler {
+internal interface Handler {
 
     fun register(playerInit: Player)
 

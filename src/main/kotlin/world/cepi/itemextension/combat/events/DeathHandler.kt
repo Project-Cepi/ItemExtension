@@ -1,4 +1,4 @@
-package world.cepi.itemextension.events
+package world.cepi.itemextension.combat.events
 
 import net.minestom.server.MinecraftServer
 import net.minestom.server.chat.ChatColor
@@ -12,6 +12,7 @@ import net.minestom.server.sound.Sound
 import net.minestom.server.sound.SoundCategory
 import net.minestom.server.utils.Position
 import net.minestom.server.utils.time.TimeUnit
+import world.cepi.itemextension.Handler
 
 
 object DeathHandler : Handler {

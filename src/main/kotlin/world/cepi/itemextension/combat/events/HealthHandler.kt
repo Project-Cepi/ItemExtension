@@ -1,7 +1,8 @@
-package world.cepi.itemextension.events
+package world.cepi.itemextension.combat.events
 
 import net.minestom.server.entity.Player
 import net.minestom.server.event.entity.EntityDamageEvent
+import world.cepi.itemextension.Handler
 
 object HealthHandler : Handler {
 
