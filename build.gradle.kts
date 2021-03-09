@@ -1,5 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
@@ -119,9 +119,9 @@ val sourcesJar by tasks.creating(Jar::class) {
 }
 
 val dokkaJavadocJar by tasks.creating(Jar::class) {
-    dependsOn(tasks.dokkaJavadoc)
-    from(tasks.dokkaJavadoc.get().outputDirectory.get())
     archiveClassifier.set("javadoc")
+    dependsOn("dokkaJavadoc")
+    from("$buildDir/dokka/javadoc/")
 }
 
 
