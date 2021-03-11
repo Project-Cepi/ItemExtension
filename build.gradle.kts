@@ -1,34 +1,31 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.4.31"
-    // Kotlinx serialization for any data format
-    kotlin("plugin.serialization") version "1.4.21"
-    // Shade the plugin
+    kotlin("jvm") version "1.4.30"
     id("com.github.johnrengelman.shadow") version "6.1.0"
-    // Add maven support
-    maven
-    // Allow publishing
-    `maven-publish`
+    id("org.jetbrains.dokka") version "1.4.20"
+    kotlin("plugin.serialization") version "1.4.21"
 
     // Apply the application plugin to add support for building a jar
     java
-    // Dokka documentation w/ kotlin
-    id("org.jetbrains.dokka") version "1.4.20"
+
+    // Apply maven-publish to publish to github packages
+    `maven-publish`
 }
 
 repositories {
     // Use jcenter for resolving dependencies.
     jcenter()
-
+    mavenCentral()
     // Use mavenCentral
     maven(url = "https://repo1.maven.org/maven2/")
     maven(url = "https://repo.spongepowered.org/maven")
     maven(url = "https://libraries.minecraft.net")
     maven(url = "https://jitpack.io")
     maven(url = "https://jcenter.bintray.com/")
+    maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
+    maven(url = "https://repo.minebench.de/")
 }
 
 dependencies {
@@ -45,16 +42,17 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom:Minestom:5ffd44449d")
+    compileOnly("com.github.Minestom:Minestom:df2ee23a7c")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:6d054839bf")
+    compileOnly("com.github.Project-Cepi:KStom:120c4c5475")
 
     // import kotlinx serialization
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
-    // Add levelExtension
-    compileOnly("com.github.Project-Cepi:LevelExtension:cfcbcd8bf7")
+    // Add Kyori Minestom implementation
+    implementation("com.github.mworzala:adventure-platform-minestom:2e12f45b2e")
+    implementation("net.kyori:adventure-text-minimessage:4.0.0-SNAPSHOT")
 }
 
 tasks.withType<Test> {
@@ -67,25 +65,16 @@ configurations {
     }
 }
 
-// Take gradle.properties and apply it to resources.
 tasks {
-    processResources {
-        // Apply properties to extension.json
-        filesMatching("extension.json") {
-            expand(project.properties)
-        }
-    }
-
-    // Set name, minimize, and merge service files
-    named<ShadowJar>("shadowJar") {
-        archiveBaseName.set(project.name)
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        archiveBaseName.set("kepi")
         mergeServiceFiles()
         minimize()
+
     }
 
     test { useJUnitPlatform() }
 
-    // Make build depend on shadowJar as shading dependencies will most likely be required.
     build { dependsOn(shadowJar) }
 
 }
@@ -96,73 +85,8 @@ java {
 }
 
 tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
+val compileKotlin: KotlinCompile by tasks
 
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}") // Github Package
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-}
-
-val sourcesJar by tasks.creating(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets.getByName("main").allSource)
-    from("LICENCE.md") {
-        into("META-INF")
-    }
-}
-
-val dokkaJavadocJar by tasks.creating(Jar::class) {
-    archiveClassifier.set("javadoc")
-    dependsOn("dokkaJavadoc")
-    from("$buildDir/dokka/javadoc/")
-}
-
-
-
-publishing {
-    publications {
-        register("gprRelease", MavenPublication::class) {
-            groupId = project.group.toString()
-            artifactId = rootProject.name
-            version = project.version.toString()
-
-            from(components["java"])
-
-            artifact(sourcesJar)
-            artifact(dokkaJavadocJar)
-
-            pom {
-                packaging = "jar"
-                name.set(rootProject.name)
-                description.set("An Example extension for Minestom")
-                url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}")
-                scm {
-                    url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}")
-                }
-                issueManagement {
-                    url.set("https://github.com/${System.getenv("GITHUB_OWNER")}/${System.getenv("GITHUB_REPO")}/issues")
-                }
-                licenses {
-                    license {
-                        name.set("MIT License") // Change when needed
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set(System.getenv("GITHUB_OWNER"))
-                        name.set(System.getenv("GITHUB_OWNER"))
-                    }
-                }
-            }
-
-        }
-    }
+compileKotlin.kotlinOptions {
+    freeCompilerArgs = listOf("-Xinline-classes")
 }
