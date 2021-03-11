@@ -6,12 +6,11 @@ plugins {
     id("com.github.johnrengelman.shadow") version "6.1.0"
     id("org.jetbrains.dokka") version "1.4.20"
     kotlin("plugin.serialization") version "1.4.21"
+    `maven-publish`
+    maven
 
     // Apply the application plugin to add support for building a jar
     java
-
-    // Apply maven-publish to publish to github packages
-    `maven-publish`
 }
 
 repositories {
@@ -67,7 +66,7 @@ configurations {
 
 tasks {
     named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
-        archiveBaseName.set("kepi")
+        archiveBaseName.set("item")
         mergeServiceFiles()
         minimize()
 
