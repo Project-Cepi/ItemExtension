@@ -1,5 +1,6 @@
 package world.cepi.itemextension.stats
 
+import net.minestom.server.MinecraftServer
 import net.minestom.server.attribute.Attribute
 import net.minestom.server.attribute.AttributeModifier
 import net.minestom.server.attribute.AttributeOperation
@@ -17,12 +18,16 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 import world.cepi.kstom.addEventCallback
+import world.cepi.kstom.asRich
 import java.util.*
 
 object StatsHandler : Handler {
 
     const val healthStat = "health_item"
+    val healthUUID: UUID = UUID.randomUUID()
+
     const val speedStat = "speed_item"
+    val speedUUID: UUID = UUID.randomUUID()
 
     override fun register(playerInit: Player) {
 
@@ -44,6 +49,7 @@ object StatsHandler : Handler {
         }
 
         playerInit.addEventCallback<PlayerChangeHeldSlotEvent> {
+            MinecraftServer.getConnectionManager().broadcastMessage(player.inventory.getItemStack(slot.toInt()).toString().asRich())
             refreshPlayerStats(playerInit, mapOf(EntityEquipmentPacket.Slot.MAIN_HAND to player.inventory.getItemStack(slot.toInt())))
         }
 
@@ -52,7 +58,7 @@ object StatsHandler : Handler {
 
     fun refreshPlayerStats(entity: LivingEntity, changedSlots: Map<EntityEquipmentPacket.Slot, ItemStack> = mapOf()) {
         val items: Map<EntityEquipmentPacket.Slot, Item> = EntityEquipmentPacket.Slot.values().mapNotNull {
-                val item = entity.getEquipment(it).data?.get<Item>(Item.key) ?: (changedSlots[it]?.data?.get<Item>(Item.key) ?: return@mapNotNull null)
+                val item = ((changedSlots[it]?.data?.get<Item>(Item.key)) ?: entity.getEquipment(it).data?.get<Item>(Item.key)) ?: return@mapNotNull null
                 it to item
             }.toMap()
 
@@ -60,11 +66,11 @@ object StatsHandler : Handler {
 
         val speed = items.values.mapNotNull { it.getTrait<SpeedStatTrait>()?.value }.sum()
 
-        entity.getAttribute(Attribute.MAX_HEALTH).removeModifier(AttributeModifier(healthStat, health, AttributeOperation.ADDITION))
-        entity.getAttribute(Attribute.MOVEMENT_SPEED).removeModifier(AttributeModifier(speedStat, speed, AttributeOperation.MULTIPLY_BASE))
+        entity.getAttribute(Attribute.MAX_HEALTH).removeModifier(AttributeModifier(healthUUID, healthStat, health, AttributeOperation.ADDITION))
+        entity.getAttribute(Attribute.MOVEMENT_SPEED).removeModifier(AttributeModifier(speedUUID, speedStat, speed, AttributeOperation.MULTIPLY_BASE))
 
-        entity.getAttribute(Attribute.MAX_HEALTH).addModifier(AttributeModifier(healthStat, health, AttributeOperation.ADDITION))
-        entity.getAttribute(Attribute.MOVEMENT_SPEED).addModifier(AttributeModifier(speedStat, speed, AttributeOperation.MULTIPLY_BASE))
+        entity.getAttribute(Attribute.MAX_HEALTH).addModifier(AttributeModifier(healthUUID, healthStat, health, AttributeOperation.ADDITION))
+        entity.getAttribute(Attribute.MOVEMENT_SPEED).addModifier(AttributeModifier(speedUUID, speedStat, speed, AttributeOperation.MULTIPLY_BASE))
 
     }
 }
