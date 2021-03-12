@@ -1,6 +1,5 @@
 package world.cepi.itemextension.stats
 
-import net.minestom.server.MinecraftServer
 import net.minestom.server.attribute.Attribute
 import net.minestom.server.attribute.AttributeModifier
 import net.minestom.server.attribute.AttributeOperation
@@ -18,7 +17,6 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 import world.cepi.kstom.addEventCallback
-import world.cepi.kstom.asRich
 import java.util.*
 
 object StatsHandler : Handler {
@@ -49,7 +47,6 @@ object StatsHandler : Handler {
         }
 
         playerInit.addEventCallback<PlayerChangeHeldSlotEvent> {
-            MinecraftServer.getConnectionManager().broadcastMessage(player.inventory.getItemStack(slot.toInt()).toString().asRich())
             refreshPlayerStats(playerInit, mapOf(EntityEquipmentPacket.Slot.MAIN_HAND to player.inventory.getItemStack(slot.toInt())))
         }
 
