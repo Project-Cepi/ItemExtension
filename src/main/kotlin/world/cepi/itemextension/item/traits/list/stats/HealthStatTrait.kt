@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("health_stat")
-class HealthStatTrait(override val value: Double): StatTrait() {
+class HealthStatTrait(override val value: Float): StatTrait() {
 
     override val name = "Health"
 

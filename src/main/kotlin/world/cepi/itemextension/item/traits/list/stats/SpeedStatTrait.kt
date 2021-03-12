@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("speed_stat")
-class SpeedStatTrait(override val value: Double): StatTrait() {
+class SpeedStatTrait(override val value: Float): StatTrait() {
 
     override val name = "Speed"
 

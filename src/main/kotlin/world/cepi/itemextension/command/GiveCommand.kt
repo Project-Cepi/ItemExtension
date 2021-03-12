@@ -9,17 +9,17 @@ class GiveCommand : Command("give") {
 
     init {
 
+        ConditionLoader.register(this)
+
         val itemArg = ArgumentType.ItemStack("item")
         val amountArg = ArgumentType.Integer("amount").min(1).max(127)
-        val selector = ArgumentType.Entities("players").onlyPlayers(true)
-
-        ConditionLoader.register(this)
+        val selector = ArgumentType.Entity("players").onlyPlayers(true)
 
         addSyntax({ commandSender, args ->
 
             val player = commandSender as Player
 
-            args.get(selector).find(player.instance!!, null).forEach {
+            args.get(selector).find(player.instance!!, player).forEach {
                 (it as? Player)?.inventory?.addItemStack(args.get(itemArg))
             }
 
@@ -32,7 +32,7 @@ class GiveCommand : Command("give") {
             val item = args.get(itemArg)
             item.amount = args.get(amountArg).toByte()
 
-            args.get(selector).find(player.instance!!, null).forEach {
+            args.get(selector).find(player.instance!!, player).forEach {
                 (it as? Player)?.inventory?.addItemStack(args.get(itemArg))
             }
 

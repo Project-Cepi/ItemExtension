@@ -17,7 +17,7 @@ abstract class StatTrait : ItemTrait() {
     override val taskIndex = 1f
 
     open val name: String = "Example"
-    open val value: Double = 0.0
+    open val value: Float = 0.0F
 
     override fun renderLore(item: Item): List<String> {
         return if (value >= 0)
