@@ -1,7 +1,6 @@
 package world.cepi.itemextension.item
 
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ColoredText
 import net.minestom.server.data.DataImpl
 import net.minestom.server.item.ItemFlag
 import net.minestom.server.item.ItemStack
@@ -33,7 +32,7 @@ class Item: TraitContainer<ItemTrait>() {
         item.data = data
 
         item.lore = traits.sortedBy(::sortLore)
-            .map { trait -> trait.renderLore(this).map { ColoredText.of(it) } }
+            .map { trait -> trait.renderLore(this) }
             .flatten()
 
         traits.sortedBy(::sortTask).forEach { it.task(item) }

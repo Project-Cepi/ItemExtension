@@ -1,5 +1,6 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
+import net.kyori.adventure.text.Component
 import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
@@ -7,9 +8,9 @@ import world.cepi.itemextension.command.itemcommand.itemIsAir
 import world.cepi.itemextension.command.itemcommand.itemRendered
 import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.itemcommand.requireFormattedItem
-import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.asSubcommand
 
@@ -22,7 +23,7 @@ object UpdateAction : ItemCommandLoader {
             val itemStack = player.itemInMainHand
 
             if (itemStack.material == Material.AIR) {
-                player.sendFormattedMessage(itemIsAir)
+                player.sendFormattedMessage(Component.text(itemIsAir))
                 return@addSyntax
             }
 
@@ -31,9 +32,9 @@ object UpdateAction : ItemCommandLoader {
             if (isCepiItem) {
                 val item = itemStack.data!!.get<Item>(Item.key)!!
                 player.itemInMainHand = item.renderItem(itemStack.amount)
-                player.sendFormattedMessage(itemRendered)
+                player.sendFormattedMessage(Component.text(itemRendered))
             } else
-                player.sendFormattedMessage(requireFormattedItem)
+                player.sendFormattedMessage(Component.text(requireFormattedItem))
         }
 
     }

@@ -3,15 +3,16 @@ package world.cepi.itemextension.command.itemcommand.loaders.actions
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import net.kyori.adventure.text.Component
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.itemIsAir
 import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
-import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.module
+import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.asSubcommand
 
@@ -38,7 +39,7 @@ object DataAction : ItemCommandLoader {
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
-                player.sendFormattedMessage(itemIsAir)
+                player.sendFormattedMessage(Component.text(itemIsAir))
                 return@addSyntax
             }
 

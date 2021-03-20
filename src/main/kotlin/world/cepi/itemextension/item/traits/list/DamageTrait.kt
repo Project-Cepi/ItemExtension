@@ -2,8 +2,8 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ChatColor
-import world.cepi.itemextension.command.itemcommand.plus
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.KItem
 import world.cepi.itemextension.item.traits.ItemTrait
@@ -19,8 +19,8 @@ class DamageTrait(
     override val loreIndex = 3f
     override val taskIndex = 1f
 
-    override fun renderLore(item: Item): List<String> {
-        return listOf("", ChatColor.GOLD + "+$damage Damage")
+    override fun renderLore(item: Item): List<Component> {
+        return listOf(Component.space(), Component.text("+$damage Damage", NamedTextColor.GOLD))
     }
 
     override fun task(item: KItem) {

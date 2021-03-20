@@ -2,9 +2,13 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ChatColor
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.Style
+import net.kyori.adventure.text.format.TextDecoration
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
+import java.util.*
 import java.util.regex.Pattern
 
 @Serializable
@@ -16,8 +20,8 @@ class LoreTrait(
     override val loreIndex = 20f // bottom of the barrel
     override val taskIndex = 1f
 
-    override fun renderLore(item: Item): List<String> {
-        return listOf("", *splitString(lore, 30).toTypedArray())
+    override fun renderLore(item: Item): List<Component> {
+        return listOf(Component.space(), *splitString(lore, 30).map { Component.text(it).style(Style.style(NamedTextColor.GRAY, TextDecoration.ITALIC)) }.toTypedArray())
     }
 
     private fun splitString(msg: String, lineSize: Int): List<String> {
@@ -25,7 +29,7 @@ class LoreTrait(
         val p = Pattern.compile("\\b.{1," + (lineSize - 1) + "}\\b\\W?")
         val m = p.matcher(msg)
         while (m.find()) {
-            res.add("" + ChatColor.GRAY + ChatColor.ITALIC + m.group())
+            res.add(m.group())
         }
         return res
     }

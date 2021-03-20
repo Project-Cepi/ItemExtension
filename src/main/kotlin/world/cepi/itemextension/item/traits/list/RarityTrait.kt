@@ -2,8 +2,10 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ChatColor
-import world.cepi.itemextension.command.itemcommand.plus
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.Style
+import net.kyori.adventure.text.format.TextDecoration
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 
@@ -18,8 +20,8 @@ class RarityTrait(
     override val loreIndex = 10f
     override val taskIndex = 1f
 
-    override fun renderLore(item: Item): List<String> {
-        return listOf("", rarity.asString())
+    override fun renderLore(item: Item): List<Component> {
+        return listOf(Component.space(), rarity.asComponent())
     }
 
     /** Rarity enum for handling item rarities. */
@@ -28,20 +30,20 @@ class RarityTrait(
         val number: Int,
 
         /** The color of the rarity */
-        val color: ChatColor
+        val color: NamedTextColor
     ) {
 
         /** Nothing special about this item, found in shops or dropped*/
-        BASIC(0, ChatColor.GRAY),
+        BASIC(0, NamedTextColor.GRAY),
         /** Item found in hidden places such as loot chests */
-        ARTIFACT(1, ChatColor.PINK),
+        ARTIFACT(1, NamedTextColor.LIGHT_PURPLE),
         /** Item received as a reward for completing a challenge */
-        TREASURE(2, ChatColor.BRIGHT_GREEN),
+        TREASURE(2, NamedTextColor.GREEN),
         /** Item that embodies a part of you */
-        VESSEL(3, ChatColor.BLUE);
+        VESSEL(3, NamedTextColor.BLUE);
 
-        fun asString(): String {
-            return ChatColor.BOLD + this.color + this.name
+        fun asComponent(): Component {
+            return Component.text(this.name).style(Style.style(this.color, TextDecoration.BOLD))
         }
 
     }

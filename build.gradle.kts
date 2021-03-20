@@ -40,13 +40,16 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom:Minestom:de66dcebe9")
+    compileOnly("com.github.Project-Cepi:Minestom:c26756c487")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:120c4c5475")
+    compileOnly("com.github.Project-Cepi:KStom:cbcf67f09c")
 
     // import kotlinx serialization
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+
+    // Add Kepi
+    compileOnly("com.github.Project-Cepi:Kepi:fdefc6a912")
 
     // Add Kyori Minestom implementation
     implementation("com.github.mworzala:adventure-platform-minestom:2e12f45b2e")

@@ -2,8 +2,8 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ChatColor
-import world.cepi.itemextension.command.itemcommand.plus
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 
@@ -17,8 +17,8 @@ class ArmorTrait(
     override val loreIndex = 4f
     override val taskIndex = 1f
 
-    override fun renderLore(item: Item): List<String> {
-        return listOf(ChatColor.CYAN + "+$armor Armor")
+    override fun renderLore(item: Item): List<Component> {
+        return listOf(Component.text("+$armor Armor", NamedTextColor.AQUA))
     }
 
     companion object {

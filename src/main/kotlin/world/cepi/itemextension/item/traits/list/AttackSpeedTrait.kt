@@ -2,8 +2,8 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ChatColor
-import world.cepi.itemextension.command.itemcommand.plus
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.list.stats.StatTrait
@@ -18,11 +18,11 @@ class AttackSpeedTrait(
     override val loreIndex = 5f
     override val taskIndex = 1f
 
-    override fun renderLore(item: Item): List<String> {
+    override fun renderLore(item: Item): List<Component> {
         return if (item.softHasTrait<StatTrait>()) {
-            listOf(ChatColor.GRAY + attackSpeed.toString() + "s Attack Speed", "")
+            listOf(Component.text("${attackSpeed}s Attack Speed", NamedTextColor.GRAY), Component.space())
         } else {
-            listOf(ChatColor.GRAY + attackSpeed.toString() + "s Attack Speed")
+            listOf(Component.text("${attackSpeed}s Attack Speed", NamedTextColor.GRAY))
         }
     }
 

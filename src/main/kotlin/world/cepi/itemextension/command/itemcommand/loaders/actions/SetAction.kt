@@ -1,5 +1,6 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
+import net.kyori.adventure.text.Component
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
 import net.minestom.server.entity.Player
@@ -10,6 +11,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
+import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.argumentsFromConstructor
 import world.cepi.kstom.command.arguments.asSubcommand
@@ -69,7 +71,7 @@ object SetAction : ItemCommandLoader {
 
         traitConstructorArguments.forEach {
             command.setArgumentCallback(it)
-            { commandSender -> commandSender.sendFormattedMessage(invalidTraitArgument) }
+            { commandSender -> commandSender.sendFormattedMessage(Component.text(invalidTraitArgument)) }
 
         }
 
@@ -95,7 +97,7 @@ object SetAction : ItemCommandLoader {
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
-                player.sendFormattedMessage(itemIsAir)
+                player.sendFormattedMessage(Component.text(itemIsAir))
                 return@addSyntax
             }
 
@@ -111,7 +113,7 @@ object SetAction : ItemCommandLoader {
 
                 player.sendFormattedMessage(traitAdded, processTraitName(lastTrait.simpleName!!))
             } else
-                player.sendFormattedMessage(requireFormattedItem)
+                player.sendFormattedMessage(Component.text(requireFormattedItem))
 
         }
     }

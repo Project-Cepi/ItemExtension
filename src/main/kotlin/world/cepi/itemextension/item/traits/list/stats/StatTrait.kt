@@ -1,7 +1,7 @@
 package world.cepi.itemextension.item.traits.list.stats
 
-import net.minestom.server.chat.ChatColor
-import world.cepi.itemextension.command.itemcommand.plus
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
@@ -19,11 +19,17 @@ abstract class StatTrait : ItemTrait() {
     open val name: String = "Example"
     open val value: Float = 0.0F
 
-    override fun renderLore(item: Item): List<String> {
+    override fun renderLore(item: Item): List<Component> {
         return if (value >= 0)
-            listOf(ChatColor.DARK_GRAY + "► " + "${ChatColor.BRIGHT_GREEN}+$value ${ChatColor.GRAY}$name")
+            listOf(
+                Component.text("► ", NamedTextColor.DARK_GRAY)
+                    .append(Component.text("+$value ", NamedTextColor.GREEN))
+                    .append(Component.text(name, NamedTextColor.GRAY)))
         else
-            listOf(ChatColor.DARK_GRAY + "► " + "${ChatColor.RED}$value ${ChatColor.GRAY}$name")
+            listOf(
+                Component.text("► ", NamedTextColor.DARK_GRAY)
+                    .append(Component.text("-$value ", NamedTextColor.RED))
+                    .append(Component.text(name, NamedTextColor.GRAY)))
     }
 
 }

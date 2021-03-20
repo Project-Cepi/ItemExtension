@@ -1,9 +1,10 @@
 package world.cepi.itemextension.command.itemcommand.loaders
 
+import net.kyori.adventure.text.Component
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
-import world.cepi.itemextension.command.itemcommand.sendFormattedMessage
 import world.cepi.itemextension.item.traits.ItemTrait
+import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.setArgumentCallback
 
 object TraitListLoader : ItemCommandLoader {
@@ -13,7 +14,7 @@ object TraitListLoader : ItemCommandLoader {
             .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }
                 .toTypedArray())
 
-        command.setArgumentCallback(traitList) { commandSender -> commandSender.sendFormattedMessage("Invalid trait!") }
+        command.setArgumentCallback(traitList) { commandSender -> commandSender.sendFormattedMessage(Component.text("Invalid trait!")) }
     }
 
 }

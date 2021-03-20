@@ -2,8 +2,8 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ChatColor
-import net.minestom.server.chat.ColoredText
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.KItem
 import world.cepi.itemextension.item.traits.ItemTrait
@@ -20,8 +20,8 @@ class NameTrait(
     override val loreIndex = 1f
 
     override fun task(item: KItem) {
-        val color = item.data?.get<Item>(Item.key)?.getTrait<RarityTrait>()?.rarity?.color ?: ChatColor.WHITE
-        item.displayName = ColoredText.of(color, name)
+        val color = item.data?.get<Item>(Item.key)?.getTrait<RarityTrait>()?.rarity?.color ?: NamedTextColor.WHITE
+        item.displayName = Component.text(name, color)
     }
 
 }

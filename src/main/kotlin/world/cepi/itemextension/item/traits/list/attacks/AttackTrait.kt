@@ -1,7 +1,7 @@
 package world.cepi.itemextension.item.traits.list.attacks
 
-import net.minestom.server.chat.ChatColor
-import world.cepi.itemextension.command.itemcommand.plus
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
@@ -20,8 +20,8 @@ abstract class AttackTrait: ItemTrait() {
     override val loreIndex = 2f
     override val taskIndex = 0f
 
-    override fun renderLore(item: Item): List<String> {
-        return listOf(ChatColor.RED + attack.displayName + ChatColor.GRAY + " [${clickType}]")
+    override fun renderLore(item: Item): List<Component> {
+        return listOf(Component.text(attack.displayName, NamedTextColor.RED).append(Component.text(" [${clickType}]", NamedTextColor.GRAY)))
     }
 
 }

@@ -1,6 +1,7 @@
 package world.cepi.itemextension.item.traits
 
 import kotlinx.serialization.Serializable
+import net.kyori.adventure.text.Component
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.KItem
 import world.cepi.itemextension.item.traits.list.*
@@ -29,7 +30,7 @@ abstract class ItemTrait {
      *
      * @return A list of ColoredText used to display on an array
      */
-    open fun renderLore(item: Item): List<String> {
+    open fun renderLore(item: Item): List<Component> {
         return arrayListOf()
     }
 

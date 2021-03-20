@@ -2,7 +2,8 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ChatColor
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 
@@ -17,11 +18,11 @@ class TypeTrait(
     override val loreIndex = 0f
     override val taskIndex = 1f
 
-    override fun renderLore(item: Item): List<String> {
+    override fun renderLore(item: Item): List<Component> {
         return if (item.softHasTrait<LevelTrait>()) {
-            arrayListOf("${ChatColor.GRAY}${type.name.toLowerCase().capitalize()}")
+            arrayListOf(Component.text(type.name.toLowerCase().capitalize(), NamedTextColor.GRAY))
         } else {
-            arrayListOf("${ChatColor.GRAY}${type.name.toLowerCase().capitalize()}", "")
+            arrayListOf(Component.text(type.name.toLowerCase().capitalize(), NamedTextColor.GRAY), Component.space())
         }
     }
 

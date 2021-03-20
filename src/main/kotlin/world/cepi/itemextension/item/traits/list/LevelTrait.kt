@@ -2,10 +2,10 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.chat.ChatColor
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
-import world.cepi.kstom.plus
 
 /** The level amount required to even use the item, usually to define its overall quality. */
 @SerialName("level")
@@ -18,7 +18,10 @@ class LevelTrait(
     override val loreIndex = 1f
     override val taskIndex = 1f
 
-    override fun renderLore(item: Item): List<String> {
-        return listOf(ChatColor.GRAY + "Level Min. " + ChatColor.WHITE + level, "")
+    override fun renderLore(item: Item): List<Component> {
+        return listOf(
+            Component.text("Level Min. ", NamedTextColor.GRAY)
+                .append(Component.text(level, NamedTextColor.WHITE))
+            , Component.space())
     }
 }
