@@ -19,10 +19,8 @@ class TypeTrait(
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {
-        return if (item.softHasTrait<LevelTrait>()) {
-            arrayListOf(Component.text(type.name.toLowerCase().capitalize(), NamedTextColor.GRAY))
-        } else {
-            arrayListOf(Component.text(type.name.toLowerCase().capitalize(), NamedTextColor.GRAY), Component.space())
+        return arrayListOf(Component.text(type.name.toLowerCase().capitalize(), NamedTextColor.GRAY)).also {
+            if (item.softHasTrait<LevelTrait>()) it.add(Component.space())
         }
     }
 
