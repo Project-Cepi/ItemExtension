@@ -1,8 +1,10 @@
 package world.cepi.itemextension.combat.events
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.title.Title
+import net.kyori.adventure.util.Ticks
 import net.minestom.server.MinecraftServer
-import net.minestom.server.chat.ChatColor
-import net.minestom.server.chat.ColoredText
 import net.minestom.server.entity.Entity
 import net.minestom.server.entity.GameMode
 import net.minestom.server.entity.Player
@@ -19,11 +21,11 @@ object DeathHandler : Handler {
     val isDead = mutableListOf<Player>()
 
     private fun deathMessage(player: Player, secondsLeft: Int) {
-        player.sendTitleSubtitleMessage(
-            ColoredText.of(ChatColor.RED, "You died!"),
-            ColoredText.of("Respawning in $secondsLeft...")
-        )
-        player.sendTitleTime(0, 21, 0)
+        player.showTitle(Title.title(
+            Component.text("You died!", NamedTextColor.RED),
+            Component.text("Respawning in $secondsLeft...", NamedTextColor.WHITE),
+            Title.Times.of(Ticks.duration(0), Ticks.duration(21), Ticks.duration(0))
+        ))
     }
 
     override fun register(playerInit: Player) {

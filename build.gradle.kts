@@ -49,7 +49,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:fdefc6a912")
+    compileOnly("com.github.Project-Cepi:Kepi:56e47e3fe9")
 
     // Add Kyori Minestom implementation
     implementation("com.github.mworzala:adventure-platform-minestom:2e12f45b2e")

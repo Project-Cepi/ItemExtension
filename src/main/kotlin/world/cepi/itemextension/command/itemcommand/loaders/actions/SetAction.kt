@@ -111,7 +111,7 @@ object SetAction : ItemCommandLoader {
 
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Byte.MAX_VALUE))
 
-                player.sendFormattedMessage(traitAdded, processTraitName(lastTrait.simpleName!!))
+                player.sendFormattedMessage(traitAdded, Component.text(processTraitName(lastTrait.simpleName!!)))
             } else
                 player.sendFormattedMessage(Component.text(requireFormattedItem))
 

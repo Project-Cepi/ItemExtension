@@ -1,8 +1,8 @@
 package world.cepi.itemextension.combat.events
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.MinecraftServer
-import net.minestom.server.chat.ChatColor
-import net.minestom.server.chat.ColoredText
 import net.minestom.server.entity.GameMode
 import net.minestom.server.entity.LivingEntity
 import net.minestom.server.entity.Player
@@ -78,7 +78,7 @@ object CombatHandler : Handler {
                     val hologram = Hologram(
                             livingTarget.instance,
                             livingTarget.position.clone().add(0.0, 1.0, 0.0),
-                            ColoredText.of("${ChatColor.RED}$format"),
+                            Component.text(format, NamedTextColor.RED),
                             true
                     )
 

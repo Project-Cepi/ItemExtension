@@ -3,6 +3,7 @@
   "name": "${project.name}",
   "version": "${project.version}",
   "dependencies": [
-    "LevelExtension"
+    "LevelExtension",
+    "Kepi"
   ]
 }
