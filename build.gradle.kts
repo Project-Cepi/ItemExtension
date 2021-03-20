@@ -66,16 +66,29 @@ configurations {
     }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+// Take gradle.properties and apply it to resources.
 tasks {
+    processResources {
+        // Apply properties to extension.json
+        filesMatching("extension.json") {
+            expand(project.properties)
+        }
+    }
+
+    // Set name, minimize, and merge service files
     named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
-        archiveBaseName.set("item")
+        archiveBaseName.set(project.name)
         mergeServiceFiles()
         minimize()
-
     }
 
     test { useJUnitPlatform() }
 
+    // Make build depend on shadowJar as shading dependencies will most likely be required.
     build { dependsOn(shadowJar) }
 
 }
@@ -85,8 +98,9 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
+
 val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
 
 compileKotlin.kotlinOptions {
     freeCompilerArgs = listOf("-Xinline-classes")
