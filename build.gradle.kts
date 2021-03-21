@@ -50,10 +50,6 @@ dependencies {
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:56e47e3fe9")
-
-    // Add Kyori Minestom implementation
-    implementation("com.github.mworzala:adventure-platform-minestom:2e12f45b2e")
-    implementation("net.kyori:adventure-text-minimessage:4.0.0-SNAPSHOT")
 }
 
 tasks.withType<Test> {
