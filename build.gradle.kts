@@ -49,7 +49,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:56e47e3fe9")
+    compileOnly("com.github.Project-Cepi:Kepi:32e01e199f")
 }
 
 tasks.withType<Test> {
