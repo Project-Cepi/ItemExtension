@@ -2,6 +2,7 @@ package world.cepi.itemextension.item.traits.list.attacks
 
 import net.kyori.adventure.sound.Sound
 import net.minestom.server.entity.Player
+import net.minestom.server.sound.SoundEvent
 
 enum class Attack(val displayName: String, val action: (Player, Player.Hand) -> Boolean = { _, _ -> true } ) {
 
@@ -13,7 +14,7 @@ enum class Attack(val displayName: String, val action: (Player, Player.Hand) -> 
     }),
     DASH("Dash", { player, _ ->
         player.velocity.add(player.position.direction.clone().normalize().multiply(6))
-        player.playSound(Sound.sound(net.minestom.server.sound.Sound.ENTITY_PLAYER_ATTACK_SWEEP, Sound.Source.MASTER, 1f, 1f))
+        player.playSound(Sound.sound(SoundEvent.ENTITY_PLAYER_ATTACK_SWEEP, Sound.Source.MASTER, 1f, 1f))
         true
     })
 

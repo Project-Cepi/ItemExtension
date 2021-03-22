@@ -1,5 +1,6 @@
 package world.cepi.itemextension.combat.events
 
+import net.kyori.adventure.sound.Sound
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.title.Title
@@ -10,8 +11,7 @@ import net.minestom.server.entity.GameMode
 import net.minestom.server.entity.Player
 import net.minestom.server.event.entity.EntityDamageEvent
 import net.minestom.server.instance.Instance
-import net.minestom.server.sound.Sound
-import net.minestom.server.sound.SoundCategory
+import net.minestom.server.sound.SoundEvent
 import net.minestom.server.utils.Position
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.Handler
@@ -45,11 +45,9 @@ object DeathHandler : Handler {
                     player.isInvisible = true
 
                     getNearbyEntities(player.position, 10.0, player.instance!!).filterIsInstance<Player>().forEach { loopPlayer ->
-                        loopPlayer.playSound(
-                            Sound.ENTITY_SKELETON_DEATH, SoundCategory.PLAYERS,
-                            loopPlayer.position.x.toInt(), loopPlayer.position.y.toInt(), loopPlayer.position.z.toInt(),
-                            2F, 1F
-                        )
+                        loopPlayer.playSound(Sound.sound(
+                            SoundEvent.ENTITY_SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
+                        ), player.position.x, player.position.y, player.position.z)
                     }
 
                     deathMessage(player, 3)
