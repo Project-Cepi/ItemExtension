@@ -12,7 +12,7 @@ import world.cepi.itemextension.stats.StatsHandler
 /** Extension wrapper for Minestom. */
 object ItemExtension : Extension() {
 
-    private fun playerInitialization(player: Player) {
+    private val playerInitialization: (Player) -> Unit = { player ->
         HealthHandler.register(player)
         CombatHandler.register(player)
         DeathHandler.register(player)
@@ -24,7 +24,7 @@ object ItemExtension : Extension() {
 
     override fun initialize() {
         val connectionManager = MinecraftServer.getConnectionManager()
-        connectionManager.addPlayerInitialization(::playerInitialization)
+        connectionManager.addPlayerInitialization(playerInitialization)
 
         MinecraftServer.getCommandManager().register(ItemCommand)
         MinecraftServer.getCommandManager().register(ClearCommand)
@@ -35,7 +35,8 @@ object ItemExtension : Extension() {
 
     override fun terminate() {
 
-        // TODO remove player initialization
+        val connectionManager = MinecraftServer.getConnectionManager()
+        connectionManager.removePlayerInitialization(playerInitialization)
 
         MinecraftServer.getCommandManager().unregister(ItemCommand)
         MinecraftServer.getCommandManager().unregister(ClearCommand)
