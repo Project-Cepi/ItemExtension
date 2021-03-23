@@ -12,3 +12,5 @@ const val itemRendered = "Item rendered!"
 const val traitNotFound = "This trait is not in this item!"
 const val itemCreated = "Item created!"
 const val itemReset = "Item reset!"
+
+const val giveItem = "Gave %1 [%2] to %3!"

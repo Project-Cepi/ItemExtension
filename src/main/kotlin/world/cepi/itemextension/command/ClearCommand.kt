@@ -4,7 +4,7 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.loaders.ConditionLoader
 
-class ClearCommand : Command("clear") {
+object ClearCommand : Command("clear") {
 
     init {
         ConditionLoader.register(this)
