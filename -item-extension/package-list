@@ -43,6 +43,7 @@ $dokka.location:world.cepi.itemextension.command.itemcommand.loaders/ItemCommand
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders/TraitListLoader///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders/-trait-list-loader/index.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders/TraitListLoader/register/#net.minestom.server.command.builder.Command/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders/-trait-list-loader/register.html
 $dokka.location:world.cepi.itemextension.command.itemcommand////PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/index.html
+$dokka.location:world.cepi.itemextension.command.itemcommand//giveItem/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/give-item.html
 $dokka.location:world.cepi.itemextension.command.itemcommand//invalidTraitArgument/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/invalid-trait-argument.html
 $dokka.location:world.cepi.itemextension.command.itemcommand//itemCreated/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/item-created.html
 $dokka.location:world.cepi.itemextension.command.itemcommand//itemIsAir/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/item-is-air.html
@@ -56,12 +57,9 @@ $dokka.location:world.cepi.itemextension.command.itemcommand//traitNotFound/#/Po
 $dokka.location:world.cepi.itemextension.command.itemcommand//traitRemoved/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/trait-removed.html
 $dokka.location:world.cepi.itemextension.command.itemcommand//usage/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/usage.html
 $dokka.location:world.cepi.itemextension.command.itemcommand/ItemCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/-item-command/index.html
-$dokka.location:world.cepi.itemextension.command.itemcommand/ItemCommand/ItemCommand/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand/-item-command/-item-command.html
 $dokka.location:world.cepi.itemextension.command////PointingToDeclaration/-item-extension/world.cepi.itemextension.command/index.html
 $dokka.location:world.cepi.itemextension.command/ClearCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-clear-command/index.html
-$dokka.location:world.cepi.itemextension.command/ClearCommand/ClearCommand/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-clear-command/-clear-command.html
 $dokka.location:world.cepi.itemextension.command/GiveCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-give-command/index.html
-$dokka.location:world.cepi.itemextension.command/GiveCommand/GiveCommand/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-give-command/-give-command.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.DASH///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-d-a-s-h/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.DASH/action/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-d-a-s-h/action.html
