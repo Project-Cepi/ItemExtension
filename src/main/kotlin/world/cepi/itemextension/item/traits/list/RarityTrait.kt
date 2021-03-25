@@ -42,9 +42,11 @@ class RarityTrait(
         /** Item found in hidden places such as loot chests */
         ARTIFACT(1, NamedTextColor.LIGHT_PURPLE),
         /** Item received as a reward for completing a challenge */
-        TREASURE(2, NamedTextColor.GREEN),
+        TREASURE(2, NamedTextColor.YELLOW),
         /** Item that embodies a part of you */
-        VESSEL(3, NamedTextColor.BLUE);
+        VESSEL(3, NamedTextColor.BLUE),
+        /** Given after doing something for someone. */
+        TRIBUTE(4, NamedTextColor.GREEN);
 
         fun asComponent(): Component {
             return Component.text(this.name).style(Style.style(this.color, TextDecoration.BOLD))
