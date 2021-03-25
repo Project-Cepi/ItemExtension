@@ -4,6 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.KItem
 import world.cepi.itemextension.item.traits.ItemTrait
@@ -21,7 +22,7 @@ class NameTrait(
 
     override fun task(item: KItem) {
         val color = item.data?.get<Item>(Item.key)?.getTrait<RarityTrait>()?.rarity?.color ?: NamedTextColor.WHITE
-        item.displayName = Component.text(name, color)
+        item.displayName = Component.text(name, color).decoration(TextDecoration.ITALIC, false)
     }
 
 }

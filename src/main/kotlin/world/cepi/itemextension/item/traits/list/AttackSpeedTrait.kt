@@ -4,6 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.list.stats.StatTrait
@@ -19,10 +20,13 @@ class AttackSpeedTrait(
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {
-        return if (item.softHasTrait<StatTrait>()) {
-            listOf(Component.text("${attackSpeed}s Attack Speed", NamedTextColor.GRAY), Component.space())
-        } else {
-            listOf(Component.text("${attackSpeed}s Attack Speed", NamedTextColor.GRAY))
+        return arrayListOf(
+            Component.text("${attackSpeed}s Attack Speed", NamedTextColor.GRAY)
+                .decoration(TextDecoration.ITALIC, false)
+        ).also {
+            if (item.softHasTrait<StatTrait>()) {
+                it.add(Component.space())
+            }
         }
     }
 

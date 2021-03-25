@@ -2,6 +2,7 @@ package world.cepi.itemextension.item.traits.list.stats
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
@@ -24,12 +25,14 @@ abstract class StatTrait : ItemTrait() {
             listOf(
                 Component.text("► ", NamedTextColor.DARK_GRAY)
                     .append(Component.text("+$value ", NamedTextColor.GREEN))
-                    .append(Component.text(name, NamedTextColor.GRAY)))
+                    .append(Component.text(name, NamedTextColor.GRAY))
+                    .decoration(TextDecoration.ITALIC, false))
         else
             listOf(
                 Component.text("► ", NamedTextColor.DARK_GRAY)
                     .append(Component.text("-$value ", NamedTextColor.RED))
-                    .append(Component.text(name, NamedTextColor.GRAY)))
+                    .append(Component.text(name, NamedTextColor.GRAY))
+                    .decoration(TextDecoration.ITALIC, false))
     }
 
 }

@@ -4,6 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 
@@ -22,6 +23,7 @@ class LevelTrait(
         return listOf(
             Component.text("Level Min. ", NamedTextColor.GRAY)
                 .append(Component.text(level, NamedTextColor.WHITE))
+                .decoration(TextDecoration.ITALIC, false)
             , Component.space())
     }
 }

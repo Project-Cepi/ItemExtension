@@ -21,7 +21,12 @@ class LoreTrait(
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {
-        return listOf(Component.space(), *splitString(lore, 30).map { Component.text(it).style(Style.style(NamedTextColor.GRAY, TextDecoration.ITALIC)) }.toTypedArray())
+        return listOf(
+            Component.space(),
+            *splitString(lore, 30).map {
+                Component.text(it).style(Style.style(NamedTextColor.GRAY, TextDecoration.ITALIC))
+                    .decoration(TextDecoration.ITALIC, false)
+            }.toTypedArray())
     }
 
     private fun splitString(msg: String, lineSize: Int): List<String> {

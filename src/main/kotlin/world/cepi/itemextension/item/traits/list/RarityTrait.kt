@@ -21,7 +21,11 @@ class RarityTrait(
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {
-        return listOf(Component.space(), rarity.asComponent())
+        return listOf(
+            Component.space(),
+            rarity.asComponent()
+                .decoration(TextDecoration.ITALIC, false)
+        )
     }
 
     /** Rarity enum for handling item rarities. */
