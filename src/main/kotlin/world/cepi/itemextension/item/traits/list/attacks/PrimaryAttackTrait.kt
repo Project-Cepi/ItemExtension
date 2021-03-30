@@ -12,6 +12,13 @@ class PrimaryAttackTrait(override val attack: Attack): AttackTrait() {
     override val loreIndex = 2.1f
 
     override fun task(item: KItem) {
-        item.leftCallbacks.add(attack.action)
+        item.leftCallbacks.add { player, hand ->
+
+            if (!player.isSneaking)
+                return@add attack.action(player, hand)
+
+            return@add true
+
+        }
     }
 }
