@@ -5,22 +5,17 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.itemCreated
-import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.itemcommand.requireNonFormattedItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.MaterialTrait
 import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
-import world.cepi.kstom.command.arguments.asSubcommand
 
-object CreateAction : ItemCommandLoader {
+object CreateAction : Command("create") {
 
-    override fun register(command: Command) {
-
-        val create = "create".asSubcommand()
-
-        command.addSyntax(create) { commandSender ->
+    init {
+        addSyntax { commandSender ->
             val player = commandSender as Player
             val itemStack = player.itemInMainHand
 

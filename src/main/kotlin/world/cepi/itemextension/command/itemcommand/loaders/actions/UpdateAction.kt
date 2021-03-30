@@ -6,19 +6,16 @@ import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.itemIsAir
 import world.cepi.itemextension.command.itemcommand.itemRendered
-import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.itemcommand.requireFormattedItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
-import world.cepi.kstom.command.arguments.asSubcommand
 
-object UpdateAction : ItemCommandLoader {
-    override fun register(command: Command) {
-        val update = "update".asSubcommand()
+object UpdateAction : Command("update") {
+    init {
 
-        command.addSyntax(update) { commandSender ->
+        addSyntax { commandSender ->
             val player = commandSender as Player
             val itemStack = player.itemInMainHand
 

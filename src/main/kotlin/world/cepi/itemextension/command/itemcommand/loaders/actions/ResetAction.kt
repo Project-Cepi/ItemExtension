@@ -6,19 +6,15 @@ import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.itemIsAir
 import world.cepi.itemextension.command.itemcommand.itemReset
-import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.itemcommand.requireFormattedItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
-import world.cepi.kstom.command.arguments.asSubcommand
 
-object ResetAction : ItemCommandLoader {
-    override fun register(command: Command) {
-        val reset = "reset".asSubcommand()
-
-        command.addSyntax(reset) { commandSender ->
+object ResetAction : Command("reset") {
+    init {
+        addSyntax { commandSender ->
             val player = commandSender as Player
             val itemStack = player.itemInMainHand
 

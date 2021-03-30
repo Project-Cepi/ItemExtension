@@ -5,7 +5,6 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.*
-import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
@@ -20,24 +19,24 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.*
 
 // TODO break down and organize
-object SetAction : ItemCommandLoader {
+object SetAction : Command("set") {
 
     val set = "set".asSubcommand()
 
     val traits = ItemTrait.classList
 
-    override fun register(command: Command) {
+    init {
 
         traits.forEach { trait ->
 
             if (defineSubTraits(trait).isNotEmpty()) {
 
                 defineSubTraits(trait).forEach {
-                    generateCommand(command, trait, it)
+                    generateCommand(this, trait, it)
                 }
 
             } else
-                generateCommand(command, trait)
+                generateCommand(this, trait)
 
         }
     }

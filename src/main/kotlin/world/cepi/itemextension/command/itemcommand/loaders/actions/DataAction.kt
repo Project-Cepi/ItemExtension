@@ -8,7 +8,6 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.itemIsAir
-import world.cepi.itemextension.command.itemcommand.loaders.ItemCommandLoader
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.module
@@ -16,7 +15,7 @@ import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.asSubcommand
 
-object DataAction : ItemCommandLoader {
+object DataAction : Command("data") {
 
     @Contextual
     val format = Json {
@@ -26,15 +25,13 @@ object DataAction : ItemCommandLoader {
         serializersModule = module
     }
 
-    override fun register(command: Command) {
-        val data = "data".asSubcommand()
-
+    init {
         val get = "get".asSubcommand()
 
         val from = "from".asSubcommand()
         val json = ArgumentType.NbtCompound("json")
 
-        command.addSyntax(data, get) { sender ->
+        addSyntax(get) { sender ->
             val player = sender as Player
             val itemStack = player.itemInMainHand
 
@@ -48,7 +45,7 @@ object DataAction : ItemCommandLoader {
             }
         }
 
-        command.addSyntax(data, from, json) { sender, args ->
+        addSyntax(from, json) { sender, args ->
             val player = sender as Player
 
             val nbtData = args.get(json) // TODO process to json and convert
