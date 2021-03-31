@@ -8,6 +8,7 @@ import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.giveItem
 import world.cepi.itemextension.command.itemcommand.loaders.ConditionLoader
 import world.cepi.kepi.messages.sendFormattedMessage
+import java.util.function.Supplier
 
 object GiveCommand : Command("give") {
 
@@ -18,7 +19,7 @@ object GiveCommand : Command("give") {
         val itemArg = ArgumentType.ItemStack("item")
         val amountArg = ArgumentType.Integer("amount").min(1).max(127)
 
-        amountArg.defaultValue = 1
+        amountArg.defaultValue = Supplier { 1 }
 
         val selector = ArgumentType.Entity("players").onlyPlayers(true)
 
