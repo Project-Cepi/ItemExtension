@@ -21,8 +21,6 @@ import kotlin.reflect.full.*
 // TODO break down and organize
 object SetSubcommand : Command("set") {
 
-    val set = "set".asSubcommand()
-
     val traits = ItemTrait.classList
 
     init {
@@ -83,7 +81,7 @@ object SetSubcommand : Command("set") {
             }
         }
 
-        command.addSyntax(set, *traitArgs.toTypedArray(), *traitConstructorArguments.toTypedArray()) { commandSender, arguments ->
+        command.addSyntax(*traitArgs.toTypedArray(), *traitConstructorArguments.toTypedArray()) { commandSender, arguments ->
             val values: List<Any> = traitConstructorArguments.map { entry ->
                 return@map when(entry) {
                     is ArgumentItemStack ->
