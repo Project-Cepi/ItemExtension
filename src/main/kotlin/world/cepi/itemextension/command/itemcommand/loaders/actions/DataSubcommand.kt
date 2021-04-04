@@ -15,7 +15,7 @@ import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.asSubcommand
 
-object DataAction : Command("data") {
+object DataSubcommand : Command("data") {
 
     @Contextual
     val format = Json {

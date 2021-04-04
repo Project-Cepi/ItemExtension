@@ -19,7 +19,7 @@ import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 
-object RemoveAction : Command("remove") {
+object RemoveSubcommand : Command("remove") {
 
     val traitList = ArgumentType.Word("trait")
         .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }.toTypedArray())

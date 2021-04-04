@@ -19,7 +19,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.*
 
 // TODO break down and organize
-object SetAction : Command("set") {
+object SetSubcommand : Command("set") {
 
     val set = "set".asSubcommand()
 

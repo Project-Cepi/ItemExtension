@@ -12,7 +12,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 
-object ResetAction : Command("reset") {
+object ResetSubcommand : Command("reset") {
     init {
         addSyntax { commandSender ->
             val player = commandSender as Player

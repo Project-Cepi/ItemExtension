@@ -12,7 +12,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 
-object UpdateAction : Command("update") {
+object UpdateSubcommand : Command("update") {
     init {
 
         addSyntax { commandSender ->

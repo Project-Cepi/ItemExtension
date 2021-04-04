@@ -12,7 +12,7 @@ import world.cepi.itemextension.item.traits.list.MaterialTrait
 import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.addSyntax
 
-object CreateAction : Command("create") {
+object CreateSubcommand : Command("create") {
 
     init {
         addSyntax { commandSender ->
