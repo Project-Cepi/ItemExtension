@@ -31,11 +31,11 @@ class Item: TraitContainer<ItemTrait>() {
 
         item.data = data
 
-        item.lore = traits.sortedBy(::sortLore)
+        item.lore = traits.sortedBy { it.loreIndex }
             .map { trait -> trait.renderLore(this) }
             .flatten()
 
-        traits.sortedBy(::sortTask).forEach { it.task(item) }
+        traits.sortedBy { it.taskIndex }.forEach { it.task(item) }
 
         item.addItemFlags(*ItemFlag.values())
 
@@ -45,14 +45,6 @@ class Item: TraitContainer<ItemTrait>() {
     companion object {
         /** Key for klaxon JSON storage. */
         const val key = "cepi-item"
-
-        fun sortLore(trait: ItemTrait): Float {
-            return trait.loreIndex
-        }
-
-        fun sortTask(trait: ItemTrait): Float {
-            return trait.loreIndex
-        }
     }
 
 
