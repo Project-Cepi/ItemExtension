@@ -240,8 +240,6 @@ $dokka.location:world.cepi.itemextension.item//item/#net.minestom.server.item.Ma
 $dokka.location:world.cepi.itemextension.item//module/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/module.html
 $dokka.location:world.cepi.itemextension.item/Item.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/-companion/index.html
 $dokka.location:world.cepi.itemextension.item/Item.Companion/key/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/-companion/key.html
-$dokka.location:world.cepi.itemextension.item/Item.Companion/sortLore/#world.cepi.itemextension.item.traits.ItemTrait/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/-companion/sort-lore.html
-$dokka.location:world.cepi.itemextension.item/Item.Companion/sortTask/#world.cepi.itemextension.item.traits.ItemTrait/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/-companion/sort-task.html
 $dokka.location:world.cepi.itemextension.item/Item///PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/index.html
 $dokka.location:world.cepi.itemextension.item/Item/Item/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/-item.html
 $dokka.location:world.cepi.itemextension.item/Item/renderItem/#kotlin.Byte/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/render-item.html
