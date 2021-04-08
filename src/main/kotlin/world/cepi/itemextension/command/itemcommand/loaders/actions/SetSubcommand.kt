@@ -1,6 +1,7 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
 import net.minestom.server.entity.Player
@@ -10,7 +11,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
-import world.cepi.kepi.messages.sendFormattedMessage
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.argumentsFromConstructor
 import world.cepi.kstom.command.arguments.asSubcommand
@@ -68,7 +69,7 @@ object SetSubcommand : Command("set") {
 
         traitConstructorArguments.forEach {
             command.setArgumentCallback(it)
-            { commandSender -> commandSender.sendFormattedMessage(Component.text(invalidTraitArgument)) }
+            { commandSender -> commandSender.sendFormattedTranslatableMessage("item", "trait.invalid") }
 
         }
 
@@ -94,7 +95,7 @@ object SetSubcommand : Command("set") {
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
-                player.sendFormattedMessage(Component.text(itemIsAir))
+                player.sendFormattedTranslatableMessage("mob", "main.required")
                 return@addSyntax
             }
 
@@ -108,9 +109,9 @@ object SetSubcommand : Command("set") {
 
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Byte.MAX_VALUE))
 
-                player.sendFormattedMessage(traitAdded, Component.text(processTraitName(lastTrait.simpleName!!)))
+                player.sendFormattedTranslatableMessage("item", "trait.add", Component.text(processTraitName(lastTrait.simpleName!!), NamedTextColor.BLUE))
             } else
-                player.sendFormattedMessage(Component.text(requireFormattedItem))
+                player.sendFormattedTranslatableMessage("mob", "formatted.required")
 
         }
     }

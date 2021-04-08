@@ -1,15 +1,12 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
-import net.kyori.adventure.text.Component
 import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.itemextension.command.itemcommand.itemCreated
-import world.cepi.itemextension.command.itemcommand.requireNonFormattedItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.MaterialTrait
-import world.cepi.kepi.messages.sendFormattedMessage
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
 
 object CreateSubcommand : Command("create") {
@@ -30,9 +27,9 @@ object CreateSubcommand : Command("create") {
                 }
 
                 player.itemInMainHand = item.renderItem(if (itemStack.amount == 0.toByte()) 1 else itemStack.amount)
-                player.sendFormattedMessage(Component.text(itemCreated))
+                player.sendFormattedTranslatableMessage("item", "create")
             } else
-                player.sendFormattedMessage(Component.text(requireNonFormattedItem))
+                player.sendFormattedTranslatableMessage("item", "nonformatted.required")
         }
     }
 }

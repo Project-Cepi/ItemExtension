@@ -5,9 +5,8 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
-import world.cepi.itemextension.command.itemcommand.giveItem
 import world.cepi.itemextension.command.itemcommand.loaders.ConditionLoader
-import world.cepi.kepi.messages.sendFormattedMessage
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import java.util.function.Supplier
 
 object GiveCommand : Command("give") {
@@ -36,8 +35,8 @@ object GiveCommand : Command("give") {
                 (it as? Player)?.inventory?.addItemStack(args.get(itemArg))
             }
 
-            commandSender.sendFormattedMessage(
-                giveItem,
+            commandSender.sendFormattedTranslatableMessage(
+                "item", "give",
                 Component.text(args.get(amountArg), NamedTextColor.BLUE),
                 (item.displayName
                     ?: Component.text(
