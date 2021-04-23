@@ -17,6 +17,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 import world.cepi.kstom.addEventCallback
+import world.cepi.kstom.item.get
 import java.util.*
 
 object StatsHandler : Handler {
@@ -55,7 +56,7 @@ object StatsHandler : Handler {
 
     fun refreshPlayerStats(entity: LivingEntity, changedSlots: Map<EntityEquipmentPacket.Slot, ItemStack> = mapOf()) {
         val items: Map<EntityEquipmentPacket.Slot, Item> = EntityEquipmentPacket.Slot.values().mapNotNull {
-                val item = ((changedSlots[it]?.data?.get<Item>(Item.key)) ?: entity.getEquipment(it).data?.get<Item>(Item.key)) ?: return@mapNotNull null
+                val item = ((changedSlots[it]?.meta?.get<Item>(Item.key)) ?: entity.getEquipment(it).meta.get(Item.key)) ?: return@mapNotNull null
                 it to item
             }.toMap()
 

@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.4.32"
     id("com.github.johnrengelman.shadow") version "6.1.0"
     id("org.jetbrains.dokka") version "1.4.32"
     kotlin("plugin.serialization") version "1.4.21"
@@ -40,10 +40,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
 
     // Compile Minestom into project
-    compileOnly("com.github.Project-Cepi:Minestom:45d3b7158c")
+    compileOnly("com.github.Project-Cepi:Minestom:0fea9b39a2")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:1b5c0d3d17")
+    compileOnly("com.github.Project-Cepi:KStom:e9dd96cb33")
 
     // import kotlinx serialization
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
@@ -99,4 +99,16 @@ val compileKotlin: KotlinCompile by tasks
 
 compileKotlin.kotlinOptions {
     freeCompilerArgs = listOf("-Xinline-classes")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.properties["group"] as? String?
+            artifactId = project.name
+            version = project.properties["version"] as? String?
+
+            from(components["java"])
+        }
+    }
 }

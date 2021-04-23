@@ -21,12 +21,12 @@ object CreateSubcommand : Command("create") {
                 val item = Item()
 
                 if (!itemStack.isAir) {
-                    item.addTrait(MaterialTrait(itemStack.material, itemStack.customModelData))
+                    item.addTrait(MaterialTrait(itemStack.material, itemStack.meta.customModelData))
                 } else {
-                    item.addTrait(MaterialTrait(Material.PAPER, itemStack.customModelData))
+                    item.addTrait(MaterialTrait(Material.PAPER, itemStack.meta.customModelData))
                 }
 
-                player.itemInMainHand = item.renderItem(if (itemStack.amount == 0.toByte()) 1 else itemStack.amount)
+                player.itemInMainHand = item.renderItem(if (itemStack.amount == 0) 1 else itemStack.amount)
                 player.sendFormattedTranslatableMessage("item", "create")
             } else
                 player.sendFormattedTranslatableMessage("item", "nonformatted.required")

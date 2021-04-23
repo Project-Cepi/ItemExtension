@@ -16,6 +16,7 @@ import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.argumentsFromConstructor
 import world.cepi.kstom.command.arguments.asSubcommand
 import world.cepi.kstom.command.setArgumentCallback
+import world.cepi.kstom.item.get
 import kotlin.reflect.KClass
 import kotlin.reflect.full.*
 
@@ -100,14 +101,14 @@ object SetSubcommand : Command("set") {
             }
 
             if (checkIsItem(itemStack)) {
-                val item = itemStack.data!!.get<Item>(Item.key)!!
+                val item = itemStack.meta.get<Item>(Item.key)!!
 
                 if (item.hasTrait(lastTrait))
                     item.removeTrait(lastTrait)
 
                 item.addTrait(lastTrait.primaryConstructor!!.call(*values.toTypedArray()))
 
-                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Byte.MAX_VALUE))
+                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
 
                 player.sendFormattedTranslatableMessage("item", "trait.add", Component.text(processTraitName(lastTrait.simpleName!!), NamedTextColor.BLUE))
             } else

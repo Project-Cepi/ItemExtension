@@ -2,15 +2,21 @@ package world.cepi.itemextension.item
 
 import kotlinx.serialization.Serializable
 import net.minestom.server.data.DataImpl
-import net.minestom.server.item.ItemFlag
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
+import world.cepi.itemextension.item.Item.Companion.key
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitContainer
+import world.cepi.kstom.item.clientData
+import world.cepi.kstom.item.get
+import world.cepi.kstom.item.item
+import world.cepi.kstom.item.withMeta
 
 /** Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits. */
 @Serializable
 class Item: TraitContainer<ItemTrait>() {
+
+    var requestedRenderMaterial: Material = Material.PAPER
 
     override val traits: MutableList<ItemTrait> = mutableListOf()
 
@@ -21,26 +27,23 @@ class Item: TraitContainer<ItemTrait>() {
      *
      * @return The ItemStack after applying traits to the Item
      */
-    fun renderItem(amount: Byte = 1): KItem {
+    fun renderItem(amount: Int = 1): ItemStack {
 
-        val item = KItem(Material.PAPER, amount)
+        val item = item(Material.PAPER, amount) {
 
-        val data = DataImpl()
+            withMeta {
+                clientData {
+                    this[key] = this@Item
+                }
+            }
 
-        data.set(key, this, Item::class.java)
-
-        item.data = data
-
-        item.lore = traits.sortedBy { it.loreIndex }
-            .map { trait -> trait.renderLore(this) }
-            .flatten()
-
-        traits.sortedBy { it.taskIndex }.forEach { it.task(item) }
-
-        item.addItemFlags(*ItemFlag.values())
-
+            lore(traits.sortedBy { it.loreIndex }
+                .map { trait -> trait.renderLore(this@Item) }
+                .flatten())
+        }
         return item
     }
+
 
     companion object {
         /** Key for klaxon JSON storage. */
@@ -60,7 +63,6 @@ class Item: TraitContainer<ItemTrait>() {
  */
 fun checkIsItem(itemStack: ItemStack): Boolean {
     // data must be initialized for an itemStack
-    if (itemStack.data == null) itemStack.data = DataImpl()
 
-    return itemStack.data!!.hasKey(Item.key)
+    return itemStack.meta.get<Item>(key) != null
 }

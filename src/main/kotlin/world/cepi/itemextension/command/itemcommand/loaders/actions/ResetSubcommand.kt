@@ -7,6 +7,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
+import world.cepi.kstom.item.get
 
 object ResetSubcommand : Command("reset") {
     init {
@@ -22,7 +23,7 @@ object ResetSubcommand : Command("reset") {
             val isCepiItem = checkIsItem(itemStack)
 
             if (isCepiItem) {
-                val item = itemStack.data!!.get<Item>(Item.key)!!
+                val item = itemStack.meta.get<Item>(Item.key)!!
                 item.removeAllTraits()
                 player.itemInMainHand = item.renderItem(itemStack.amount)
                 player.sendFormattedTranslatableMessage("item", "reset")

@@ -12,6 +12,7 @@ import world.cepi.itemextension.item.module
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.asSubcommand
+import world.cepi.kstom.item.get
 
 object DataSubcommand : Command("data") {
 
@@ -39,7 +40,7 @@ object DataSubcommand : Command("data") {
             }
 
             if (checkIsItem(itemStack)) {
-                println(format.encodeToString(itemStack.data!!.get<Item>(Item.key)))
+                println(format.encodeToString(itemStack.meta.get<Item>(Item.key)))
             }
         }
 

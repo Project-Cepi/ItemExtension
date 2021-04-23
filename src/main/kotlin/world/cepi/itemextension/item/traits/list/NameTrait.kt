@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
+import net.minestom.server.item.ItemStackBuilder
 import world.cepi.itemextension.item.Item
-import world.cepi.itemextension.item.KItem
 import world.cepi.itemextension.item.traits.ItemTrait
 
 /** Represents the name that the item contains. */
@@ -20,9 +20,9 @@ class NameTrait(
     override val taskIndex = 10f
     override val loreIndex = 1f
 
-    override fun task(item: KItem) {
-        val color = item.data?.get<Item>(Item.key)?.getTrait<RarityTrait>()?.rarity?.color ?: NamedTextColor.WHITE
-        item.displayName = Component.text(name, color).decoration(TextDecoration.ITALIC, false)
+    override fun task(item: ItemStackBuilder, originalItem: Item) {
+        val color = originalItem.getTrait<RarityTrait>()?.rarity?.color ?: NamedTextColor.WHITE
+        item.displayName(Component.text(name, color).decoration(TextDecoration.ITALIC, false))
     }
 
 }

@@ -2,8 +2,10 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import net.minestom.server.item.ItemStack
+import net.minestom.server.item.ItemStackBuilder
 import net.minestom.server.item.Material
-import world.cepi.itemextension.item.KItem
+import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 
 /** The material that the item will take on. Default is Paper. */
@@ -20,9 +22,8 @@ class MaterialTrait(
     override val taskIndex = 1f
     override val loreIndex = 1f
 
-    override fun task(item: KItem) {
-        item.customModelData = customModelData
-        item.material = material
+    override fun task(item: ItemStackBuilder, originalItem: Item) {
+        val newItem = ItemStack.of(material)
     }
 
 }

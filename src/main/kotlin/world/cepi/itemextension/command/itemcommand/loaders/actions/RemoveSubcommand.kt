@@ -14,6 +14,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
+import world.cepi.kstom.item.get
 
 object RemoveSubcommand : Command("remove") {
 
@@ -39,7 +40,7 @@ object RemoveSubcommand : Command("remove") {
         if (isCepiItem) {
             val trait = ItemTrait.classList.first { processTraitName(it.simpleName!!).equals(context.get(traitList), ignoreCase = true) }
 
-            val item = itemStack.data!!.get<Item>(Item.key)!!
+            val item = itemStack.meta.get<Item>(Item.key)!!
 
             if (item.hasTrait(trait)) {
                 item.removeTrait(trait)
