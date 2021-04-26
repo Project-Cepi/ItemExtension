@@ -1,18 +1,15 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
-import net.kyori.adventure.text.Component
 import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.itemextension.command.itemcommand.itemIsAir
-import world.cepi.itemextension.command.itemcommand.itemRendered
-import world.cepi.itemextension.command.itemcommand.requireFormattedItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.kepi.messages.sendFormattedMessage
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
+import world.cepi.kstom.item.get
 
-object UpdateAction : Command("update") {
+object UpdateSubcommand : Command("update") {
     init {
 
         addSyntax { commandSender ->
@@ -20,18 +17,18 @@ object UpdateAction : Command("update") {
             val itemStack = player.itemInMainHand
 
             if (itemStack.material == Material.AIR) {
-                player.sendFormattedMessage(Component.text(itemIsAir))
+                player.sendFormattedTranslatableMessage("mob", "main.required")
                 return@addSyntax
             }
 
             val isCepiItem = checkIsItem(itemStack)
 
             if (isCepiItem) {
-                val item = itemStack.data!!.get<Item>(Item.key)!!
+                val item = itemStack.meta.get<Item>(Item.key)!!
                 player.itemInMainHand = item.renderItem(itemStack.amount)
-                player.sendFormattedMessage(Component.text(itemRendered))
+                player.sendFormattedTranslatableMessage("item", "render")
             } else
-                player.sendFormattedMessage(Component.text(requireFormattedItem))
+                player.sendFormattedTranslatableMessage("mob", "formatted.required")
         }
 
     }

@@ -10,12 +10,12 @@ object ItemCommand : Command("item") {
 
         // Add the actions
         arrayOf(
-            CreateAction,
-            RemoveAction,
-            ResetAction,
-            SetAction,
-            UpdateAction,
-            DataAction
+            CreateSubcommand,
+            RemoveSubcommand,
+            ResetSubcommand,
+            SetSubcommand,
+            UpdateSubcommand,
+            DataSubcommand
         ).forEach {
             this.addSubcommand(it)
         }

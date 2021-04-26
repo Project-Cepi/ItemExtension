@@ -1,6 +1,7 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
 import net.minestom.server.entity.Player
@@ -10,18 +11,17 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
-import world.cepi.kepi.messages.sendFormattedMessage
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.argumentsFromConstructor
 import world.cepi.kstom.command.arguments.asSubcommand
 import world.cepi.kstom.command.setArgumentCallback
+import world.cepi.kstom.item.get
 import kotlin.reflect.KClass
 import kotlin.reflect.full.*
 
 // TODO break down and organize
-object SetAction : Command("set") {
-
-    val set = "set".asSubcommand()
+object SetSubcommand : Command("set") {
 
     val traits = ItemTrait.classList
 
@@ -70,7 +70,7 @@ object SetAction : Command("set") {
 
         traitConstructorArguments.forEach {
             command.setArgumentCallback(it)
-            { commandSender -> commandSender.sendFormattedMessage(Component.text(invalidTraitArgument)) }
+            { commandSender -> commandSender.sendFormattedTranslatableMessage("item", "trait.invalid") }
 
         }
 
@@ -83,7 +83,7 @@ object SetAction : Command("set") {
             }
         }
 
-        command.addSyntax(set, *traitArgs.toTypedArray(), *traitConstructorArguments.toTypedArray()) { commandSender, arguments ->
+        command.addSyntax(*traitArgs.toTypedArray(), *traitConstructorArguments.toTypedArray()) { commandSender, arguments ->
             val values: List<Any> = traitConstructorArguments.map { entry ->
                 return@map when(entry) {
                     is ArgumentItemStack ->
@@ -96,23 +96,23 @@ object SetAction : Command("set") {
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
-                player.sendFormattedMessage(Component.text(itemIsAir))
+                player.sendFormattedTranslatableMessage("mob", "main.required")
                 return@addSyntax
             }
 
             if (checkIsItem(itemStack)) {
-                val item = itemStack.data!!.get<Item>(Item.key)!!
+                val item = itemStack.meta.get<Item>(Item.key)!!
 
                 if (item.hasTrait(lastTrait))
                     item.removeTrait(lastTrait)
 
                 item.addTrait(lastTrait.primaryConstructor!!.call(*values.toTypedArray()))
 
-                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Byte.MAX_VALUE))
+                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
 
-                player.sendFormattedMessage(traitAdded, Component.text(processTraitName(lastTrait.simpleName!!)))
+                player.sendFormattedTranslatableMessage("item", "trait.add", Component.text(processTraitName(lastTrait.simpleName!!), NamedTextColor.BLUE))
             } else
-                player.sendFormattedMessage(Component.text(requireFormattedItem))
+                player.sendFormattedTranslatableMessage("mob", "formatted.required")
 
         }
     }

@@ -2,8 +2,8 @@ package world.cepi.itemextension.item.traits
 
 import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
+import net.minestom.server.item.ItemStackBuilder
 import world.cepi.itemextension.item.Item
-import world.cepi.itemextension.item.KItem
 import world.cepi.itemextension.item.traits.list.*
 import world.cepi.itemextension.item.traits.list.attacks.AttackTrait
 import world.cepi.itemextension.item.traits.list.stats.StatTrait
@@ -23,7 +23,7 @@ abstract class ItemTrait {
      *
      * @param item The item that is being rendered.
      */
-    open fun task(item: KItem) { }
+    open fun task(item: ItemStackBuilder, originalItem: Item) { }
 
     /**
      * This function is called based on the [loreIndex] of the [ItemTrait]

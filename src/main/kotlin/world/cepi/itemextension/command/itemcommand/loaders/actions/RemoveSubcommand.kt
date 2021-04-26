@@ -8,18 +8,15 @@ import net.minestom.server.command.builder.CommandContext
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.itemextension.command.itemcommand.itemIsAir
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
-import world.cepi.itemextension.command.itemcommand.requireFormattedItem
-import world.cepi.itemextension.command.itemcommand.traitNotFound
-import world.cepi.itemextension.command.itemcommand.traitRemoved
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
-import world.cepi.kepi.messages.sendFormattedMessage
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
+import world.cepi.kstom.item.get
 
-object RemoveAction : Command("remove") {
+object RemoveSubcommand : Command("remove") {
 
     val traitList = ArgumentType.Word("trait")
         .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }.toTypedArray())
@@ -34,7 +31,7 @@ object RemoveAction : Command("remove") {
         val itemStack = player.itemInMainHand
 
         if (itemStack.material == Material.AIR) {
-            player.sendFormattedMessage(Component.text(itemIsAir))
+            player.sendFormattedTranslatableMessage("mob", "main.required")
             return
         }
 
@@ -43,20 +40,20 @@ object RemoveAction : Command("remove") {
         if (isCepiItem) {
             val trait = ItemTrait.classList.first { processTraitName(it.simpleName!!).equals(context.get(traitList), ignoreCase = true) }
 
-            val item = itemStack.data!!.get<Item>(Item.key)!!
+            val item = itemStack.meta.get<Item>(Item.key)!!
 
             if (item.hasTrait(trait)) {
                 item.removeTrait(trait)
-                player.sendFormattedMessage(
-                    Component.text(traitRemoved),
+                player.sendFormattedTranslatableMessage(
+                    "item", "trait.remove",
                     Component.text(processTraitName(trait.simpleName!!).substring(0..trait.simpleName!!.length - 5), NamedTextColor.BLUE)
                         .append(Component.text("", NamedTextColor.GRAY))
                 )
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
             } else
-                player.sendFormattedMessage(Component.text(traitNotFound))
+                player.sendFormattedTranslatableMessage("item", "trait.none", Component.text(context.get(traitList), NamedTextColor.BLUE))
         } else
-            player.sendFormattedMessage(Component.text(requireFormattedItem))
+            player.sendFormattedTranslatableMessage("mob", "formatted.required")
     }
 
 }

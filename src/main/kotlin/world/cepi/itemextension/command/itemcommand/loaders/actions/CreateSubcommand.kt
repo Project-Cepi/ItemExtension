@@ -1,18 +1,15 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
-import net.kyori.adventure.text.Component
 import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.itemextension.command.itemcommand.itemCreated
-import world.cepi.itemextension.command.itemcommand.requireNonFormattedItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.MaterialTrait
-import world.cepi.kepi.messages.sendFormattedMessage
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
 
-object CreateAction : Command("create") {
+object CreateSubcommand : Command("create") {
 
     init {
         addSyntax { commandSender ->
@@ -24,15 +21,15 @@ object CreateAction : Command("create") {
                 val item = Item()
 
                 if (!itemStack.isAir) {
-                    item.addTrait(MaterialTrait(itemStack.material, itemStack.customModelData))
+                    item.addTrait(MaterialTrait(itemStack.material, itemStack.meta.customModelData))
                 } else {
-                    item.addTrait(MaterialTrait(Material.PAPER, itemStack.customModelData))
+                    item.addTrait(MaterialTrait(Material.PAPER, itemStack.meta.customModelData))
                 }
 
-                player.itemInMainHand = item.renderItem(if (itemStack.amount == 0.toByte()) 1 else itemStack.amount)
-                player.sendFormattedMessage(Component.text(itemCreated))
+                player.itemInMainHand = item.renderItem(if (itemStack.amount == 0) 1 else itemStack.amount)
+                player.sendFormattedTranslatableMessage("item", "create")
             } else
-                player.sendFormattedMessage(Component.text(requireNonFormattedItem))
+                player.sendFormattedTranslatableMessage("item", "nonformatted.required")
         }
     }
 }

@@ -5,9 +5,9 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
-import world.cepi.itemextension.command.itemcommand.giveItem
 import world.cepi.itemextension.command.itemcommand.loaders.ConditionLoader
-import world.cepi.kepi.messages.sendFormattedMessage
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
+import world.cepi.kstom.command.addSyntax
 import java.util.function.Supplier
 
 object GiveCommand : Command("give") {
@@ -23,12 +23,11 @@ object GiveCommand : Command("give") {
 
         val selector = ArgumentType.Entity("players").onlyPlayers(true)
 
-        addSyntax({ commandSender, args ->
+        addSyntax(selector, itemArg, amountArg) { commandSender, args ->
 
             val player = commandSender as Player
 
-            val item = args.get(itemArg)
-            item.amount = args.get(amountArg).toByte()
+            val item = args.get(itemArg).withAmount(args.get(amountArg))
 
             val targets = args.get(selector).find(player.instance!!, player).map { it as Player }
 
@@ -36,8 +35,8 @@ object GiveCommand : Command("give") {
                 (it as? Player)?.inventory?.addItemStack(args.get(itemArg))
             }
 
-            commandSender.sendFormattedMessage(
-                giveItem,
+            commandSender.sendFormattedTranslatableMessage(
+                "item", "give",
                 Component.text(args.get(amountArg), NamedTextColor.BLUE),
                 (item.displayName
                     ?: Component.text(
@@ -51,7 +50,7 @@ object GiveCommand : Command("give") {
                 (if (targets.size == 1) Component.text(targets[0].username) else Component.text("${targets.size} Players")).color(NamedTextColor.BLUE)
             )
 
-        }, selector, itemArg, amountArg)
+        }
     }
 
 }
