@@ -27,7 +27,7 @@ class ArmorTrait(
 
     companion object {
         fun applyToDamage(armor: Double, damage: Double): Double =
-            (damage - armor).coerceIn(0.0, Double.MAX_VALUE)
+            (damage - armor).coerceAtLeast(0.0)
     }
 
 

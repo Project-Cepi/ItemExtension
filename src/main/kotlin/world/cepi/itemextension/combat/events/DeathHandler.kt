@@ -15,6 +15,7 @@ import net.minestom.server.sound.SoundEvent
 import net.minestom.server.utils.Position
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.Handler
+import world.cepi.kstom.addEventCallback
 
 
 object DeathHandler : Handler {
@@ -30,44 +31,43 @@ object DeathHandler : Handler {
 
     override fun register(playerInit: Player) {
         val schedulerManager = MinecraftServer.getSchedulerManager()
-        playerInit.addEventCallback(EntityDamageEvent::class.java) {
-            with(it) {
-                if (entity is Player && damage >= entity.health) {
-                    isCancelled = true
-                    val player = entity as Player
-                    val originalGamemode = player.gameMode
-                    val originalFlyStatus = player.isAllowFlying
+        playerInit.addEventCallback<EntityDamageEvent> {
+            if (entity is Player && damage >= entity.health) {
+                isCancelled = true
+                val player = entity as Player
+                val originalGamemode = player.gameMode
+                val originalFlyStatus = player.isAllowFlying
 
-                    player.gameMode = GameMode.ADVENTURE
-                    player.heal()
-                    player.food = 20
-                    player.isAllowFlying = true
-                    player.isInvisible = true
+                player.gameMode = GameMode.ADVENTURE
+                player.heal()
+                player.food = 20
+                player.isAllowFlying = true
+                player.isInvisible = true
 
-                    getNearbyEntities(player.position, 10.0, player.instance!!).filterIsInstance<Player>().forEach { loopPlayer ->
-                        loopPlayer.playSound(Sound.sound(
-                            SoundEvent.ENTITY_SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
-                        ), player.position.x, player.position.y, player.position.z)
-                    }
-
-                    deathMessage(player, 3)
-
-                    isDead.add(player)
-
-                    schedulerManager.buildTask { deathMessage(player, 2) }.delay(1, TimeUnit.SECOND).schedule()
-                    schedulerManager.buildTask { deathMessage(player, 1) }.delay(2, TimeUnit.SECOND).schedule()
-                    schedulerManager.buildTask {
-                        player.resetTitle()
-                        player.teleport(player.respawnPoint)
-                        player.gameMode = originalGamemode
-                        isDead.remove(player)
-                        player.isAllowFlying = originalFlyStatus
-                        player.isFlying = false
-                        player.isInvisible = false
-                    }.delay(3, TimeUnit.SECOND).schedule()
+                getNearbyEntities(player.position, 10.0, player.instance!!).filterIsInstance<Player>().forEach { loopPlayer ->
+                    loopPlayer.playSound(Sound.sound(
+                        SoundEvent.ENTITY_SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
+                    ), player.position.x, player.position.y, player.position.z)
                 }
+
+                deathMessage(player, 3)
+
+                isDead.add(player)
+
+                schedulerManager.buildTask { deathMessage(player, 2) }.delay(1, TimeUnit.SECOND).schedule()
+                schedulerManager.buildTask { deathMessage(player, 1) }.delay(2, TimeUnit.SECOND).schedule()
+                schedulerManager.buildTask {
+                    player.resetTitle()
+                    player.teleport(player.respawnPoint)
+                    player.gameMode = originalGamemode
+                    isDead.remove(player)
+                    player.isAllowFlying = originalFlyStatus
+                    player.isFlying = false
+                    player.isInvisible = false
+                }.delay(3, TimeUnit.SECOND).schedule()
             }
         }
+
     }
 
     private fun getNearbyEntities(location: Position, distance: Double, instance: Instance): Collection<Entity> {

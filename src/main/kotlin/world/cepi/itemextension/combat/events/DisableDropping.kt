@@ -8,7 +8,7 @@ import world.cepi.kstom.addEventCallback
 object DisableDropping : Handler {
 
     override fun register(playerInit: Player) {
-        playerInit.addEventCallback(ItemDropEvent::class) {
+        playerInit.addEventCallback<ItemDropEvent> {
             isCancelled = true
         }
     }

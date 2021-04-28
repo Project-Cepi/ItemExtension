@@ -4,21 +4,22 @@ import net.minestom.server.entity.Player
 import net.minestom.server.entity.damage.DamageType
 import net.minestom.server.event.entity.EntityDamageEvent
 import world.cepi.itemextension.Handler
+import world.cepi.kstom.addEventCallback
 
 object NoVoidHandler : Handler {
 
     override fun register(playerInit: Player) {
-        playerInit.addEventCallback(EntityDamageEvent::class.java) { entityDamageEvent ->
+        playerInit.addEventCallback<EntityDamageEvent> {
 
-            if (entityDamageEvent.entity !is Player) {
+            if (entity !is Player) {
                 return@addEventCallback
             }
 
-            val player = entityDamageEvent.entity as Player
+            val player = entity as Player
 
-            if (entityDamageEvent.damageType == DamageType.VOID) {
+            if (damageType == DamageType.VOID) {
                 player.teleport(player.respawnPoint)
-                entityDamageEvent.isCancelled = true
+                isCancelled = true
             }
         }
     }

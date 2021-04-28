@@ -11,7 +11,7 @@ import world.cepi.itemextension.item.traits.list.attacks.TertiaryAttackTrait
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 
-val module = SerializersModule {
+internal val module = SerializersModule {
 
     polymorphic(ItemTrait::class) {
         subclass(MaterialTrait::class)

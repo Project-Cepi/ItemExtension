@@ -29,11 +29,11 @@ class Item: TraitContainer<ItemTrait>() {
      */
     fun renderItem(amount: Int = 1): ItemStack {
 
-        val item = item(Material.PAPER, amount) {
+        val item = item(requestedRenderMaterial, amount) {
 
             withMeta {
                 clientData {
-                    this[key] = this@Item
+                    this[key, module] = this@Item
                 }
             }
 
@@ -41,6 +41,7 @@ class Item: TraitContainer<ItemTrait>() {
                 .map { trait -> trait.renderLore(this@Item) }
                 .flatten())
         }
+
         return item
     }
 

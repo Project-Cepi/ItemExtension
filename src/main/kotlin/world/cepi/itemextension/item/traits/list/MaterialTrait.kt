@@ -2,7 +2,6 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.item.ItemStack
 import net.minestom.server.item.ItemStackBuilder
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
@@ -23,7 +22,7 @@ class MaterialTrait(
     override val loreIndex = 1f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
-        val newItem = ItemStack.of(material)
+        originalItem.requestedRenderMaterial = material
     }
 
 }

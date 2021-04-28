@@ -21,18 +21,16 @@ abstract class StatTrait : ItemTrait() {
     open val value: Float = 0.0F
 
     override fun renderLore(item: Item): List<Component> {
-        return if (value >= 0)
-            listOf(
-                Component.text("► ", NamedTextColor.DARK_GRAY)
-                    .append(Component.text("+$value ", NamedTextColor.GREEN))
-                    .append(Component.text(name, NamedTextColor.GRAY))
-                    .decoration(TextDecoration.ITALIC, false))
-        else
-            listOf(
-                Component.text("► ", NamedTextColor.DARK_GRAY)
-                    .append(Component.text("-$value ", NamedTextColor.RED))
-                    .append(Component.text(name, NamedTextColor.GRAY))
-                    .decoration(TextDecoration.ITALIC, false))
+        return listOf(
+            Component.text("► ", NamedTextColor.DARK_GRAY)
+                .append(
+                    if (value >= 0)
+                        Component.text("+$value ", NamedTextColor.GREEN)
+                    else
+                        Component.text("-$value ", NamedTextColor.RED)
+                )
+                .append(Component.text(name, NamedTextColor.GRAY))
+                .decoration(TextDecoration.ITALIC, false))
     }
 
 }
