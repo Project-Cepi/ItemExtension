@@ -13,7 +13,7 @@ class TertiaryAttackTrait(override val attack: Attack): AttackTrait() {
     override val loreIndex = 2.3f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
-        item.rightCallbacks.add(attack.action)
+//        item.rightCallbacks.add(attack.action)
     }
 
 }
