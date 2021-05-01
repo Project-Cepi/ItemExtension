@@ -65,5 +65,5 @@ class Item: TraitContainer<ItemTrait>() {
 fun checkIsItem(itemStack: ItemStack): Boolean {
     // data must be initialized for an itemStack
 
-    return itemStack.meta.get<Item>(key) != null
+    return itemStack.meta.get<Item>(key, module) != null
 }
