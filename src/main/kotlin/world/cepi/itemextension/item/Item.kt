@@ -1,6 +1,7 @@
 package world.cepi.itemextension.item
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import net.minestom.server.data.DataImpl
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
@@ -16,6 +17,7 @@ import world.cepi.kstom.item.withMeta
 @Serializable
 class Item: TraitContainer<ItemTrait>() {
 
+    @Transient
     var requestedRenderMaterial: Material = Material.PAPER
 
     override val traits: MutableList<ItemTrait> = mutableListOf()
@@ -40,6 +42,9 @@ class Item: TraitContainer<ItemTrait>() {
             lore(traits.sortedBy { it.loreIndex }
                 .map { trait -> trait.renderLore(this@Item) }
                 .flatten())
+
+            traits.sortedBy { it.taskIndex }
+                .map { trait -> trait.task(this, this@Item) }
         }
 
         return item
