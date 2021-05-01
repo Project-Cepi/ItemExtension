@@ -40,7 +40,7 @@ object DataSubcommand : Command("data") {
             }
 
             if (checkIsItem(itemStack)) {
-                println(format.encodeToString(itemStack.meta.get<Item>(Item.key)))
+                println(format.encodeToString(itemStack.meta.get<Item>(Item.key, module)))
             }
         }
 

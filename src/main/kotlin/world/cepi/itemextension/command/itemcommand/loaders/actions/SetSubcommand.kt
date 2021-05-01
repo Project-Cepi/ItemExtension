@@ -9,6 +9,7 @@ import world.cepi.itemextension.command.itemcommand.*
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.itemextension.item.module
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
@@ -101,7 +102,7 @@ object SetSubcommand : Command("set") {
             }
 
             if (checkIsItem(itemStack)) {
-                val item = itemStack.meta.get<Item>(Item.key)!!
+                val item = itemStack.meta.get<Item>(Item.key, module)!!
 
                 if (item.hasTrait(lastTrait))
                     item.removeTrait(lastTrait)

@@ -14,6 +14,7 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.network.packet.server.play.EntityEquipmentPacket
 import world.cepi.itemextension.Handler
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.module
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 import world.cepi.kstom.addEventCallback
@@ -56,7 +57,7 @@ object StatsHandler : Handler {
 
     fun refreshPlayerStats(entity: LivingEntity, changedSlots: Map<EntityEquipmentPacket.Slot, ItemStack> = mapOf()) {
         val items: Map<EntityEquipmentPacket.Slot, Item> = EntityEquipmentPacket.Slot.values().mapNotNull {
-                val item = ((changedSlots[it]?.meta?.get<Item>(Item.key)) ?: entity.getEquipment(it).meta.get(Item.key)) ?: return@mapNotNull null
+                val item = ((changedSlots[it]?.meta?.get<Item>(Item.key, module)) ?: entity.getEquipment(it).meta.get(Item.key, module)) ?: return@mapNotNull null
                 it to item
             }.toMap()
 

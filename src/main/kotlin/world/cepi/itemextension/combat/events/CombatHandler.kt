@@ -16,6 +16,7 @@ import world.cepi.itemextension.Handler
 import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.itemextension.item.module
 import world.cepi.itemextension.item.traits.list.ArmorTrait
 import world.cepi.itemextension.item.traits.list.DamageTrait
 import world.cepi.itemextension.item.traits.list.LevelTrait
@@ -39,7 +40,7 @@ object CombatHandler : Handler {
             val item = (entity as? LivingEntity)?.itemInMainHand
 
             val cepiItem = if (item != null && checkIsItem(item)) {
-                item.meta.get<Item>(Item.key)!!
+                item.meta.get<Item>(Item.key, module)!!
             } else null
 
             if (entity is Player) {
@@ -63,7 +64,7 @@ object CombatHandler : Handler {
 
                 // Appends armor to the damage. Collects all armor from all armor slots and applies it as so.
                 val armor = listOf(livingTarget.boots, livingTarget.leggings, livingTarget.chestplate, livingTarget.helmet).map {
-                    it.meta.get<Item>(Item.key)?.getTrait<ArmorTrait>()?.armor ?: 0.0
+                    it.meta.get<Item>(Item.key, module)?.getTrait<ArmorTrait>()?.armor ?: 0.0
                 }.sum()
 
                 val finalDamage = ArmorTrait.applyToDamage(armor, damage)
