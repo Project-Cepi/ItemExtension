@@ -17,6 +17,7 @@ abstract class AttackTrait: ItemTrait() {
 
     open val attack: Attack = Attack.STRIKE
     open val clickType: String = "None"
+    open val requiresTarget: Boolean = false
 
     override val loreIndex = 2f
     override val taskIndex = 0f
