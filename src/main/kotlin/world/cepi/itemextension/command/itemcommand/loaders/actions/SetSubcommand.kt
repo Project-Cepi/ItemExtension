@@ -93,7 +93,7 @@ object SetSubcommand : Command("set") {
                 if (item.hasTrait(lastTrait))
                     item.removeTrait(lastTrait)
 
-                item.addTrait(traitConstructorArguments.createInstance(arguments))
+                item.addTrait(traitConstructorArguments.createInstance(arguments, commandSender))
 
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
 

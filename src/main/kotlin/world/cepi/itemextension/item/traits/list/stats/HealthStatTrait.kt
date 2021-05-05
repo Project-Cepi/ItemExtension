@@ -9,5 +9,4 @@ class HealthStatTrait(override val value: Float): StatTrait() {
 
     override val name = "Health"
 
-
 }
