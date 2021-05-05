@@ -52,7 +52,7 @@ class Item: TraitContainer<ItemTrait>() {
 
 
     companion object {
-        /** Key for klaxon JSON storage. */
+        /** Key for kotlin JSON storage. */
         const val key = "cepi-item"
     }
 

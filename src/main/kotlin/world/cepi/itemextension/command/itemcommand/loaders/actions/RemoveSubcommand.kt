@@ -14,7 +14,6 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.module
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
-import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.item.get
 
 object RemoveSubcommand : Command("remove") {
@@ -23,8 +22,7 @@ object RemoveSubcommand : Command("remove") {
         .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }.toTypedArray())
 
     init {
-
-        addSyntax(traitList) { commandSender, args -> actionWithTrait(commandSender, args) }
+        addSyntax(::actionWithTrait, traitList)
     }
 
     private fun actionWithTrait(commandSender: CommandSender, context: CommandContext) {
