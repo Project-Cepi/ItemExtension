@@ -3,7 +3,6 @@ package world.cepi.itemextension.command.itemcommand.loaders.actions
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.Command
-import net.minestom.server.command.builder.arguments.minecraft.ArgumentItemStack
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.*
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
@@ -14,8 +13,8 @@ import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
-import world.cepi.kstom.command.arguments.argumentsFromConstructor
-import world.cepi.kstom.command.arguments.asSubcommand
+import world.cepi.kstom.command.arguments.argumentsFromClass
+import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.setArgumentCallback
 import world.cepi.kstom.item.get
 import kotlin.reflect.KClass
@@ -62,14 +61,9 @@ object SetSubcommand : Command("set") {
 
         val lastTrait = traits.last()
 
-        // We will be using this constructor later to get its arguments
-        val traitConstructor = lastTrait.primaryConstructor ?: return
+        val traitConstructorArguments = argumentsFromClass(lastTrait)
 
-        val traitConstructorArguments = argumentsFromConstructor(traitConstructor)
-
-        if (traitConstructorArguments.isEmpty()) return
-
-        traitConstructorArguments.forEach {
+        traitConstructorArguments.args.forEach {
             command.setArgumentCallback(it)
             { commandSender -> commandSender.sendFormattedTranslatableMessage("item", "trait.invalid") }
 
@@ -78,21 +72,13 @@ object SetSubcommand : Command("set") {
         val traitArgs = traits.mapIndexed { index, loopTrait ->
             if (index != 0) { // If this trait isnt the first trait (root trait)
                 // Drop the suffix, EX PrimaryAttackTrait becomes Primary
-                loopTrait.simpleName!!.dropLast(traits[index - 1].simpleName!!.length).toLowerCase().asSubcommand()
+                loopTrait.simpleName!!.dropLast(traits[index - 1].simpleName!!.length).toLowerCase().literal()
             } else {
-                processTraitName(loopTrait.simpleName!!).asSubcommand()
+                processTraitName(loopTrait.simpleName!!).literal()
             }
         }
 
-        command.addSyntax(*traitArgs.toTypedArray(), *traitConstructorArguments.toTypedArray()) { commandSender, arguments ->
-            val values: List<Any> = traitConstructorArguments.map { entry ->
-                return@map when(entry) {
-                    is ArgumentItemStack ->
-                        arguments.get(entry).material
-                    else -> arguments.get(entry)
-                }
-            }
-
+        command.addSyntax(*traitArgs.toTypedArray(), *traitConstructorArguments.args) { commandSender, arguments ->
             val player = commandSender as Player
             val itemStack = player.itemInMainHand
 
@@ -107,7 +93,7 @@ object SetSubcommand : Command("set") {
                 if (item.hasTrait(lastTrait))
                     item.removeTrait(lastTrait)
 
-                item.addTrait(lastTrait.primaryConstructor!!.call(*values.toTypedArray()))
+                item.addTrait(traitConstructorArguments.createInstance(arguments, commandSender))
 
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
 

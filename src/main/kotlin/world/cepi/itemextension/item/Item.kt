@@ -1,13 +1,13 @@
 package world.cepi.itemextension.item
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import net.minestom.server.data.DataImpl
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item.Companion.key
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.TraitContainer
+import world.cepi.itemextension.item.traits.list.MaterialTrait
 import world.cepi.kstom.item.clientData
 import world.cepi.kstom.item.get
 import world.cepi.kstom.item.item
@@ -16,9 +16,6 @@ import world.cepi.kstom.item.withMeta
 /** Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits. */
 @Serializable
 class Item: TraitContainer<ItemTrait>() {
-
-    @Transient
-    var requestedRenderMaterial: Material = Material.PAPER
 
     override val traits: MutableList<ItemTrait> = mutableListOf()
 
@@ -31,7 +28,10 @@ class Item: TraitContainer<ItemTrait>() {
      */
     fun renderItem(amount: Int = 1): ItemStack {
 
-        val item = item(requestedRenderMaterial, amount) {
+        val item = item(
+            getTrait<MaterialTrait>()?.material ?: Material.PAPER,
+            amount
+        ) {
 
             withMeta {
                 clientData {
@@ -52,7 +52,7 @@ class Item: TraitContainer<ItemTrait>() {
 
 
     companion object {
-        /** Key for klaxon JSON storage. */
+        /** Key for kotlin JSON storage. */
         const val key = "cepi-item"
     }
 

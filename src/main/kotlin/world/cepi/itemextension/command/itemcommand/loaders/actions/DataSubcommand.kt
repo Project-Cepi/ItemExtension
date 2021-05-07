@@ -11,7 +11,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.module
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
-import world.cepi.kstom.command.arguments.asSubcommand
+import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.item.get
 
 object DataSubcommand : Command("data") {
@@ -25,9 +25,9 @@ object DataSubcommand : Command("data") {
     }
 
     init {
-        val get = "get".asSubcommand()
+        val get = "get".literal()
 
-        val from = "from".asSubcommand()
+        val from = "from".literal()
         val json = ArgumentType.NbtCompound("json")
 
         addSyntax(get) { sender ->

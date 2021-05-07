@@ -22,7 +22,7 @@ class MaterialTrait(
     override val loreIndex = 1f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
-        originalItem.requestedRenderMaterial = material
+        item.meta { it.customModelData(customModelData) }
     }
 
 }
