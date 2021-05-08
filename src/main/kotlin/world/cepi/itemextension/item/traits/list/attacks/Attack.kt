@@ -6,7 +6,7 @@ import net.minestom.server.entity.Player
 import net.minestom.server.sound.SoundEvent
 import net.minestom.server.entity.damage.DamageType
 
-enum class Attack(val displayName: String, val action: (Player, Player.Hand, LivingEntity) -> Boolean = { _, _, _ -> true } ) {
+enum class Attack(val displayName: String, val action: (Player, Player.Hand, LivingEntity) -> Boolean = { _, _, _ -> true }, val requiresTarget: Boolean = false) {
 
     STRIKE("Strike"),
     NONE("None", { _, _, _ -> false }),
@@ -22,6 +22,6 @@ enum class Attack(val displayName: String, val action: (Player, Player.Hand, Liv
     TARGET_ATTACK("Target Attack", { player, _, target ->
         target.damage(DamageType.fromPlayer(player), 1.0F)
         true
-    })
+    }, true)
 
 }

@@ -78,9 +78,7 @@ object TargetHandler {
         if(checkIsItem(item)) {
             val cepiItem: Item = item.meta.get(Item.key, module)!!
 
-            cepiItem.traits.forEach {
-                return it is AttackTrait && it.requiresTarget
-            }
+            return cepiItem.traits.filterIsInstance<AttackTrait>().any { it.attack.requiresTarget } // Check if any attack of an item requires a target
         }
 
         return false
