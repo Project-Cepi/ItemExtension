@@ -36,7 +36,6 @@ object TargetHandler {
 
                 if((canTarget(itemInHand) || canTarget(itemInOffHand)) && it.instance != null) {
                     // TODO: Base max distance upon the item
-                    //val result = castRay(it.instance!!, it, it.position.x, it.position.y + it.eyeHeight, it.position.z, it.position.direction.x, it.position.direction.y, it.position.direction.z, 100.0, 0.25, { pos ->  it.instance!!.getBlockStateId(pos) == Block.AIR.blockId }, {})
                     val result = castRay(it.instance!!, it, Vector(it.position.x, it.position.y + it.eyeHeight, it.position.z), it.position.direction, 100.0, 0.25)
 
                     if(result.hitType == HitType.ENTITY) {
