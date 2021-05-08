@@ -61,6 +61,9 @@ object TargetHandler {
                         targets.remove(it)
                         PacketUtils.sendPacket(it, createMetadataPacket(target, false))
                     }
+                } else if(hasTarget(it)) {
+                    PacketUtils.sendPacket(it, createMetadataPacket(targets[it]!!, false))
+                    targets.remove(it)
                 }
             }
         }.repeat(checkTarget, checkTargetTime).schedule()
