@@ -32,6 +32,7 @@ object ItemExtension : Extension() {
         MinecraftServer.getCommandManager().register(ItemCommand)
         MinecraftServer.getCommandManager().register(ClearCommand)
         MinecraftServer.getCommandManager().register(GiveCommand)
+        MinecraftServer.getCommandManager().register(SpawnZombieCommand())
 
         logger.info("[ItemExtension] has been enabled!")
     }
