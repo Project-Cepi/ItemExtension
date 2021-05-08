@@ -57,9 +57,8 @@ object TargetHandler {
                             PacketUtils.sendPacket(it, createMetadataPacket(target, true))
                         }
                     } else if(hasTarget(it)) {
-                        val target = targets[it]!!
+                        PacketUtils.sendPacket(it, createMetadataPacket(targets[it]!!, false))
                         targets.remove(it)
-                        PacketUtils.sendPacket(it, createMetadataPacket(target, false))
                     }
                 } else if(hasTarget(it)) {
                     PacketUtils.sendPacket(it, createMetadataPacket(targets[it]!!, false))
