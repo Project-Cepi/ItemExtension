@@ -34,32 +34,33 @@ object TargetHandler {
                 val itemInHand = it.getItemInHand(Player.Hand.MAIN)
                 val itemInOffHand = it.getItemInHand(Player.Hand.OFF)
 
-                if((canTarget(itemInHand) || canTarget(itemInOffHand)) && it.instance != null) {
+                if((canTarget(itemInHand) || canTarget(itemInOffHand)) && it.instance != null) { // Check if the item supports the targeting system
                     // TODO: Base max distance upon the item
-                    val result = castRay(it.instance!!, it, Vector(it.position.x, it.position.y + it.eyeHeight, it.position.z), it.position.direction, 100.0, 0.25)
+                    val result = castRay(it.instance!!, it, Vector(it.position.x, it.position.y + it.eyeHeight, it.position.z), it.position.direction, 100.0, 0.25) // Cast a ray
 
+                    // Check if the ray has hit an entity
                     if(result.hitType == HitType.ENTITY) {
                         val target = result.hitEntity!!
-                        if(target is Player) {
+                        if(target is Player) { // Ignore if the entity hit is a player
                             return@forEach
                         }
 
-                        if(hasTarget(it)) {
+                        if(hasTarget(it)) { // Check if the player already has a target
                             val currentTarget = targets[it]!!
-                            if(currentTarget != target) {
+                            if(currentTarget != target) { // Switch target and update the entities' glow
                                 targets[it] = target
                                 PacketUtils.sendPacket(it, createMetadataPacket(currentTarget, false))
                                 PacketUtils.sendPacket(it, createMetadataPacket(target, true))
                             }
-                        } else {
+                        } else { // Set the target
                             targets[it] = target
                             PacketUtils.sendPacket(it, createMetadataPacket(target, true))
                         }
-                    } else if(hasTarget(it)) {
+                    } else if(hasTarget(it)) { // Remove target if no entity is hit
                         PacketUtils.sendPacket(it, createMetadataPacket(targets[it]!!, false))
                         targets.remove(it)
                     }
-                } else if(hasTarget(it)) {
+                } else if(hasTarget(it)) { // Remove target if the player swaps to an item which does not have targeting support
                     PacketUtils.sendPacket(it, createMetadataPacket(targets[it]!!, false))
                     targets.remove(it)
                 }
@@ -67,10 +68,21 @@ object TargetHandler {
         }.repeat(checkTarget, checkTargetTime).schedule()
     }
 
+    /**
+     * Get the [LivingEntity] that a [Player] is targeting
+     *
+     * @param player The [Player] which is targeting something
+     * @return a [LivingEntity] that is being targeted
+     */
     fun getTarget(player: Player): LivingEntity? {
         return targets[player]
     }
 
+    /**
+     * Check if a [Player] has a target
+     *
+     * @param player [Player] to check
+     */
     fun hasTarget(player: Player): Boolean {
         return targets.containsKey(player)
     }

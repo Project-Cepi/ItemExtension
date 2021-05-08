@@ -7,7 +7,6 @@ import world.cepi.itemextension.combat.TargetHandler
 import world.cepi.itemextension.combat.events.*
 import world.cepi.itemextension.command.ClearCommand
 import world.cepi.itemextension.command.GiveCommand
-import world.cepi.itemextension.command.SpawnZombieCommand
 import world.cepi.itemextension.command.itemcommand.ItemCommand
 import world.cepi.itemextension.stats.StatsHandler
 
@@ -32,7 +31,6 @@ object ItemExtension : Extension() {
         MinecraftServer.getCommandManager().register(ItemCommand)
         MinecraftServer.getCommandManager().register(ClearCommand)
         MinecraftServer.getCommandManager().register(GiveCommand)
-        MinecraftServer.getCommandManager().register(SpawnZombieCommand())
 
         logger.info("[ItemExtension] has been enabled!")
     }
