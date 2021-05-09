@@ -3,6 +3,7 @@ package world.cepi.itemextension
 import net.minestom.server.MinecraftServer
 import net.minestom.server.entity.Player
 import net.minestom.server.extensions.Extension
+import world.cepi.itemextension.combat.TargetHandler
 import world.cepi.itemextension.combat.events.*
 import world.cepi.itemextension.command.ClearCommand
 import world.cepi.itemextension.command.GiveCommand
@@ -25,6 +26,7 @@ object ItemExtension : Extension() {
     override fun initialize() {
         val connectionManager = MinecraftServer.getConnectionManager()
         connectionManager.addPlayerInitialization(playerInitialization)
+        TargetHandler.register()
 
         MinecraftServer.getCommandManager().register(ItemCommand)
         MinecraftServer.getCommandManager().register(ClearCommand)
