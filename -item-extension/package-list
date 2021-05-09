@@ -14,6 +14,11 @@ $dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler///PointingT
 $dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-no-void-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.util////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/index.html
 $dokka.location:world.cepi.itemextension.combat.util//applyKnockback/#net.minestom.server.entity.Entity#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/apply-knockback.html
+$dokka.location:world.cepi.itemextension.combat////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/index.html
+$dokka.location:world.cepi.itemextension.combat/TargetHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-target-handler/index.html
+$dokka.location:world.cepi.itemextension.combat/TargetHandler/getTarget/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-target-handler/get-target.html
+$dokka.location:world.cepi.itemextension.combat/TargetHandler/hasTarget/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-target-handler/has-target.html
+$dokka.location:world.cepi.itemextension.combat/TargetHandler/register/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-target-handler/register.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions////PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/index.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions/CreateSubcommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/-create-subcommand/index.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions/DataSubcommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/-data-subcommand/index.html
@@ -46,24 +51,35 @@ $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.DASH/ac
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.DASH/displayName/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-d-a-s-h/display-name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.DASH/name/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-d-a-s-h/name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.DASH/ordinal/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-d-a-s-h/ordinal.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.DASH/requiresTarget/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-d-a-s-h/requires-target.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.NONE///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-n-o-n-e/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.NONE/action/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-n-o-n-e/action.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.NONE/displayName/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-n-o-n-e/display-name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.NONE/name/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-n-o-n-e/name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.NONE/ordinal/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-n-o-n-e/ordinal.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.NONE/requiresTarget/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-n-o-n-e/requires-target.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.STRIKE///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-s-t-r-i-k-e/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.STRIKE/action/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-s-t-r-i-k-e/action.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.STRIKE/displayName/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-s-t-r-i-k-e/display-name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.STRIKE/name/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-s-t-r-i-k-e/name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.STRIKE/ordinal/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-s-t-r-i-k-e/ordinal.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.STRIKE/requiresTarget/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-s-t-r-i-k-e/requires-target.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.TARGET_ATTACK///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-t-a-r-g-e-t_-a-t-t-a-c-k/index.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.TARGET_ATTACK/action/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-t-a-r-g-e-t_-a-t-t-a-c-k/action.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.TARGET_ATTACK/displayName/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-t-a-r-g-e-t_-a-t-t-a-c-k/display-name.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.TARGET_ATTACK/name/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-t-a-r-g-e-t_-a-t-t-a-c-k/name.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.TARGET_ATTACK/ordinal/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-t-a-r-g-e-t_-a-t-t-a-c-k/ordinal.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.TARGET_ATTACK/requiresTarget/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-t-a-r-g-e-t_-a-t-t-a-c-k/requires-target.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.YEET///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-y-e-e-t/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.YEET/action/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-y-e-e-t/action.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.YEET/displayName/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-y-e-e-t/display-name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.YEET/name/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-y-e-e-t/name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.YEET/ordinal/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-y-e-e-t/ordinal.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.YEET/requiresTarget/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-y-e-e-t/requires-target.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack/action/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/action.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack/displayName/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/display-name.html
+$dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack/requiresTarget/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/requires-target.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/-companion/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait/AttackTrait/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/-attack-trait.html
@@ -243,6 +259,7 @@ $dokka.location:world.cepi.itemextension/ItemExtension///PointingToDeclaration/
 $dokka.location:world.cepi.itemextension/ItemExtension/initialize/#/PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/initialize.html
 $dokka.location:world.cepi.itemextension/ItemExtension/terminate/#/PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/terminate.html
 world.cepi.itemextension
+world.cepi.itemextension.combat
 world.cepi.itemextension.combat.events
 world.cepi.itemextension.combat.util
 world.cepi.itemextension.command
