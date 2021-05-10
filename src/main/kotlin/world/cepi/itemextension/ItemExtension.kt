@@ -1,6 +1,5 @@
 package world.cepi.itemextension
 
-import net.minestom.server.MinecraftServer
 import net.minestom.server.entity.Player
 import net.minestom.server.extensions.Extension
 import world.cepi.itemextension.combat.TargetHandler
@@ -9,6 +8,9 @@ import world.cepi.itemextension.command.ClearCommand
 import world.cepi.itemextension.command.GiveCommand
 import world.cepi.itemextension.command.itemcommand.ItemCommand
 import world.cepi.itemextension.stats.StatsHandler
+import world.cepi.kstom.Manager
+import world.cepi.kstom.command.register
+import world.cepi.kstom.command.unregister
 
 /** Extension wrapper for Minestom. */
 object ItemExtension : Extension() {
@@ -20,29 +22,27 @@ object ItemExtension : Extension() {
         NoVoidHandler.register(player)
         DisableDropping.register(player)
         StatsHandler.register(player)
-
     }
 
     override fun initialize() {
-        val connectionManager = MinecraftServer.getConnectionManager()
-        connectionManager.addPlayerInitialization(playerInitialization)
+        Manager.connection.addPlayerInitialization(playerInitialization)
+
         TargetHandler.register()
 
-        MinecraftServer.getCommandManager().register(ItemCommand)
-        MinecraftServer.getCommandManager().register(ClearCommand)
-        MinecraftServer.getCommandManager().register(GiveCommand)
+        ItemCommand.register()
+        ClearCommand.register()
+        GiveCommand.register()
 
         logger.info("[ItemExtension] has been enabled!")
     }
 
     override fun terminate() {
 
-        val connectionManager = MinecraftServer.getConnectionManager()
-        connectionManager.removePlayerInitialization(playerInitialization)
+        Manager.connection.removePlayerInitialization(playerInitialization)
 
-        MinecraftServer.getCommandManager().unregister(ItemCommand)
-        MinecraftServer.getCommandManager().unregister(ClearCommand)
-        MinecraftServer.getCommandManager().unregister(GiveCommand)
+        ItemCommand.unregister()
+        ClearCommand.unregister()
+        GiveCommand.unregister()
 
         logger.info("[ItemExtension] has been disabled!")
     }
