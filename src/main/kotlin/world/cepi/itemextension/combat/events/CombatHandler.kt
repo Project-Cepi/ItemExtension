@@ -34,7 +34,7 @@ object CombatHandler : Handler {
                 return@addEventCallback
             }
 
-            if (DeathHandler.isDead.contains(entity) || DeathHandler.isDead.contains(target))
+            if (DeathHandler.deadPlayers.contains(entity) || DeathHandler.deadPlayers.contains(target))
                 return@addEventCallback
 
             val item = (entity as? LivingEntity)?.itemInMainHand

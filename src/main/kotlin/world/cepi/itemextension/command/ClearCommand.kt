@@ -13,6 +13,10 @@ object ClearCommand : Command("clear") {
             val player = commandSender as Player
             player.inventory.clear()
         }
+
+        addSyntax({ _, _ ->
+
+        }, one, two, three)
     }
 
 }

@@ -74,11 +74,9 @@ object StatsHandler : Handler {
     }
 }
 
-fun ArmorEquipEvent.ArmorSlot.toEquipmentSlot(): EntityEquipmentPacket.Slot {
-    return when (this) {
-        ArmorEquipEvent.ArmorSlot.BOOTS -> EntityEquipmentPacket.Slot.BOOTS
-        ArmorEquipEvent.ArmorSlot.LEGGINGS -> EntityEquipmentPacket.Slot.LEGGINGS
-        ArmorEquipEvent.ArmorSlot.CHESTPLATE -> EntityEquipmentPacket.Slot.CHESTPLATE
-        ArmorEquipEvent.ArmorSlot.HELMET -> EntityEquipmentPacket.Slot.HELMET
-    }
+fun ArmorEquipEvent.ArmorSlot.toEquipmentSlot(): EntityEquipmentPacket.Slot = when (this) {
+    ArmorEquipEvent.ArmorSlot.BOOTS -> EntityEquipmentPacket.Slot.BOOTS
+    ArmorEquipEvent.ArmorSlot.LEGGINGS -> EntityEquipmentPacket.Slot.LEGGINGS
+    ArmorEquipEvent.ArmorSlot.CHESTPLATE -> EntityEquipmentPacket.Slot.CHESTPLATE
+    ArmorEquipEvent.ArmorSlot.HELMET -> EntityEquipmentPacket.Slot.HELMET
 }

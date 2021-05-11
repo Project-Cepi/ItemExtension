@@ -11,16 +11,18 @@ object NoVoidHandler : Handler {
     override fun register(playerInit: Player) {
         playerInit.addEventCallback<EntityDamageEvent> {
 
+            // Only void damage type
+            if (damageType != DamageType.VOID) return@addEventCallback
+
+            isCancelled = true
+
             if (entity !is Player) {
+                entity.remove()
                 return@addEventCallback
             }
 
-            val player = entity as Player
+            entity.teleport((entity as Player).respawnPoint)
 
-            if (damageType == DamageType.VOID) {
-                player.teleport(player.respawnPoint)
-                isCancelled = true
-            }
         }
     }
 
