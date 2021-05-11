@@ -97,14 +97,14 @@ object TargetHandler {
         targets.containsKey(player)
 
     private fun canTarget(item: ItemStack): Boolean {
-        if (checkIsItem(item)) {
-            val cepiItem: Item = item.meta.get(Item.key, module)!!
 
-            // Check if any attack of an item requires a target
-            return cepiItem.traits.filterIsInstance<AttackTrait>().any { it.attack.requiresTarget }
-        }
+        if (!checkIsItem(item)) return false
 
-        return false
+        val cepiItem: Item = item.meta.get(Item.key, module)!!
+
+        // Check if any attack of an item requires a target
+        return cepiItem.traits.filterIsInstance<AttackTrait>().any { it.attack.requiresTarget }
+
     }
 
 

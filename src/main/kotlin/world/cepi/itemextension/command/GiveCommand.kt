@@ -35,6 +35,7 @@ object GiveCommand : Command("give") {
                 (it as? Player)?.inventory?.addItemStack(args.get(itemArg))
             }
 
+            // TODO plural translation
             commandSender.sendFormattedTranslatableMessage(
                 "item", "give",
                 Component.text(args.get(amountArg), NamedTextColor.BLUE),
@@ -42,12 +43,14 @@ object GiveCommand : Command("give") {
                     ?: Component.text(
                         item.material
                             .name
-                            .toLowerCase()
+                            .lowercase()
                             .split("_")
                             .joinToString(" ") { it.capitalize() }
                     ))
                     .hoverEvent(item.asHoverEvent()),
-                (if (targets.size == 1) Component.text(targets[0].username) else Component.text("${targets.size} Players")).color(NamedTextColor.BLUE)
+                (
+                        if (targets.size == 1) Component.text(targets[0].username)
+                        else Component.text("${targets.size} Players")).color(NamedTextColor.BLUE)
             )
 
         }
