@@ -27,4 +27,4 @@ object TraitListLoader : ItemCommandLoader {
  *
  * @return A substring of that trait, EX NameTrait turns into "name"
  */
-fun processTraitName(name: String) = name.toLowerCase().substring(0..name.length - 6)
+fun processTraitName(name: String) = name.lowercase().substring(0..name.length - 6)

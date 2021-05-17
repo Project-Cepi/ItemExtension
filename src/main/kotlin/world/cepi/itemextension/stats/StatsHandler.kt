@@ -3,15 +3,15 @@ package world.cepi.itemextension.stats
 import net.minestom.server.attribute.Attribute
 import net.minestom.server.attribute.AttributeModifier
 import net.minestom.server.attribute.AttributeOperation
+import net.minestom.server.entity.EquipmentSlot
 import net.minestom.server.entity.LivingEntity
 import net.minestom.server.entity.Player
 import net.minestom.server.event.inventory.InventoryClickEvent
-import net.minestom.server.event.item.ArmorEquipEvent
+import net.minestom.server.event.item.EntityEquipEvent
 import net.minestom.server.event.item.ItemDropEvent
 import net.minestom.server.event.player.PlayerChangeHeldSlotEvent
 import net.minestom.server.event.player.PlayerSwapItemEvent
 import net.minestom.server.item.ItemStack
-import net.minestom.server.network.packet.server.play.EntityEquipmentPacket
 import world.cepi.itemextension.Handler
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.module
@@ -33,9 +33,9 @@ object StatsHandler : Handler {
 
         // TODO optimization?
 
-        playerInit.addEventCallback<ArmorEquipEvent> {
+        playerInit.addEventCallback<EntityEquipEvent> {
             if (entity is LivingEntity) {
-                refreshPlayerStats(entity as LivingEntity, mapOf(armorSlot.toEquipmentSlot() to armorItem))
+                refreshPlayerStats(entity as LivingEntity, mapOf(slot to equippedItem))
             }
         }
 
@@ -43,20 +43,20 @@ object StatsHandler : Handler {
 
         playerInit.addEventCallback<PlayerSwapItemEvent> {
             refreshPlayerStats(player,
-                mapOf(EntityEquipmentPacket.Slot.MAIN_HAND to mainHandItem,
-                EntityEquipmentPacket.Slot.OFF_HAND to offHandItem)
+                mapOf(EquipmentSlot.MAIN_HAND to mainHandItem,
+                    EquipmentSlot.OFF_HAND to offHandItem)
             )
         }
 
         playerInit.addEventCallback<PlayerChangeHeldSlotEvent> {
-            refreshPlayerStats(playerInit, mapOf(EntityEquipmentPacket.Slot.MAIN_HAND to player.inventory.getItemStack(slot.toInt())))
+            refreshPlayerStats(playerInit, mapOf(EquipmentSlot.MAIN_HAND to player.inventory.getItemStack(slot.toInt())))
         }
 
         playerInit.addEventCallback<InventoryClickEvent> { refreshPlayerStats(playerInit) }
     }
 
-    fun refreshPlayerStats(entity: LivingEntity, changedSlots: Map<EntityEquipmentPacket.Slot, ItemStack> = mapOf()) {
-        val items: Map<EntityEquipmentPacket.Slot, Item> = EntityEquipmentPacket.Slot.values().mapNotNull {
+    fun refreshPlayerStats(entity: LivingEntity, changedSlots: Map<EquipmentSlot, ItemStack> = mapOf()) {
+        val items: Map<EquipmentSlot, Item> = EquipmentSlot.values().mapNotNull {
                 val item = ((changedSlots[it]?.meta?.get<Item>(Item.key, module)) ?: entity.getEquipment(it).meta.get(Item.key, module)) ?: return@mapNotNull null
                 it to item
             }.toMap()
@@ -72,11 +72,4 @@ object StatsHandler : Handler {
         entity.getAttribute(Attribute.MOVEMENT_SPEED).addModifier(AttributeModifier(speedUUID, speedStat, speed, AttributeOperation.MULTIPLY_BASE))
 
     }
-}
-
-fun ArmorEquipEvent.ArmorSlot.toEquipmentSlot(): EntityEquipmentPacket.Slot = when (this) {
-    ArmorEquipEvent.ArmorSlot.BOOTS -> EntityEquipmentPacket.Slot.BOOTS
-    ArmorEquipEvent.ArmorSlot.LEGGINGS -> EntityEquipmentPacket.Slot.LEGGINGS
-    ArmorEquipEvent.ArmorSlot.CHESTPLATE -> EntityEquipmentPacket.Slot.CHESTPLATE
-    ArmorEquipEvent.ArmorSlot.HELMET -> EntityEquipmentPacket.Slot.HELMET
 }

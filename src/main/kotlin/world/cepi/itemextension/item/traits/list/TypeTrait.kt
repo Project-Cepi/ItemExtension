@@ -12,7 +12,7 @@ import world.cepi.itemextension.item.traits.ItemTrait
 @SerialName("itemtype")
 class TypeTrait(
         /** The type, used to hold the value in TypeTrait. */
-        @SerialName("itemtype") // Renamed for JSON specifications
+        @SerialName("itemtype") // Renamed as "type" is a reserved keyword in kotlinx.serialization
         val type: Type
 ) : ItemTrait() {
 
@@ -21,8 +21,12 @@ class TypeTrait(
 
     override fun renderLore(item: Item): List<Component> {
         return arrayListOf(
-            Component.text(type.name.toLowerCase().capitalize(), NamedTextColor.GRAY)
-                .decoration(TextDecoration.ITALIC, false)
+            Component.text(
+                type.name
+                    .lowercase()
+                    .replaceFirstChar { it.titlecase() }, // Capitalize first char of word.
+                NamedTextColor.GRAY
+            ).decoration(TextDecoration.ITALIC, false)
         ).also {
             if (item.softHasTrait<LevelTrait>()) it.add(Component.space())
         }

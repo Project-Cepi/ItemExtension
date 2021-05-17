@@ -17,7 +17,6 @@ import world.cepi.itemextension.Handler
 import world.cepi.kstom.Manager
 import world.cepi.kstom.addEventCallback
 
-
 object DeathHandler : Handler {
     val deadPlayers = mutableListOf<Player>()
 
@@ -46,7 +45,7 @@ object DeathHandler : Handler {
             val originalGamemode = player.gameMode
             val originalFlyStatus = player.isAllowFlying
 
-            with(player) {
+            player.apply {
                 gameMode = GameMode.ADVENTURE
                 heal()
                 food = 20
@@ -71,7 +70,7 @@ object DeathHandler : Handler {
             Manager.scheduler.buildTask { deathMessage(player, 2) }.delay(1, TimeUnit.SECOND).schedule()
             Manager.scheduler.buildTask { deathMessage(player, 1) }.delay(2, TimeUnit.SECOND).schedule()
             Manager.scheduler.buildTask {
-                with(player) {
+                player.apply {
                     resetTitle()
                     teleport(player.respawnPoint)
 

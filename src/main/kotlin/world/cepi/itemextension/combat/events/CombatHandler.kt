@@ -34,11 +34,14 @@ object CombatHandler : Handler {
                 return@addEventCallback
             }
 
+            // Stop dead players from being hit
             if (DeathHandler.deadPlayers.contains(entity) || DeathHandler.deadPlayers.contains(target))
                 return@addEventCallback
 
+            // Find the player's item if any
             val item = (entity as? LivingEntity)?.itemInMainHand
 
+            // Find the player's item as a cepi item if any
             val cepiItem = if (item != null && checkIsItem(item)) {
                 item.meta.get<Item>(Item.key, module)!!
             } else null
@@ -63,7 +66,12 @@ object CombatHandler : Handler {
                     cepiItem?.getTrait<DamageTrait>()?.damage ?: 1.0
 
                 // Appends armor to the damage. Collects all armor from all armor slots and applies it as so.
-                val armor = listOf(livingTarget.boots, livingTarget.leggings, livingTarget.chestplate, livingTarget.helmet).map {
+                val armor = listOf(
+                    livingTarget.boots,
+                    livingTarget.leggings,
+                    livingTarget.chestplate,
+                    livingTarget.helmet
+                ).map {
                     it.meta.get<Item>(Item.key, module)?.getTrait<ArmorTrait>()?.armor ?: 0.0
                 }.sum()
 

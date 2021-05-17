@@ -72,7 +72,7 @@ object SetSubcommand : Command("set") {
         val traitArgs = traits.mapIndexed { index, loopTrait ->
             if (index != 0) { // If this trait isnt the first trait (root trait)
                 // Drop the suffix, EX PrimaryAttackTrait becomes Primary
-                loopTrait.simpleName!!.dropLast(traits[index - 1].simpleName!!.length).toLowerCase().literal()
+                loopTrait.simpleName!!.dropLast(traits[index - 1].simpleName!!.length).lowercase().literal()
             } else {
                 processTraitName(loopTrait.simpleName!!).literal()
             }
