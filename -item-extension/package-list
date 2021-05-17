@@ -246,11 +246,10 @@ $dokka.location:world.cepi.itemextension.item/Item/Item/#/PointingToDeclaration/
 $dokka.location:world.cepi.itemextension.item/Item/renderItem/#kotlin.Int/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/render-item.html
 $dokka.location:world.cepi.itemextension.item/Item/traits/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/traits.html
 $dokka.location:world.cepi.itemextension.stats////PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/index.html
-$dokka.location:world.cepi.itemextension.stats//toEquipmentSlot/net.minestom.server.event.item.ArmorEquipEvent.ArmorSlot#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/to-equipment-slot.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/index.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/healthStat/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/health-stat.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/healthUUID/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/health-u-u-i-d.html
-$dokka.location:world.cepi.itemextension.stats/StatsHandler/refreshPlayerStats/#net.minestom.server.entity.LivingEntity#kotlin.collections.Map[net.minestom.server.network.packet.server.play.EntityEquipmentPacket.Slot,net.minestom.server.item.ItemStack]/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/refresh-player-stats.html
+$dokka.location:world.cepi.itemextension.stats/StatsHandler/refreshPlayerStats/#net.minestom.server.entity.LivingEntity#kotlin.collections.Map[net.minestom.server.entity.EquipmentSlot,net.minestom.server.item.ItemStack]/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/refresh-player-stats.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/register.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/speedStat/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/speed-stat.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/speedUUID/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/speed-u-u-i-d.html
