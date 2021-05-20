@@ -6,7 +6,7 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.minestom.server.item.ItemStackBuilder
-import net.minestom.server.item.ItemTag
+import net.minestom.server.tag.Tag
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 
@@ -30,7 +30,7 @@ class DamageTrait(
     }
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
-        item.meta { it.set(ItemTag.Double("damage"), damage) }
+        item.meta { it.set(Tag.Double("damage"), damage) }
     }
 
 }
