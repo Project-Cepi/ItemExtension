@@ -15,6 +15,9 @@ $dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler/register/#n
 $dokka.location:world.cepi.itemextension.combat.util////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/index.html
 $dokka.location:world.cepi.itemextension.combat.util//applyKnockback/#net.minestom.server.entity.Entity#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/apply-knockback.html
 $dokka.location:world.cepi.itemextension.combat////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/index.html
+$dokka.location:world.cepi.itemextension.combat/ImmunityHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-immunity-handler/index.html
+$dokka.location:world.cepi.itemextension.combat/ImmunityHandler/isImmune/#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-immunity-handler/is-immune.html
+$dokka.location:world.cepi.itemextension.combat/ImmunityHandler/triggerImmune/#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-immunity-handler/trigger-immune.html
 $dokka.location:world.cepi.itemextension.combat/TargetHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-target-handler/index.html
 $dokka.location:world.cepi.itemextension.combat/TargetHandler/getTarget/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-target-handler/get-target.html
 $dokka.location:world.cepi.itemextension.combat/TargetHandler/hasTarget/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-target-handler/has-target.html
