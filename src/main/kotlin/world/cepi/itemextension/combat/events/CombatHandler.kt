@@ -12,7 +12,6 @@ import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.item.Material
 import net.minestom.server.utils.time.TimeUnit
-import world.cepi.itemextension.Handler
 import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
@@ -25,9 +24,9 @@ import world.cepi.kstom.item.get
 import java.text.NumberFormat
 
 
-object CombatHandler : Handler {
+object CombatHandler {
 
-    override fun register() {
+    fun register() {
         MinecraftServer.getGlobalEventHandler().addEventCallback<EntityAttackEvent> {
             // Don't attack players in creative!
             if (target is Player && (target as Player).gameMode == GameMode.CREATIVE) {
