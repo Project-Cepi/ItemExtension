@@ -12,6 +12,7 @@ import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.item.Material
 import net.minestom.server.utils.time.TimeUnit
+import world.cepi.itemextension.combat.ImmunityHandler
 import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
@@ -35,6 +36,9 @@ object CombatHandler {
 
             // Stop dead players from being hit
             if (DeathHandler.deadPlayers.contains(entity) || DeathHandler.deadPlayers.contains(target))
+                return@addEventCallback
+
+            if (ImmunityHandler.isImmune(target))
                 return@addEventCallback
 
             // Find the player's item if any
@@ -99,6 +103,8 @@ object CombatHandler {
             // Calls the event for other handlers to listen to.
             val deathEvent = EntityDeathEvent(target)
             target.callEvent(EntityDeathEvent::class.java, deathEvent)
+
+            ImmunityHandler.triggerImmune(target)
         }
 
 
