@@ -17,7 +17,6 @@ object ItemExtension : Extension() {
 
     private val playerInitialization: (Player) -> Unit = { player ->
         HealthHandler.register(player)
-        CombatHandler.register(player)
         DeathHandler.register(player)
         NoVoidHandler.register(player)
         DisableDropping.register(player)
@@ -25,6 +24,9 @@ object ItemExtension : Extension() {
     }
 
     override fun initialize() {
+
+        CombatHandler.register()
+
         Manager.connection.addPlayerInitialization(playerInitialization)
 
         TargetHandler.register()
@@ -37,6 +39,8 @@ object ItemExtension : Extension() {
     }
 
     override fun terminate() {
+
+        // TODO unregister combat handler
 
         Manager.connection.removePlayerInitialization(playerInitialization)
 

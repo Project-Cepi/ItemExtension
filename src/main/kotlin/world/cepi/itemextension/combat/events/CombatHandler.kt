@@ -27,7 +27,7 @@ import java.text.NumberFormat
 
 object CombatHandler : Handler {
 
-    override fun register(playerInit: Player) {
+    override fun register() {
         MinecraftServer.getGlobalEventHandler().addEventCallback<EntityAttackEvent> {
             // Don't attack players in creative!
             if (target is Player && (target as Player).gameMode == GameMode.CREATIVE) {
