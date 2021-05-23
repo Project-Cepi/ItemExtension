@@ -2,7 +2,7 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:world.cepi.itemextension.combat.events////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/index.html
 $dokka.location:world.cepi.itemextension.combat.events/CombatHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/index.html
-$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/register.html
+$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/register/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.events/DeathHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/index.html
 $dokka.location:world.cepi.itemextension.combat.events/DeathHandler/deadPlayers/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/dead-players.html
 $dokka.location:world.cepi.itemextension.combat.events/DeathHandler/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/register.html
