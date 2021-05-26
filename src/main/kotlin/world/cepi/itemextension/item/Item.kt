@@ -27,30 +27,25 @@ class Item: TraitContainer<ItemTrait>() {
      *
      * @return The ItemStack after applying traits to the Item
      */
-    fun renderItem(amount: Int = 1): ItemStack {
+    fun renderItem(amount: Int = 1): ItemStack = item(
+        getTrait<MaterialTrait>()?.material ?: Material.PAPER,
+        amount
+    ) {
 
-        val item = item(
-            getTrait<MaterialTrait>()?.material ?: Material.PAPER,
-            amount
-        ) {
-
-            withMeta {
-                clientData {
-                    this[key, module] = this@Item
-                }
-
-                hideFlag(*ItemHideFlag.values())
+        withMeta {
+            clientData {
+                this[key, module] = this@Item
             }
 
-            lore(traits.sortedBy { it.loreIndex }
-                .map { trait -> trait.renderLore(this@Item) }
-                .flatten())
-
-            traits.sortedBy { it.taskIndex }
-                .map { trait -> trait.task(this, this@Item) }
+            hideFlag(*ItemHideFlag.values())
         }
 
-        return item
+        lore(traits.sortedBy { it.loreIndex }
+            .map { trait -> trait.renderLore(this@Item) }
+            .flatten())
+
+        traits.sortedBy { it.taskIndex }
+            .map { trait -> trait.task(this, this@Item) }
     }
 
 
