@@ -40,6 +40,7 @@ abstract class ItemTrait {
         NameTrait::class,
         RarityTrait::class,
         AttackSpeedTrait::class,
+        PriceTrait::class,
         MaterialTrait::class,
         ArmorTrait::class,
         LoreTrait::class,

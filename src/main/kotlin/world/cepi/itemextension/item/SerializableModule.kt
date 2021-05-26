@@ -13,6 +13,7 @@ import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 
 internal val module = SerializersModule {
 
+    // TODO sealed / better serializaiton?
     polymorphic(ItemTrait::class) {
         subclass(MaterialTrait::class)
         subclass(LevelTrait::class)
@@ -23,6 +24,7 @@ internal val module = SerializersModule {
         subclass(RarityTrait::class)
         subclass(TypeTrait::class)
         subclass(AttackSpeedTrait::class)
+        subclass(PriceTrait::class)
 
         subclass(PrimaryAttackTrait::class)
         subclass(SecondaryAttackTrait::class)
