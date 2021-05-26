@@ -2,6 +2,7 @@ package world.cepi.itemextension.item
 
 import kotlinx.serialization.Serializable
 import net.minestom.server.data.DataImpl
+import net.minestom.server.item.ItemHideFlag
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item.Companion.key
@@ -37,6 +38,8 @@ class Item: TraitContainer<ItemTrait>() {
                 clientData {
                     this[key, module] = this@Item
                 }
+
+                hideFlag(*ItemHideFlag.values())
             }
 
             lore(traits.sortedBy { it.loreIndex }
