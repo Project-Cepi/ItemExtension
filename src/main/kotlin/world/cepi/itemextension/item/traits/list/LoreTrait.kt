@@ -25,7 +25,6 @@ class LoreTrait(
             Component.space(),
             *splitString(lore, 30).map {
                 Component.text(it).style(Style.style(NamedTextColor.GRAY, TextDecoration.ITALIC))
-                    .decoration(TextDecoration.ITALIC, false)
             }.toTypedArray())
     }
 
