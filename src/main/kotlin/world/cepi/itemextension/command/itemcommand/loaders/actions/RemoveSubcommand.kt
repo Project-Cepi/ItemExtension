@@ -30,29 +30,29 @@ object RemoveSubcommand : Command("remove") {
         val itemStack = player.itemInMainHand
 
         if (itemStack.material == Material.AIR) {
-            player.sendFormattedTranslatableMessage("mob", "main.required")
+            player.sendFormattedTranslatableMessage("item", "main.required")
             return
         }
 
-        val isCepiItem = checkIsItem(itemStack)
+        if (!checkIsItem(itemStack)) {
+            player.sendFormattedTranslatableMessage("item", "formatted.required")
+            return
+        }
 
-        if (isCepiItem) {
-            val trait = ItemTrait.classList.first { processTraitName(it.simpleName!!).equals(context.get(traitList), ignoreCase = true) }
+        val trait = ItemTrait.classList.first { processTraitName(it.simpleName!!).equals(context.get(traitList), ignoreCase = true) }
 
-            val item = itemStack.meta.get<Item>(Item.key, module)!!
+        val item = itemStack.meta.get<Item>(Item.key, module)!!
 
-            if (item.hasTrait(trait)) {
-                item.removeTrait(trait)
-                player.sendFormattedTranslatableMessage(
-                    "item", "trait.remove",
-                    Component.text(processTraitName(trait.simpleName!!).substring(0..trait.simpleName!!.length - 5), NamedTextColor.BLUE)
-                        .append(Component.text("", NamedTextColor.GRAY))
-                )
-                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
-            } else
-                player.sendFormattedTranslatableMessage("item", "trait.none", Component.text(context.get(traitList), NamedTextColor.BLUE))
+        if (item.hasTrait(trait)) {
+            item.removeTrait(trait)
+            player.sendFormattedTranslatableMessage(
+                "item", "trait.remove",
+                Component.text(processTraitName(trait.simpleName!!), NamedTextColor.BLUE)
+                    .append(Component.text("", NamedTextColor.GRAY))
+            )
+            player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
         } else
-            player.sendFormattedTranslatableMessage("mob", "formatted.required")
+            player.sendFormattedTranslatableMessage("item", "trait.none", Component.text(context.get(traitList), NamedTextColor.BLUE))
     }
 
 }
