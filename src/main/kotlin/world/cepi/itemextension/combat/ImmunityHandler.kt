@@ -5,7 +5,7 @@ import net.minestom.server.entity.Entity
 
 object ImmunityHandler {
 
-    private val cooldownMilis = 500
+    private const val cooldownMilliseconds = 500
 
     private val immunityHandler = Object2LongOpenHashMap<Entity>()
 
@@ -14,5 +14,5 @@ object ImmunityHandler {
     }
 
     fun isImmune(entity: Entity) =
-        immunityHandler.containsKey(entity) && (System.currentTimeMillis() - immunityHandler.getLong(entity) < cooldownMilis)
+        immunityHandler.containsKey(entity) && (System.currentTimeMillis() - immunityHandler.getLong(entity) < cooldownMilliseconds)
 }
