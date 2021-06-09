@@ -13,14 +13,12 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
     // Use mavenCentral
-    maven(url = "https://repo1.maven.org/maven2/")
-    maven(url = "https://repo.spongepowered.org/maven")
-    maven(url = "https://libraries.minecraft.net")
+    mavenCentral()
+
     maven(url = "https://jitpack.io")
-    maven(url = "https://jcenter.bintray.com/")
-    maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
+    maven(url = "https://repo.spongepowered.org/maven")
+    maven(url = "https://repo.minestom.com/repository/maven-public/")
     maven(url = "https://repo.velocitypowered.com/snapshots/")
 }
 
@@ -47,7 +45,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:c6ed2d6884")
+    compileOnly("com.github.Project-Cepi:Kepi:3371e1a411")
 }
 
 tasks.withType<Test> {
