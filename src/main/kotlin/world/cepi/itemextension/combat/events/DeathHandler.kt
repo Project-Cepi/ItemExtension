@@ -59,7 +59,7 @@ object DeathHandler : Handler {
             ).filterIsInstance<Player>()
                 .forEach { loopPlayer ->
                     loopPlayer.playSound(Sound.sound(
-                        SoundEvent.ENTITY_SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
+                        SoundEvent.SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
                     ), player.position.x, player.position.y, player.position.z)
                 }
 
