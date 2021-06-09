@@ -1,6 +1,7 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
 import kotlinx.serialization.Contextual
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import net.kyori.adventure.text.Component
@@ -34,7 +35,9 @@ object DataSubcommand : Command("data") {
         val get = "get".literal()
 
         val from = "from".literal()
-        val json = ArgumentType.NbtCompound("json")
+        val json = ArgumentType.StringArray("json").map {
+            it.joinToString(" ")
+        }
 
         addSyntax(get) { sender ->
             val player = sender as Player
@@ -67,6 +70,7 @@ object DataSubcommand : Command("data") {
             }
         }
 
+        // TODO use translation
         applyHelp("""
             Data is the pure form of an item.
             
@@ -81,6 +85,17 @@ object DataSubcommand : Command("data") {
             val player = sender as Player
 
             val nbtData = args.get(json) // TODO process to json and convert
+
+            try {
+                val item = format.decodeFromString<Item>(nbtData)
+
+                player.itemInMainHand = item.renderItem()
+            } catch (exception: Exception) {
+                player.sendFormattedTranslatableMessage(
+                    "data",
+                    "malformed"
+                )
+            }
         }
     }
 }
