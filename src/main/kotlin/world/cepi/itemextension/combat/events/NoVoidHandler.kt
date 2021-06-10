@@ -3,27 +3,24 @@ package world.cepi.itemextension.combat.events
 import net.minestom.server.entity.Player
 import net.minestom.server.entity.damage.DamageType
 import net.minestom.server.event.entity.EntityDamageEvent
-import world.cepi.itemextension.Handler
-import world.cepi.kstom.addEventCallback
 
-object NoVoidHandler : Handler {
+object NoVoidHandler {
 
-    override fun register(playerInit: Player) {
-        playerInit.addEventCallback<EntityDamageEvent> {
+    fun register(event: EntityDamageEvent) = with(event) {
 
-            // Only void damage type
-            if (damageType != DamageType.VOID) return@addEventCallback
+        // Only void damage type
+        if (damageType != DamageType.VOID) return
 
-            isCancelled = true
+        isCancelled = true
 
-            if (entity !is Player) {
-                entity.remove()
-                return@addEventCallback
-            }
-
-            entity.teleport((entity as Player).respawnPoint)
-
+        if (entity !is Player) {
+            entity.remove()
+            return
         }
+
+        entity.teleport((entity as Player).respawnPoint)
+
     }
+
 
 }

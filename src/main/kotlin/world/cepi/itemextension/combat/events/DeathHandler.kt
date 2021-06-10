@@ -13,11 +13,9 @@ import net.minestom.server.instance.Instance
 import net.minestom.server.sound.SoundEvent
 import net.minestom.server.utils.Position
 import net.minestom.server.utils.time.TimeUnit
-import world.cepi.itemextension.Handler
 import world.cepi.kstom.Manager
-import world.cepi.kstom.addEventCallback
 
-object DeathHandler : Handler {
+object DeathHandler {
     val deadPlayers = mutableListOf<Player>()
 
     private fun deathMessage(player: Player, secondsLeft: Int) = player.showTitle(Title.title(
@@ -27,62 +25,62 @@ object DeathHandler : Handler {
     ))
 
 
-    override fun register(playerInit: Player) {
-        playerInit.addEventCallback<EntityDamageEvent> {
+    fun register(event: EntityDamageEvent) = with(event) {
 
-            // Looking for only players
-            if (entity !is Player) return@addEventCallback
+        // Looking for only players
+        if (entity !is Player) return
 
-            // Damage must be higher than the health
-            if (damage < entity.health) return@addEventCallback
+        // Damage must be higher than the health
+        if (damage < entity.health) return
 
-            // If both conditions passed, cancel the event
-            isCancelled = true
+        // If both conditions passed, cancel the event
+        isCancelled = true
 
-            val player = entity as Player
+        val player = entity as Player
 
-            // Cache variables for gamemode / flying
-            val originalGamemode = player.gameMode
-            val originalFlyStatus = player.isAllowFlying
+        // Cache variables for gamemode / flying
+        val originalGamemode = player.gameMode
+        val originalFlyStatus = player.isAllowFlying
 
-            player.apply {
-                gameMode = GameMode.ADVENTURE
-                heal()
-                food = 20
-                isAllowFlying = true
-                isInvisible = true
+        player.apply {
+            gameMode = GameMode.ADVENTURE
+            heal()
+            food = 20
+            isAllowFlying = true
+            isInvisible = true
+        }
+
+        getNearbyEntities(
+            player.instance!!, player.position,
+            10.0
+        ).filterIsInstance<Player>()
+            .forEach { loopPlayer ->
+                loopPlayer.playSound(Sound.sound(
+                    SoundEvent.SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
+                ), player.position.x, player.position.y, player.position.z)
             }
 
-            getNearbyEntities(
-                player.instance!!, player.position,
-                10.0
-            ).filterIsInstance<Player>()
-                .forEach { loopPlayer ->
-                    loopPlayer.playSound(Sound.sound(
-                        SoundEvent.SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
-                    ), player.position.x, player.position.y, player.position.z)
-                }
+        deathMessage(player, 3)
 
-            deathMessage(player, 3)
+        deadPlayers.add(player)
 
-            deadPlayers.add(player)
+        Manager.scheduler.buildTask { deathMessage(player, 2) }.delay(1, TimeUnit.SECOND).schedule()
+        Manager.scheduler.buildTask { deathMessage(player, 1) }.delay(2, TimeUnit.SECOND).schedule()
+        Manager.scheduler.buildTask {
+            player.apply {
+                resetTitle()
+                teleport(player.respawnPoint)
 
-            Manager.scheduler.buildTask { deathMessage(player, 2) }.delay(1, TimeUnit.SECOND).schedule()
-            Manager.scheduler.buildTask { deathMessage(player, 1) }.delay(2, TimeUnit.SECOND).schedule()
-            Manager.scheduler.buildTask {
-                player.apply {
-                    resetTitle()
-                    teleport(player.respawnPoint)
+                gameMode = originalGamemode
+                isAllowFlying = originalFlyStatus
+                isFlying = false
+                isInvisible = false
+            }
 
-                    gameMode = originalGamemode
-                    isAllowFlying = originalFlyStatus
-                    isFlying = false
-                    isInvisible = false
-                }
+            deadPlayers.remove(player)
+        }.delay(3, TimeUnit.SECOND).schedule()
 
-                deadPlayers.remove(player)
-            }.delay(3, TimeUnit.SECOND).schedule()
-        }
+        Unit
 
     }
 
