@@ -2,16 +2,16 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:world.cepi.itemextension.combat.events////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/index.html
 $dokka.location:world.cepi.itemextension.combat.events/CombatHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/index.html
-$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/register/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/register.html
+$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/register/#net.minestom.server.event.entity.EntityAttackEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.events/DeathHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/index.html
 $dokka.location:world.cepi.itemextension.combat.events/DeathHandler/deadPlayers/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/dead-players.html
-$dokka.location:world.cepi.itemextension.combat.events/DeathHandler/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/register.html
+$dokka.location:world.cepi.itemextension.combat.events/DeathHandler/register/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.events/DisableDropping///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-disable-dropping/index.html
-$dokka.location:world.cepi.itemextension.combat.events/DisableDropping/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-disable-dropping/register.html
+$dokka.location:world.cepi.itemextension.combat.events/DisableDropping/register/#net.minestom.server.event.item.ItemDropEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-disable-dropping/register.html
 $dokka.location:world.cepi.itemextension.combat.events/HealthHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-health-handler/index.html
-$dokka.location:world.cepi.itemextension.combat.events/HealthHandler/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-health-handler/register.html
+$dokka.location:world.cepi.itemextension.combat.events/HealthHandler/register/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-health-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-no-void-handler/index.html
-$dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-no-void-handler/register.html
+$dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler/register/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-no-void-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.util////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/index.html
 $dokka.location:world.cepi.itemextension.combat.util//applyKnockback/#net.minestom.server.entity.Entity#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/apply-knockback.html
 $dokka.location:world.cepi.itemextension.combat////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/index.html
@@ -242,11 +242,13 @@ $dokka.location:world.cepi.itemextension.stats/StatsHandler///PointingToDeclarat
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/healthStat/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/health-stat.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/healthUUID/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/health-u-u-i-d.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/refreshPlayerStats/#net.minestom.server.entity.LivingEntity#kotlin.collections.Map[net.minestom.server.entity.EquipmentSlot,net.minestom.server.item.ItemStack]/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/refresh-player-stats.html
-$dokka.location:world.cepi.itemextension.stats/StatsHandler/register/#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/register.html
+$dokka.location:world.cepi.itemextension.stats/StatsHandler/register/#net.minestom.server.event.EventNode[net.minestom.server.event.Event]/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/register.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/speedStat/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/speed-stat.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/speedUUID/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/speed-u-u-i-d.html
 $dokka.location:world.cepi.itemextension////PointingToDeclaration/-item-extension/world.cepi.itemextension/index.html
+$dokka.location:world.cepi.itemextension/ItemExtension.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/-companion/index.html
 $dokka.location:world.cepi.itemextension/ItemExtension///PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/index.html
+$dokka.location:world.cepi.itemextension/ItemExtension/ItemExtension/#/PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/-item-extension.html
 $dokka.location:world.cepi.itemextension/ItemExtension/initialize/#/PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/initialize.html
 $dokka.location:world.cepi.itemextension/ItemExtension/terminate/#/PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/terminate.html
 world.cepi.itemextension
