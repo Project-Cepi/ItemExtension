@@ -5,15 +5,8 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
-import world.cepi.itemextension.item.traits.TraitRefrenceList
 
-abstract class StatTrait : ItemTrait() {
-
-    companion object: TraitRefrenceList(
-            HealthStatTrait::class,
-            SpeedStatTrait::class
-    )
-
+sealed class StatTrait : ItemTrait() {
 
     override val taskIndex = 1f
 

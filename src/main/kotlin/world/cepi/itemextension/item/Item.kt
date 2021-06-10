@@ -38,7 +38,7 @@ class Item: TraitContainer<ItemTrait>() {
             hideFlag(*ItemHideFlag.values())
         }
 
-        lore(traits.values.sortedBy { ItemTrait.traitPriorityOrdered.indexOf(it::class) }
+        lore(traits.values.sortedBy { ItemTrait.classList.indexOf(it::class) }
             .map { trait -> trait.renderLore(this@Item) }
             .flatten())
 

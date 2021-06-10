@@ -5,15 +5,8 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
-import world.cepi.itemextension.item.traits.TraitRefrenceList
 
-abstract class AttackTrait: ItemTrait() {
-
-    companion object: TraitRefrenceList(
-            PrimaryAttackTrait::class,
-            SecondaryAttackTrait::class,
-            TertiaryAttackTrait::class
-    )
+sealed class AttackTrait: ItemTrait() {
 
     open val attack: Attack = Attack.STRIKE
     open val clickType: String = "None"

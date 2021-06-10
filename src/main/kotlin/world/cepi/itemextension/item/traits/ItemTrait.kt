@@ -5,13 +5,11 @@ import net.kyori.adventure.text.Component
 import net.minestom.server.item.ItemStackBuilder
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.list.*
-import world.cepi.itemextension.item.traits.list.attacks.AttackTrait
 import world.cepi.itemextension.item.traits.list.attacks.PrimaryAttackTrait
 import world.cepi.itemextension.item.traits.list.attacks.SecondaryAttackTrait
 import world.cepi.itemextension.item.traits.list.attacks.TertiaryAttackTrait
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
-import world.cepi.itemextension.item.traits.list.stats.StatTrait
 
 // TODO just make ordered list for lore priority -- easier to read.
 /** Trait objects that get appended to Items. Inspired by the decorator pattern */
@@ -38,45 +36,30 @@ abstract class ItemTrait {
     }
 
     companion object: TraitRefrenceList(
-        DamageTrait::class,
-        LevelTrait::class,
-        NameTrait::class,
-        RarityTrait::class,
-        AttackSpeedTrait::class,
+        // Background (lore-unrendered) traits
         PriceTrait::class,
         MaterialTrait::class,
-        ArmorTrait::class,
-        LoreTrait::class,
+
+        // Non-lore traits
+        NameTrait::class,
+
+        // Rendered traits
         TypeTrait::class,
-        StatTrait::class,
-        AttackTrait::class
-    ) {
-        val traitPriorityOrdered = arrayOf(
-            // Background (lore-unrendered) traits
-            PriceTrait::class,
-            MaterialTrait::class,
+        LevelTrait::class,
 
-            // Non-lore traits
-            NameTrait::class,
+        PrimaryAttackTrait::class,
+        SecondaryAttackTrait::class,
+        TertiaryAttackTrait::class,
 
-            // Rendered traits
-            TypeTrait::class,
-            LevelTrait::class,
+        DamageTrait::class,
+        ArmorTrait::class,
+        AttackSpeedTrait::class,
 
-            PrimaryAttackTrait::class,
-            SecondaryAttackTrait::class,
-            TertiaryAttackTrait::class,
+        HealthStatTrait::class,
+        SpeedStatTrait::class,
 
-            DamageTrait::class,
-            ArmorTrait::class,
-            AttackSpeedTrait::class,
-
-            HealthStatTrait::class,
-            SpeedStatTrait::class,
-
-            RarityTrait::class,
-            LoreTrait::class
-        )
-    }
+        RarityTrait::class,
+        LoreTrait::class
+    )
 
 }

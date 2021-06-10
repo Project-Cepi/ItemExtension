@@ -10,7 +10,6 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.module
 import world.cepi.itemextension.item.traits.ItemTrait
-import world.cepi.itemextension.item.traits.TraitRefrenceList
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.argumentsFromClass
@@ -50,10 +49,7 @@ object SetSubcommand : Command("set") {
      * @return A list of klasses of subtraits from the trait container.
      */
     private fun defineSubTraits(traitContainer: KClass<out ItemTrait>): List<KClass<out ItemTrait>> {
-        val companionClass = traitContainer.companionObjectInstance ?: return emptyList()
-        if (companionClass !is TraitRefrenceList) return emptyList()
-
-        return (traitContainer.companionObjectInstance as TraitRefrenceList).classList.toList()
+        return traitContainer.sealedSubclasses
 
     }
 
