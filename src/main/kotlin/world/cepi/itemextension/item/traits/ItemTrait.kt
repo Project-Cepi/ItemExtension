@@ -8,6 +8,7 @@ import world.cepi.itemextension.item.traits.list.*
 import world.cepi.itemextension.item.traits.list.attacks.AttackTrait
 import world.cepi.itemextension.item.traits.list.stats.StatTrait
 
+// TODO just make ordered list for lore priority -- easier to read.
 /** Trait objects that get appended to Items. Inspired by the decorator pattern */
 @Serializable
 abstract class ItemTrait {
