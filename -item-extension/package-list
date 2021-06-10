@@ -83,9 +83,7 @@ $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack///Point
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack/action/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/action.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack/displayName/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/display-name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack/requiresTarget/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/requires-target.html
-$dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/-companion/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/index.html
-$dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait/AttackTrait/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/-attack-trait.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait/attack/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/attack.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait/clickType/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/click-type.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/AttackTrait/renderLore/#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack-trait/render-lore.html
@@ -114,9 +112,7 @@ $dokka.location:world.cepi.itemextension.item.traits.list.stats/SpeedStatTrait//
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/SpeedStatTrait/SpeedStatTrait/#kotlin.Float/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-speed-stat-trait/-speed-stat-trait.html
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/SpeedStatTrait/name/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-speed-stat-trait/name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/SpeedStatTrait/value/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-speed-stat-trait/value.html
-$dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-stat-trait/-companion/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-stat-trait/index.html
-$dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait/StatTrait/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-stat-trait/-stat-trait.html
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait/name/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-stat-trait/name.html
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait/renderLore/#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-stat-trait/render-lore.html
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait/taskIndex/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-stat-trait/task-index.html
@@ -213,7 +209,6 @@ $dokka.location:world.cepi.itemextension.item.traits.list/TypeTrait/taskIndex/#/
 $dokka.location:world.cepi.itemextension.item.traits.list/TypeTrait/type/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-type-trait/type.html
 $dokka.location:world.cepi.itemextension.item.traits////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/index.html
 $dokka.location:world.cepi.itemextension.item.traits/ItemTrait.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-item-trait/-companion/index.html
-$dokka.location:world.cepi.itemextension.item.traits/ItemTrait.Companion/traitPriorityOrdered/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-item-trait/-companion/trait-priority-ordered.html
 $dokka.location:world.cepi.itemextension.item.traits/ItemTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-item-trait/index.html
 $dokka.location:world.cepi.itemextension.item.traits/ItemTrait/ItemTrait/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-item-trait/-item-trait.html
 $dokka.location:world.cepi.itemextension.item.traits/ItemTrait/renderLore/#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-item-trait/render-lore.html
