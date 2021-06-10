@@ -14,9 +14,9 @@ import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.module
+import world.cepi.kepi.command.subcommand.applyHelp
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kepi.messages.translations.formatTranslableMessage
-import world.cepi.kepi.subcommands.applyHelp
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.item.get
@@ -71,15 +71,17 @@ object DataSubcommand : Command("data") {
         }
 
         // TODO use translation
-        applyHelp("""
-            Data is the pure form of an item.
-            
-            You can get an item's data by using
-            <yellow>/item data get
-            
-            And reapply it to an item by using
-            <yellow>/item data from (json)
-        """.trimIndent())
+        applyHelp {
+            """
+                Data is the pure form of an item.
+                
+                You can get an item's data by using
+                <yellow>/item data get
+                
+                And reapply it to an item by using
+                <yellow>/item data from (json)
+            """.trimIndent()
+        }
 
         addSyntax(from, json) { sender, args ->
             val player = sender as Player
