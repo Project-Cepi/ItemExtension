@@ -11,12 +11,11 @@ import world.cepi.itemextension.item.traits.ItemTrait
 /** The level amount required to even use the item, usually to define its overall quality. */
 @SerialName("level")
 @Serializable
-class LevelTrait(
+data class LevelTrait(
     /** The minimum level required to use the item passed as a parameter. */
     val level: Int
 ) : ItemTrait() {
 
-    override val loreIndex = 1f
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {

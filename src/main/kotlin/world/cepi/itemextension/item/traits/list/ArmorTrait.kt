@@ -11,11 +11,10 @@ import world.cepi.itemextension.item.traits.ItemTrait
 // TODO make armor trait functional
 @SerialName("armor")
 @Serializable
-class ArmorTrait(
+data class ArmorTrait(
     val armor: Double
 ) : ItemTrait() {
 
-    override val loreIndex = 4f
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {

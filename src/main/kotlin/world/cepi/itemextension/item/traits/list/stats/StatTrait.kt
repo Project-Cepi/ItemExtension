@@ -14,7 +14,7 @@ abstract class StatTrait : ItemTrait() {
             SpeedStatTrait::class
     )
 
-    override val loreIndex = 6f
+
     override val taskIndex = 1f
 
     open val name: String = "Example"

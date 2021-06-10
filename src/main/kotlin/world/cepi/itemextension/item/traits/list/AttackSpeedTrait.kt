@@ -11,12 +11,11 @@ import world.cepi.itemextension.item.traits.list.stats.StatTrait
 
 @Serializable
 @SerialName("attack_speed")
-class AttackSpeedTrait(
+data class AttackSpeedTrait(
         /** The attack speed of the trait. */
         val attackSpeed: Double
 ) : ItemTrait() {
 
-    override val loreIndex = 5f
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {

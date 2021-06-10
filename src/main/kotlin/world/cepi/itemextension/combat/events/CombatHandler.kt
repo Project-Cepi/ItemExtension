@@ -53,7 +53,7 @@ object CombatHandler {
 
                 // Don't attack if the player doesn't have the correct levels
 
-                cepiItem?.getTrait<LevelTrait>()?.let {
+                cepiItem?.get<LevelTrait>()?.let {
                     if ((entity as Player).level < it.level) return@addEventCallback
                 }
             }
@@ -66,7 +66,7 @@ object CombatHandler {
                 val damage: Double = if (item?.material == Material.AIR)
                     1.0
                 else
-                    cepiItem?.getTrait<DamageTrait>()?.damage ?: 1.0
+                    cepiItem?.get<DamageTrait>()?.damage ?: 1.0
 
                 // Appends armor to the damage. Collects all armor from all armor slots and applies it as so.
                 val armor = listOf(
@@ -75,7 +75,7 @@ object CombatHandler {
                     livingTarget.chestplate,
                     livingTarget.helmet
                 ).map {
-                    it.meta.get<Item>(Item.key, module)?.getTrait<ArmorTrait>()?.armor ?: 0.0
+                    it.meta.get<Item>(Item.key, module)?.get<ArmorTrait>()?.armor ?: 0.0
                 }.sum()
 
                 val finalDamage = ArmorTrait.applyToDamage(armor, damage)

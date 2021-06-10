@@ -12,12 +12,11 @@ import world.cepi.itemextension.item.traits.ItemTrait
 /** Defines the overall chance that this item would even exist */
 @Serializable
 @SerialName("rarity")
-class RarityTrait(
+data class RarityTrait(
     /** The rarity that the [RarityTrait] encapsulates. */
     val rarity: Rarity
 ) : ItemTrait() {
 
-    override val loreIndex = 10f
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {

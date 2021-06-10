@@ -13,13 +13,12 @@ import world.cepi.itemextension.item.traits.ItemTrait
 /** Represents the name that the item contains. */
 @Serializable
 @SerialName("price")
-class PriceTrait(
+data class PriceTrait(
     /** The price of the item in economy units. */
     val price: Int
 ) : ItemTrait() {
 
     override val taskIndex = 0f
-    override val loreIndex = 0f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
         item.meta { it.set(Tag.Integer("price"), price) }

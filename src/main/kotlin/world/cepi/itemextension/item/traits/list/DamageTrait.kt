@@ -14,11 +14,10 @@ import world.cepi.itemextension.item.traits.ItemTrait
 
 @Serializable
 @SerialName("damage")
-class DamageTrait(
+data class DamageTrait(
     val damage: Double
 ) : ItemTrait() {
 
-    override val loreIndex = 3f
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {

@@ -7,10 +7,8 @@ import world.cepi.itemextension.item.Item
 
 @Serializable
 @SerialName("secondary_attack")
-class SecondaryAttackTrait(override val attack: Attack): AttackTrait() {
+data class SecondaryAttackTrait(override val attack: Attack): AttackTrait() {
     override val clickType = "Sneak + Left"
-
-    override val loreIndex = 2.2f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
 //        item.leftCallbacks.add { player, hand ->

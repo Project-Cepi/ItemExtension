@@ -18,7 +18,6 @@ abstract class AttackTrait: ItemTrait() {
     open val attack: Attack = Attack.STRIKE
     open val clickType: String = "None"
 
-    override val loreIndex = 2f
     override val taskIndex = 0f
 
     override fun renderLore(item: Item): List<Component> {

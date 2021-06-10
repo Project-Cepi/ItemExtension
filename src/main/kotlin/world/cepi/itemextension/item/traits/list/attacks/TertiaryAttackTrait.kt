@@ -7,10 +7,8 @@ import world.cepi.itemextension.item.Item
 
 @Serializable
 @SerialName("tertiary_attack")
-class TertiaryAttackTrait(override val attack: Attack): AttackTrait() {
+data class TertiaryAttackTrait(override val attack: Attack): AttackTrait() {
     override val clickType = "Right"
-
-    override val loreIndex = 2.3f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
 //        item.rightCallbacks.add(attack.action)

@@ -10,7 +10,7 @@ import world.cepi.itemextension.item.traits.ItemTrait
 /** The material that the item will take on. Default is Paper. */
 @Serializable
 @SerialName("material")
-class MaterialTrait(
+data class MaterialTrait(
     /** The display material for the item */
     val material: Material = Material.PAPER,
 
@@ -19,7 +19,6 @@ class MaterialTrait(
 ) : ItemTrait() {
 
     override val taskIndex = 1f
-    override val loreIndex = 1f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
         item.meta { it.customModelData(customModelData) }

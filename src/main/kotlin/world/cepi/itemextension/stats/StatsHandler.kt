@@ -61,9 +61,9 @@ object StatsHandler : Handler {
                 it to item
             }.toMap()
 
-        val health = items.values.mapNotNull { it.getTrait<HealthStatTrait>()?.value }.sum()
+        val health = items.values.mapNotNull { it.get<HealthStatTrait>()?.value }.sum()
 
-        val speed = items.values.mapNotNull { it.getTrait<SpeedStatTrait>()?.value }.sum()
+        val speed = items.values.mapNotNull { it.get<SpeedStatTrait>()?.value }.sum()
 
         entity.getAttribute(Attribute.MAX_HEALTH).removeModifier(AttributeModifier(healthUUID, healthStat, health, AttributeOperation.ADDITION))
         entity.getAttribute(Attribute.MOVEMENT_SPEED).removeModifier(AttributeModifier(speedUUID, speedStat, speed, AttributeOperation.MULTIPLY_BASE))

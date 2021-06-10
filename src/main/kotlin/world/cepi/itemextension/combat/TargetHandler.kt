@@ -103,7 +103,7 @@ object TargetHandler {
         val cepiItem: Item = item.meta.get(Item.key, module)!!
 
         // Check if any attack of an item requires a target
-        return cepiItem.traits.filterIsInstance<AttackTrait>().any { it.attack.requiresTarget }
+        return cepiItem.softGet<AttackTrait>().any { it.attack.requiresTarget }
 
     }
 

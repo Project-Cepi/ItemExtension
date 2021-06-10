@@ -18,8 +18,6 @@ import world.cepi.kstom.item.withMeta
 @Serializable
 class Item: TraitContainer<ItemTrait>() {
 
-    override val traits: MutableList<ItemTrait> = mutableListOf()
-
     /**
      * Renders an item to an ItemStack.
      *
@@ -28,7 +26,7 @@ class Item: TraitContainer<ItemTrait>() {
      * @return The ItemStack after applying traits to the Item
      */
     fun renderItem(amount: Int = 1): ItemStack = item(
-        getTrait<MaterialTrait>()?.material ?: Material.PAPER,
+        get<MaterialTrait>()?.material ?: Material.PAPER,
         amount
     ) {
 
@@ -40,11 +38,11 @@ class Item: TraitContainer<ItemTrait>() {
             hideFlag(*ItemHideFlag.values())
         }
 
-        lore(traits.sortedBy { it.loreIndex }
+        lore(traits.values.sortedBy { ItemTrait.traitPriorityOrdered.indexOf(it::class) }
             .map { trait -> trait.renderLore(this@Item) }
             .flatten())
 
-        traits.sortedBy { it.taskIndex }
+        traits.values.sortedBy { it.taskIndex }
             .map { trait -> trait.task(this, this@Item) }
     }
 

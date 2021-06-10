@@ -10,13 +10,12 @@ import world.cepi.itemextension.item.traits.ItemTrait
 
 @Serializable
 @SerialName("itemtype")
-class TypeTrait(
+data class TypeTrait(
         /** The type, used to hold the value in TypeTrait. */
         @SerialName("itemtype") // Renamed as "type" is a reserved keyword in kotlinx.serialization
         val type: Type
 ) : ItemTrait() {
 
-    override val loreIndex = 0f
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {

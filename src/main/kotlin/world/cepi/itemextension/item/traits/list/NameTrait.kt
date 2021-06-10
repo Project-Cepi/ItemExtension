@@ -12,16 +12,15 @@ import world.cepi.itemextension.item.traits.ItemTrait
 /** Represents the name that the item contains. */
 @Serializable
 @SerialName("name")
-class NameTrait(
+data class NameTrait(
     /** The name to be rendered on the item */
     val name: String
 ) : ItemTrait() {
 
     override val taskIndex = 10f
-    override val loreIndex = 1f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
-        val color = originalItem.getTrait<RarityTrait>()?.rarity?.color ?: NamedTextColor.WHITE
+        val color = originalItem.get<RarityTrait>()?.rarity?.color ?: NamedTextColor.WHITE
         item.displayName(Component.text(name, color).decoration(TextDecoration.ITALIC, false))
     }
 

@@ -13,11 +13,10 @@ import java.util.regex.Pattern
 
 @Serializable
 @SerialName("lore")
-class LoreTrait(
+data class LoreTrait(
         val lore: String
 ) : ItemTrait() {
 
-    override val loreIndex = 20f // bottom of the barrel
     override val taskIndex = 1f
 
     override fun renderLore(item: Item): List<Component> {
