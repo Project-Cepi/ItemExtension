@@ -20,6 +20,10 @@ enum class Attack(val displayName: String, val action: (Player, LivingEntity?) -
         player.playSound(Sound.sound(SoundEvent.PLAYER_ATTACK_SWEEP, Sound.Source.MASTER, 1f, 1f))
         true
     }),
+    TELEPORT("Teleport", { player, target ->
+        player.teleport(target!!.position)
+        false
+    }, true),
     TARGET_ATTACK("Target Attack", { player, target ->
         target!!.damage(DamageType.fromPlayer(player), 1.0F)
         true

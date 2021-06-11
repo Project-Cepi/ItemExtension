@@ -77,7 +77,7 @@ sealed class AttackTrait: ItemTrait() {
             } else if (
                 itemStack.hasTag(Attack.generateTag<PrimaryAttackTrait>())
             ) {
-                val attackName = itemStack.getTag(Attack.generateTag<SecondaryAttackTrait>())
+                val attackName = itemStack.getTag(Attack.generateTag<PrimaryAttackTrait>())
 
                 val attack = Attack.valueOf(attackName!!)
 
