@@ -5,23 +5,33 @@ import net.minestom.server.entity.LivingEntity
 import net.minestom.server.entity.Player
 import net.minestom.server.entity.damage.DamageType
 import net.minestom.server.sound.SoundEvent
+import net.minestom.server.tag.Tag
 
-enum class Attack(val displayName: String, val action: (Player, Player.Hand, LivingEntity) -> Boolean = { _, _, _ -> true }, val requiresTarget: Boolean = false) {
+enum class Attack(val displayName: String, val action: (Player, LivingEntity?) -> Boolean = { _, _ -> true }, val requiresTarget: Boolean = false) {
 
     STRIKE("Strike"),
-    NONE("None", { _, _, _ -> false }),
-    YEET("Yeet", { player, _, _ ->
-        player.velocity.add(0.0, 20.0, 0.0)
+    NONE("None", { _, _ -> false }),
+    YEET("Yeet", { _, target ->
+        target!!.velocity.add(0.0, 20.0, 0.0)
         true
-    }),
-    DASH("Dash", { player, _, _ ->
+    }, true),
+    DASH("Dash", { player, _ ->
         player.velocity.add(player.position.direction.clone().normalize().multiply(6))
         player.playSound(Sound.sound(SoundEvent.PLAYER_ATTACK_SWEEP, Sound.Source.MASTER, 1f, 1f))
         true
     }),
-    TARGET_ATTACK("Target Attack", { player, _, target ->
-        target.damage(DamageType.fromPlayer(player), 1.0F)
+    TARGET_ATTACK("Target Attack", { player, target ->
+        target!!.damage(DamageType.fromPlayer(player), 1.0F)
         true
-    }, true)
+    }, true);
+
+    companion object {
+        inline fun <reified T: AttackTrait> generateTag(): Tag<String> = when (T::class) {
+            PrimaryAttackTrait::class -> Tag.String("primary")
+            SecondaryAttackTrait::class -> Tag.String("secondary")
+            TertiaryAttackTrait::class -> Tag.String("tertiary")
+            else -> throw IllegalAccessException("This should not happen!")
+        }
+    }
 
 }

@@ -55,6 +55,7 @@ object SetSubcommand : Command("set") {
 
     private fun generateCommand(command: Command, vararg traits: KClass<out ItemTrait>) {
 
+        // EX: /item set attack primary, last is primary
         val lastTrait = traits.last()
 
         val traitConstructorArguments = argumentsFromClass(lastTrait)

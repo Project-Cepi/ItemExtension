@@ -6,6 +6,7 @@ import world.cepi.itemextension.combat.events.*
 import world.cepi.itemextension.command.ClearCommand
 import world.cepi.itemextension.command.GiveCommand
 import world.cepi.itemextension.command.itemcommand.ItemCommand
+import world.cepi.itemextension.item.traits.list.attacks.AttackTrait.Companion.itemNode
 import world.cepi.itemextension.stats.StatsHandler
 import world.cepi.kstom.command.register
 import world.cepi.kstom.command.unregister
@@ -22,6 +23,7 @@ class ItemExtension : Extension() {
             listenOnly(DeathHandler::register)
             listenOnly(NoVoidHandler::register)
             listenOnly(DisableDropping::register)
+            addChild(itemNode)
             StatsHandler.register(this)
         }
 
@@ -46,6 +48,6 @@ class ItemExtension : Extension() {
         logger.info("[ItemExtension] has been disabled!")
     }
 
-    companion object: ExtensionCompanion<ItemExtension>(ItemExtension::class)
+    companion object: ExtensionCompanion<ItemExtension>(Any())
 
 }
