@@ -8,12 +8,10 @@ $dokka.location:world.cepi.itemextension.combat.events/DeathHandler/deadPlayers/
 $dokka.location:world.cepi.itemextension.combat.events/DeathHandler/register/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.events/DisableDropping///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-disable-dropping/index.html
 $dokka.location:world.cepi.itemextension.combat.events/DisableDropping/register/#net.minestom.server.event.item.ItemDropEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-disable-dropping/register.html
-$dokka.location:world.cepi.itemextension.combat.events/HealthHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-health-handler/index.html
-$dokka.location:world.cepi.itemextension.combat.events/HealthHandler/register/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-health-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-no-void-handler/index.html
 $dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler/register/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-no-void-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.util////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/index.html
-$dokka.location:world.cepi.itemextension.combat.util//applyKnockback/#net.minestom.server.entity.Entity#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/apply-knockback.html
+$dokka.location:world.cepi.itemextension.combat.util//applyKnockback/#net.minestom.server.entity.Entity#net.minestom.server.entity.Entity#kotlin.Double/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/apply-knockback.html
 $dokka.location:world.cepi.itemextension.combat////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/index.html
 $dokka.location:world.cepi.itemextension.combat/ImmunityHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-immunity-handler/index.html
 $dokka.location:world.cepi.itemextension.combat/ImmunityHandler/isImmune/#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-immunity-handler/is-immune.html
@@ -147,6 +145,11 @@ $dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/damage/#/P
 $dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/renderLore/#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/render-lore.html
 $dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/task/#net.minestom.server.item.ItemStackBuilder#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/task.html
 $dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/taskIndex/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/task-index.html
+$dokka.location:world.cepi.itemextension.item.traits.list/KnockbackTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-knockback-trait/index.html
+$dokka.location:world.cepi.itemextension.item.traits.list/KnockbackTrait/KnockbackTrait/#kotlin.Double/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-knockback-trait/-knockback-trait.html
+$dokka.location:world.cepi.itemextension.item.traits.list/KnockbackTrait/amount/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-knockback-trait/amount.html
+$dokka.location:world.cepi.itemextension.item.traits.list/KnockbackTrait/task/#net.minestom.server.item.ItemStackBuilder#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-knockback-trait/task.html
+$dokka.location:world.cepi.itemextension.item.traits.list/KnockbackTrait/taskIndex/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-knockback-trait/task-index.html
 $dokka.location:world.cepi.itemextension.item.traits.list/LevelTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-level-trait/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list/LevelTrait/LevelTrait/#kotlin.Int/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-level-trait/-level-trait.html
 $dokka.location:world.cepi.itemextension.item.traits.list/LevelTrait/level/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-level-trait/level.html
