@@ -46,6 +46,6 @@ class ItemExtension : Extension() {
         logger.info("[ItemExtension] has been disabled!")
     }
 
-    companion object: ExtensionCompanion<ItemExtension>(ItemExtension::class)
+    companion object: ExtensionCompanion<ItemExtension>(Any())
 
 }
