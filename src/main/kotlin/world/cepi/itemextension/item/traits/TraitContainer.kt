@@ -13,7 +13,7 @@ abstract class TraitContainer<T : ItemTrait> {
      *
      * @param traits The traits to add
      */
-    fun addTrait(vararg traits: T) {
+    fun put(vararg traits: T) {
         traits.forEach { this.traits[it::class] = it }
     }
 

@@ -20,7 +20,7 @@ object CreateSubcommand : Command("create") {
                 val item = Item()
 
                 if (!itemStack.isAir) {
-                    item.addTrait(MaterialTrait(itemStack.material, itemStack.meta.customModelData))
+                    item.put(MaterialTrait(itemStack.material, itemStack.meta.customModelData))
                 }
 
                 player.itemInMainHand = item.renderItem(if (itemStack.amount == 0) 1 else itemStack.amount)

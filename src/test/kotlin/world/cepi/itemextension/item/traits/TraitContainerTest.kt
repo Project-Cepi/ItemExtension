@@ -16,10 +16,10 @@ class TraitContainerTest {
     fun `TraitContainer should correctly handle trait storage`() {
         val traitContainerImpl = TraitContainerImpl()
 
-        traitContainerImpl.addTrait(NameTrait("Hello World!"))
+        traitContainerImpl.put(NameTrait("Hello World!"))
 
-        traitContainerImpl.addTrait(PrimaryAttackTrait(Attack.TARGET_ATTACK))
-        traitContainerImpl.addTrait(SecondaryAttackTrait(Attack.STRIKE))
+        traitContainerImpl.put(PrimaryAttackTrait(Attack.TARGET_ATTACK))
+        traitContainerImpl.put(SecondaryAttackTrait(Attack.STRIKE))
 
         assertTrue(traitContainerImpl.hasTrait<NameTrait>())
 
@@ -37,5 +37,9 @@ class TraitContainerTest {
         )
 
         assertEquals("Hello World!", traitContainerImpl.get<NameTrait>()?.name)
+
+        traitContainerImpl.removeTrait<PrimaryAttackTrait>()
+
+        assertFalse(traitContainerImpl.hasTrait<PrimaryAttackTrait>())
     }
 }

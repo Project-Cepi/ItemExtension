@@ -87,10 +87,7 @@ object SetSubcommand : Command("set") {
             if (checkIsItem(itemStack)) {
                 val item = itemStack.meta.get<Item>(Item.key, module)!!
 
-                if (item.hasTrait(lastTrait))
-                    item.removeTrait(lastTrait)
-
-                item.addTrait(traitConstructorArguments.createInstance(arguments, commandSender))
+                item.put(traitConstructorArguments.createInstance(arguments, commandSender))
 
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
 

@@ -19,9 +19,9 @@ class ItemSerializer {
         val item = Item(
 
         ).apply {
-            addTrait(LevelTrait(5))
-            addTrait(AttackSpeedTrait(10.1))
-            addTrait(PrimaryAttackTrait(Attack.YEET))
+            put(LevelTrait(5))
+            put(AttackSpeedTrait(10.1))
+            put(PrimaryAttackTrait(Attack.YEET))
         }
 
         val json = DataSubcommand.format.encodeToString(item)
