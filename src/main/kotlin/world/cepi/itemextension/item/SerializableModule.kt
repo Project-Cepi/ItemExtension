@@ -25,6 +25,7 @@ internal val module = SerializersModule {
         subclass(TypeTrait::class)
         subclass(AttackSpeedTrait::class)
         subclass(PriceTrait::class)
+        subclass(KnockbackTrait::class)
 
         subclass(PrimaryAttackTrait::class)
         subclass(SecondaryAttackTrait::class)

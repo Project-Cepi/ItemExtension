@@ -24,7 +24,7 @@ import kotlin.experimental.or
 object TargetHandler {
     private val targets = mutableMapOf<Player, LivingEntity>()
 
-    private const val checkTarget = 5L
+    private const val checkTarget = 2L
     private val checkTargetTime = TimeUnit.TICK
 
     fun register() = Manager.scheduler.buildTask {

@@ -39,6 +39,7 @@ abstract class ItemTrait {
         // Background (lore-unrendered) traits
         PriceTrait::class,
         MaterialTrait::class,
+        KnockbackTrait::class,
 
         // Non-lore traits
         NameTrait::class,

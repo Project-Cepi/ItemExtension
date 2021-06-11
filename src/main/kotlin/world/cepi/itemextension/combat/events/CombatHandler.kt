@@ -19,6 +19,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.module
 import world.cepi.itemextension.item.traits.list.ArmorTrait
 import world.cepi.itemextension.item.traits.list.DamageTrait
+import world.cepi.itemextension.item.traits.list.KnockbackTrait
 import world.cepi.itemextension.item.traits.list.LevelTrait
 import world.cepi.kstom.Manager
 import world.cepi.kstom.item.get
@@ -82,7 +83,7 @@ object CombatHandler {
             // TODO attack speed?
 
             livingTarget.damage(DamageType.fromEntity(livingTarget), finalDamage.toFloat())
-            applyKnockback(target, entity)
+            applyKnockback(target, entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 1.0)
 
             val format = NumberFormat.getInstance().format(-finalDamage)
 

@@ -2,7 +2,10 @@ package world.cepi.itemextension
 
 import net.minestom.server.extensions.Extension
 import world.cepi.itemextension.combat.TargetHandler
-import world.cepi.itemextension.combat.events.*
+import world.cepi.itemextension.combat.events.CombatHandler
+import world.cepi.itemextension.combat.events.DeathHandler
+import world.cepi.itemextension.combat.events.DisableDropping
+import world.cepi.itemextension.combat.events.NoVoidHandler
 import world.cepi.itemextension.command.ClearCommand
 import world.cepi.itemextension.command.GiveCommand
 import world.cepi.itemextension.command.itemcommand.ItemCommand
@@ -19,7 +22,6 @@ class ItemExtension : Extension() {
 
         with(eventNode) {
             listenOnly(CombatHandler::register)
-            listenOnly(HealthHandler::register)
             listenOnly(DeathHandler::register)
             listenOnly(NoVoidHandler::register)
             listenOnly(DisableDropping::register)
