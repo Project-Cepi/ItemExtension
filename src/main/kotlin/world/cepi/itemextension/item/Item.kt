@@ -7,16 +7,22 @@ import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item.Companion.key
 import world.cepi.itemextension.item.traits.ItemTrait
+import world.cepi.itemextension.item.traits.ItemTraitMapSerializer
 import world.cepi.itemextension.item.traits.TraitContainer
 import world.cepi.itemextension.item.traits.list.MaterialTrait
 import world.cepi.kstom.item.clientData
 import world.cepi.kstom.item.get
 import world.cepi.kstom.item.item
 import world.cepi.kstom.item.withMeta
+import java.util.*
+import kotlin.reflect.KClass
 
 /** Item object wrapper for Cepi's items. Built on top of the decorator pattern, calling them traits. */
 @Serializable
 class Item: TraitContainer<ItemTrait>() {
+
+    @Serializable(with = ItemTraitMapSerializer::class)
+    override val traits = mutableMapOf<KClass<out ItemTrait>, ItemTrait>()
 
     /**
      * Renders an item to an ItemStack.
@@ -52,6 +58,23 @@ class Item: TraitContainer<ItemTrait>() {
         const val key = "cepi-item"
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (other !is Item) return false
+
+        return other.traits.values
+            .sortedBy { it::class.simpleName!! }.toTypedArray()
+            .contentEquals(this.traits.values.sortedBy { it::class.simpleName!! }.toTypedArray())
+    }
+
+    override fun toString(): String {
+        return traits.values.fold("") { acc, trait ->
+            return@fold "$acc,$trait"
+        }
+    }
+
+    override fun hashCode(): Int {
+        return Objects.hash(*traits.values.toTypedArray())
+    }
 
 }
 

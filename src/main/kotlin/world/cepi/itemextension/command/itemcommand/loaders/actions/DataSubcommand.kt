@@ -1,6 +1,5 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -23,7 +22,6 @@ import world.cepi.kstom.item.get
 
 object DataSubcommand : Command("data") {
 
-    @Contextual
     val format = Json {
         ignoreUnknownKeys = true
         coerceInputValues = true

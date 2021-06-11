@@ -85,7 +85,7 @@ object TargetHandler {
      * @param player The [Player] which is targeting something
      * @return a [LivingEntity] that is being targeted
      */
-    fun getTarget(player: Player): LivingEntity? =
+    operator fun get(player: Player): LivingEntity? =
         targets[player]
 
     /**

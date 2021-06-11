@@ -6,15 +6,15 @@ import kotlin.reflect.KClass
 abstract class TraitContainer<T : ItemTrait> {
 
     /** List of traits that can be added or removed from. Please use a wrapper function */
-    protected val traits: MutableMap<KClass<out T>, T> = mutableMapOf()
+    open val traits: MutableMap<KClass<out T>, T> = mutableMapOf()
 
     /**
      * Encapsulation function to add a trait to the [traits] property
      *
-     * @param trait The trait to add
+     * @param traits The traits to add
      */
-    fun addTrait(trait: T) {
-        traits[trait::class] = trait
+    fun addTrait(vararg traits: T) {
+        traits.forEach { this.traits[it::class] = it }
     }
 
     /**
@@ -23,6 +23,8 @@ abstract class TraitContainer<T : ItemTrait> {
      * @param traitClass The class remove from the array.
      */
     fun removeTrait(traitClass: KClass<out T>) = traits.remove(traitClass)
+
+    inline fun <reified B: T> removeTrait() = removeTrait(B::class)
 
     /**
      * Checks if the trait container contains this trait class
