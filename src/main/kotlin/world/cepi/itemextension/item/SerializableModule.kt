@@ -32,5 +32,7 @@ internal val module = SerializersModule {
 
         subclass(HealthStatTrait::class)
         subclass(SpeedStatTrait::class)
+
+        subclass(CustomTextTrait::class)
     }
 }

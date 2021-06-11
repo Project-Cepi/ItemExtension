@@ -59,7 +59,8 @@ abstract class ItemTrait {
         SpeedStatTrait::class,
 
         RarityTrait::class,
-        LoreTrait::class
+        LoreTrait::class,
+        CustomTextTrait::class
     )
 
 }
