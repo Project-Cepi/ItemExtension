@@ -5,7 +5,7 @@ import net.minestom.server.entity.Entity
 
 object ImmunityHandler {
 
-    private const val cooldownMilliseconds = 500
+    private const val cooldownMilliseconds = 200
 
     private val immunityHandler = Object2LongOpenHashMap<Entity>()
 
