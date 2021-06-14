@@ -6,10 +6,7 @@ import net.kyori.adventure.text.format.TextDecoration
 import net.minestom.server.entity.Player
 import net.minestom.server.event.EventFilter
 import net.minestom.server.event.EventNode
-import net.minestom.server.event.player.PlayerEntityInteractEvent
-import net.minestom.server.event.player.PlayerStartDiggingEvent
-import net.minestom.server.event.player.PlayerUseItemEvent
-import net.minestom.server.event.player.PlayerUseItemOnBlockEvent
+import net.minestom.server.event.player.*
 import net.minestom.server.event.trait.PlayerEvent
 import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.combat.TargetHandler
@@ -90,6 +87,10 @@ sealed class AttackTrait: ItemTrait() {
             itemNode.listenOnly<PlayerUseItemOnBlockEvent>(::rightClick)
             itemNode.listenOnly<PlayerEntityInteractEvent>(::rightClick)
             itemNode.listenOnly<PlayerStartDiggingEvent>(::leftClick)
+            itemNode.listenOnly<PlayerHandAnimationEvent> {
+                if (hand == Player.Hand.MAIN)
+                    leftClick(this)
+            }
         }
     }
 

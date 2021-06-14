@@ -7,7 +7,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlin.reflect.KClass
 
-object ItemTraitMapSerializer : KSerializer<MutableMap<KClass<out ItemTrait>, ItemTrait>> {
+internal object ItemTraitMapSerializer : KSerializer<MutableMap<KClass<out ItemTrait>, ItemTrait>> {
 
     val dataSerializer = ListSerializer(ItemTrait.serializer())
 

@@ -10,7 +10,6 @@ import net.minestom.server.event.EventFilter
 import net.minestom.server.event.EventNode
 import net.minestom.server.event.inventory.InventoryClickEvent
 import net.minestom.server.event.item.EntityEquipEvent
-import net.minestom.server.event.item.ItemDropEvent
 import net.minestom.server.event.player.PlayerChangeHeldSlotEvent
 import net.minestom.server.event.player.PlayerSwapItemEvent
 import net.minestom.server.item.ItemStack
@@ -41,8 +40,6 @@ object StatsHandler {
                 refreshPlayerStats(entity as LivingEntity, mapOf(slot to equippedItem))
             }
         }
-
-        livingEventNode.listenOnly<ItemDropEvent> { refreshPlayerStats(player) }
 
         livingEventNode.listenOnly<PlayerSwapItemEvent> {
             refreshPlayerStats(player,
