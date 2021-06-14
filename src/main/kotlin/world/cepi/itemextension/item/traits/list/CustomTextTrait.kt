@@ -16,6 +16,6 @@ class CustomTextTrait(
     override val taskIndex: Float = 1F
 
     override fun renderLore(item: Item): List<Component> {
-        return listOf(text.asMini().decoration(TextDecoration.ITALIC, false))
+        return listOf(Component.space(), text.asMini().decoration(TextDecoration.ITALIC, false))
     }
 }
