@@ -5,7 +5,7 @@ plugins {
     kotlin("jvm") version "1.5.0"
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("org.jetbrains.dokka") version "1.4.32"
-    kotlin("plugin.serialization") version "1.4.21"
+    kotlin("plugin.serialization") version "1.5.0"
     `maven-publish`
 
     // Apply the application plugin to add support for building a jar
@@ -36,7 +36,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom:Minestom:78cc392007")
+    compileOnly("com.github.Minestom:Minestom:f2bf27c86e")
 
     // implement KStom
     compileOnly("com.github.Project-Cepi:KStom:38216ae174")
