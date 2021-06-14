@@ -16,7 +16,7 @@ data class MaterialTrait(
     val material: Material = Material.PAPER,
 
     /** CustomModelData for the item (resource pack) */
-    @DefaultNumber(0.0)
+    @param:DefaultNumber(0.0)
     private val customModelData: Int = 0
 ) : ItemTrait() {
 
