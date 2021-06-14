@@ -6,6 +6,7 @@ import net.minestom.server.item.ItemStackBuilder
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
+import world.cepi.kstom.command.arguments.annotations.DefaultNumber
 
 /** The material that the item will take on. Default is Paper. */
 @Serializable
@@ -15,6 +16,7 @@ data class MaterialTrait(
     val material: Material = Material.PAPER,
 
     /** CustomModelData for the item (resource pack) */
+    @DefaultNumber(0.0)
     private val customModelData: Int = 0
 ) : ItemTrait() {
 
