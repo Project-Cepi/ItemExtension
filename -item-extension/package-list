@@ -271,6 +271,10 @@ $dokka.location:world.cepi.itemextension.stats/StatsHandler/refreshPlayerStats/#
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/register/#net.minestom.server.event.EventNode[net.minestom.server.event.Event]/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/register.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/speedStat/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/speed-stat.html
 $dokka.location:world.cepi.itemextension.stats/StatsHandler/speedUUID/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.stats/-stats-handler/speed-u-u-i-d.html
+$dokka.location:world.cepi.itemextension.trading////PointingToDeclaration/-item-extension/world.cepi.itemextension.trading/index.html
+$dokka.location:world.cepi.itemextension.trading/TradeCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.trading/-trade-command/index.html
+$dokka.location:world.cepi.itemextension.trading/TradeManager///PointingToDeclaration/-item-extension/world.cepi.itemextension.trading/-trade-manager/index.html
+$dokka.location:world.cepi.itemextension.trading/TradeManager/openTrade/#net.minestom.server.entity.Player#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.trading/-trade-manager/open-trade.html
 $dokka.location:world.cepi.itemextension////PointingToDeclaration/-item-extension/world.cepi.itemextension/index.html
 $dokka.location:world.cepi.itemextension/ItemExtension.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/-companion/index.html
 $dokka.location:world.cepi.itemextension/ItemExtension///PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/index.html
@@ -291,4 +295,5 @@ world.cepi.itemextension.item.traits.list
 world.cepi.itemextension.item.traits.list.attacks
 world.cepi.itemextension.item.traits.list.stats
 world.cepi.itemextension.stats
+world.cepi.itemextension.trading
 
