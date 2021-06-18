@@ -9,10 +9,13 @@ import net.minestom.server.event.EventNode
 import net.minestom.server.event.player.*
 import net.minestom.server.event.trait.PlayerEvent
 import net.minestom.server.item.ItemStack
+import world.cepi.energy.energy
 import world.cepi.itemextension.combat.TargetHandler
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kstom.event.listenOnly
+import world.cepi.kstom.raycast.HitType;
+import world.cepi.kstom.raycast.RayCast;
 
 sealed class AttackTrait: ItemTrait() {
 
@@ -33,9 +36,13 @@ sealed class AttackTrait: ItemTrait() {
 
         private fun useAttack(player: Player, attack: Attack) {
 
+            if (player.energy < attack.usedEnergy) return
+
             if (TargetHandler[player] == null && attack.requiresTarget) return
 
             attack.action(player, TargetHandler[player])
+
+            player.energy -= attack.usedEnergy
         }
 
         val itemNode = EventNode.type("item-handler-attacks", EventFilter.PLAYER)
@@ -88,7 +95,13 @@ sealed class AttackTrait: ItemTrait() {
             itemNode.listenOnly<PlayerEntityInteractEvent>(::rightClick)
             itemNode.listenOnly<PlayerStartDiggingEvent>(::leftClick)
             itemNode.listenOnly<PlayerHandAnimationEvent> {
-                if (hand == Player.Hand.MAIN)
+                if (hand == Player.Hand.MAIN && RayCast.castRay(
+                        player.instance!!,
+                        player,
+                        player.position.toVector().clone().add(.0, player.eyeHeight, .0),
+                        player.position.direction,
+                        5.0
+                    ).hitType == HitType.NONE)
                     leftClick(this)
             }
         }

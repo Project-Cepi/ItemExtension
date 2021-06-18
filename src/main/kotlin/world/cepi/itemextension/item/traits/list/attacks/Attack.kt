@@ -7,7 +7,12 @@ import net.minestom.server.entity.damage.DamageType
 import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
 
-enum class Attack(val displayName: String, val action: (Player, LivingEntity?) -> Boolean = { _, _ -> true }, val requiresTarget: Boolean = false) {
+enum class Attack(
+    val displayName: String,
+    val action: (Player, LivingEntity?) -> Boolean = { _, _ -> true },
+    val requiresTarget: Boolean = false,
+    val usedEnergy: Int = 0
+) {
 
     STRIKE("Strike"),
     NONE("None", { _, _ -> false }),
@@ -19,7 +24,7 @@ enum class Attack(val displayName: String, val action: (Player, LivingEntity?) -
         player.velocity.add(player.position.direction.clone().normalize().multiply(6))
         player.playSound(Sound.sound(SoundEvent.PLAYER_ATTACK_SWEEP, Sound.Source.MASTER, 1f, 1f))
         true
-    }),
+    }, usedEnergy = 5),
     TELEPORT("Teleport", { player, target ->
         player.teleport(target!!.position)
         false
