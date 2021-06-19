@@ -20,7 +20,7 @@ sealed class StatTrait : ItemTrait() {
                     if (value >= 0)
                         Component.text("+$value ", NamedTextColor.GREEN)
                     else
-                        Component.text("-$value ", NamedTextColor.RED)
+                        Component.text("$value ", NamedTextColor.RED)
                 )
                 .append(Component.text(name, NamedTextColor.GRAY))
                 .decoration(TextDecoration.ITALIC, false))
