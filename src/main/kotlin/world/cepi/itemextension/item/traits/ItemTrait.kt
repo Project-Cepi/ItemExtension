@@ -35,33 +35,36 @@ abstract class ItemTrait {
         return arrayListOf()
     }
 
-    companion object: TraitRefrenceList(
-        // Background (lore-unrendered) traits
-        PriceTrait::class,
-        MaterialTrait::class,
-        KnockbackTrait::class,
+    companion object {
 
-        // Non-lore traits
-        NameTrait::class,
+        val classList = arrayOf(
+            // Background (lore-unrendered) traits
+            PriceTrait::class,
+            MaterialTrait::class,
+            KnockbackTrait::class,
 
-        // Rendered traits
-        TypeTrait::class,
-        LevelTrait::class,
+            // Non-lore traits
+            NameTrait::class,
 
-        PrimaryAttackTrait::class,
-        SecondaryAttackTrait::class,
-        TertiaryAttackTrait::class,
+            // Rendered traits
+            TypeTrait::class,
+            LevelTrait::class,
 
-        DamageTrait::class,
-        ArmorTrait::class,
-        AttackSpeedTrait::class,
+            PrimaryAttackTrait::class,
+            SecondaryAttackTrait::class,
+            TertiaryAttackTrait::class,
 
-        HealthStatTrait::class,
-        SpeedStatTrait::class,
+            DamageTrait::class,
+            ArmorTrait::class,
+            AttackSpeedTrait::class,
 
-        RarityTrait::class,
-        LoreTrait::class,
-        CustomTextTrait::class
-    )
+            HealthStatTrait::class,
+            SpeedStatTrait::class,
+
+            RarityTrait::class,
+            LoreTrait::class,
+            CustomTextTrait::class
+        )
+    }
 
 }
