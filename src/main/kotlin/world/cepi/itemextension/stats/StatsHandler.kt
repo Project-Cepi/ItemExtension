@@ -59,7 +59,15 @@ object StatsHandler {
 
     fun refreshPlayerStats(entity: LivingEntity, changedSlots: Map<EquipmentSlot, ItemStack> = mapOf()) {
         val items: Map<EquipmentSlot, Item> = EquipmentSlot.values().mapNotNull {
-                val item = ((changedSlots[it]?.meta?.get<Item>(Item.key, module)) ?: entity.getEquipment(it).meta.get(Item.key, module)) ?: return@mapNotNull null
+
+                val isSlotChanged = changedSlots[it] != null
+
+                val item: Item = (
+                        if (isSlotChanged)
+                            changedSlots[it]?.meta?.get(Item.key, module) ?: return@mapNotNull null
+                        else
+                            null
+                        ) ?: entity.getEquipment(it).meta.get(Item.key, module) ?: return@mapNotNull null
                 it to item
             }.toMap()
 
@@ -72,6 +80,8 @@ object StatsHandler {
 
         entity.getAttribute(Attribute.MAX_HEALTH).addModifier(AttributeModifier(healthUUID, healthStat, health, AttributeOperation.ADDITION))
         entity.getAttribute(Attribute.MOVEMENT_SPEED).addModifier(AttributeModifier(speedUUID, speedStat, speed, AttributeOperation.MULTIPLY_BASE))
+
+        entity.health = entity.health.coerceAtMost(20 + health)
 
     }
 }
