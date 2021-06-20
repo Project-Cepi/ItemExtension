@@ -13,6 +13,7 @@ import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.argumentsFromClass
+import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.setArgumentCallback
 import world.cepi.kstom.item.get
 import kotlin.reflect.KClass
