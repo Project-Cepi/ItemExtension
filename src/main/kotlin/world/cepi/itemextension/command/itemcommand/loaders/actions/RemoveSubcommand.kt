@@ -11,7 +11,7 @@ import net.minestom.server.item.Material
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.module
+import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.item.get
@@ -41,7 +41,7 @@ object RemoveSubcommand : Command("remove") {
 
         val trait = ItemTrait.classList.first { processTraitName(it.simpleName!!).equals(context.get(traitList), ignoreCase = true) }
 
-        val item = itemStack.meta.get<Item>(Item.key, module)!!
+        val item = itemStack.meta.get<Item>(Item.key, itemSerializationModule)!!
 
         if (item.hasTrait(trait)) {
             item.removeTrait(trait)

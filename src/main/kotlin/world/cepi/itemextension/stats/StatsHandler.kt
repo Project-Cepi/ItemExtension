@@ -14,7 +14,7 @@ import net.minestom.server.event.player.PlayerChangeHeldSlotEvent
 import net.minestom.server.event.player.PlayerSwapItemEvent
 import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.Item
-import world.cepi.itemextension.item.module
+import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 import world.cepi.kstom.event.listenOnly
@@ -64,10 +64,10 @@ object StatsHandler {
 
                 val item: Item = (
                         if (isSlotChanged)
-                            changedSlots[it]?.meta?.get(Item.key, module) ?: return@mapNotNull null
+                            changedSlots[it]?.meta?.get(Item.key, itemSerializationModule) ?: return@mapNotNull null
                         else
                             null
-                        ) ?: entity.getEquipment(it).meta.get(Item.key, module) ?: return@mapNotNull null
+                        ) ?: entity.getEquipment(it).meta.get(Item.key, itemSerializationModule) ?: return@mapNotNull null
                 it to item
             }.toMap()
 

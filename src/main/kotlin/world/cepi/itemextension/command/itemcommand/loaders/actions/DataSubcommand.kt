@@ -12,7 +12,7 @@ import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.module
+import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.kepi.command.subcommand.applyHelp
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kepi.messages.translations.formatTranslableMessage
@@ -26,7 +26,7 @@ object DataSubcommand : Command("data") {
         ignoreUnknownKeys = true
         coerceInputValues = true
         isLenient = true
-        serializersModule = module
+        serializersModule = itemSerializationModule
     }
 
     init {
@@ -48,7 +48,7 @@ object DataSubcommand : Command("data") {
 
             if (checkIsItem(itemStack)) {
 
-                val data = format.encodeToString(itemStack.meta.get<Item>(Item.key, module))
+                val data = format.encodeToString(itemStack.meta.get<Item>(Item.key, itemSerializationModule))
 
                 sender.sendMessage(
                     Component.text(

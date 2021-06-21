@@ -11,7 +11,7 @@ import world.cepi.itemextension.item.traits.list.attacks.TertiaryAttackTrait
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 
-internal val module = SerializersModule {
+val itemSerializationModule = SerializersModule {
 
     // TODO sealed / better serializaiton?
     polymorphic(ItemTrait::class) {

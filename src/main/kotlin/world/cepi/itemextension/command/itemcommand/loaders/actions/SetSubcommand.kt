@@ -8,7 +8,7 @@ import world.cepi.itemextension.command.itemcommand.*
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.module
+import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
@@ -85,7 +85,7 @@ object SetSubcommand : Command("set") {
             }
 
             if (checkIsItem(itemStack)) {
-                val item = itemStack.meta.get<Item>(Item.key, module)!!
+                val item = itemStack.meta.get<Item>(Item.key, itemSerializationModule)!!
 
                 item.put(traitConstructorArguments.createInstance(arguments, commandSender))
 

@@ -10,7 +10,7 @@ import net.minestom.server.utils.PacketUtils
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.module
+import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.list.attacks.AttackTrait
 import world.cepi.kstom.Manager
 import world.cepi.kstom.item.get
@@ -100,7 +100,7 @@ object TargetHandler {
 
         if (!checkIsItem(item)) return false
 
-        val cepiItem: Item = item.meta.get(Item.key, module)!!
+        val cepiItem: Item = item.meta.get(Item.key, itemSerializationModule)!!
 
         // Check if any attack of an item requires a target
         return cepiItem.softGet<AttackTrait>().any { it.attack.requiresTarget }

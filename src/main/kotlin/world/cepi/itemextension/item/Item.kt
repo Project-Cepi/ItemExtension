@@ -38,7 +38,7 @@ class Item: TraitContainer<ItemTrait>() {
 
         withMeta {
             clientData {
-                this[key, module] = this@Item
+                this[key, itemSerializationModule] = this@Item
             }
 
             hideFlag(*ItemHideFlag.values())
@@ -89,5 +89,5 @@ class Item: TraitContainer<ItemTrait>() {
 fun checkIsItem(itemStack: ItemStack): Boolean {
     // data must be initialized for an itemStack
 
-    return itemStack.meta.get<Item>(key, module) != null
+    return itemStack.meta.get<Item>(key, itemSerializationModule) != null
 }

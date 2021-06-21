@@ -16,7 +16,7 @@ import world.cepi.itemextension.combat.ImmunityHandler
 import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.module
+import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.list.ArmorTrait
 import world.cepi.itemextension.item.traits.list.DamageTrait
 import world.cepi.itemextension.item.traits.list.KnockbackTrait
@@ -46,7 +46,7 @@ object CombatHandler {
 
         // Find the player's item as a cepi item if any
         val cepiItem = if (item != null && checkIsItem(item)) {
-            item.meta.get<Item>(Item.key, module)!!
+            item.meta.get<Item>(Item.key, itemSerializationModule)!!
         } else null
 
         if (entity is Player) {
@@ -75,7 +75,7 @@ object CombatHandler {
                 livingTarget.chestplate,
                 livingTarget.helmet
             ).map {
-                it.meta.get<Item>(Item.key, module)?.get<ArmorTrait>()?.armor ?: 0.0
+                it.meta.get<Item>(Item.key, itemSerializationModule)?.get<ArmorTrait>()?.armor ?: 0.0
             }.sum()
 
             val finalDamage = ArmorTrait.applyToDamage(armor, damage)
