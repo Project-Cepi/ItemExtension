@@ -11,8 +11,8 @@ import world.cepi.kstom.command.addSyntax
 object CreateSubcommand : Command("create") {
 
     init {
-        addSyntax { commandSender ->
-            val player = commandSender as Player
+        addSyntax {
+            val player = sender as Player
             val itemStack = player.itemInMainHand
 
             val isCepiItem = checkIsItem(itemStack)

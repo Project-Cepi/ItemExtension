@@ -37,7 +37,7 @@ object DataSubcommand : Command("data") {
             it.joinToString(" ")
         }
 
-        addSyntax(get) { sender ->
+        addSyntax(get) {
             val player = sender as Player
             val itemStack = player.itemInMainHand
 
@@ -81,10 +81,10 @@ object DataSubcommand : Command("data") {
             """.trimIndent()
         }
 
-        addSyntax(from, json) { sender, args ->
+        addSyntax(from, json) {
             val player = sender as Player
 
-            val nbtData = args.get(json) // TODO process to json and convert
+            val nbtData = context.get(json) // TODO process to json and convert
 
             try {
                 val item = format.decodeFromString<Item>(nbtData)

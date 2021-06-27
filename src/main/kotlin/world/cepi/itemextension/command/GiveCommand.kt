@@ -23,22 +23,22 @@ object GiveCommand : Command("give") {
 
         val selector = ArgumentType.Entity("players").onlyPlayers(true)
 
-        addSyntax(selector, itemArg, amountArg) { commandSender, args ->
+        addSyntax(selector, itemArg, amountArg) {
 
-            val player = commandSender as Player
+            val player = sender as Player
 
-            val item = args.get(itemArg).withAmount(args.get(amountArg))
+            val item = context.get(itemArg).withAmount(context.get(amountArg))
 
-            val targets = args.get(selector).find(player.instance!!, player).map { it as Player }
+            val targets = context.get(selector).find(player.instance!!, player).map { it as Player }
 
             targets.forEach {
-                (it as? Player)?.inventory?.addItemStack(args.get(itemArg))
+                (it as? Player)?.inventory?.addItemStack(context.get(itemArg))
             }
 
             // TODO plural translation
-            commandSender.sendFormattedTranslatableMessage(
+            sender.sendFormattedTranslatableMessage(
                 "item", "give",
-                Component.text(args.get(amountArg), NamedTextColor.BLUE),
+                Component.text(context.get(amountArg), NamedTextColor.BLUE),
                 (item.displayName
                     ?: Component.text(
                         item.material

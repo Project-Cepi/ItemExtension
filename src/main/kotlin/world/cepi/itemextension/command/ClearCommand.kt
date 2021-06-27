@@ -29,10 +29,10 @@ object ClearCommand : Command("clear") {
 
         }
 
-        addSyntax(playerArgument) { sender, args ->
+        addSyntax(playerArgument) {
             val player = sender as Player
 
-            val entities = args.get(playerArgument).find(player)
+            val entities = context.get(playerArgument).find(player)
 
             entities.forEach {
                 (it as Player).inventory.clear()

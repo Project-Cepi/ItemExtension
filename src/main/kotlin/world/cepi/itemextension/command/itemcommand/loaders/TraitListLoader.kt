@@ -14,7 +14,7 @@ object TraitListLoader : ItemCommandLoader {
             .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }
                 .toTypedArray())
 
-        command.setArgumentCallback(traitList) { commandSender -> commandSender.sendFormattedMessage(Component.text("Invalid trait!")) }
+        command.setArgumentCallback(traitList) { sender.sendFormattedMessage(Component.text("Invalid trait!")) }
     }
 
 }

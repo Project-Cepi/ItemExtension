@@ -62,7 +62,7 @@ object SetSubcommand : Command("set") {
 
         traitConstructorArguments.args.forEach {
             command.setArgumentCallback(it)
-            { commandSender -> commandSender.sendFormattedTranslatableMessage("item", "trait.invalid") }
+            { sender.sendFormattedTranslatableMessage("item", "trait.invalid") }
 
         }
 
@@ -75,8 +75,8 @@ object SetSubcommand : Command("set") {
             }
         }
 
-        command.addSyntax(*traitArgs.toTypedArray(), *traitConstructorArguments.args) { commandSender, arguments ->
-            val player = commandSender as Player
+        command.addSyntax(*traitArgs.toTypedArray(), *traitConstructorArguments.args) {
+            val player = sender as Player
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
@@ -87,7 +87,7 @@ object SetSubcommand : Command("set") {
             if (checkIsItem(itemStack)) {
                 val item = itemStack.meta.get<Item>(Item.key, itemSerializationModule)!!
 
-                item.put(traitConstructorArguments.createInstance(arguments, commandSender))
+                item.put(traitConstructorArguments.createInstance(context, sender))
 
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
 

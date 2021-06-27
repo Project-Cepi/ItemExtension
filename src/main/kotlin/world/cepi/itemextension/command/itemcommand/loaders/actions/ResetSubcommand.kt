@@ -12,8 +12,8 @@ import world.cepi.kstom.item.get
 
 object ResetSubcommand : Command("reset") {
     init {
-        addSyntax { commandSender ->
-            val player = commandSender as Player
+        addSyntax {
+            val player = sender as Player
             val itemStack = player.itemInMainHand
 
             if (itemStack.material == Material.AIR) {

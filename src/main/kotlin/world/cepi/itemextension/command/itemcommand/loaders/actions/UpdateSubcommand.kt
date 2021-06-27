@@ -13,8 +13,8 @@ import world.cepi.kstom.item.get
 object UpdateSubcommand : Command("update") {
     init {
 
-        addSyntax { commandSender ->
-            val player = commandSender as Player
+        addSyntax {
+            val player = sender as Player
             val itemStack = player.itemInMainHand
 
             if (itemStack.material == Material.AIR) {
