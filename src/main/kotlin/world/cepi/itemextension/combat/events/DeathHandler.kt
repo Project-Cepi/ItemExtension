@@ -30,6 +30,12 @@ object DeathHandler {
         // Looking for only players
         if (entity !is Player) return
 
+        // Can't be killed if you're already dead.
+        if (deadPlayers.contains(entity)) {
+            isCancelled = true
+            return
+        }
+
         // Damage must be higher than the health
         if (damage < entity.health) return
 
