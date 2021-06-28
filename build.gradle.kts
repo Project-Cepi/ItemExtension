@@ -35,7 +35,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom:Minestom:e635e29a16")
+    compileOnly("com.github.Minestom", "Minestom", "fbb8c1a819")
 
     // implement KStom
     compileOnly("com.github.Project-Cepi:KStom:9e4bc4929f")
