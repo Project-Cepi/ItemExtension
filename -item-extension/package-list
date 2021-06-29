@@ -46,6 +46,7 @@ $dokka.location:world.cepi.itemextension.command.itemcommand/ItemCommand///Point
 $dokka.location:world.cepi.itemextension.command////PointingToDeclaration/-item-extension/world.cepi.itemextension.command/index.html
 $dokka.location:world.cepi.itemextension.command/ClearCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-clear-command/index.html
 $dokka.location:world.cepi.itemextension.command/GiveCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-give-command/index.html
+$dokka.location:world.cepi.itemextension.command/HealCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-heal-command/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-companion/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.attacks/Attack.Companion/generateTag/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.attacks/-attack/-companion/generate-tag.html
