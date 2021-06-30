@@ -9,6 +9,7 @@ import world.cepi.itemextension.combat.events.NoVoidHandler
 import world.cepi.itemextension.command.ClearCommand
 import world.cepi.itemextension.command.GiveCommand
 import world.cepi.itemextension.command.HealCommand
+import world.cepi.itemextension.command.NBTCommand
 import world.cepi.itemextension.command.itemcommand.ItemCommand
 import world.cepi.itemextension.item.traits.list.attacks.AttackTrait.Companion.itemNode
 import world.cepi.itemextension.stats.StatsHandler
@@ -36,6 +37,7 @@ class ItemExtension : Extension() {
         ClearCommand.register()
         GiveCommand.register()
         HealCommand.register()
+        NBTCommand.register()
 
         logger.info("[ItemExtension] has been enabled!")
 
@@ -49,6 +51,7 @@ class ItemExtension : Extension() {
         ClearCommand.unregister()
         GiveCommand.unregister()
         HealCommand.unregister()
+        NBTCommand.unregister()
 
         logger.info("[ItemExtension] has been disabled!")
     }
