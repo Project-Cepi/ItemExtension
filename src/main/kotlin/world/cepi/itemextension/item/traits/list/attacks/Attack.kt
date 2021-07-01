@@ -21,7 +21,7 @@ enum class Attack(
         true
     }, true),
     DASH("Dash", { player, _ ->
-        player.velocity.add(player.position.direction.clone().normalize().multiply(6))
+        player.velocity = player.position.direction.clone().normalize().multiply(15)
         player.playSound(Sound.sound(SoundEvent.PLAYER_ATTACK_SWEEP, Sound.Source.MASTER, 1f, 1f))
         true
     }, usedEnergy = 5),
