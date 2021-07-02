@@ -11,6 +11,7 @@ import net.minestom.server.entity.hologram.Hologram
 import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.item.Material
+import net.minestom.server.utils.Vector
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.combat.ImmunityHandler
 import world.cepi.itemextension.combat.util.applyKnockback
@@ -89,10 +90,12 @@ object CombatHandler {
 
             val hologram = Hologram(
                     livingTarget.instance,
-                    livingTarget.position.clone().add(0.0, 1.0, 0.0),
-                    Component.text(format, NamedTextColor.RED),
+                    livingTarget.position.clone().add(0.0, livingTarget.eyeHeight, 0.0),
+                    Component.text(format, NamedTextColor.RED).append(Component.text(" ❤", NamedTextColor.RED)),
                     true
             )
+
+            hologram.entity.velocity.add(Vector(.0, .3, .0))
 
             MinecraftServer.getSchedulerManager().buildTask {
                 hologram.remove()
