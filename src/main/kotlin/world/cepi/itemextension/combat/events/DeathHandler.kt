@@ -11,13 +11,12 @@ import net.minestom.server.entity.Player
 import net.minestom.server.event.entity.EntityDamageEvent
 import net.minestom.server.instance.Instance
 import net.minestom.server.sound.SoundEvent
+import net.minestom.server.tag.Tag
 import net.minestom.server.utils.Position
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.kstom.Manager
 
 object DeathHandler {
-    val deadPlayers = mutableListOf<Player>()
-
     private fun deathMessage(player: Player, secondsLeft: Int) = player.showTitle(Title.title(
         Component.text("You died!", NamedTextColor.RED),
         Component.text("Respawning in $secondsLeft...", NamedTextColor.WHITE),
@@ -31,7 +30,7 @@ object DeathHandler {
         if (entity !is Player) return
 
         // Can't be killed if you're already dead.
-        if (deadPlayers.contains(entity)) {
+        if (entity.isDeadCepi || entity.isDead) {
             isCancelled = true
             return
         }
@@ -56,6 +55,8 @@ object DeathHandler {
             isInvisible = true
         }
 
+        player.setTag(Tag.Byte("dead"), 1)
+
         getNearbyEntities(
             player.instance!!, player.position,
             10.0
@@ -67,8 +68,6 @@ object DeathHandler {
             }
 
         deathMessage(player, 3)
-
-        deadPlayers.add(player)
 
         Manager.scheduler.buildTask { deathMessage(player, 2) }.delay(1, TimeUnit.SECOND).schedule()
         Manager.scheduler.buildTask { deathMessage(player, 1) }.delay(2, TimeUnit.SECOND).schedule()
@@ -83,7 +82,7 @@ object DeathHandler {
                 isInvisible = false
             }
 
-            deadPlayers.remove(player)
+            player.setTag(Tag.Byte("dead"), 0)
         }.delay(3, TimeUnit.SECOND).schedule()
 
         Unit
@@ -94,3 +93,6 @@ object DeathHandler {
         return instance.entities.filter { e -> e.position.getDistance(location) <= distance * distance }
     }
 }
+
+val Entity.isDeadCepi
+    get() = this.getTag(Tag.Byte("dead")) == 0.toByte()

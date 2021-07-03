@@ -33,7 +33,7 @@ object CombatHandler {
         }
 
         // Stop dead players from being hit
-        if (DeathHandler.deadPlayers.contains(entity) || DeathHandler.deadPlayers.contains(target))
+        if (entity.isDeadCepi || target.isDeadCepi)
             return
 
         if (ImmunityHandler.isImmune(target))
