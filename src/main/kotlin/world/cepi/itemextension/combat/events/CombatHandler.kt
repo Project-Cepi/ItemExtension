@@ -3,11 +3,9 @@ package world.cepi.itemextension.combat.events
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.MinecraftServer
-import net.minestom.server.entity.GameMode
-import net.minestom.server.entity.LivingEntity
-import net.minestom.server.entity.Player
+import net.minestom.server.entity.*
 import net.minestom.server.entity.damage.DamageType
-import net.minestom.server.entity.hologram.Hologram
+import net.minestom.server.entity.metadata.other.ArmorStandMeta
 import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.item.Material
@@ -25,7 +23,6 @@ import world.cepi.itemextension.item.traits.list.LevelTrait
 import world.cepi.kstom.Manager
 import world.cepi.kstom.item.get
 import java.text.NumberFormat
-
 
 object CombatHandler {
 
@@ -88,14 +85,27 @@ object CombatHandler {
 
             val format = NumberFormat.getInstance().format(-finalDamage)
 
-            val hologram = Hologram(
-                    livingTarget.instance,
-                    livingTarget.position.clone().add(0.0, livingTarget.eyeHeight, 0.0),
-                    Component.text(format, NamedTextColor.RED).append(Component.text(" ❤", NamedTextColor.RED)),
-                    true
+            val hologram = Entity(EntityType.ARMOR_STAND)
+
+            val hologramMeta = hologram.entityMeta as ArmorStandMeta
+
+            hologramMeta.setNotifyAboutChanges(false)
+
+            hologramMeta.customName = Component.text(format, NamedTextColor.RED).append(Component.text(" ❤", NamedTextColor.RED))
+            hologramMeta.isMarker = true
+            hologramMeta.isSmall = true;
+            hologramMeta.isHasNoGravity = true;
+            hologramMeta.isCustomNameVisible = true;
+            hologramMeta.isInvisible = true;
+
+            hologramMeta.setNotifyAboutChanges(true)
+
+            hologram.setInstance(
+                livingTarget.instance!!,
+                livingTarget.position.clone().add(0.0, livingTarget.eyeHeight, 0.0)
             )
 
-            hologram.entity.velocity.add(Vector(.0, .3, .0))
+            hologram.velocity.add(Vector(.0, .3, .0))
 
             MinecraftServer.getSchedulerManager().buildTask {
                 hologram.remove()
