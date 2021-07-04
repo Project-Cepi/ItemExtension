@@ -286,7 +286,6 @@ $dokka.location:world.cepi.itemextension.trading/TradeCommand///PointingToDeclar
 $dokka.location:world.cepi.itemextension.trading/TradeManager///PointingToDeclaration/-item-extension/world.cepi.itemextension.trading/-trade-manager/index.html
 $dokka.location:world.cepi.itemextension.trading/TradeManager/openTrade/#net.minestom.server.entity.Player#net.minestom.server.entity.Player/PointingToDeclaration/-item-extension/world.cepi.itemextension.trading/-trade-manager/open-trade.html
 $dokka.location:world.cepi.itemextension////PointingToDeclaration/-item-extension/world.cepi.itemextension/index.html
-$dokka.location:world.cepi.itemextension/ItemExtension.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/-companion/index.html
 $dokka.location:world.cepi.itemextension/ItemExtension///PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/index.html
 $dokka.location:world.cepi.itemextension/ItemExtension/ItemExtension/#/PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/-item-extension.html
 $dokka.location:world.cepi.itemextension/ItemExtension/initialize/#/PointingToDeclaration/-item-extension/world.cepi.itemextension/-item-extension/initialize.html
