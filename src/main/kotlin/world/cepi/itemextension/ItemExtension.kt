@@ -16,7 +16,6 @@ import world.cepi.itemextension.stats.StatsHandler
 import world.cepi.kstom.command.register
 import world.cepi.kstom.command.unregister
 import world.cepi.kstom.event.listenOnly
-import world.cepi.kstom.extension.ExtensionCompanion
 
 /** Extension wrapper for Minestom. */
 class ItemExtension : Extension() {
@@ -55,7 +54,5 @@ class ItemExtension : Extension() {
 
         logger.info("[ItemExtension] has been disabled!")
     }
-
-    companion object: ExtensionCompanion<ItemExtension>(Any())
 
 }
