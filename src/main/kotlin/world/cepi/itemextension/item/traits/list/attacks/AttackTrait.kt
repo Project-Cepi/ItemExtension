@@ -12,14 +12,17 @@ import net.minestom.server.item.ItemStack
 import world.cepi.energy.energy
 import world.cepi.itemextension.combat.TargetHandler
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.checkIsItem
+import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kstom.event.listenOnly
+import world.cepi.kstom.item.get
 import world.cepi.kstom.raycast.HitType;
 import world.cepi.kstom.raycast.RayCast;
 
 sealed class AttackTrait: ItemTrait() {
 
-    open val attack: Attack = Attack.STRIKE
+    open val attack: Attack = Attack.Strike()
     open val clickType: String = "None"
 
     override val taskIndex = 0f
@@ -56,11 +59,11 @@ sealed class AttackTrait: ItemTrait() {
             if (!itemStack.hasTag(Attack.generateTag<TertiaryAttackTrait>()))
                 return
 
-            val attackName = itemStack.getTag(Attack.generateTag<TertiaryAttackTrait>())
+            val cepiItem = itemStack.meta.get<Item>(Item.key, itemSerializationModule)
 
-            val attack = Attack.valueOf(attackName!!)
+            val attack = cepiItem!!.get<SecondaryAttackTrait>()
 
-            useAttack(player, attack)
+            useAttack(player, attack!!.attack)
         }
 
         fun <T> leftClick(event: T): Unit where T : PlayerEvent = with(event) {
@@ -69,23 +72,22 @@ sealed class AttackTrait: ItemTrait() {
 
             val itemStack = player.itemInMainHand
 
+            if (!checkIsItem(itemStack)) return@with
+
+            val cepiItem = itemStack.meta.get<Item>(Item.key, itemSerializationModule)!!
+
             if (
                 player.isSneaking && itemStack.hasTag(Attack.generateTag<SecondaryAttackTrait>())
             ) {
+                val attack = cepiItem.get<SecondaryAttackTrait>()
 
-                val attackName = itemStack.getTag(Attack.generateTag<SecondaryAttackTrait>())
-
-                val attack = Attack.valueOf(attackName!!)
-
-                useAttack(player, attack)
+                useAttack(player, attack!!.attack)
             } else if (
                 itemStack.hasTag(Attack.generateTag<PrimaryAttackTrait>())
             ) {
-                val attackName = itemStack.getTag(Attack.generateTag<PrimaryAttackTrait>())
+                val attack = cepiItem.get<SecondaryAttackTrait>()
 
-                val attack = Attack.valueOf(attackName!!)
-
-                useAttack(player, attack)
+                useAttack(player, attack!!.attack)
             }
         }
 

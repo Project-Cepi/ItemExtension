@@ -18,8 +18,8 @@ class TraitContainerTest {
 
         traitContainerImpl.put(NameTrait("Hello World!"))
 
-        traitContainerImpl.put(PrimaryAttackTrait(Attack.TARGET_ATTACK))
-        traitContainerImpl.put(SecondaryAttackTrait(Attack.STRIKE))
+        traitContainerImpl.put(PrimaryAttackTrait(Attack.TargetAttack()))
+        traitContainerImpl.put(SecondaryAttackTrait(Attack.Strike()))
 
         assertTrue(traitContainerImpl.hasTrait<NameTrait>())
 
@@ -30,8 +30,8 @@ class TraitContainerTest {
 
         assertEquals(
             listOf(
-                PrimaryAttackTrait(Attack.TARGET_ATTACK),
-                SecondaryAttackTrait(Attack.STRIKE)
+                PrimaryAttackTrait(Attack.TargetAttack()),
+                SecondaryAttackTrait(Attack.Strike())
             ),
             traitContainerImpl.softGet<AttackTrait>()
         )

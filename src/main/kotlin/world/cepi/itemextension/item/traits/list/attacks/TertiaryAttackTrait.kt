@@ -13,7 +13,7 @@ data class TertiaryAttackTrait(override val attack: Attack): AttackTrait() {
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
         item.withMeta {
-            set(Attack.generateTag<TertiaryAttackTrait>(), attack.name)
+            set(Attack.generateTag<TertiaryAttackTrait>(), attack.displayName)
         }
     }
 
