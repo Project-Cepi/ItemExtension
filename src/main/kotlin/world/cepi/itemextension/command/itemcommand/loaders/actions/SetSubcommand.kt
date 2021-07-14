@@ -11,9 +11,8 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
+import world.cepi.kstom.command.arguments.generation.generateSyntaxes
 import world.cepi.kstom.command.arguments.literal
-import world.cepi.kstom.command.addSyntax
-import world.cepi.kstom.command.arguments.argumentsFromClass
 import world.cepi.kstom.command.setArgumentCallback
 import world.cepi.kstom.item.get
 import kotlin.reflect.KClass
@@ -58,9 +57,9 @@ object SetSubcommand : Command("set") {
         // EX: /item set attack primary, last is primary
         val lastTrait = traits.last()
 
-        val traitConstructorArguments = argumentsFromClass(lastTrait)
+        val traitConstructorSyntaxes = generateSyntaxes(lastTrait)
 
-        traitConstructorArguments.args.forEach {
+        traitConstructorSyntaxes.args.forEach {
             command.setArgumentCallback(it)
             { sender.sendFormattedTranslatableMessage("item", "trait.invalid") }
 
@@ -75,19 +74,19 @@ object SetSubcommand : Command("set") {
             }
         }
 
-        command.addSyntax(*traitArgs.toTypedArray(), *traitConstructorArguments.args) {
+        traitConstructorSyntaxes.applySyntax(command, traitArgs.toTypedArray()) { instance ->
             val player = sender as Player
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
                 player.sendFormattedTranslatableMessage("mob", "main.required")
-                return@addSyntax
+                return@applySyntax
             }
 
             if (checkIsItem(itemStack)) {
                 val item = itemStack.meta.get<Item>(Item.key, itemSerializationModule)!!
 
-                item.put(traitConstructorArguments.createInstance(context, sender))
+                item.put(instance)
 
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
 

@@ -6,7 +6,7 @@ import net.minestom.server.item.ItemStackBuilder
 import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
-import world.cepi.kstom.command.arguments.annotations.DefaultNumber
+import world.cepi.kstom.command.arguments.generation.annotations.DefaultNumber
 
 /** The material that the item will take on. Default is Paper. */
 @Serializable

@@ -25,7 +25,7 @@ object TargetHandler {
     private val targets = mutableMapOf<Player, LivingEntity>()
 
     private const val checkTarget = 2L
-    private val checkTargetTime = TimeUnit.TICK
+    private val checkTargetTime = TimeUnit.SERVER_TICK
 
     fun register() = Manager.scheduler.buildTask {
         Manager.connection.onlinePlayers.forEach {
