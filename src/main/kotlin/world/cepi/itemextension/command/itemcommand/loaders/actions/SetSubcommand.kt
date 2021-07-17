@@ -11,6 +11,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
+import world.cepi.kstom.command.arguments.generation.GeneratedArguments.Companion.createSyntaxesFrom
 import world.cepi.kstom.command.arguments.generation.generateSyntaxes
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.setArgumentCallback
@@ -30,11 +31,11 @@ object SetSubcommand : Command("set") {
             if (defineSubTraits(trait).isNotEmpty()) {
 
                 defineSubTraits(trait).forEach {
-                    generateCommand(this, trait, it)
+                    generateCommand(trait, it)
                 }
 
             } else
-                generateCommand(this, trait)
+                generateCommand(trait)
 
         }
     }
@@ -52,35 +53,27 @@ object SetSubcommand : Command("set") {
 
     }
 
-    private fun generateCommand(command: Command, vararg traits: KClass<out ItemTrait>) {
+    private fun generateCommand(vararg traits: KClass<out ItemTrait>) {
 
-        // EX: /item set attack primary, last is primary
+        // EX: /item set action primary, last is primary
         val lastTrait = traits.last()
-
-        val traitConstructorSyntaxes = generateSyntaxes(lastTrait)
-
-        traitConstructorSyntaxes.args.forEach {
-            command.setArgumentCallback(it)
-            { sender.sendFormattedTranslatableMessage("item", "trait.invalid") }
-
-        }
 
         val traitArgs = traits.mapIndexed { index, loopTrait ->
             if (index != 0) { // If this trait isnt the first trait (root trait)
-                // Drop the suffix, EX PrimaryAttackTrait becomes Primary
+                // Drop the suffix, EX PrimaryActionTrait becomes Primary
                 loopTrait.simpleName!!.dropLast(traits[index - 1].simpleName!!.length).lowercase().literal()
             } else {
                 processTraitName(loopTrait.simpleName!!).literal()
             }
         }
 
-        traitConstructorSyntaxes.applySyntax(command, traitArgs.toTypedArray()) { instance ->
+        val traitConstructorSyntaxes = createSyntaxesFrom(lastTrait, *traitArgs.toTypedArray()) { instance ->
             val player = sender as Player
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
                 player.sendFormattedTranslatableMessage("mob", "main.required")
-                return@applySyntax
+                return@createSyntaxesFrom
             }
 
             if (checkIsItem(itemStack)) {
@@ -93,8 +86,9 @@ object SetSubcommand : Command("set") {
                 player.sendFormattedTranslatableMessage("item", "trait.add", Component.text(processTraitName(lastTrait.simpleName!!), NamedTextColor.BLUE))
             } else
                 player.sendFormattedTranslatableMessage("mob", "formatted.required")
-
         }
+
+        traitConstructorSyntaxes.callback = { sender.sendFormattedTranslatableMessage("item", "trait.invalid") }
     }
 
 }

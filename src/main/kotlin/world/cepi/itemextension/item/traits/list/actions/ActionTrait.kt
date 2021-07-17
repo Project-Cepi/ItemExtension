@@ -1,4 +1,4 @@
-package world.cepi.itemextension.item.traits.list.attacks
+package world.cepi.itemextension.item.traits.list.actions
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -9,27 +9,24 @@ import net.minestom.server.event.EventNode
 import net.minestom.server.event.player.*
 import net.minestom.server.event.trait.PlayerEvent
 import net.minestom.server.item.ItemStack
-import world.cepi.energy.energy
-import world.cepi.itemextension.combat.TargetHandler
 import world.cepi.itemextension.item.Item
-import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kstom.event.listenOnly
 import world.cepi.kstom.item.get
-import world.cepi.kstom.raycast.HitType;
-import world.cepi.kstom.raycast.RayCast;
+import world.cepi.kstom.raycast.HitType
+import world.cepi.kstom.raycast.RayCast
 
-sealed class AttackTrait: ItemTrait() {
+sealed class ActionTrait: ItemTrait() {
 
-    open val attack: Attack = Attack.Strike()
+    open val action: Action = Action.Strike()
     open val clickType: String = "None"
 
     override val taskIndex = 0f
 
     override fun renderLore(item: Item): List<Component> {
         return listOf(
-            Component.text(attack.displayName, NamedTextColor.RED)
+            Component.text(action.displayName, NamedTextColor.RED)
                 .append(Component.text(" [${clickType}]", NamedTextColor.GRAY))
                 .decoration(TextDecoration.ITALIC, false)
         )
@@ -37,18 +34,7 @@ sealed class AttackTrait: ItemTrait() {
 
     companion object {
 
-        private fun useAttack(player: Player, attack: Attack) {
-
-            if (player.energy < attack.usedEnergy) return
-
-            if (TargetHandler[player] == null && attack.requiresTarget) return
-
-            attack.action(player, TargetHandler[player])
-
-            player.energy -= attack.usedEnergy
-        }
-
-        val itemNode = EventNode.type("item-handler-attacks", EventFilter.PLAYER)
+        val itemNode = EventNode.type("item-handler-actions", EventFilter.PLAYER)
 
         fun <T> rightClick(event: T): Unit where T : PlayerEvent = with(event) {
 
@@ -56,14 +42,14 @@ sealed class AttackTrait: ItemTrait() {
 
             val itemStack = player.itemInMainHand
 
-            if (!itemStack.hasTag(Attack.generateTag<TertiaryAttackTrait>()))
+            val cepiItem = itemStack.meta.get<Item>(Item.key, itemSerializationModule) ?: return@with
+
+            if (!cepiItem.hasTrait<TertiaryActionTrait>())
                 return
 
-            val cepiItem = itemStack.meta.get<Item>(Item.key, itemSerializationModule)
+            val action = cepiItem.get<TertiaryActionTrait>()
 
-            val attack = cepiItem!!.get<SecondaryAttackTrait>()
-
-            useAttack(player, attack!!.attack)
+            action!!.action(player)
         }
 
         fun <T> leftClick(event: T): Unit where T : PlayerEvent = with(event) {
@@ -72,23 +58,17 @@ sealed class AttackTrait: ItemTrait() {
 
             val itemStack = player.itemInMainHand
 
-            if (!checkIsItem(itemStack)) return@with
+            val cepiItem = itemStack.meta.get<Item>(Item.key, itemSerializationModule) ?: return@with
 
-            val cepiItem = itemStack.meta.get<Item>(Item.key, itemSerializationModule)!!
-
-            if (
-                player.isSneaking && itemStack.hasTag(Attack.generateTag<SecondaryAttackTrait>())
-            ) {
-                val attack = cepiItem.get<SecondaryAttackTrait>()
-
-                useAttack(player, attack!!.attack)
-            } else if (
-                itemStack.hasTag(Attack.generateTag<PrimaryAttackTrait>())
-            ) {
-                val attack = cepiItem.get<SecondaryAttackTrait>()
-
-                useAttack(player, attack!!.attack)
+            val actionTrait = if (player.isSneaking && cepiItem.hasTrait<SecondaryActionTrait>()) {
+                cepiItem.get<SecondaryActionTrait>()!!
+            } else if (cepiItem.hasTrait<PrimaryActionTrait>()) {
+                cepiItem.get<PrimaryActionTrait>()!!
+            } else {
+                return@with
             }
+
+            actionTrait.action(player)
         }
 
         init {

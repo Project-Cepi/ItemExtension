@@ -5,9 +5,9 @@ import net.kyori.adventure.text.Component
 import net.minestom.server.item.ItemStackBuilder
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.list.*
-import world.cepi.itemextension.item.traits.list.attacks.PrimaryAttackTrait
-import world.cepi.itemextension.item.traits.list.attacks.SecondaryAttackTrait
-import world.cepi.itemextension.item.traits.list.attacks.TertiaryAttackTrait
+import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
+import world.cepi.itemextension.item.traits.list.actions.SecondaryActionTrait
+import world.cepi.itemextension.item.traits.list.actions.TertiaryActionTrait
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 
@@ -50,9 +50,9 @@ abstract class ItemTrait {
             TypeTrait::class,
             LevelTrait::class,
 
-            PrimaryAttackTrait::class,
-            SecondaryAttackTrait::class,
-            TertiaryAttackTrait::class,
+            PrimaryActionTrait::class,
+            SecondaryActionTrait::class,
+            TertiaryActionTrait::class,
 
             DamageTrait::class,
             ArmorTrait::class,

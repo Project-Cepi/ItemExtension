@@ -27,7 +27,7 @@ import java.text.NumberFormat
 object CombatHandler {
 
     fun register(event: EntityAttackEvent) = with(event) {
-        // Don't attack players in creative!
+        // Don't action players in creative!
         if (target is Player && (target as Player).gameMode == GameMode.CREATIVE) {
             return
         }
@@ -49,7 +49,7 @@ object CombatHandler {
 
         if (entity is Player) {
 
-            // Don't attack if the player doesn't have the correct levels
+            // Don't action if the player doesn't have the correct levels
 
             cepiItem?.get<LevelTrait>()?.let {
                 if ((entity as Player).level < it.level) return
@@ -78,7 +78,7 @@ object CombatHandler {
 
             val finalDamage = ArmorTrait.applyToDamage(armor, damage)
 
-            // TODO attack speed?
+            // TODO action speed?
 
             livingTarget.damage(DamageType.fromEntity(livingTarget), finalDamage.toFloat())
             applyKnockback(target, entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 1.0)

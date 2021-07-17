@@ -12,7 +12,7 @@ import world.cepi.itemextension.item.traits.list.stats.StatTrait
 @Serializable
 @SerialName("attack_speed")
 data class AttackSpeedTrait(
-        /** The attack speed of the trait. */
+        /** The action speed of the trait. */
         val attackSpeed: Double
 ) : ItemTrait() {
 
@@ -20,7 +20,7 @@ data class AttackSpeedTrait(
 
     override fun renderLore(item: Item): List<Component> {
         return arrayListOf(
-            Component.text("${attackSpeed}s Attack Speed", NamedTextColor.GRAY)
+            Component.text("${attackSpeed}s Action Speed", NamedTextColor.GRAY)
                 .decoration(TextDecoration.ITALIC, false)
         ).also {
             if (item.softHasTrait<StatTrait>()) {

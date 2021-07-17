@@ -11,7 +11,7 @@ import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.itemSerializationModule
-import world.cepi.itemextension.item.traits.list.attacks.AttackTrait
+import world.cepi.itemextension.item.traits.list.actions.ActionTrait
 import world.cepi.kstom.Manager
 import world.cepi.kstom.item.get
 import world.cepi.kstom.raycast.HitType
@@ -102,8 +102,8 @@ object TargetHandler {
 
         val cepiItem: Item = item.meta.get(Item.key, itemSerializationModule)!!
 
-        // Check if any attack of an item requires a target
-        return cepiItem.softGet<AttackTrait>().any { it.attack.requiresTarget }
+        // Check if any action of an item requires a target
+        return cepiItem.softGet<ActionTrait>().any { it.action.requiresTarget }
 
     }
 

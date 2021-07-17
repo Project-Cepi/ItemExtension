@@ -23,7 +23,7 @@ data class MaterialTrait(
     override val taskIndex = 1f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
-        item.meta { it.customModelData(customModelData) }
+        item.meta { it.also { if (customModelData != 0) it.customModelData(customModelData) } }
     }
 
 }

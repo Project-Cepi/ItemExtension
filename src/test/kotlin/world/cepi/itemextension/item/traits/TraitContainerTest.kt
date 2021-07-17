@@ -3,10 +3,10 @@ package world.cepi.itemextension.item.traits
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import world.cepi.itemextension.item.traits.list.NameTrait
-import world.cepi.itemextension.item.traits.list.attacks.Attack
-import world.cepi.itemextension.item.traits.list.attacks.AttackTrait
-import world.cepi.itemextension.item.traits.list.attacks.PrimaryAttackTrait
-import world.cepi.itemextension.item.traits.list.attacks.SecondaryAttackTrait
+import world.cepi.itemextension.item.traits.list.actions.Action
+import world.cepi.itemextension.item.traits.list.actions.ActionTrait
+import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
+import world.cepi.itemextension.item.traits.list.actions.SecondaryActionTrait
 
 class TraitContainerTest {
 
@@ -18,28 +18,28 @@ class TraitContainerTest {
 
         traitContainerImpl.put(NameTrait("Hello World!"))
 
-        traitContainerImpl.put(PrimaryAttackTrait(Attack.TargetAttack()))
-        traitContainerImpl.put(SecondaryAttackTrait(Attack.Strike()))
+        traitContainerImpl.put(PrimaryActionTrait(Action.FlatDamage()))
+        traitContainerImpl.put(SecondaryActionTrait(Action.Strike()))
 
         assertTrue(traitContainerImpl.hasTrait<NameTrait>())
 
-        assertFalse(traitContainerImpl.hasTrait<AttackTrait>())
+        assertFalse(traitContainerImpl.hasTrait<ActionTrait>())
 
-        assertTrue(traitContainerImpl.hasTrait<PrimaryAttackTrait>())
-        assertTrue(traitContainerImpl.softHasTrait<AttackTrait>())
+        assertTrue(traitContainerImpl.hasTrait<PrimaryActionTrait>())
+        assertTrue(traitContainerImpl.softHasTrait<ActionTrait>())
 
         assertEquals(
             listOf(
-                PrimaryAttackTrait(Attack.TargetAttack()),
-                SecondaryAttackTrait(Attack.Strike())
+                PrimaryActionTrait(Action.FlatDamage()),
+                SecondaryActionTrait(Action.Strike())
             ),
-            traitContainerImpl.softGet<AttackTrait>()
+            traitContainerImpl.softGet<ActionTrait>()
         )
 
         assertEquals("Hello World!", traitContainerImpl.get<NameTrait>()?.name)
 
-        traitContainerImpl.removeTrait<PrimaryAttackTrait>()
+        traitContainerImpl.removeTrait<PrimaryActionTrait>()
 
-        assertFalse(traitContainerImpl.hasTrait<PrimaryAttackTrait>())
+        assertFalse(traitContainerImpl.hasTrait<PrimaryActionTrait>())
     }
 }

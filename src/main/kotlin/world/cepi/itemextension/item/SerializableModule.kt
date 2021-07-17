@@ -5,9 +5,9 @@ import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.list.*
-import world.cepi.itemextension.item.traits.list.attacks.PrimaryAttackTrait
-import world.cepi.itemextension.item.traits.list.attacks.SecondaryAttackTrait
-import world.cepi.itemextension.item.traits.list.attacks.TertiaryAttackTrait
+import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
+import world.cepi.itemextension.item.traits.list.actions.SecondaryActionTrait
+import world.cepi.itemextension.item.traits.list.actions.TertiaryActionTrait
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 
@@ -27,9 +27,9 @@ val itemSerializationModule = SerializersModule {
         subclass(PriceTrait::class)
         subclass(KnockbackTrait::class)
 
-        subclass(PrimaryAttackTrait::class)
-        subclass(SecondaryAttackTrait::class)
-        subclass(TertiaryAttackTrait::class)
+        subclass(PrimaryActionTrait::class)
+        subclass(SecondaryActionTrait::class)
+        subclass(TertiaryActionTrait::class)
 
         subclass(HealthStatTrait::class)
         subclass(SpeedStatTrait::class)

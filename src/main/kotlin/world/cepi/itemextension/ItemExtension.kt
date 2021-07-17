@@ -11,7 +11,7 @@ import world.cepi.itemextension.command.GiveCommand
 import world.cepi.itemextension.command.HealCommand
 import world.cepi.itemextension.command.NBTCommand
 import world.cepi.itemextension.command.itemcommand.ItemCommand
-import world.cepi.itemextension.item.traits.list.attacks.AttackTrait.Companion.itemNode
+import world.cepi.itemextension.item.traits.list.actions.ActionTrait.Companion.itemNode
 import world.cepi.itemextension.stats.StatsHandler
 import world.cepi.kstom.command.register
 import world.cepi.kstom.command.unregister
