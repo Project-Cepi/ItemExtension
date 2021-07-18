@@ -9,6 +9,7 @@ import net.minestom.server.entity.damage.DamageType
 import net.minestom.server.sound.SoundEvent
 import world.cepi.energy.energy
 import world.cepi.itemextension.combat.TargetHandler
+import world.cepi.kstom.command.arguments.generation.annotations.DefaultNumber
 
 
 @Serializable
@@ -67,7 +68,10 @@ sealed class Action {
     }
 
     @Serializable
-    data class Dash(val amount: Double = 15.0, val dummy: String = "") : Action() {
+    data class Dash(
+        @param:DefaultNumber(15.0)
+        val amount: Double = 15.0
+    ) : Action() {
         override val displayName = "Dash"
         override val usedEnergy = 5
 
