@@ -47,6 +47,9 @@ $dokka.location:world.cepi.itemextension.command////PointingToDeclaration/-item
 $dokka.location:world.cepi.itemextension.command/ClearCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-clear-command/index.html
 $dokka.location:world.cepi.itemextension.command/GiveCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-give-command/index.html
 $dokka.location:world.cepi.itemextension.command/HealCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-heal-command/index.html
+$dokka.location:world.cepi.itemextension.item.context////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/index.html
+$dokka.location:world.cepi.itemextension.item.context/ItemContextParser///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/-item-context-parser/index.html
+$dokka.location:world.cepi.itemextension.item.context/ItemContextParser/parse/#net.minestom.server.command.CommandSender/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/-item-context-parser/parse.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash/Dash/#kotlin.Double/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/-dash.html
@@ -284,6 +287,7 @@ world.cepi.itemextension.command.itemcommand
 world.cepi.itemextension.command.itemcommand.loaders
 world.cepi.itemextension.command.itemcommand.loaders.actions
 world.cepi.itemextension.item
+world.cepi.itemextension.item.context
 world.cepi.itemextension.item.traits
 world.cepi.itemextension.item.traits.list
 world.cepi.itemextension.item.traits.list.actions
