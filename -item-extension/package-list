@@ -49,10 +49,9 @@ $dokka.location:world.cepi.itemextension.command/GiveCommand///PointingToDeclara
 $dokka.location:world.cepi.itemextension.command/HealCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-heal-command/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/index.html
-$dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash/Dash/#kotlin.Double#kotlin.String/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/-dash.html
+$dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash/Dash/#kotlin.Double/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/-dash.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash/amount/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/amount.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash/displayName/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/display-name.html
-$dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash/dummy/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/dummy.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.Dash/usedEnergy/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-dash/used-energy.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.FlatDamage///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-flat-damage/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions/Action.FlatDamage/FlatDamage/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions/-action/-flat-damage/-flat-damage.html
