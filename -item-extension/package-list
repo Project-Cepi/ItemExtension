@@ -246,10 +246,12 @@ $dokka.location:world.cepi.itemextension.item.traits/TraitContainer/softGet/#kot
 $dokka.location:world.cepi.itemextension.item.traits/TraitContainer/softHasTrait/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-trait-container/soft-has-trait.html
 $dokka.location:world.cepi.itemextension.item.traits/TraitContainer/softHasTrait/#kotlin.reflect.KClass[TypeParam(bounds=[world.cepi.itemextension.item.traits.ItemTrait])]/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-trait-container/soft-has-trait.html
 $dokka.location:world.cepi.itemextension.item.traits/TraitContainer/traits/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-trait-container/traits.html
+$dokka.location:world.cepi.itemextension.item.traits/TraitContainer/unaryPlus/TypeParam(bounds=[world.cepi.itemextension.item.traits.ItemTrait])#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-trait-container/unary-plus.html
 $dokka.location:world.cepi.itemextension.item.traits/TraitRefrenceList///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-trait-refrence-list/index.html
 $dokka.location:world.cepi.itemextension.item.traits/TraitRefrenceList/TraitRefrenceList/#kotlin.Array[kotlin.reflect.KClass[world.cepi.itemextension.item.traits.ItemTrait]]/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-trait-refrence-list/-trait-refrence-list.html
 $dokka.location:world.cepi.itemextension.item.traits/TraitRefrenceList/classList/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits/-trait-refrence-list/class-list.html
 $dokka.location:world.cepi.itemextension.item////PointingToDeclaration/-item-extension/world.cepi.itemextension.item/index.html
+$dokka.location:world.cepi.itemextension.item//cepiItem/#kotlin.Function1[world.cepi.itemextension.item.Item,kotlin.Unit]/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/cepi-item.html
 $dokka.location:world.cepi.itemextension.item//checkIsItem/#net.minestom.server.item.ItemStack/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/check-is-item.html
 $dokka.location:world.cepi.itemextension.item//itemSerializationModule/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item/item-serialization-module.html
 $dokka.location:world.cepi.itemextension.item/Item.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item/-item/-companion/index.html
