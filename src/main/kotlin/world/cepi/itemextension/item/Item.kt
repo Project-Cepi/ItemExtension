@@ -92,4 +92,11 @@ fun checkIsItem(itemStack: ItemStack): Boolean {
     return itemStack.meta.get<Item>(key, itemSerializationModule) != null
 }
 
-fun cepiItem(lambda: Item.() -> Unit) = lambda(Item())
+/**
+ * DSL for creating cepi items
+ *
+ * @param lambda The DSL receiver lambda.
+ *
+ * @return The item instance with applied changes
+ */
+fun cepiItem(lambda: Item.() -> Unit): Item = Item().also { it.lambda() }

@@ -23,6 +23,7 @@ class ItemSerializer {
             +PrimaryActionTrait(Action.Dash())
         }
 
+
         val json = DataSubcommand.format.encodeToString(item)
 
         val decodedJSON = DataSubcommand.format.decodeFromString<Item>(json)
