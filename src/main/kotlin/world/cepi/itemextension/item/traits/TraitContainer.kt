@@ -17,6 +17,8 @@ abstract class TraitContainer<T : ItemTrait> {
         traits.forEach { this.traits[it::class] = it }
     }
 
+    operator fun T.unaryPlus() = put(this)
+
     /**
      * Safely removes a trait based on its class refrence.
      *

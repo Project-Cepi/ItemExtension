@@ -91,3 +91,5 @@ fun checkIsItem(itemStack: ItemStack): Boolean {
 
     return itemStack.meta.get<Item>(key, itemSerializationModule) != null
 }
+
+fun cepiItem(lambda: Item.() -> Unit) = lambda(Item())
