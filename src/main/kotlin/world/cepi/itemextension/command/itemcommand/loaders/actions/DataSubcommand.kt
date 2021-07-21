@@ -1,8 +1,5 @@
 package world.cepi.itemextension.command.itemcommand.loaders.actions
 
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.event.HoverEvent
@@ -11,23 +8,14 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
-import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.itemSerializationModule
+import world.cepi.itemextension.item.cepiItem
 import world.cepi.kepi.command.subcommand.applyHelp
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kepi.messages.translations.formatTranslableMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.literal
-import world.cepi.kstom.item.get
 
 object DataSubcommand : Command("data") {
-
-    val format = Json {
-        ignoreUnknownKeys = true
-        coerceInputValues = true
-        isLenient = true
-        serializersModule = itemSerializationModule
-    }
 
     init {
         val get = "get".literal()
@@ -42,30 +30,31 @@ object DataSubcommand : Command("data") {
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
-                player.sendFormattedTranslatableMessage("mob", "main.required")
+                player.sendFormattedTranslatableMessage("item", "main.required")
                 return@addSyntax
             }
 
-            if (checkIsItem(itemStack)) {
+            val data = itemStack.cepiItem?.toJSON() ?: run {
+                player.sendFormattedTranslatableMessage("item", "formatted.required")
+                return@addSyntax
+            }
 
-                val data = format.encodeToString(itemStack.meta.get<Item>(Item.key, itemSerializationModule))
-
-                sender.sendMessage(
-                    Component.text(
-                        data,
-                        NamedTextColor.GRAY
-                    ).hoverEvent(
-                        HoverEvent.showText(
-                            sender.formatTranslableMessage("common", "click.to_copy")
-                                .color(NamedTextColor.GRAY)
-                        )
-                    ).clickEvent(
-                        ClickEvent.copyToClipboard(
-                            data
-                        )
+            sender.sendMessage(
+                Component.text(
+                    data,
+                    NamedTextColor.GRAY
+                ).hoverEvent(
+                    HoverEvent.showText(
+                        sender.formatTranslableMessage("common", "click.to_copy")
+                            .color(NamedTextColor.GRAY)
+                    )
+                ).clickEvent(
+                    ClickEvent.copyToClipboard(
+                        data
                     )
                 )
-            }
+            )
+
         }
 
         // TODO use translation
@@ -87,7 +76,7 @@ object DataSubcommand : Command("data") {
             val nbtData = context.get(json) // TODO process to json and convert
 
             try {
-                val item = format.decodeFromString<Item>(nbtData)
+                val item = Item.fromJSON(nbtData)
 
                 player.itemInMainHand = item.renderItem()
             } catch (exception: Exception) {

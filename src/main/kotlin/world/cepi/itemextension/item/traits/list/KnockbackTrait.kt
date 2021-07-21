@@ -10,13 +10,13 @@ import world.cepi.kstom.item.withMeta
 
 @Serializable
 @SerialName("knockback")
-data class KnockbackTrait(val amount: Double): ItemTrait() {
+data class KnockbackTrait(val amount: Float): ItemTrait() {
 
     override val taskIndex = 0f
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
         item.withMeta {
-            set(Tag.Double("knockback"), amount)
+            set(Tag.Float("knockback"), amount)
         }
     }
 

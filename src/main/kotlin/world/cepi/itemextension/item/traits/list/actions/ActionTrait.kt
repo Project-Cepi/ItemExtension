@@ -10,10 +10,9 @@ import net.minestom.server.event.player.*
 import net.minestom.server.event.trait.PlayerEvent
 import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.Item
-import world.cepi.itemextension.item.itemSerializationModule
+import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kstom.event.listenOnly
-import world.cepi.kstom.item.get
 import world.cepi.kstom.raycast.HitType
 import world.cepi.kstom.raycast.RayCast
 
@@ -42,7 +41,7 @@ sealed class ActionTrait: ItemTrait() {
 
             val itemStack = player.itemInMainHand
 
-            val cepiItem = itemStack.meta.get<Item>(Item.key, itemSerializationModule) ?: return@with
+            val cepiItem = itemStack.cepiItem ?: return@with
 
             if (!cepiItem.hasTrait<TertiaryActionTrait>())
                 return
@@ -58,7 +57,7 @@ sealed class ActionTrait: ItemTrait() {
 
             val itemStack = player.itemInMainHand
 
-            val cepiItem = itemStack.meta.get<Item>(Item.key, itemSerializationModule) ?: return@with
+            val cepiItem = itemStack.cepiItem ?: return@with
 
             val actionTrait = if (player.isSneaking && cepiItem.hasTrait<SecondaryActionTrait>()) {
                 cepiItem.get<SecondaryActionTrait>()!!

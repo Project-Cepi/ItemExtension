@@ -1,6 +1,9 @@
 package world.cepi.itemextension.item
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import net.minestom.server.data.DataImpl
 import net.minestom.server.item.ItemHideFlag
 import net.minestom.server.item.ItemStack
@@ -52,12 +55,6 @@ class Item: TraitContainer<ItemTrait>() {
             .map { trait -> trait.task(this, this@Item) }
     }
 
-
-    companion object {
-        /** Key for kotlin JSON storage. */
-        const val key = "cepi-item"
-    }
-
     override fun equals(other: Any?): Boolean {
         if (other !is Item) return false
 
@@ -76,6 +73,22 @@ class Item: TraitContainer<ItemTrait>() {
         return Objects.hash(*traits.values.toTypedArray())
     }
 
+    fun toJSON() = format.encodeToString(this)
+
+    companion object {
+        /** Key for kotlin JSON storage. */
+        const val key = "cepi-item"
+
+        val format = Json {
+            ignoreUnknownKeys = true
+            coerceInputValues = true
+            isLenient = true
+            serializersModule = itemSerializationModule
+        }
+
+        fun fromJSON(json: String) = format.decodeFromString<Item>(json)
+    }
+
 }
 
 /**
@@ -91,6 +104,9 @@ fun checkIsItem(itemStack: ItemStack): Boolean {
 
     return itemStack.meta.get<Item>(key, itemSerializationModule) != null
 }
+
+val ItemStack.cepiItem: Item?
+    get() = this.meta.get(key, itemSerializationModule)
 
 /**
  * DSL for creating cepi items

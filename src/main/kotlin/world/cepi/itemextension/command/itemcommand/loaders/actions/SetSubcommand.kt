@@ -7,6 +7,7 @@ import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.*
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.ItemTrait
@@ -77,7 +78,7 @@ object SetSubcommand : Command("set") {
             }
 
             if (checkIsItem(itemStack)) {
-                val item = itemStack.meta.get<Item>(Item.key, itemSerializationModule)!!
+                val item = itemStack.cepiItem!!
 
                 item.put(instance)
 
@@ -85,7 +86,7 @@ object SetSubcommand : Command("set") {
 
                 player.sendFormattedTranslatableMessage("item", "trait.add", Component.text(processTraitName(lastTrait.simpleName!!), NamedTextColor.BLUE))
             } else
-                player.sendFormattedTranslatableMessage("mob", "formatted.required")
+                player.sendFormattedTranslatableMessage("item", "formatted.required")
         }
 
         traitConstructorSyntaxes.callback = { sender.sendFormattedTranslatableMessage("item", "trait.invalid") }

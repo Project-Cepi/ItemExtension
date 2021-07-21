@@ -1,11 +1,8 @@
 package world.cepi.itemextension.item.serialization
 
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import world.cepi.itemextension.command.itemcommand.loaders.actions.DataSubcommand
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.traits.list.AttackSpeedTrait
@@ -24,9 +21,9 @@ class ItemSerializer {
         }
 
 
-        val json = DataSubcommand.format.encodeToString(item)
+        val json = item.toJSON()
 
-        val decodedJSON = DataSubcommand.format.decodeFromString<Item>(json)
+        val decodedJSON = Item.fromJSON(json)
 
         assertEquals(item, decodedJSON)
 
