@@ -2,7 +2,6 @@ package world.cepi.itemextension.combat.events
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import net.minestom.server.MinecraftServer
 import net.minestom.server.entity.GameMode
 import net.minestom.server.entity.LivingEntity
 import net.minestom.server.entity.Player
@@ -99,7 +98,7 @@ object CombatHandler {
                 true
             )
 
-            MinecraftServer.getSchedulerManager().buildTask {
+            Manager.scheduler.buildTask {
                 hologram.remove()
             }.delay(1, TimeUnit.SECOND).schedule()
         }
