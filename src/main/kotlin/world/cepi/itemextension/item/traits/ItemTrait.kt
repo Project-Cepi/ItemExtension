@@ -27,7 +27,7 @@ abstract class ItemTrait {
     open fun task(item: ItemStackBuilder, originalItem: Item) { }
 
     /**
-     * This function is called based on the [loreIndex] of the [ItemTrait]
+     * This function is called based on the [ItemTrait.Companion.classList] of the [ItemTrait]
      *
      * @return A list of ColoredText used to display on an array
      */

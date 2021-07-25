@@ -6,17 +6,11 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.*
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
-import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.arguments.generation.GeneratedArguments.Companion.createSyntaxesFrom
-import world.cepi.kstom.command.arguments.generation.generateSyntaxes
-import world.cepi.kstom.command.arguments.literal
-import world.cepi.kstom.command.setArgumentCallback
-import world.cepi.kstom.item.get
 import kotlin.reflect.KClass
 import kotlin.reflect.full.*
 
