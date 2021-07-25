@@ -10,6 +10,7 @@ import net.minestom.server.entity.hologram.Hologram
 import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.inventory.EquipmentHandler
+import net.minestom.server.tag.Tag
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.combat.AttackSpeedHandler.canUseItem
 import world.cepi.itemextension.combat.AttackSpeedHandler.useAttackSpeed
@@ -36,7 +37,12 @@ object CombatHandler {
         if (entity.isDeadCepi || target.isDeadCepi)
             return
 
+        // Don't attack immume mobs (red delay)
         if (ImmunityHandler.isImmune(target))
+            return
+
+        // Don't attack immune mobs (by tag)
+        if (target.hasTag(Tag.Byte("invulnerable")))
             return
 
         if (entity is EquipmentHandler && !entity.canUseItem((entity as EquipmentHandler).itemInMainHand))
