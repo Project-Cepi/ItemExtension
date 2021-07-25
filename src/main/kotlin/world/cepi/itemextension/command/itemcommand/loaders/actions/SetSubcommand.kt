@@ -11,6 +11,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.arguments.generation.GeneratedArguments.Companion.createSyntaxesFrom
+import world.cepi.kstom.command.arguments.literal
 import kotlin.reflect.KClass
 import kotlin.reflect.full.*
 
