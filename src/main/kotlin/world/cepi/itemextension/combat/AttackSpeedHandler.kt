@@ -44,7 +44,7 @@ object AttackSpeedHandler {
         // Has the cooldown time passed
         if (
             System.currentTimeMillis() - attackSpeedMap[this]!!.time
-            < cepiItem.get<AttackSpeedTrait>()!!.attackSpeed
+            < cepiItem.get<AttackSpeedTrait>()!!.attackSpeed.toMillis()
         ) return false
 
         return true
