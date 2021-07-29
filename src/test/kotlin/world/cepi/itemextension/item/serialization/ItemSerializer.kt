@@ -9,6 +9,7 @@ import world.cepi.itemextension.item.traits.list.AttackSpeedTrait
 import world.cepi.itemextension.item.traits.list.LevelTrait
 import world.cepi.itemextension.item.traits.list.actions.Action
 import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
+import java.time.Duration
 
 class ItemSerializer {
 
@@ -16,7 +17,7 @@ class ItemSerializer {
     fun `normal item serialization should turn back into an item safely`() {
         val item = cepiItem {
             +LevelTrait(5)
-            +AttackSpeedTrait(10.1)
+            +AttackSpeedTrait(Duration.ofMillis(10_000))
             +PrimaryActionTrait(Action.Dash())
         }
 
