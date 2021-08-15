@@ -30,6 +30,7 @@ $dokka.location:world.cepi.itemextension.combat/TargetHandler/register/#/Pointin
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions////PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/index.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions/CreateSubcommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/-create-subcommand/index.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions/DataSubcommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/-data-subcommand/index.html
+$dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions/RegistrySubcommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/-registry-subcommand/index.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions/RemoveSubcommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/-remove-subcommand/index.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions/RemoveSubcommand/traitList/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/-remove-subcommand/trait-list.html
 $dokka.location:world.cepi.itemextension.command.itemcommand.loaders.actions/ResetSubcommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command.itemcommand.loaders.actions/-reset-subcommand/index.html
@@ -53,6 +54,12 @@ $dokka.location:world.cepi.itemextension.command////PointingToDeclaration/-item
 $dokka.location:world.cepi.itemextension.command/ClearCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-clear-command/index.html
 $dokka.location:world.cepi.itemextension.command/GiveCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-give-command/index.html
 $dokka.location:world.cepi.itemextension.command/HealCommand///PointingToDeclaration/-item-extension/world.cepi.itemextension.command/-heal-command/index.html
+$dokka.location:world.cepi.itemextension.data////PointingToDeclaration/-item-extension/world.cepi.itemextension.data/index.html
+$dokka.location:world.cepi.itemextension.data/RegisteredItem///PointingToDeclaration/-item-extension/world.cepi.itemextension.data/-registered-item/index.html
+$dokka.location:world.cepi.itemextension.data/RegisteredItem/RegisteredItem/#kotlin.String#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.data/-registered-item/-registered-item.html
+$dokka.location:world.cepi.itemextension.data/RegisteredItem/item/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.data/-registered-item/item.html
+$dokka.location:world.cepi.itemextension.data/RegisteredItem/key/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.data/-registered-item/key.html
+$dokka.location:world.cepi.itemextension.data/RegisteredItemModel///PointingToDeclaration/-item-extension/world.cepi.itemextension.data/-registered-item-model/index.html
 $dokka.location:world.cepi.itemextension.item.context////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/index.html
 $dokka.location:world.cepi.itemextension.item.context/ItemContextParser///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/-item-context-parser/index.html
 $dokka.location:world.cepi.itemextension.item.context/ItemContextParser/parse/#net.minestom.server.command.CommandSender/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/-item-context-parser/parse.html
@@ -298,6 +305,7 @@ world.cepi.itemextension.command
 world.cepi.itemextension.command.itemcommand
 world.cepi.itemextension.command.itemcommand.loaders
 world.cepi.itemextension.command.itemcommand.loaders.actions
+world.cepi.itemextension.data
 world.cepi.itemextension.item
 world.cepi.itemextension.item.context
 world.cepi.itemextension.item.traits
