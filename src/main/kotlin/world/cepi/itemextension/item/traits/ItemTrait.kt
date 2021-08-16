@@ -61,6 +61,8 @@ abstract class ItemTrait {
             HealthStatTrait::class,
             SpeedStatTrait::class,
 
+            DurabilityTrait::class,
+
             RarityTrait::class,
             LoreTrait::class,
             CustomTextTrait::class

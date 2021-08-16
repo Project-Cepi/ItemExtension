@@ -1,5 +1,6 @@
 package world.cepi.itemextension.combat.events
 
+import net.kyori.adventure.sound.Sound
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.entity.GameMode
@@ -10,6 +11,8 @@ import net.minestom.server.entity.hologram.Hologram
 import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.inventory.EquipmentHandler
+import net.minestom.server.item.ItemStack
+import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.combat.AttackSpeedHandler.canUseItem
@@ -18,10 +21,7 @@ import world.cepi.itemextension.combat.ImmunityHandler
 import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.itemextension.item.traits.list.ArmorTrait
-import world.cepi.itemextension.item.traits.list.DamageTrait
-import world.cepi.itemextension.item.traits.list.KnockbackTrait
-import world.cepi.itemextension.item.traits.list.LevelTrait
+import world.cepi.itemextension.item.traits.list.*
 import world.cepi.kstom.Manager
 import java.text.NumberFormat
 
@@ -112,6 +112,35 @@ object CombatHandler {
         // Calls the event for other handlers to listen to.
         val deathEvent = EntityDeathEvent(target)
         Manager.globalEvent.call(deathEvent)
+
+        if (cepiItem?.hasTrait<DurabilityTrait>() == true) {
+
+            val currentDurabilityTrait = cepiItem.get<DurabilityTrait>()!!
+
+            if (currentDurabilityTrait.currentDurability - 1 <= 0) {
+                (entity as? LivingEntity)?.itemInMainHand = ItemStack.AIR
+
+                (entity as? Player)?.playSound(
+                    Sound.sound(
+                        SoundEvent.ITEM_BREAK,
+                        Sound.Source.MASTER,
+                        1f,
+                        1f
+                    )
+                )
+            } else {
+                cepiItem.put(DurabilityTrait(
+                    currentDurabilityTrait.maxDurability,
+                    currentDurabilityTrait.currentDurability - 1)
+                )
+
+                run set@ {
+                    (entity as? LivingEntity)?.itemInMainHand = cepiItem.renderItem(
+                        (entity as? LivingEntity)?.itemInMainHand?.amount ?: return@set
+                    )
+                }
+            }
+        }
 
         // Trigger immunity and attack speed if applicable
         ImmunityHandler.triggerImmune(target)

@@ -26,6 +26,7 @@ val itemSerializationModule = SerializersModule {
         subclass(AttackSpeedTrait::class)
         subclass(PriceTrait::class)
         subclass(KnockbackTrait::class)
+        subclass(DurabilityTrait::class)
 
         subclass(PrimaryActionTrait::class)
         subclass(SecondaryActionTrait::class)
