@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.title.Title
 import net.kyori.adventure.util.Ticks
+import net.minestom.server.coordinate.Pos
 import net.minestom.server.entity.Entity
 import net.minestom.server.entity.GameMode
 import net.minestom.server.entity.Player
@@ -12,7 +13,6 @@ import net.minestom.server.event.entity.EntityDamageEvent
 import net.minestom.server.instance.Instance
 import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
-import net.minestom.server.utils.Position
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.kstom.Manager
 
@@ -63,8 +63,8 @@ object DeathHandler {
         ).filterIsInstance<Player>()
             .forEach { loopPlayer ->
                 loopPlayer.playSound(Sound.sound(
-                    SoundEvent.SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
-                ), player.position.x, player.position.y, player.position.z)
+                    SoundEvent.ENTITY_SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
+                ), player.position.x(), player.position.y(), player.position.z())
             }
 
         deathMessage(player, 3)
@@ -89,8 +89,8 @@ object DeathHandler {
 
     }
 
-    private fun getNearbyEntities(instance: Instance, location: Position, distance: Double): Collection<Entity> {
-        return instance.entities.filter { e -> e.position.getDistance(location) <= distance * distance }
+    private fun getNearbyEntities(instance: Instance, location: Pos, distance: Double): Collection<Entity> {
+        return instance.entities.filter { e -> e.position.distance(location) <= distance * distance }
     }
 }
 

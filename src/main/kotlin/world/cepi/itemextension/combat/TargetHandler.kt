@@ -40,8 +40,8 @@ object TargetHandler {
                 val result = castRay(
                     it.instance!!,
                     it,
-                    it.position.clone().add(.0, it.eyeHeight, .0).toVector(),
-                    it.position.direction,
+                    it.position.add(.0, it.eyeHeight, .0).asVec(),
+                    it.position.direction(),
                     100.0,
                     0.25
                 )

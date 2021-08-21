@@ -33,7 +33,7 @@ sealed class ActionTrait: ItemTrait() {
 
     companion object {
 
-        val itemNode = EventNode.type("item-handler-actions", EventFilter.PLAYER)
+        val itemNode by lazy { EventNode.type("item-handler-actions", EventFilter.PLAYER) }
 
         fun <T> rightClick(event: T): Unit where T : PlayerEvent = with(event) {
 
@@ -79,8 +79,8 @@ sealed class ActionTrait: ItemTrait() {
                 if (hand == Player.Hand.MAIN && RayCast.castRay(
                         player.instance!!,
                         player,
-                        player.position.toVector().clone().add(.0, player.eyeHeight, .0),
-                        player.position.direction,
+                        player.position.asVec().add(.0, player.eyeHeight, .0),
+                        player.position.direction(),
                         5.0
                     ).hitType == HitType.NONE)
                     leftClick(this)

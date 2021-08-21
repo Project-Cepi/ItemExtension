@@ -42,7 +42,7 @@ object GiveCommand : Command("give") {
                 (item.displayName
                     ?: Component.text(
                         item.material
-                            .name
+                            .name()
                             .lowercase()
                             .split("_")
                             .joinToString(" ") { it.capitalize() }

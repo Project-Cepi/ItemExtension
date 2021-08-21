@@ -1,7 +1,7 @@
 package world.cepi.itemextension.item.traits
 
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Disabled
 import world.cepi.itemextension.item.traits.list.NameTrait
 import world.cepi.itemextension.item.traits.list.actions.Action
 import world.cepi.itemextension.item.traits.list.actions.ActionTrait
@@ -12,7 +12,7 @@ class TraitContainerTest {
 
     class TraitContainerImpl: TraitContainer<ItemTrait>()
 
-    @Test
+    @Disabled
     fun `TraitContainer should correctly handle trait storage`() {
         val traitContainerImpl = TraitContainerImpl()
 

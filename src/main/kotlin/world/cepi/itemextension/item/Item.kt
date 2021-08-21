@@ -13,8 +13,8 @@ import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.ItemTraitMapSerializer
 import world.cepi.itemextension.item.traits.TraitContainer
 import world.cepi.itemextension.item.traits.list.MaterialTrait
-import world.cepi.kstom.item.clientData
 import world.cepi.kstom.item.get
+import world.cepi.kstom.item.set
 import world.cepi.kstom.item.item
 import world.cepi.kstom.item.withMeta
 import java.util.*
@@ -40,9 +40,7 @@ class Item: TraitContainer<ItemTrait>() {
     ) {
 
         withMeta {
-            clientData {
-                this[key, itemSerializationModule] = this@Item
-            }
+            this[key, itemSerializationModule] = this@Item
 
             hideFlag(*ItemHideFlag.values())
         }

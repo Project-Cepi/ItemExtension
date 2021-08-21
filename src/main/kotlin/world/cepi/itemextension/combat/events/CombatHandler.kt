@@ -98,7 +98,7 @@ object CombatHandler {
 
             val hologram = Hologram(
                 livingTarget.instance!!,
-                livingTarget.position.clone().add(0.0, livingTarget.eyeHeight, 0.0),
+                livingTarget.position.add(0.0, livingTarget.eyeHeight, 0.0),
                 Component.text(format, NamedTextColor.RED).append(Component.text(" ❤", NamedTextColor.RED)),
                 true,
                 true
@@ -122,7 +122,7 @@ object CombatHandler {
 
                 (entity as? Player)?.playSound(
                     Sound.sound(
-                        SoundEvent.ITEM_BREAK,
+                        SoundEvent.ENTITY_ITEM_BREAK,
                         Sound.Source.MASTER,
                         1f,
                         1f

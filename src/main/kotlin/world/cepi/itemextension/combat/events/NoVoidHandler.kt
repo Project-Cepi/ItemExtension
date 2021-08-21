@@ -6,7 +6,7 @@ import net.minestom.server.event.entity.EntityDamageEvent
 
 object NoVoidHandler {
 
-    fun register(event: EntityDamageEvent) = with(event) {
+    fun register(event: EntityDamageEvent): Unit = with(event) {
 
         // Only void damage type
         if (damageType != DamageType.VOID) return

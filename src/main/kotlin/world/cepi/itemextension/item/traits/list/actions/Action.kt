@@ -76,8 +76,8 @@ sealed class Action {
         override val usedEnergy = 5
 
         override fun invoke(player: Player, target: LivingEntity?): Boolean {
-            player.velocity = player.position.direction.clone().normalize().multiply(amount)
-            player.playSound(Sound.sound(SoundEvent.PLAYER_ATTACK_SWEEP, Sound.Source.MASTER, 1f, 1f))
+            player.velocity = player.position.direction().normalize().mul(amount)
+            player.playSound(Sound.sound(SoundEvent.ENTITY_PLAYER_ATTACK_SWEEP, Sound.Source.MASTER, 1f, 1f))
 
             return true
         }
