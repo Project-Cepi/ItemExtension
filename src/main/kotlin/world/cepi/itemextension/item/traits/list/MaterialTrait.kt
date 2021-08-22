@@ -7,12 +7,14 @@ import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kstom.command.arguments.generation.annotations.DefaultNumber
+import world.cepi.kstom.serializer.MaterialSerializer
 
 /** The material that the item will take on. Default is Paper. */
 @Serializable
 @SerialName("material")
 data class MaterialTrait(
     /** The display material for the item */
+    @Serializable(with = MaterialSerializer::class)
     val material: Material = Material.PAPER,
 
     /** CustomModelData for the item (resource pack) */
