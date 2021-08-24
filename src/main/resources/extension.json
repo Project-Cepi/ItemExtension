@@ -4,7 +4,9 @@
   "version": "${project.version}",
   "dependencies": [
     "Kepi",
-    "KStom"
+    "KStom",
+    "MobExtension",
+    "Projectiles"
   ],
   "meta": {
     "downloadURL": "https://github.com/Project-Cepi/ItemExtension/releases/download/latest/ItemExtension-1.0.0-all.jar"

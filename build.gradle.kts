@@ -49,6 +49,12 @@ dependencies {
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:710df7ad94")
 
+    // Add projectiles
+    compileOnly("com.github.Project-Cepi:Projectiles:8191a5b6f8")
+
+    // Add mobs
+    compileOnly("com.github.Project-Cepi:MobExtension:0ed0fc125e")
+
     // Add canvas
     implementation("com.mattworzala:canvas:1.1.4")
 }

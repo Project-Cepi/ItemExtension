@@ -10,6 +10,11 @@ import net.minestom.server.sound.SoundEvent
 import world.cepi.energy.energy
 import world.cepi.itemextension.combat.TargetHandler
 import world.cepi.kstom.command.arguments.generation.annotations.DefaultNumber
+import world.cepi.kstom.command.arguments.generation.annotations.ParameterContext
+import world.cepi.mob.arguments.MobOffHandContextParser
+import world.cepi.mob.mob.Mob
+import world.cepi.projectile.context.ProjectileOffHandContextParser
+import world.cepi.projectile.structure.Projectile
 
 
 @Serializable
@@ -100,6 +105,24 @@ sealed class Action {
         override fun equals(other: Any?): Boolean {
             if (other !is Teleport) return false
             return true
+        }
+    }
+
+    @Serializable
+    data class Summon(
+        @param:ParameterContext(ProjectileOffHandContextParser::class)
+        val projectile: Projectile,
+        @param:ParameterContext(MobOffHandContextParser::class)
+        val mob: Mob
+    ) : Action() {
+
+        override val displayName = "Projectile"
+
+        override val requiresTarget = false
+
+        override fun invoke(player: Player, target: LivingEntity?): Boolean {
+            projectile.shoot(mob, player)
+            return false
         }
     }
 
