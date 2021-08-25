@@ -11,10 +11,12 @@ import world.cepi.energy.energy
 import world.cepi.itemextension.combat.TargetHandler
 import world.cepi.kstom.command.arguments.generation.annotations.DefaultNumber
 import world.cepi.kstom.command.arguments.generation.annotations.ParameterContext
+import world.cepi.kstom.serializer.SoundEventSerializer
 import world.cepi.mob.arguments.MobOffHandContextParser
 import world.cepi.mob.mob.Mob
 import world.cepi.projectile.context.ProjectileOffHandContextParser
 import world.cepi.projectile.structure.Projectile
+import kotlin.random.Random
 
 
 @Serializable
@@ -105,6 +107,27 @@ sealed class Action {
         override fun equals(other: Any?): Boolean {
             if (other !is Teleport) return false
             return true
+        }
+    }
+
+    @Serializable
+    data class RandomInstrument(
+        @param:ParameterContext(SoundEventSerializer::class)
+        val sound: SoundEvent
+    ) : Action() {
+
+        override val displayName = "Instrument"
+
+        override val requiresTarget = false
+
+        override fun invoke(player: Player, target: LivingEntity?): Boolean {
+            player.playSound(Sound.sound(
+                sound,
+                Sound.Source.MASTER,
+                1f,
+                Random.nextDouble(0.5, 2.0).toFloat()
+            ))
+            return false
         }
     }
 
