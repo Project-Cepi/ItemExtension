@@ -112,7 +112,7 @@ sealed class Action {
 
     @Serializable
     data class RandomInstrument(
-        @param:ParameterContext(SoundEventSerializer::class)
+        @Serializable(with = SoundEventSerializer::class)
         val sound: SoundEvent
     ) : Action() {
 
