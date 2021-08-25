@@ -56,7 +56,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:MobExtension:0ed0fc125e")
 
     // Add canvas
-    implementation("com.mattworzala:canvas:1.1.4")
+    implementation("com.mattworzala:canvas:1.1.5")
 }
 
 tasks.withType<Test> {
