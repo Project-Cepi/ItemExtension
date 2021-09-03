@@ -9,7 +9,6 @@ import net.minestom.server.entity.Player
 import net.minestom.server.entity.damage.DamageType
 import net.minestom.server.entity.hologram.Hologram
 import net.minestom.server.event.entity.EntityAttackEvent
-import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.inventory.EquipmentHandler
 import net.minestom.server.item.ItemStack
 import net.minestom.server.sound.SoundEvent
@@ -108,10 +107,6 @@ object CombatHandler {
                 hologram.remove()
             }.delay(1, TimeUnit.SECOND).schedule()
         }
-
-        // Calls the event for other handlers to listen to.
-        val deathEvent = EntityDeathEvent(target)
-        Manager.globalEvent.call(deathEvent)
 
         if (cepiItem?.hasTrait<DurabilityTrait>() == true) {
 

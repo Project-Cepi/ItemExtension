@@ -10,6 +10,7 @@ import net.minestom.server.entity.Entity
 import net.minestom.server.entity.GameMode
 import net.minestom.server.entity.Player
 import net.minestom.server.event.entity.EntityDamageEvent
+import net.minestom.server.event.entity.EntityDeathEvent
 import net.minestom.server.instance.Instance
 import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
@@ -85,10 +86,11 @@ object DeathHandler {
             player.setTag(Tag.Byte("dead"), 0)
         }.delay(3, TimeUnit.SECOND).schedule()
 
-        Unit
+        // Calls the event for other handlers to listen to.
+        val deathEvent = EntityDeathEvent(entity)
+        Manager.globalEvent.call(deathEvent)
 
     }
-
     private fun getNearbyEntities(instance: Instance, location: Pos, distance: Double): Collection<Entity> {
         return instance.entities.filter { e -> e.position.distance(location) <= distance * distance }
     }
