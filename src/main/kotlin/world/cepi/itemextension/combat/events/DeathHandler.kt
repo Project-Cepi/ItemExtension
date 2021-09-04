@@ -65,7 +65,7 @@ object DeathHandler {
         deathMessage(player, 3)
 
         player.isAutoViewable = false
-        player.viewers.clear()
+        player.viewers.forEach(player::removeViewer)
 
         Manager.scheduler.buildTask { deathMessage(player, 2) }.delay(1, TimeUnit.SECOND).schedule()
         Manager.scheduler.buildTask { deathMessage(player, 1) }.delay(2, TimeUnit.SECOND).schedule()
