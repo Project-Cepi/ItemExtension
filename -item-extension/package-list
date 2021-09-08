@@ -1,9 +1,13 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:world.cepi.itemextension.combat.events////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/index.html
+$dokka.location:world.cepi.itemextension.combat.events//deadTag/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/dead-tag.html
 $dokka.location:world.cepi.itemextension.combat.events//isDeadCepi/net.minestom.server.entity.Entity#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/is-dead-cepi.html
 $dokka.location:world.cepi.itemextension.combat.events/CombatHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/index.html
-$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/register/#net.minestom.server.event.entity.EntityAttackEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/register.html
+$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/canBeDamaged/#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/can-be-damaged.html
+$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/canDamageEntities/#net.minestom.server.entity.Entity/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/can-damage-entities.html
+$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/registerDamageByEntity/#net.minestom.server.event.entity.EntityAttackEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/register-damage-by-entity.html
+$dokka.location:world.cepi.itemextension.combat.events/CombatHandler/registerGenericDamage/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-combat-handler/register-generic-damage.html
 $dokka.location:world.cepi.itemextension.combat.events/DeathHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/index.html
 $dokka.location:world.cepi.itemextension.combat.events/DeathHandler/register/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-death-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.events/DisableDropping///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-disable-dropping/index.html
@@ -149,7 +153,7 @@ $dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait/taskIn
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait/value/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-stat-trait/value.html
 $dokka.location:world.cepi.itemextension.item.traits.list////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-companion/index.html
-$dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait.Companion/applyToDamage/#kotlin.Double#kotlin.Double/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-companion/apply-to-damage.html
+$dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait.Companion/applyToDamage/#kotlin.Double#kotlin.Float/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-companion/apply-to-damage.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait/ArmorTrait/#kotlin.Double/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-armor-trait.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait/armor/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/armor.html
