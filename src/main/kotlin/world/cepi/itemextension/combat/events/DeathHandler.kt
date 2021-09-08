@@ -54,7 +54,7 @@ object DeathHandler {
             isInvisible = true
         }
 
-        player.setTag(Tag.Byte("dead"), 1)
+        player.setTag(deadTag, 1)
 
         player.viewers.forEach { loopPlayer ->
             loopPlayer.playSound(Sound.sound(
@@ -72,7 +72,7 @@ object DeathHandler {
         Manager.scheduler.buildTask {
             player.apply {
 
-                player.isAutoViewable = true
+                isAutoViewable = true
 
                 resetTitle()
                 teleport(player.respawnPoint)
@@ -81,9 +81,9 @@ object DeathHandler {
                 isAllowFlying = originalFlyStatus
                 isFlying = false
                 isInvisible = false
-            }
 
-            player.setTag(Tag.Byte("dead"), 0)
+                setTag(deadTag, 0)
+            }
         }.delay(3, TimeUnit.SECOND).schedule()
 
         // Calls the event for other handlers to listen to.
@@ -93,5 +93,7 @@ object DeathHandler {
     }
 }
 
+val deadTag = Tag.Byte("dead")
+
 val Entity.isDeadCepi
-    get() = this.getTag(Tag.Byte("dead")) == 0.toByte()
+    get() = this.getTag(deadTag) == 0.toByte()

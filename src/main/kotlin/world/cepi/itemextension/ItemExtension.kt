@@ -22,7 +22,8 @@ class ItemExtension : Extension() {
     override fun initialize() {
 
         with(eventNode) {
-            listenOnly(CombatHandler::register)
+            listenOnly(CombatHandler::registerDamageByEntity)
+            listenOnly(CombatHandler::registerGenericDamage)
             listenOnly(DeathHandler::register)
             listenOnly(NoVoidHandler::register)
             listenOnly(DisableDropping::register)

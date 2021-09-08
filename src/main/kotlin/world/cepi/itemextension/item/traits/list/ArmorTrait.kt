@@ -25,7 +25,7 @@ data class ArmorTrait(
     }
 
     companion object {
-        fun applyToDamage(armor: Double, damage: Double): Double =
+        fun applyToDamage(armor: Double, damage: Float): Double =
             (damage - armor).coerceAtLeast(0.0)
     }
 
