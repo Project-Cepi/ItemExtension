@@ -153,9 +153,9 @@ $dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait/taskIn
 $dokka.location:world.cepi.itemextension.item.traits.list.stats/StatTrait/value/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.stats/-stat-trait/value.html
 $dokka.location:world.cepi.itemextension.item.traits.list////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait.Companion///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-companion/index.html
-$dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait.Companion/applyToDamage/#kotlin.Double#kotlin.Float/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-companion/apply-to-damage.html
+$dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait.Companion/applyToDamage/#kotlin.Float#kotlin.Float/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-companion/apply-to-damage.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/index.html
-$dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait/ArmorTrait/#kotlin.Double/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-armor-trait.html
+$dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait/ArmorTrait/#kotlin.Float/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/-armor-trait.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait/armor/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/armor.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait/renderLore/#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/render-lore.html
 $dokka.location:world.cepi.itemextension.item.traits.list/ArmorTrait/taskIndex/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-armor-trait/task-index.html
@@ -170,7 +170,7 @@ $dokka.location:world.cepi.itemextension.item.traits.list/CustomTextTrait/render
 $dokka.location:world.cepi.itemextension.item.traits.list/CustomTextTrait/taskIndex/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-custom-text-trait/task-index.html
 $dokka.location:world.cepi.itemextension.item.traits.list/CustomTextTrait/text/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-custom-text-trait/text.html
 $dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/index.html
-$dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/DamageTrait/#kotlin.Double/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/-damage-trait.html
+$dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/DamageTrait/#kotlin.Float/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/-damage-trait.html
 $dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/damage/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/damage.html
 $dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/renderLore/#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/render-lore.html
 $dokka.location:world.cepi.itemextension.item.traits.list/DamageTrait/task/#net.minestom.server.item.ItemStackBuilder#world.cepi.itemextension.item.Item/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list/-damage-trait/task.html
