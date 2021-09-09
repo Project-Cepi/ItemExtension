@@ -15,7 +15,7 @@ import world.cepi.itemextension.item.traits.ItemTrait
 @Serializable
 @SerialName("damage")
 data class DamageTrait(
-    val damage: Double
+    val damage: Float
 ) : ItemTrait() {
 
     override val taskIndex = 1f
@@ -29,7 +29,7 @@ data class DamageTrait(
     }
 
     override fun task(item: ItemStackBuilder, originalItem: Item) {
-        item.meta { it.set(Tag.Double("damage"), damage) }
+        item.meta { it.set(Tag.Float("damage"), damage) }
     }
 
 }

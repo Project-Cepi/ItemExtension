@@ -12,7 +12,7 @@ import world.cepi.itemextension.item.traits.ItemTrait
 @SerialName("armor")
 @Serializable
 data class ArmorTrait(
-    val armor: Double
+    val armor: Float
 ) : ItemTrait() {
 
     override val taskIndex = 1f
@@ -25,8 +25,8 @@ data class ArmorTrait(
     }
 
     companion object {
-        fun applyToDamage(armor: Double, damage: Float): Double =
-            (damage - armor).coerceAtLeast(0.0)
+        fun applyToDamage(armor: Float, damage: Float): Float =
+            (damage - armor).coerceAtLeast(0.0f)
     }
 
 

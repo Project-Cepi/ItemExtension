@@ -63,10 +63,14 @@ object CombatHandler {
         if (entity is EquipmentHandler && !entity.canUseItem((entity as EquipmentHandler).itemInMainHand))
             return false
 
+        if (entity is EquipmentHandler && !entity.canUseItem(entity.itemInMainHand))
+            return false
+
         return true
     }
 
     fun registerGenericDamage(event: EntityDamageEvent) = with(event) {
+
         if (!canBeDamaged(entity)) {
             isCancelled = true
             return@with
@@ -97,7 +101,10 @@ object CombatHandler {
                 // Don't action if the player doesn't have the correct levels
 
                 cepiItem?.get<LevelTrait>()?.let {
-                    if (attacker.level < it.level) return
+                    if (attacker.level < it.level) {
+                        isCancelled = true
+                        return
+                    }
                 }
             }
 
@@ -110,19 +117,21 @@ object CombatHandler {
             entity.chestplate,
             entity.helmet
         ).map {
-            it.cepiItem?.get<ArmorTrait>()?.armor ?: 0.0
+            it.cepiItem?.get<ArmorTrait>()?.armor ?: 0.0f
         }.sum()
 
         val finalDamage = ArmorTrait.applyToDamage(armor, damage)
 
-        // Damage the entity
-        entity.damage(DamageType.fromEntity(entity), finalDamage.toFloat())
+        damage = finalDamage
     }
 
     fun registerDamageByEntity(event: EntityAttackEvent) = with(event) {
         if (!canDamageEntities(entity)) {
             return
         }
+
+        // Ensure only living entities
+        if (target !is LivingEntity) return@with
 
         // Find the player's item if any
         val item = (entity as? LivingEntity)?.itemInMainHand
@@ -141,9 +150,6 @@ object CombatHandler {
                 if ((entity as Player).level < it.level) return
             }
         }
-
-        // Ensure only living entities
-        if (target !is LivingEntity) return@with
 
         // Apply knockback to the entity
         applyKnockback(target, entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 1.0f)
@@ -176,6 +182,9 @@ object CombatHandler {
                 }
             }
         }
+
+        // Damage the entity
+        (target as LivingEntity).damage(DamageType.fromEntity(entity), cepiItem?.get<DamageTrait>()?.damage ?: 1.0f)
 
         if (entity is EquipmentHandler)
             entity.useAttackSpeed((entity as EquipmentHandler).itemInMainHand)
