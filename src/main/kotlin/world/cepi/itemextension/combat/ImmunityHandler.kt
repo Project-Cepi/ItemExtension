@@ -1,18 +1,18 @@
 package world.cepi.itemextension.combat
 
-import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap
 import net.minestom.server.entity.Entity
+import java.util.*
 
 object ImmunityHandler {
 
     private const val cooldownMilliseconds = 200
 
-    private val immunityHandler = Object2LongOpenHashMap<Entity>()
+    private val immunityHandler = WeakHashMap<Entity, Long>()
 
     fun triggerImmune(entity: Entity) {
         immunityHandler[entity] = System.currentTimeMillis()
     }
 
     fun isImmune(entity: Entity) =
-        immunityHandler.containsKey(entity) && (System.currentTimeMillis() - immunityHandler.getLong(entity) < cooldownMilliseconds)
+        immunityHandler.containsKey(entity) && (System.currentTimeMillis() - (immunityHandler[entity] ?: 0L) < cooldownMilliseconds)
 }

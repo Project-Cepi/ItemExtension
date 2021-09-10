@@ -1,18 +1,22 @@
 package world.cepi.itemextension.combat.events
 
 import net.kyori.adventure.sound.Sound
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.entity.Entity
 import net.minestom.server.entity.GameMode
 import net.minestom.server.entity.LivingEntity
 import net.minestom.server.entity.Player
 import net.minestom.server.entity.damage.DamageType
 import net.minestom.server.entity.damage.EntityDamage
+import net.minestom.server.entity.hologram.Hologram
 import net.minestom.server.event.entity.EntityAttackEvent
 import net.minestom.server.event.entity.EntityDamageEvent
 import net.minestom.server.inventory.EquipmentHandler
 import net.minestom.server.item.ItemStack
 import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
+import net.minestom.server.utils.time.TimeUnit
 import world.cepi.itemextension.combat.AttackSpeedHandler.canUseItem
 import world.cepi.itemextension.combat.AttackSpeedHandler.useAttackSpeed
 import world.cepi.itemextension.combat.ImmunityHandler
@@ -20,6 +24,8 @@ import world.cepi.itemextension.combat.util.applyKnockback
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.*
+import world.cepi.kstom.Manager
+import java.text.NumberFormat
 
 object CombatHandler {
 
@@ -60,20 +66,16 @@ object CombatHandler {
         if (entity.isDeadCepi || entity.isRemoved)
             return false
 
-        if (entity is EquipmentHandler && !entity.canUseItem((entity as EquipmentHandler).itemInMainHand))
-            return false
-
         if (entity is EquipmentHandler && !entity.canUseItem(entity.itemInMainHand))
             return false
 
         return true
     }
 
-    fun registerGenericDamage(event: EntityDamageEvent) = with(event) {
-
+    fun registerGenericDamage(event: EntityDamageEvent): Unit = with(event) {
         if (!canBeDamaged(entity)) {
             isCancelled = true
-            return@with
+            return
         }
 
         if (damageType is EntityDamage) {
@@ -123,6 +125,25 @@ object CombatHandler {
         val finalDamage = ArmorTrait.applyToDamage(armor, damage)
 
         damage = finalDamage
+
+        // Display the holograms
+        run {
+            val format = NumberFormat.getInstance().format(-finalDamage)
+
+            val hologram = Hologram(
+                entity.instance!!,
+                entity.position.add(0.0, entity.eyeHeight, 0.0),
+                Component.text(format, NamedTextColor.RED).append(Component.text(" ❤", NamedTextColor.RED)),
+                true,
+                true
+            )
+
+            Manager.scheduler.buildTask {
+                hologram.remove()
+            }.delay(1, TimeUnit.SECOND).schedule()
+        }
+
+        ImmunityHandler.triggerImmune(entity)
     }
 
     fun registerDamageByEntity(event: EntityAttackEvent) = with(event) {
