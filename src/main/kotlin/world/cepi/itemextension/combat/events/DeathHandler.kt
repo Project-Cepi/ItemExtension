@@ -14,6 +14,7 @@ import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
 import net.minestom.server.utils.time.TimeUnit
 import world.cepi.kstom.Manager
+import world.cepi.kstom.util.playSound
 
 object DeathHandler {
     private fun deathMessage(player: Player, secondsLeft: Int) = player.showTitle(Title.title(
@@ -56,10 +57,10 @@ object DeathHandler {
 
         player.setTag(deadTag, 1)
 
-        player.viewers.forEach { loopPlayer ->
+        (player.viewers + player).forEach { loopPlayer ->
             loopPlayer.playSound(Sound.sound(
                 SoundEvent.ENTITY_SKELETON_DEATH, Sound.Source.PLAYER,2F, 1F
-            ), player.position.x(), player.position.y(), player.position.z())
+            ), player.position)
         }
 
         deathMessage(player, 3)
