@@ -32,7 +32,7 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Use the JUpiter test library.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
     // Compile Minestom into project
     compileOnly("com.github.Minestom", "Minestom", "fa07d861a6")
