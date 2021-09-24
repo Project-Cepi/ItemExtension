@@ -44,7 +44,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:EnergyExtension:f2bcdfc79e")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:710df7ad94")
