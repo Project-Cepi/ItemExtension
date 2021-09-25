@@ -1,6 +1,6 @@
 package world.cepi.itemextension.command.itemcommand.loaders
 
-import net.minestom.server.command.builder.Command
+import world.cepi.kstom.command.kommand.Kommand
 
 /** Loads when the command is registered */
 interface ItemCommandLoader {
@@ -11,6 +11,6 @@ interface ItemCommandLoader {
      * @param command The command to apply syntaxes to.
      *
      */
-    fun register(command: Command)
+    fun register(command: Kommand)
 
 }

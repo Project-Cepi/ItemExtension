@@ -5,16 +5,16 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedMessage
-import world.cepi.kstom.command.setArgumentCallback
+import world.cepi.kstom.command.kommand.Kommand
 
 object TraitListLoader : ItemCommandLoader {
 
-    override fun register(command: Command) {
+    override fun register(command: Kommand) {
         val traitList = ArgumentType.Word("trait")
             .from(*ItemTrait.classList.map { processTraitName(it.simpleName!!) }
                 .toTypedArray())
 
-        command.setArgumentCallback(traitList) { sender.sendFormattedMessage(Component.text("Invalid trait!")) }
+        command.argumentCallback(traitList) { sender.sendFormattedMessage(Component.text("Invalid trait!")) }
     }
 
 }

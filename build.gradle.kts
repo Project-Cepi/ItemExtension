@@ -38,7 +38,7 @@ dependencies {
     compileOnly("com.github.Minestom", "Minestom", "fa07d861a6")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:68d162a170")
+    compileOnly("com.github.Project-Cepi:KStom:e3ddf8f437")
 
     // add energy
     compileOnly("com.github.Project-Cepi:EnergyExtension:f2bcdfc79e")
@@ -47,7 +47,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:710df7ad94")
+    compileOnly("com.github.Project-Cepi:Kepi:23749ad45e")
 
     // Add projectiles
     compileOnly("com.github.Project-Cepi:Projectiles:8191a5b6f8")
@@ -97,11 +97,11 @@ tasks {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
 }
 
-tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
+tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "16" }
 val compileKotlin: KotlinCompile by tasks
 
 compileKotlin.kotlinOptions {

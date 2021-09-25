@@ -1,26 +1,22 @@
 package world.cepi.itemextension.command.itemcommand
 
-import net.minestom.server.command.builder.Command
 import world.cepi.itemextension.command.itemcommand.loaders.actions.*
 import world.cepi.itemextension.command.itemcommand.loaders.loaders
-import world.cepi.kstom.command.addSubcommands
+import world.cepi.kstom.command.kommand.Kommand
 
-object ItemCommand : Command("item") {
+object ItemCommand : Kommand({
 
-    init {
+    addSubcommands(
+        CreateSubcommand,
+        RemoveSubcommand,
+        ResetSubcommand,
+        SetSubcommand,
+        UpdateSubcommand,
+        DataSubcommand,
+        RegistrySubcommand
+    )
 
-        addSubcommands(
-            CreateSubcommand,
-            RemoveSubcommand,
-            ResetSubcommand,
-            SetSubcommand,
-            UpdateSubcommand,
-            DataSubcommand,
-            RegistrySubcommand
-        )
+    // Load loaders
+    loaders.forEach { it.register(this) }
 
-        // Load loaders
-        loaders.forEach { it.register(this) }
-    }
-
-}
+}, "item")

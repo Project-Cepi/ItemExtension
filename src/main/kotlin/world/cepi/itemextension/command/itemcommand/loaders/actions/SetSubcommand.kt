@@ -12,11 +12,12 @@ import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.arguments.generation.GeneratedArguments.Companion.createSyntaxesFrom
 import world.cepi.kstom.command.arguments.literal
+import world.cepi.kstom.command.kommand.Kommand
 import kotlin.reflect.KClass
 import kotlin.reflect.full.*
 
 // TODO break down and organize
-object SetSubcommand : Command("set") {
+object SetSubcommand : Kommand(name = "set") {
 
     val traits = ItemTrait.classList
 
