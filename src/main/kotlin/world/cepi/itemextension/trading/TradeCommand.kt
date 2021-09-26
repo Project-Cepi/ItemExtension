@@ -1,7 +1,12 @@
 package world.cepi.itemextension.trading
 
-import net.minestom.server.command.builder.Command
+import world.cepi.kstom.command.arguments.ArgumentPlayer
+import world.cepi.kstom.command.kommand.Kommand
 
-object TradeCommand : Command("trade") {
+object TradeCommand : Kommand({
+    val playerArgument = ArgumentPlayer("player")
 
-}
+    syntax(playerArgument) {
+        TradeManager.openTrade(player, !playerArgument)
+    }
+}, "trade")

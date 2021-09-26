@@ -13,8 +13,7 @@ import world.cepi.itemextension.command.NBTCommand
 import world.cepi.itemextension.command.itemcommand.ItemCommand
 import world.cepi.itemextension.item.traits.list.actions.ActionTrait.Companion.itemNode
 import world.cepi.itemextension.stats.StatsHandler
-import world.cepi.kstom.command.register
-import world.cepi.kstom.command.unregister
+import world.cepi.itemextension.trading.TradeCommand
 import world.cepi.kstom.event.listenOnly
 
 /** Extension wrapper for Minestom. */
@@ -38,6 +37,7 @@ class ItemExtension : Extension() {
         GiveCommand.register()
         HealCommand.register()
         NBTCommand.register()
+        TradeCommand.register()
 
         logger.info("[ItemExtension] has been enabled!")
 
@@ -52,6 +52,7 @@ class ItemExtension : Extension() {
         GiveCommand.unregister()
         HealCommand.unregister()
         NBTCommand.unregister()
+        TradeCommand.unregister()
 
         logger.info("[ItemExtension] has been disabled!")
     }
