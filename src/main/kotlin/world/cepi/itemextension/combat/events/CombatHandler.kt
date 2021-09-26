@@ -172,9 +172,6 @@ object CombatHandler {
             }
         }
 
-        // Apply knockback to the entity
-        applyKnockback(target, entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 1.0f)
-
         if (cepiItem?.hasTrait<DurabilityTrait>() == true) {
 
             val currentDurabilityTrait = cepiItem.get<DurabilityTrait>()!!
@@ -206,6 +203,9 @@ object CombatHandler {
 
         // Damage the entity
         (target as LivingEntity).damage(DamageType.fromEntity(entity), cepiItem?.get<DamageTrait>()?.damage ?: 1.0f)
+
+        // Apply knockback to the entity
+        applyKnockback(target, entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 1.0f)
 
         if (entity is EquipmentHandler)
             entity.useAttackSpeed((entity as EquipmentHandler).itemInMainHand)

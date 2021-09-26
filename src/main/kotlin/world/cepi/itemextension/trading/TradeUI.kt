@@ -2,6 +2,7 @@ package world.cepi.itemextension.trading
 
 import com.mattworzala.canvas.extra.mask
 import com.mattworzala.canvas.fragment
+import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.minestom.server.entity.Player
@@ -12,6 +13,11 @@ import net.minestom.server.item.metadata.PlayerHeadMeta
 internal object TradeUI {
 
     fun mainScreen(source: Player, target: Player) = fragment(9, 6) {
+
+        this.inventory.title = Component.text("Trade")
+            .append(source.name.color(NamedTextColor.BLUE))
+            .append(Component.text(" -> ", NamedTextColor.GRAY))
+            .append(target.name.color(NamedTextColor.BLUE))
 
         item(2,
             ItemStack.of(Material.PLAYER_HEAD)
