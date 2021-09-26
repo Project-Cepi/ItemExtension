@@ -97,4 +97,4 @@ object DeathHandler {
 val deadTag = Tag.Byte("dead")
 
 val Entity.isDeadCepi
-    get() = this.getTag(deadTag) == 0.toByte()
+    get() = this.getTag(deadTag) == 1.toByte()
