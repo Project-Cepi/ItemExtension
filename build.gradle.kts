@@ -69,10 +69,6 @@ configurations {
     }
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-
 // Take gradle.properties and apply it to resources.
 tasks {
     processResources {
@@ -89,7 +85,7 @@ tasks {
         minimize()
     }
 
-    test { useJUnitPlatform() }
+    withType<Test> { useJUnitPlatform() }
 
     // Make build depend on shadowJar as shading dependencies will most likely be required.
     build { dependsOn(shadowJar) }

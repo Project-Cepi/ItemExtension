@@ -37,6 +37,8 @@ data class RandomInstrument(
             cooldownTicks = 20
         }
 
+        player.sendPacket(packet)
+
         return false
     }
 }
