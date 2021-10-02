@@ -7,7 +7,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.traits.list.AttackSpeedTrait
 import world.cepi.itemextension.item.traits.list.LevelTrait
-import world.cepi.itemextension.item.traits.list.actions.Action
+import world.cepi.itemextension.item.traits.list.actions.list.Action
 import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
 import java.time.Duration
 

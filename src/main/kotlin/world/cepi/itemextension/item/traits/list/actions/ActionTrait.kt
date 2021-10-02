@@ -12,6 +12,7 @@ import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.traits.ItemTrait
+import world.cepi.itemextension.item.traits.list.actions.list.Action
 import world.cepi.kstom.event.listenOnly
 import world.cepi.kstom.raycast.HitType
 import world.cepi.kstom.raycast.RayCast
@@ -48,7 +49,7 @@ sealed class ActionTrait: ItemTrait() {
 
             val action = cepiItem.get<TertiaryActionTrait>()
 
-            action!!.action(player)
+            action!!.action(player, cepiItem)
         }
 
         fun <T> leftClick(event: T): Unit where T : PlayerEvent = with(event) {
@@ -67,7 +68,7 @@ sealed class ActionTrait: ItemTrait() {
                 return@with
             }
 
-            actionTrait.action(player)
+            actionTrait.action(player, cepiItem)
         }
 
         init {

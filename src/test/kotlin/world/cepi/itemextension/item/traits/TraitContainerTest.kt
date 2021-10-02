@@ -3,7 +3,7 @@ package world.cepi.itemextension.item.traits
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Disabled
 import world.cepi.itemextension.item.traits.list.NameTrait
-import world.cepi.itemextension.item.traits.list.actions.Action
+import world.cepi.itemextension.item.traits.list.actions.list.Action
 import world.cepi.itemextension.item.traits.list.actions.ActionTrait
 import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
 import world.cepi.itemextension.item.traits.list.actions.SecondaryActionTrait
