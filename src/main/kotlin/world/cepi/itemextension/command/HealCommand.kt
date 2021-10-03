@@ -23,8 +23,7 @@ object HealCommand : Kommand({
     syntax(targets) {
         val entities = (context[targets].setDistance(IntRange(0, 10))).find(sender)
             .filterIsInstance<LivingEntity>()
-
-        entities.forEach(LivingEntity::heal)
+            .onEach(LivingEntity::heal)
 
         if (entities.size == 1) {
             sender.sendFormattedTranslatableMessage(
