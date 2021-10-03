@@ -29,7 +29,7 @@ internal object NBTCommand : Kommand({
             
             You can get an item's nbt by holding it and using <blue</nbt get
             
-            You can set an item's nbt by using <blue>/nbt set (material) (nbt)
+            You can set an item's nbt by using <blue>/nbt set (nbt) (material)
         """.trimIndent()
     }
 
@@ -43,7 +43,7 @@ internal object NBTCommand : Kommand({
         )
     }
 
-    syntax(set, material, nbt) {
+    syntax(set, nbt, material) {
         player.itemInMainHand = ItemStack.fromNBT(
             context[material].material,
             context[nbt]
