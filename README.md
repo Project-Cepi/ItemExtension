@@ -1,5 +1,8 @@
-
 # ItemExtension  
+[![license](https://img.shields.io/github/license/Project-Cepi/ItemExtension?style=for-the-badge&color=b2204c)](../LICENSE)
+[![wiki](https://img.shields.io/badge/documentation-wiki-74aad6?style=for-the-badge)](https://project-cepi.github.io/docs/tools/items)
+[![discord-banner](https://img.shields.io/discord/706185253441634317?label=discord&style=for-the-badge&color=7289da)](https://discord.cepi.world/8K8WMGV)
+
 This minestom extension handles the items for Cepi.  
 
 It uses a trait based system to handle items.  
