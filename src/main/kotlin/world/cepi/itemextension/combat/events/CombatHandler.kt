@@ -37,7 +37,7 @@ object CombatHandler {
     fun canBeDamaged(entity: Entity): Boolean {
 
         // Don't action players in creative!
-        if (entity is Player && entity.gameMode == GameMode.CREATIVE) {
+        if (entity is Player && (entity.gameMode == GameMode.CREATIVE || entity.gameMode == GameMode.SPECTATOR)) {
             return false
         }
 
@@ -73,6 +73,10 @@ object CombatHandler {
     }
 
     fun registerGenericDamage(event: EntityDamageEvent): Unit = with(event) {
+        if (!canDamageEntities(entity)) {
+            return
+        }
+
         if (!canBeDamaged(entity)) {
             isCancelled = true
             return
@@ -151,6 +155,10 @@ object CombatHandler {
             return
         }
 
+        if (!canBeDamaged(entity)) {
+            return
+        }
+
         // Ensure only living entities
         if (target !is LivingEntity) return@with
 
@@ -205,7 +213,7 @@ object CombatHandler {
         (target as LivingEntity).damage(DamageType.fromEntity(entity), cepiItem?.get<DamageTrait>()?.damage ?: 1.0f)
 
         // Apply knockback to the entity
-        applyKnockback(target, entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 1.0f)
+        target.applyKnockback(entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 1.0f)
 
         if (entity is EquipmentHandler)
             entity.useAttackSpeed((entity as EquipmentHandler).itemInMainHand)
