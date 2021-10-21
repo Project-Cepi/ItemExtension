@@ -73,10 +73,6 @@ object CombatHandler {
     }
 
     fun registerGenericDamage(event: EntityDamageEvent): Unit = with(event) {
-        if (!canDamageEntities(entity)) {
-            return
-        }
-
         if (!canBeDamaged(entity)) {
             isCancelled = true
             return
@@ -155,7 +151,7 @@ object CombatHandler {
             return
         }
 
-        if (!canBeDamaged(entity)) {
+        if (!canBeDamaged(target)) {
             return
         }
 
