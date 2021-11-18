@@ -38,7 +38,7 @@ dependencies {
     compileOnly("com.github.Minestom", "Minestom", "e71c420fa8")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:125657fd29")
+    compileOnly("com.github.Project-Cepi:KStom:7cc1165723")
 
     // add energy
     compileOnly("com.github.Project-Cepi:EnergyExtension:f2bcdfc79e")

@@ -14,9 +14,8 @@ import world.cepi.itemextension.item.traits.ItemTraitMapSerializer
 import world.cepi.itemextension.item.traits.TraitContainer
 import world.cepi.itemextension.item.traits.list.MaterialTrait
 import world.cepi.kstom.item.get
-import world.cepi.kstom.item.set
 import world.cepi.kstom.item.item
-import world.cepi.kstom.item.withMeta
+import world.cepi.kstom.item.set
 import java.util.*
 import kotlin.reflect.KClass
 
@@ -39,11 +38,9 @@ class Item: TraitContainer<ItemTrait>() {
         amount
     ) {
 
-        withMeta {
-            this[key, itemSerializationModule] = this@Item
+        this[key, itemSerializationModule] = this@Item
 
-            hideFlag(*ItemHideFlag.values())
-        }
+        hideFlag(*ItemHideFlag.values())
 
         lore(traits.values.sortedBy { ItemTrait.classList.indexOf(it::class) }
             .map { trait -> trait.renderLore(this@Item) }
