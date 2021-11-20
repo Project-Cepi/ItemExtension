@@ -66,6 +66,7 @@ $dokka.location:world.cepi.itemextension.data/RegisteredItem/key/#/PointingToDec
 $dokka.location:world.cepi.itemextension.data/RegisteredItemModel///PointingToDeclaration/-item-extension/world.cepi.itemextension.data/-registered-item-model/index.html
 $dokka.location:world.cepi.itemextension.item.context////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/index.html
 $dokka.location:world.cepi.itemextension.item.context/ItemContextParser///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/-item-context-parser/index.html
+$dokka.location:world.cepi.itemextension.item.context/ItemContextParser/callbackMessage/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/-item-context-parser/callback-message.html
 $dokka.location:world.cepi.itemextension.item.context/ItemContextParser/parse/#net.minestom.server.command.CommandSender/PointingToDeclaration/-item-extension/world.cepi.itemextension.item.context/-item-context-parser/parse.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions.list////PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions.list/index.html
 $dokka.location:world.cepi.itemextension.item.traits.list.actions.list/Action.Dash///PointingToDeclaration/-item-extension/world.cepi.itemextension.item.traits.list.actions.list/-action/-dash/index.html
