@@ -1,5 +1,6 @@
 package world.cepi.itemextension.item.context
 
+import net.kyori.adventure.text.Component
 import net.minestom.server.command.CommandSender
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
@@ -14,5 +15,7 @@ object ItemContextParser : ContextParser<Item> {
 
     override fun parse(sender: CommandSender): Item? =
         (sender as? Player)?.itemInMainHand?.meta?.get(Item.key, itemSerializationModule)
+
+    override val callbackMessage = Component.text("No cepi item found in main hand!")
 
 }
