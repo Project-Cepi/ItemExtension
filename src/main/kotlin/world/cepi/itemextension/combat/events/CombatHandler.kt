@@ -209,7 +209,7 @@ object CombatHandler {
         (target as LivingEntity).damage(DamageType.fromEntity(entity), cepiItem?.get<DamageTrait>()?.damage ?: 1.0f)
 
         // Apply knockback to the entity
-        target.applyKnockback(entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 1.0f)
+        target.applyKnockback(entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 0f)
 
         if (entity is EquipmentHandler)
             entity.useAttackSpeed((entity as EquipmentHandler).itemInMainHand)

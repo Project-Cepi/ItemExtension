@@ -6,7 +6,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 
-fun Entity.applyKnockback(attacker: Entity, extra: Float = 1.0f) {
+fun Entity.applyKnockback(attacker: Entity, extra: Float = 0f) {
     val verticalKnockback = 0.4 * 20
     val horizontalKnockback = 0.4 * 20
     val extraHorizontalKnockback = 0.3 * 20
