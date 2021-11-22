@@ -1,45 +1,38 @@
 package world.cepi.itemextension.combat.util
 
-import net.minestom.server.coordinate.Vec
 import net.minestom.server.entity.Entity
-import net.minestom.server.inventory.EquipmentHandler
-import net.minestom.server.item.Enchantment
+import kotlin.math.PI
 import kotlin.math.cos
-import kotlin.math.min
 import kotlin.math.sin
-import kotlin.math.sqrt
 
 
 fun Entity.applyKnockback(attacker: Entity, extra: Float = 1.0f) {
-    val horizontalKnockback = 0.25 * 20.0 * extra
+    val verticalKnockback = 0.4 * 20
+    val horizontalKnockback = 0.4 * 20
+    val extraHorizontalKnockback = 0.3 * 20
+    val extraVerticalKnockback = 0.1 * 20
+    val limitVerticalKnockback = 0.4 * 20
 
-    val d0 = attacker.position.x() - position.x()
-    val d1 = attacker.position.z() - position.z()
+    val distanceX = attacker.position.x() - position.x()
+    val distanceY = attacker.position.z() - position.z()
 
-    val magnitude = sqrt(d0 * d0 + d1 * d1)
+    val magnitude = attacker.position.distance(position)
+    var knockback = extra
 
-    val knockbackLevel = (attacker as? EquipmentHandler)?.itemInMainHand
-        ?.meta?.enchantmentMap
-        ?.get(Enchantment.KNOCKBACK) ?: 0
-    var i = knockbackLevel.toDouble()
-
-    if (attacker.isSprinting) i += 1.25
+    if (attacker.isSprinting) knockback += 1.25f
 
     var newVelocity = velocity
-        .withX(((velocity.x() / 2) - (d0 / magnitude * horizontalKnockback)) )
-        .withY((min((velocity.y() / 2) + 8, 8.0)))
-        .withZ(((velocity.z() / 2) - (d1 / magnitude * horizontalKnockback)))
+        .withX { x -> (x / 2) - (distanceX / magnitude * horizontalKnockback) }
+        .withY { y -> (y / 2) + verticalKnockback }
+        .withZ { z -> (z / 2) - (distanceY / magnitude * horizontalKnockback) }
 
-    if (i > 0) newVelocity = newVelocity.add(
-        Vec(
-            (-sin(attacker.position.yaw() * Math.PI / 180.0f) * i.toFloat() * horizontalKnockback),
-            20.0,
-            (cos(attacker.position.yaw() * Math.PI / 180.0f) * i.toFloat() * horizontalKnockback)
-        )
+    if (knockback > 0) newVelocity = newVelocity.add(
+        -sin(attacker.position.yaw() * PI / 180.0f) * knockback * extraHorizontalKnockback,
+        extraVerticalKnockback,
+        cos(attacker.position.yaw() * PI / 180.0f) * knockback * extraHorizontalKnockback
     )
 
-    if (newVelocity.y() > 8)
-        newVelocity = newVelocity.withY(8.0)
+    if (newVelocity.y() > limitVerticalKnockback) newVelocity = newVelocity.withY(limitVerticalKnockback)
 
     velocity = newVelocity
 
