@@ -2,8 +2,8 @@ package world.cepi.itemextension.item.traits
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Disabled
+import world.cepi.actions.list.FlingAction
 import world.cepi.itemextension.item.traits.list.NameTrait
-import world.cepi.itemextension.item.traits.list.actions.list.Action
 import world.cepi.itemextension.item.traits.list.actions.ActionTrait
 import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
 import world.cepi.itemextension.item.traits.list.actions.SecondaryActionTrait
@@ -18,8 +18,8 @@ class TraitContainerTest {
 
         traitContainerImpl.put(NameTrait("Hello World!"))
 
-        traitContainerImpl.put(PrimaryActionTrait(Action.FlatDamage()))
-        traitContainerImpl.put(SecondaryActionTrait(Action.Strike()))
+        traitContainerImpl.put(PrimaryActionTrait(FlingAction(1.0), "Fling", true))
+        traitContainerImpl.put(SecondaryActionTrait(FlingAction(1.0), "Fling", true))
 
         assertTrue(traitContainerImpl.hasTrait<NameTrait>())
 
@@ -30,8 +30,8 @@ class TraitContainerTest {
 
         assertEquals(
             listOf(
-                PrimaryActionTrait(Action.FlatDamage()),
-                SecondaryActionTrait(Action.Strike())
+                PrimaryActionTrait(FlingAction(1.0), "Fling", true),
+                SecondaryActionTrait(FlingAction(1.0), "Fling", true)
             ),
             traitContainerImpl.softGet<ActionTrait>()
         )

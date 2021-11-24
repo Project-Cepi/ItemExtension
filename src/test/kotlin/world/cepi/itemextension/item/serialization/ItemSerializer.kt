@@ -3,11 +3,11 @@ package world.cepi.itemextension.item.serialization
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Disabled
+import world.cepi.actions.list.FlingAction
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.traits.list.AttackSpeedTrait
 import world.cepi.itemextension.item.traits.list.LevelTrait
-import world.cepi.itemextension.item.traits.list.actions.list.Action
 import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
 import java.time.Duration
 
@@ -18,7 +18,7 @@ class ItemSerializer {
         val item = cepiItem {
             +LevelTrait(5)
             +AttackSpeedTrait(Duration.ofMillis(10_000))
-            +PrimaryActionTrait(Action.Dash())
+            +PrimaryActionTrait(FlingAction(1.0), "Fling", true)
         }
 
 
@@ -32,7 +32,7 @@ class ItemSerializer {
         assertEquals(LevelTrait(5), decodedJSON.get<LevelTrait>())
 
         assertTrue(decodedJSON.hasTrait<PrimaryActionTrait>())
-        assertEquals(PrimaryActionTrait(Action.Dash()), decodedJSON.get<PrimaryActionTrait>())
+        assertEquals(PrimaryActionTrait(FlingAction(1.0), "Fling", true), decodedJSON.get<PrimaryActionTrait>())
     }
 
 }

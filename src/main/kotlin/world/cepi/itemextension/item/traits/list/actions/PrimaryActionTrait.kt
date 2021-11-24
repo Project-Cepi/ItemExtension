@@ -2,10 +2,17 @@ package world.cepi.itemextension.item.traits.list.actions
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import world.cepi.itemextension.item.traits.list.actions.list.Action
+import world.cepi.actions.Action
+import world.cepi.actions.context.ActionItemOffContextParser
+import world.cepi.kstom.command.arguments.generation.annotations.ParameterContext
 
 @Serializable
 @SerialName("primary_action")
-data class PrimaryActionTrait(override val action: Action): ActionTrait() {
+class PrimaryActionTrait(
+    @ParameterContext(ActionItemOffContextParser::class)
+    override val action: Action,
+    override val displayName: String,
+    override val useTargeting: Boolean
+): ActionTrait() {
     override val clickType = "Left"
 }

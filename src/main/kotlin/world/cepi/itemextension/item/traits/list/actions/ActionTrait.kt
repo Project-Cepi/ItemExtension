@@ -1,5 +1,6 @@
 package world.cepi.itemextension.item.traits.list.actions
 
+import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -9,24 +10,28 @@ import net.minestom.server.event.EventNode
 import net.minestom.server.event.player.*
 import net.minestom.server.event.trait.PlayerEvent
 import net.minestom.server.item.ItemStack
+import world.cepi.actions.Action
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.traits.ItemTrait
-import world.cepi.itemextension.item.traits.list.actions.list.Action
 import world.cepi.kstom.event.listenOnly
 import world.cepi.kstom.raycast.HitType
 import world.cepi.kstom.raycast.RayCast
 
+@Serializable
 sealed class ActionTrait: ItemTrait() {
 
-    open val action: Action = Action.Strike()
-    open val clickType: String = "None"
+    abstract val action: Action
+    abstract val displayName: String
+    abstract val useTargeting: Boolean
+
+    abstract val clickType: String
 
     override val taskIndex = 0f
 
     override fun renderLore(item: Item): List<Component> {
         return listOf(
-            Component.text(action.displayName, NamedTextColor.RED)
+            Component.text(displayName, NamedTextColor.RED)
                 .append(Component.text(" [${clickType}]", NamedTextColor.GRAY))
                 .decoration(TextDecoration.ITALIC, false)
         )
@@ -49,7 +54,7 @@ sealed class ActionTrait: ItemTrait() {
 
             val action = cepiItem.get<TertiaryActionTrait>()
 
-            action!!.action(player, cepiItem)
+            action!!.action(player, player)
         }
 
         fun <T> leftClick(event: T): Unit where T : PlayerEvent = with(event) {
@@ -68,7 +73,7 @@ sealed class ActionTrait: ItemTrait() {
                 return@with
             }
 
-            actionTrait.action(player, cepiItem)
+            actionTrait.action(player, player)
         }
 
         init {

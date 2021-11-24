@@ -55,6 +55,9 @@ dependencies {
     // Add mobs
     compileOnly("com.github.Project-Cepi:MobExtension:0ed0fc125e")
 
+    // Add actions
+    compileOnly("com.github.Project-Cepi:Actions:b22ef7ae29")
+
     // Add canvas
     implementation("com.mattworzala:canvas:1.1.5")
 }

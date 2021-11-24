@@ -103,7 +103,7 @@ object TargetHandler {
         val cepiItem: Item = item.meta.get(Item.key, itemSerializationModule)!!
 
         // Check if any action of an item requires a target
-        return cepiItem.softGet<ActionTrait>().any { it.action.requiresTarget }
+        return cepiItem.softGet<ActionTrait>().any { it.useTargeting }
 
     }
 
