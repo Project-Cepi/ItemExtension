@@ -11,6 +11,7 @@ import net.minestom.server.event.player.*
 import net.minestom.server.event.trait.PlayerEvent
 import net.minestom.server.item.ItemStack
 import world.cepi.actions.ActionItem
+import world.cepi.itemextension.combat.TargetHandler
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.traits.ItemTrait
@@ -54,7 +55,7 @@ sealed class ActionTrait: ItemTrait() {
 
             val action = cepiItem.get<TertiaryActionTrait>()
 
-            action!!.action(player, player)
+            action!!.action(player, TargetHandler[player])
         }
 
         fun <T> leftClick(event: T): Unit where T : PlayerEvent = with(event) {
@@ -73,7 +74,7 @@ sealed class ActionTrait: ItemTrait() {
                 return@with
             }
 
-            actionTrait.action(player, player)
+            actionTrait.action(player, TargetHandler[player])
         }
 
         init {

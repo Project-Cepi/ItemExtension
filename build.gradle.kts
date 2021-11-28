@@ -56,7 +56,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:MobExtension:0ed0fc125e")
 
     // Add actions
-    compileOnly("com.github.Project-Cepi:Actions:80871eeb22")
+    compileOnly("com.github.Project-Cepi:Actions:36b6f784d9")
 
     // Add canvas
     implementation("com.mattworzala:canvas:1.1.5")
