@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin.
-    kotlin("jvm") version "1.5.31"
+    kotlin("jvm") version "1.6.0"
     id("com.github.johnrengelman.shadow") version "7.1.0"
     id("org.jetbrains.dokka") version "1.5.31"
     kotlin("plugin.serialization") version "1.5.0"
@@ -56,7 +56,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:MobExtension:0ed0fc125e")
 
     // Add actions
-    compileOnly("com.github.Project-Cepi:Actions:b22ef7ae29")
+    compileOnly("com.github.Project-Cepi:Actions:80871eeb22")
 
     // Add canvas
     implementation("com.mattworzala:canvas:1.1.5")

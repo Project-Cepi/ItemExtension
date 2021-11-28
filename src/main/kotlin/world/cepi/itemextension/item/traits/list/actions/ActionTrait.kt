@@ -10,7 +10,7 @@ import net.minestom.server.event.EventNode
 import net.minestom.server.event.player.*
 import net.minestom.server.event.trait.PlayerEvent
 import net.minestom.server.item.ItemStack
-import world.cepi.actions.Action
+import world.cepi.actions.ActionItem
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.traits.ItemTrait
@@ -21,7 +21,7 @@ import world.cepi.kstom.raycast.RayCast
 @Serializable
 sealed class ActionTrait: ItemTrait() {
 
-    abstract val action: Action
+    abstract val action: ActionItem
     abstract val displayName: String
     abstract val useTargeting: Boolean
 

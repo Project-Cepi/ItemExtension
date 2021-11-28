@@ -1,8 +1,10 @@
 package world.cepi.itemextension.item
 
 import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.plus
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import world.cepi.actions.ActionSerializer
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.itemextension.item.traits.list.*
 import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
@@ -37,4 +39,4 @@ val itemSerializationModule = SerializersModule {
 
         subclass(CustomTextTrait::class)
     }
-}
+} + ActionSerializer.module
