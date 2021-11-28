@@ -43,6 +43,16 @@ internal object NBTCommand : Kommand({
         )
     }
 
+    syntax(get, "ignoreDisplay".literal()) {
+        val item = player.itemInMainHand
+
+        player.sendMessage(
+            Component.text(item.meta.toNBT().removeTag("display").toSNBT(), NamedTextColor.GRAY)
+                .hoverEvent(HoverEvent.showText(Component.text("Click to copy", NamedTextColor.YELLOW)))
+                .clickEvent(ClickEvent.copyToClipboard(item.meta.toSNBT()))
+        )
+    }
+
     syntax(set, nbt, material) {
         player.itemInMainHand = ItemStack.fromNBT(
             context[material].material,
