@@ -47,7 +47,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:23749ad45e")
+    compileOnly("com.github.Project-Cepi:Kepi:de037535d0")
 
     // Add projectiles
     compileOnly("com.github.Project-Cepi:Projectiles:8191a5b6f8")

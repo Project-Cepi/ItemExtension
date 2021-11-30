@@ -6,6 +6,7 @@ import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.MaterialTrait
+import world.cepi.kepi.item.AddCreationalItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.kommand.Kommand
 
@@ -27,7 +28,7 @@ object CreateSubcommand : Kommand({
                 item.put(MaterialTrait(itemStack.material, itemStack.meta.customModelData))
             }
 
-            player.itemInMainHand = item.renderItem(if (itemStack.amount == 0) 1 else itemStack.amount)
+            AddCreationalItem.put(player, item.renderItem(if (itemStack.amount == 0) 1 else itemStack.amount))
             player.sendFormattedTranslatableMessage("item", "create")
         } else
             player.sendFormattedTranslatableMessage("item", "nonformatted.required")

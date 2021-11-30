@@ -8,6 +8,7 @@ import net.minestom.server.command.builder.arguments.ArgumentType
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.kepi.command.subcommand.applyHelp
+import world.cepi.kepi.item.AddCreationalItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kepi.messages.translations.formatTranslableMessage
 import world.cepi.kstom.command.arguments.literal
@@ -72,7 +73,7 @@ object DataSubcommand : Kommand({
         try {
             val item = Item.fromJSON(nbtData)
 
-            player.itemInMainHand = item.renderItem()
+            AddCreationalItem.put(player, item.renderItem())
         } catch (exception: Exception) {
             player.sendFormattedTranslatableMessage(
                 "data",
