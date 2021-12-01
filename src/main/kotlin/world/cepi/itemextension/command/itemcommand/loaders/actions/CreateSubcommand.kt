@@ -24,8 +24,6 @@ object CreateSubcommand : Kommand({
 
             if (context[materialArgument] != ItemStack.of(Material.PAPER)) {
                 item.put(MaterialTrait(context[materialArgument].material, context[materialArgument].meta.customModelData))
-            } else if (!itemStack.isAir) {
-                item.put(MaterialTrait(itemStack.material, itemStack.meta.customModelData))
             }
 
             AddCreationalItem.put(player, item.renderItem(if (itemStack.amount == 0) 1 else itemStack.amount))
