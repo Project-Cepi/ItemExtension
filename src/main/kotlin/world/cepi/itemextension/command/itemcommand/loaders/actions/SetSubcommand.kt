@@ -68,12 +68,13 @@ object SetSubcommand : Kommand(name = "set") {
 
         val traitConstructorSyntaxes = createSyntaxesFrom(lastTrait, *traitArgs.toTypedArray()) { instance ->
             val player = sender as Player
-            val itemStack = player.itemInMainHand
 
-            if (itemStack.isAir) {
+            if (player.itemInMainHand.isAir) {
                 AddCreationalItem.put(player, Item().renderItem(1))
                 player.sendFormattedTranslatableMessage("item", "created.anyways")
             }
+
+            val itemStack = player.itemInMainHand
 
             if (checkIsItem(itemStack)) {
                 val item = itemStack.cepiItem!!
