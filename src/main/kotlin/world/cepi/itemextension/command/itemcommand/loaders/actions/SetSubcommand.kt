@@ -6,9 +6,11 @@ import net.minestom.server.command.builder.Command
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.command.itemcommand.*
 import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
+import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
+import world.cepi.kepi.item.AddCreationalItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.arguments.generation.GeneratedArguments.Companion.createSyntaxesFrom
 import world.cepi.kstom.command.arguments.literal
@@ -69,8 +71,8 @@ object SetSubcommand : Kommand(name = "set") {
             val itemStack = player.itemInMainHand
 
             if (itemStack.isAir) {
-                player.sendFormattedTranslatableMessage("mob", "main.required")
-                return@createSyntaxesFrom
+                AddCreationalItem.put(player, Item().renderItem(1))
+                player.sendFormattedTranslatableMessage("item", "created.anyways")
             }
 
             if (checkIsItem(itemStack)) {
