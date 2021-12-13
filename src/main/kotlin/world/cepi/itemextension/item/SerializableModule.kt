@@ -13,7 +13,7 @@ import world.cepi.itemextension.item.traits.list.actions.TertiaryActionTrait
 import world.cepi.itemextension.item.traits.list.stats.HealthStatTrait
 import world.cepi.itemextension.item.traits.list.stats.SpeedStatTrait
 
-val itemSerializationModule = SerializersModule {
+val itemSerializationModule get() = SerializersModule {
 
     // TODO sealed / better serializaiton?
     polymorphic(ItemTrait::class) {

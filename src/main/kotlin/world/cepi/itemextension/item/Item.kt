@@ -97,6 +97,8 @@ class Item: TraitContainer<ItemTrait>() {
 fun checkIsItem(itemStack: ItemStack): Boolean {
     // data must be initialized for an itemStack
 
+    if (itemStack.isAir) return false
+
     return itemStack.meta.get<Item>(key, itemSerializationModule) != null
 }
 

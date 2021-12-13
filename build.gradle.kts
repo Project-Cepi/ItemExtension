@@ -25,7 +25,7 @@ dependencies {
     // Align versions of all Kotlin components
     compileOnly(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-    // Use the Kotlin JDK 8 standard library.
+    // Use the Kotlin JDK standard library.
     compileOnly(kotlin("stdlib"))
 
     // Use the Kotlin reflect library.
@@ -38,7 +38,7 @@ dependencies {
     compileOnly("com.github.Minestom", "Minestom", "e71c420fa8")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:b20a9c0e9f")
+    compileOnly("com.github.Project-Cepi:KStom:b195c64c8d")
 
     // add energy
     compileOnly("com.github.Project-Cepi:EnergyExtension:f2bcdfc79e")
@@ -47,7 +47,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:de037535d0")
+    compileOnly("com.github.Project-Cepi:Kepi:e2e5d12244")
 
     // Add projectiles
     compileOnly("com.github.Project-Cepi:Projectiles:8191a5b6f8")
@@ -56,7 +56,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:MobExtension:0ed0fc125e")
 
     // Add actions
-    compileOnly("com.github.Project-Cepi:Actions:36b6f784d9")
+    compileOnly("com.github.Project-Cepi:Actions:3cccca74c8")
 
     // Add canvas
     implementation("com.mattworzala:canvas:1.1.5")
@@ -96,11 +96,11 @@ tasks {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_16
-    targetCompatibility = JavaVersion.VERSION_16
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "16" }
+tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "17" }
 val compileKotlin: KotlinCompile by tasks
 
 compileKotlin.kotlinOptions {
