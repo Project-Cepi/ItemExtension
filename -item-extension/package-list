@@ -16,6 +16,11 @@ $dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler///PointingT
 $dokka.location:world.cepi.itemextension.combat.events/NoVoidHandler/register/#net.minestom.server.event.entity.EntityDamageEvent/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.events/-no-void-handler/register.html
 $dokka.location:world.cepi.itemextension.combat.util////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/index.html
 $dokka.location:world.cepi.itemextension.combat.util//applyKnockback/net.minestom.server.entity.Entity#net.minestom.server.entity.Entity#kotlin.Float/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/apply-knockback.html
+$dokka.location:world.cepi.itemextension.combat.util//extraHorizontalKnockback/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/extra-horizontal-knockback.html
+$dokka.location:world.cepi.itemextension.combat.util//extraVerticalKnockback/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/extra-vertical-knockback.html
+$dokka.location:world.cepi.itemextension.combat.util//horizontalKnockback/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/horizontal-knockback.html
+$dokka.location:world.cepi.itemextension.combat.util//limitVerticalKnockback/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/limit-vertical-knockback.html
+$dokka.location:world.cepi.itemextension.combat.util//verticalKnockback/#/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat.util/vertical-knockback.html
 $dokka.location:world.cepi.itemextension.combat////PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/index.html
 $dokka.location:world.cepi.itemextension.combat/AttackSpeedHandler///PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-attack-speed-handler/index.html
 $dokka.location:world.cepi.itemextension.combat/AttackSpeedHandler/canUseItem/net.minestom.server.entity.Entity#net.minestom.server.item.ItemStack/PointingToDeclaration/-item-extension/world.cepi.itemextension.combat/-attack-speed-handler/can-use-item.html
