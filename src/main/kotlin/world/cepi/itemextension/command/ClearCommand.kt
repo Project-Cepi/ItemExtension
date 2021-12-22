@@ -4,6 +4,8 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
+import net.minestom.server.item.ItemStack
+import world.cepi.gooey.InventoryManager
 import world.cepi.itemextension.command.itemcommand.loaders.ConditionLoader
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.kommand.Kommand
@@ -15,7 +17,13 @@ object ClearCommand : Kommand({
     val playerArgument = ArgumentType.Entity("players").onlyPlayers(true)
 
     default {
-        player.inventory.clear()
+        for (num in 0 until player.inventory.size) {
+
+            // Don't clear permenant items.
+            if (InventoryManager.slot(num) == null) continue
+
+            player.inventory.setItemStack(num, ItemStack.AIR)
+        }
 
         player.sendFormattedTranslatableMessage(
             "item",

@@ -49,6 +49,9 @@ dependencies {
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:e2e5d12244")
 
+    // Add Gooey
+    compileOnly("com.github.Project-Cepi:Gooey:91e5ca7944")
+
     // Add projectiles
     compileOnly("com.github.Project-Cepi:Projectiles:8191a5b6f8")
 
