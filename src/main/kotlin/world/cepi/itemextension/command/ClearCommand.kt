@@ -20,7 +20,7 @@ object ClearCommand : Kommand({
         for (num in 0 until player.inventory.size) {
 
             // Don't clear permenant items.
-            if (InventoryManager.slot(num) == null) continue
+            if (InventoryManager.slot(num) != null) continue
 
             player.inventory.setItemStack(num, ItemStack.AIR)
         }
