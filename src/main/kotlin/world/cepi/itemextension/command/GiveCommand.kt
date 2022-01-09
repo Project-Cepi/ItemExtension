@@ -39,7 +39,7 @@ object GiveCommand : Kommand({
                         .name()
                         .lowercase()
                         .split("_")
-                        .joinToString(" ") { it.capitalize() }
+                        .joinToString(" ") { it.replaceFirstChar { it.uppercase() } }
                 ))
                 .hoverEvent(item.asHoverEvent()),
             (

@@ -14,13 +14,17 @@ import world.cepi.itemextension.command.itemcommand.ItemCommand
 import world.cepi.itemextension.item.traits.list.actions.ActionTrait.Companion.itemNode
 import world.cepi.itemextension.stats.StatsHandler
 import world.cepi.itemextension.trading.TradeCommand
+import world.cepi.kstom.Manager
 import world.cepi.kstom.event.listenOnly
+import world.cepi.kstom.util.log
+import world.cepi.kstom.util.node
+import world.cepi.mob.mob.Mob
 
 /** Extension wrapper for Minestom. */
 class ItemExtension : Extension() {
-    override fun initialize() {
+    override fun initialize(): LoadStatus {
 
-        with(eventNode) {
+        with(node) {
             listenOnly(CombatHandler::registerDamageByEntity)
             listenOnly(CombatHandler::registerGenericDamage)
             listenOnly(DeathHandler::register)
@@ -39,7 +43,9 @@ class ItemExtension : Extension() {
         NBTCommand.register()
         TradeCommand.register()
 
-        logger.info("[ItemExtension] has been enabled!")
+        log.info("[ItemExtension] has been enabled!")
+
+        return LoadStatus.SUCCESS
 
     }
 
@@ -54,7 +60,7 @@ class ItemExtension : Extension() {
         NBTCommand.unregister()
         TradeCommand.unregister()
 
-        logger.info("[ItemExtension] has been disabled!")
+        log.info("[ItemExtension] has been disabled!")
     }
 
 }

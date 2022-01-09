@@ -12,7 +12,7 @@ import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
 import world.cepi.kepi.item.AddCreationalItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
-import world.cepi.kstom.command.arguments.generation.GeneratedArguments.Companion.createSyntaxesFrom
+import world.cepi.kstom.command.arguments.generation.ClassArgumentGenerator.Companion.syntaxesFrom
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.kommand.Kommand
 import kotlin.reflect.KClass
@@ -66,7 +66,7 @@ object SetSubcommand : Kommand(name = "set") {
             }
         }
 
-        val traitConstructorSyntaxes = createSyntaxesFrom(lastTrait, *traitArgs.toTypedArray()) { instance ->
+        val traitConstructorSyntaxes = syntaxesFrom(lastTrait, *traitArgs.toTypedArray()) { instance ->
             val player = sender as Player
 
             if (player.itemInMainHand.isAir) {

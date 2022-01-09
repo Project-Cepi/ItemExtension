@@ -111,17 +111,18 @@ object TargetHandler {
     // All of the seemingly random constants here are a result of reverse engineering Minestom's metadata system
     private fun createMetadataPacket(target: Entity, glow: Boolean): EntityMetaDataPacket {
         // Clone the metadata packet to prevent sync issues
-        val clonePacket = EntityMetaDataPacket()
-        clonePacket.entityId = target.entityId
-
         val currentEntry = target.metadataPacket.entries.firstOrNull()
 
         // If no meta is present, the mask should be 0
-        val mask = modifyMask(0x40, glow, currentEntry?.metaValue?.value as? Byte ?: 0)
+        val mask = modifyMask(0x40, glow, currentEntry?.value?.content as? Byte ?: 0)
 
         // Weird mismatch, seems redundant but for some unknown reason it's required
-        clonePacket.entries = Collections.singleton(Metadata.Entry(0, Metadata.Byte(mask))) as Collection<Metadata.Entry<*>>?
-        return clonePacket
+        return EntityMetaDataPacket(
+            target.entityId,
+            // Weird mismatch, seems redundant but for some unknown reason it's required
+            (Collections.singleton(Metadata.Entry(0, Metadata.Byte(mask)))
+                .toMutableList()) as Collection<Metadata.Entry<*>>
+        )
     }
 
     private fun modifyMask(bit: Byte, value: Boolean, currentMask: Byte = 0): Byte {

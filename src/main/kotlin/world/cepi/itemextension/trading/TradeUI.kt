@@ -9,6 +9,7 @@ import net.minestom.server.entity.Player
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import net.minestom.server.item.metadata.PlayerHeadMeta
+import world.cepi.kstom.item.item
 
 internal object TradeUI {
 
@@ -47,10 +48,9 @@ internal object TradeUI {
             """.trimIndent()
 
             fill(
-                ItemStack.of(Material.GRAY_STAINED_GLASS_PANE, 1)
-                    .withMeta {
-                        it.customModelData(1)
-                    }
+                item(Material.GRAY_STAINED_GLASS_PANE, 1) {
+                    customModelData(1)
+                }
             )
         }
     }
