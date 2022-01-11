@@ -36,7 +36,7 @@ object CombatHandler {
      */
     fun canBeDamaged(entity: Entity): Boolean {
 
-        // Don't action players in creative!
+        // Don't attacl players in creative!
         if (entity is Player && (entity.gameMode == GameMode.CREATIVE || entity.gameMode == GameMode.SPECTATOR)) {
             return false
         }
@@ -204,15 +204,9 @@ object CombatHandler {
                 }
             }
         }
-
-        // Damage the entity
-        (target as LivingEntity).damage(DamageType.fromEntity(entity), cepiItem?.get<DamageTrait>()?.damage ?: 1.0f)
-
-        // Apply knockback to the entity
-        target.applyKnockback(entity, cepiItem?.get<KnockbackTrait>()?.amount ?: 0f)
-
-        if (entity is EquipmentHandler)
-            entity.useAttackSpeed((entity as EquipmentHandler).itemInMainHand)
+//
+//        if (entity is EquipmentHandler)
+//            entity.useAttackSpeed((entity as EquipmentHandler).itemInMainHand)
 
     }
 
