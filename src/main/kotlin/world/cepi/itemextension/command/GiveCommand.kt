@@ -23,6 +23,23 @@ object GiveCommand : Kommand({
 
     val selector = ArgumentType.Entity("players").onlyPlayers(true)
 
+    syntax(selector, itemArg) {
+        val targets = context.get(selector).find(player.instance!!, player).map { it as Player }
+
+        targets.forEach { target ->
+            (target as? Player)?.inventory?.addItemStack(!itemArg)
+        }
+
+        sender.sendFormattedTranslatableMessage(
+            "item", "give",
+            ((!itemArg).displayName!!),
+            (
+                    if (targets.size == 1) Component.text(targets[0].username)
+                    else Component.text("${targets.size} Players")
+                    ).color(NamedTextColor.BLUE)
+        )
+    }
+
     syntax(selector, items) {
 
         val targets = context.get(selector).find(player.instance!!, player).map { it as Player }
