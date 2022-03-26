@@ -9,6 +9,7 @@ import world.cepi.itemextension.command.itemcommand.loaders.processTraitName
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
+import world.cepi.kepi.Kepi
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.kommand.Kommand
 
@@ -43,6 +44,7 @@ object RemoveSubcommand : Kommand(name = "remove") {
                         .append(Component.text("", NamedTextColor.GRAY))
                 )
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
+                player.playSound(Kepi.editItemSound)
             } else
                 player.sendFormattedTranslatableMessage("item", "trait.none", Component.text(context.get(traitList), NamedTextColor.BLUE))
         }

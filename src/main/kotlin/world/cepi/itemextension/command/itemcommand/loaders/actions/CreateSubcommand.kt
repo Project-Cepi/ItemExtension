@@ -6,6 +6,7 @@ import net.minestom.server.item.Material
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.MaterialTrait
+import world.cepi.kepi.Kepi
 import world.cepi.kepi.item.AddCreationalItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.kommand.Kommand
@@ -20,6 +21,7 @@ object CreateSubcommand : Kommand({
 
         val isCepiItem = checkIsItem(itemStack)
         if (!isCepiItem) {
+
             val item = Item()
 
             if (context[materialArgument] != ItemStack.of(Material.PAPER)) {
@@ -28,6 +30,8 @@ object CreateSubcommand : Kommand({
 
             AddCreationalItem.put(player, item.renderItem(if (itemStack.amount == 0) 1 else itemStack.amount))
             player.sendFormattedTranslatableMessage("item", "create")
+
+            player.playSound(Kepi.newItemSound)
         } else
             player.sendFormattedTranslatableMessage("item", "nonformatted.required")
     }

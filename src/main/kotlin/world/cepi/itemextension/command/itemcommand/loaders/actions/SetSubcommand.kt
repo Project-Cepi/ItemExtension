@@ -10,6 +10,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.ItemTrait
+import world.cepi.kepi.Kepi
 import world.cepi.kepi.item.AddCreationalItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.arguments.generation.ClassArgumentGenerator.Companion.syntaxesFrom
@@ -84,6 +85,8 @@ object SetSubcommand : Kommand(name = "set") {
                 player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
 
                 player.sendFormattedTranslatableMessage("item", "trait.add", Component.text(processTraitName(lastTrait.simpleName!!), NamedTextColor.BLUE))
+
+                player.playSound(Kepi.editItemSound)
             } else
                 player.sendFormattedTranslatableMessage("item", "formatted.required")
         }
