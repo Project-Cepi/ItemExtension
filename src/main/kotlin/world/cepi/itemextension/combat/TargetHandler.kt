@@ -49,7 +49,7 @@ object TargetHandler {
                 // Check if the ray has hit an entity
                 if (result.hitType == HitType.ENTITY) {
 
-                    val target = result.hitEntity!!
+                    val target = result.hitEntity!! as? LivingEntity ?: return@forEach
 
                     // Ignore if the entity hit is a player
                     if (target is Player) {

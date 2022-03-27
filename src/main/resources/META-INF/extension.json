@@ -8,7 +8,9 @@
     "MobExtension",
     "Projectiles",
     "Actions",
-    "Gooey"
+    "Gooey",
+    "Particable",
+    "PvpExtension"
   ],
   "meta": {
     "downloadURL": "https://github.com/Project-Cepi/ItemExtension/releases/download/latest/ItemExtension-1.0.0-all.jar"

@@ -1,5 +1,6 @@
 package world.cepi.itemextension.combat.events
 
+import io.github.bloepiloepi.pvp.events.FinalAttackEvent
 import net.kyori.adventure.sound.Sound
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -25,6 +26,13 @@ import world.cepi.itemextension.item.cepiItem
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.itemextension.item.traits.list.*
 import world.cepi.kstom.Manager
+import world.cepi.kstom.raycast.RayCast
+import world.cepi.kstom.util.eyePosition
+import world.cepi.particle.Particle
+import world.cepi.particle.ParticleType
+import world.cepi.particle.data.OffsetAndSpeed
+import world.cepi.particle.renderer.Renderer
+import world.cepi.particle.renderer.render
 import java.text.NumberFormat
 
 object CombatHandler {
@@ -146,7 +154,7 @@ object CombatHandler {
         ImmunityHandler.triggerImmune(entity)
     }
 
-    fun registerDamageByEntity(event: EntityAttackEvent) = with(event) {
+    fun registerDamageByEntity(event: FinalAttackEvent) = with(event) {
         if (!canDamageEntities(entity)) {
             return
         }
@@ -174,6 +182,17 @@ object CombatHandler {
             cepiItem?.get<LevelTrait>()?.let {
                 if ((entity as Player).level < it.level) return
             }
+
+            val centerTarget = RayCast.castRay(
+                instance,
+                entity,
+                entity.eyePosition(),
+                entity.position.direction(),
+                stepLength = 0.5
+            ).finalPosition
+
+            Renderer.fixedLine(centerTarget, centerTarget.add(entity.position.direction().mul(2.0)))
+                .render(Particle.particle(ParticleType.CRIT, 1, OffsetAndSpeed()), target.viewersAsAudience)
         }
 
         if (cepiItem?.hasTrait<DurabilityTrait>() == true) {
@@ -204,9 +223,6 @@ object CombatHandler {
                 }
             }
         }
-//
-//        if (entity is EquipmentHandler)
-//            entity.useAttackSpeed((entity as EquipmentHandler).itemInMainHand)
 
     }
 

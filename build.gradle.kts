@@ -32,19 +32,22 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Use the JUpiter test library.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 
     // Compile Minestom into project
     compileOnly("com.github.Minestom", "Minestom", "4ee5cbe424")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:05b5e1f2a1")
+    compileOnly("com.github.Project-Cepi:KStom:15bab227a2")
 
     // add energy
     compileOnly("com.github.Project-Cepi:EnergyExtension:f2bcdfc79e")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+
+    // Add MiniMessage
+    compileOnly("net.kyori:adventure-text-minimessage:4.2.0-SNAPSHOT")
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:071b288ed0")
@@ -60,6 +63,12 @@ dependencies {
 
     // Add actions
     compileOnly("com.github.Project-Cepi:Actions:3cccca74c8")
+
+    // Add Particable
+    compileOnly("com.github.Project-Cepi:Particable:9ab0e20842")
+
+    // Add MinestomPVP
+    compileOnly("com.github.Project-Cepi:MinestomPVP:b9cb14d4bf")
 
     // Add canvas
     implementation("com.mattworzala:canvas:1.1.5")
