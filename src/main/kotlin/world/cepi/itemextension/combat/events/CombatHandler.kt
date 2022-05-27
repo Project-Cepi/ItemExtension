@@ -218,7 +218,7 @@ object CombatHandler {
 
                 run set@ {
                     (entity as? LivingEntity)?.itemInMainHand = cepiItem.renderItem(
-                        (entity as? LivingEntity)?.itemInMainHand?.amount ?: return@set
+                        (entity as? LivingEntity)?.itemInMainHand?.amount() ?: return@set
                     )
                 }
             }

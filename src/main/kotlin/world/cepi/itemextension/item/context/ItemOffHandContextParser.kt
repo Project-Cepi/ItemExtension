@@ -14,7 +14,7 @@ import world.cepi.kstom.item.get
 object ItemOffHandContextParser : ContextParser<Item> {
 
     override fun parse(sender: CommandSender): Item? =
-        (sender as? Player)?.itemInOffHand?.meta?.get(Item.key, itemSerializationModule)
+        (sender as? Player)?.itemInOffHand?.meta()?.get(Item.key, itemSerializationModule)
 
     override val callbackMessage = Component.text("No cepi item found in main hand!")
 

@@ -64,10 +64,10 @@ object StatsHandler {
 
                 val item: Item = (
                         if (isSlotChanged)
-                            changedSlots[it]?.meta?.get(Item.key, itemSerializationModule) ?: return@mapNotNull null
+                            changedSlots[it]?.meta()?.get(Item.key, itemSerializationModule) ?: return@mapNotNull null
                         else
                             null
-                        ) ?: entity.getEquipment(it).meta.get(Item.key, itemSerializationModule) ?: return@mapNotNull null
+                        ) ?: entity.getEquipment(it).meta().get(Item.key, itemSerializationModule) ?: return@mapNotNull null
                 it to item
             }.toMap()
 

@@ -2,7 +2,7 @@ package world.cepi.itemextension.item.traits.list
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import net.minestom.server.item.ItemMetaBuilder
+import net.minestom.server.item.ItemMeta
 import net.minestom.server.tag.Tag
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
@@ -20,7 +20,7 @@ data class PriceTrait(
 
     override val taskIndex = 0f
 
-    override fun task(item: ItemMetaBuilder, originalItem: Item): Unit = with(item) {
+    override fun task(item: ItemMeta.Builder, originalItem: Item): Unit = with(item) {
         set(Tag.Integer("price"), price)
     }
 

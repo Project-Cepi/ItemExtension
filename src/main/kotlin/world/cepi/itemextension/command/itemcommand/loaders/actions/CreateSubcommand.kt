@@ -25,10 +25,10 @@ object CreateSubcommand : Kommand({
             val item = Item()
 
             if (context[materialArgument] != ItemStack.of(Material.PAPER)) {
-                item.put(MaterialTrait(context[materialArgument].material, context[materialArgument].meta.customModelData))
+                item.put(MaterialTrait(context[materialArgument].material(), context[materialArgument].meta().customModelData))
             }
 
-            AddCreationalItem.put(player, item.renderItem(if (itemStack.amount == 0) 1 else itemStack.amount))
+            AddCreationalItem.put(player, item.renderItem(if (itemStack.amount() == 0) 1 else itemStack.amount()))
             player.sendFormattedTranslatableMessage("item", "create")
 
             player.playSound(Kepi.newItemSound)

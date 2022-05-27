@@ -35,19 +35,19 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom", "Minestom", "4ee5cbe424")
+    compileOnly("com.github.Minestom", "Minestom", "7867313290")
 
     // implement KStom
-    compileOnly("com.github.Project-Cepi:KStom:15bab227a2")
+    compileOnly("com.github.Project-Cepi:KStom:82f7000079")
 
     // add energy
     compileOnly("com.github.Project-Cepi:EnergyExtension:f2bcdfc79e")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
     // Add MiniMessage
-    compileOnly("net.kyori:adventure-text-minimessage:4.2.0-SNAPSHOT")
+    compileOnly("net.kyori:adventure-text-minimessage:4.10.1")
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:071b288ed0")
@@ -71,7 +71,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:MinestomPVP:b9cb14d4bf")
 
     // Add canvas
-    implementation("com.mattworzala:canvas:1.1.5")
+    implementation("com.github.Project-Cepi:canvas:a61710f9e2")
 }
 
 tasks.withType<Test> {

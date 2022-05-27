@@ -12,7 +12,7 @@ object ResetSubcommand : Kommand({
     syntax {
         val itemStack = player.itemInMainHand
 
-        if (itemStack.material == Material.AIR) {
+        if (itemStack.material() == Material.AIR) {
             player.sendFormattedTranslatableMessage("mob", "main.required")
             return@syntax
         }
@@ -22,7 +22,7 @@ object ResetSubcommand : Kommand({
         if (isCepiItem) {
             val item = itemStack.cepiItem!!
             item.removeAllTraits()
-            player.itemInMainHand = item.renderItem(itemStack.amount)
+            player.itemInMainHand = item.renderItem(itemStack.amount())
             player.sendFormattedTranslatableMessage("item", "reset")
             player.playSound(Kepi.editItemSound)
         } else

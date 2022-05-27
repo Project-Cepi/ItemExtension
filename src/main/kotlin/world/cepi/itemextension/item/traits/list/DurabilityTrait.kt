@@ -5,7 +5,8 @@ import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
-import net.minestom.server.item.ItemMetaBuilder
+import net.minestom.server.item.ItemMeta
+import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.ItemTrait
 
@@ -15,7 +16,7 @@ class DurabilityTrait(val maxDurability: Int, val currentDurability: Int) : Item
 
     override val taskIndex = 1f
 
-    override fun task(item: ItemMetaBuilder, originalItem: Item): Unit = with(item) {
+    override fun task(item: ItemMeta.Builder, originalItem: Item): Unit = with(item) {
         damage(
             (maxDurability - currentDurability) *
                 (originalItem.get<MaterialTrait>()!!.material.registry().maxDamage() / maxDurability)

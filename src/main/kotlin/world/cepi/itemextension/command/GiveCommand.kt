@@ -55,8 +55,8 @@ object GiveCommand : Kommand({
             Component.text(context.get(amountArg), NamedTextColor.BLUE)
                 .append(Component.space())
                 .append(context.get(itemArg).displayName ?: Component.text(
-                    context.get(itemArg).material
-                        .namespace().path
+                    context.get(itemArg).material()
+                        .namespace().path()
                         .lowercase()
                         .split("_")
                         .joinToString(" ") { it.replaceFirstChar { it.uppercase() } }

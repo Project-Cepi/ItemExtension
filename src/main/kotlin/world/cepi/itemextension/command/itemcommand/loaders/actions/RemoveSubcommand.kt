@@ -22,7 +22,7 @@ object RemoveSubcommand : Kommand(name = "remove") {
         syntax(traitList) {
             val itemStack = player.itemInMainHand
 
-            if (itemStack.material == Material.AIR) {
+            if (itemStack.material() == Material.AIR) {
                 player.sendFormattedTranslatableMessage("item", "main.required")
                 return@syntax
             }
@@ -43,7 +43,7 @@ object RemoveSubcommand : Kommand(name = "remove") {
                     Component.text(processTraitName(trait.simpleName!!), NamedTextColor.BLUE)
                         .append(Component.text("", NamedTextColor.GRAY))
                 )
-                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount)
+                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount())
                 player.playSound(Kepi.editItemSound)
             } else
                 player.sendFormattedTranslatableMessage("item", "trait.none", Component.text(context.get(traitList), NamedTextColor.BLUE))

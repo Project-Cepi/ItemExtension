@@ -20,7 +20,7 @@ object DeathHandler {
     private fun deathMessage(player: Player, secondsLeft: Int) = player.showTitle(Title.title(
         Component.text("You died!", NamedTextColor.RED),
         Component.text("Respawning in $secondsLeft...", NamedTextColor.WHITE),
-        Title.Times.of(Ticks.duration(0), Ticks.duration(21), Ticks.duration(0))
+        Title.Times.times(Ticks.duration(0), Ticks.duration(21), Ticks.duration(0))
     ))
 
 

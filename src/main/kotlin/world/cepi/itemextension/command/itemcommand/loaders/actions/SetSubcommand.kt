@@ -82,7 +82,7 @@ object SetSubcommand : Kommand(name = "set") {
 
                 item.put(instance)
 
-                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount.coerceIn(1, Integer.MAX_VALUE))
+                player.itemInMainHand = item.renderItem(player.itemInMainHand.amount().coerceIn(1, Integer.MAX_VALUE))
 
                 player.sendFormattedTranslatableMessage("item", "trait.add", Component.text(processTraitName(lastTrait.simpleName!!), NamedTextColor.BLUE))
 

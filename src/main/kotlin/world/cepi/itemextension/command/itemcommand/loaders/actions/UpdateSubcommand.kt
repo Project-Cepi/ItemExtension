@@ -11,7 +11,7 @@ object UpdateSubcommand : Kommand({
     syntax {
         val itemStack = player.itemInMainHand
 
-        if (itemStack.material == Material.AIR) {
+        if (itemStack.material() == Material.AIR) {
             player.sendFormattedTranslatableMessage("item", "main.required")
             return@syntax
         }
@@ -20,7 +20,7 @@ object UpdateSubcommand : Kommand({
 
         if (isCepiItem) {
             val item = itemStack.cepiItem!!
-            player.itemInMainHand = item.renderItem(itemStack.amount)
+            player.itemInMainHand = item.renderItem(itemStack.amount())
             player.sendFormattedTranslatableMessage("item", "render")
         } else
             player.sendFormattedTranslatableMessage("item", "formatted.required")

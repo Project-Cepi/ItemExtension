@@ -2,7 +2,8 @@ package world.cepi.itemextension.item.traits
 
 import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
-import net.minestom.server.item.ItemMetaBuilder
+import net.minestom.server.item.ItemMeta
+import net.minestom.server.item.ItemStack
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.traits.list.*
 import world.cepi.itemextension.item.traits.list.actions.PrimaryActionTrait
@@ -24,7 +25,7 @@ abstract class ItemTrait {
      *
      * @param item The item that is being rendered.
      */
-    open fun task(item: ItemMetaBuilder, originalItem: Item) { }
+    open fun task(item: ItemMeta.Builder, originalItem: Item) { }
 
     /**
      * This function is called based on the [ItemTrait.Companion.classList] of the [ItemTrait]

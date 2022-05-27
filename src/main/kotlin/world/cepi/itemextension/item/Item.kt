@@ -98,11 +98,11 @@ fun checkIsItem(itemStack: ItemStack): Boolean {
 
     if (itemStack.isAir) return false
 
-    return itemStack.meta.get<Item>(key, itemSerializationModule) != null
+    return itemStack.meta().get<Item>(key, itemSerializationModule) != null
 }
 
 val ItemStack.cepiItem: Item?
-    get() = this.meta.get(key, itemSerializationModule)
+    get() = this.meta().get(key, itemSerializationModule)
 
 /**
  * DSL for creating cepi items
