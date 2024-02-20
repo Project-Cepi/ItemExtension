@@ -47,7 +47,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
     // Add MiniMessage
-    compileOnly("net.kyori:adventure-text-minimessage:4.10.1")
+    compileOnly("net.kyori:adventure-text-minimessage:4.16.0")
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:071b288ed0")
